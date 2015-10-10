@@ -62,6 +62,7 @@ alias zf="vim ~/.oh-my-zsh/custom/functions.zsh"
 alias zshrc="vim ~/dotfiles/zsh/zshrc"
 alias vimrc="vim ~/dotfiles/vimrc"
 alias gc="vim ~/.gitconfig"
+alias tc="vim ~/dotfiles/tmux.conf"
 
 #Testing Angular
 alias wds="webdriver-manager start"
@@ -71,8 +72,9 @@ alias test="gulp test"
 # Git
 alias g="git status"
 alias ga="git add"
-alias gc="git commit"
+alias gc="git commit -m"
 alias go="git checkout"
+alias amend="git commit --amend"
 
 #Reload the shell
 alias reload="exec $SHELL -l"

@@ -13,11 +13,18 @@ Plug 'airblade/vim-gitgutter'
 Plug 'pbrisbin/vim-mkdir'
 Plug 'tpope/vim-repeat'
 Plug 'thoughtbot/vim-rspec'
+Plug 'vim-ruby/vim-ruby'
 Plug 'honza/vim-snippets'
 Plug 'tpope/vim-surround'
+Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'kana/vim-textobj-user'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'christoomey/vim-tmux-runner'
 
 Plug 'nanotech/jellybeans.vim'
 call plug#end()
+
+runtime macros/matchit.vim
 
 colorscheme jellybeans
 
@@ -37,6 +44,7 @@ set nobackup nowritebackup noswapfile
 set nocompatible
 set noerrorbells
 set number
+set nrformats=alpha
 set numberwidth=5
 set relativenumber 
 set ruler
@@ -61,9 +69,10 @@ imap <C-a> <C-o>^
 nmap 0 ^
 nmap <C-a> ^
 nmap <C-e> $
-nmap <C-n> :bn<cr>
-nmap <C-p> :bp<cr>
+nmap <C-m> :bn<cr>
+nmap <C-n> :bp<cr>
 nnoremap <C-z> <C-a>
+vmap <C-c> "*y
 
 let mapleader = "\<Space>"
 map <leader>b :ls<cr>:b
@@ -110,6 +119,19 @@ inoremap ˚ <Esc>:m .-2<cr>==gi
 inoremap ∆ <Esc>:m .+1<cr>==gi
 vnoremap ˚ :m '<-2<cr>gv=gv
 vnoremap ∆ :m '>+1<cr>gv=gv
+
+" automatically rebalance windows on vim resize
+autocmd VimResized * :wincmd =
+
+" zoom a vim pane, <C-w>= to re-balance
+nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>
+nnoremap <leader>= :wincmd =<cr>
+
+" Setting paths for ruby
+augroup rubypath
+autocmd!
+autocmd FileType ruby setlocal path+=lib/**,spec/**
+augroup END
 
 " Ultisnips
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -269,3 +291,26 @@ function! <SID>BufcloseCloseIt()
     execute("bdelete! ".l:currentBufNum)
   endif
 endfunction
+
+" vim tmux runner
+let g:VtrUseVtrMaps = 1
+let g:VtrGitCdUpOnOpen = 0
+let g:VtrPercentage = 33
+
+nmap <leader>va :VtrAttachToPane<cr>
+nmap <leader>sc :VtrSendCommand<cr>
+nmap <leader>sf :VtrSendFile!<cr>
+nmap <leader>cr :VtrClearRunner<cr>
+nmap <leader>kr :VtrKillRunner<cr>
+nmap <C-f> :VtrSendLinesToRunner<cr>
+vmap <C-f> :VtrSendLinesToRunner<cr>
+
+nmap <leader>or:VtrOpenRunner { 'orientation': 'h', 'percentage': 50 }<cr>
+nmap <leader>pry :VtrOpenRunner { 'orientation': 'h', 'percentage': 50, 'cmd': 'pry' }<cr>
+nmap <leader>irb :VtrOpenRunner { 'orientation': 'h', 'percentage': 50, 'cmd': 'irb' }<cr>
+
+let g:vtr_filetype_runner_overrides = {
+      \ 'haskell': 'ghci {file}',
+      \ 'applescript': 'osascript {file}'
+      \ }
+
