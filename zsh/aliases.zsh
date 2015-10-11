@@ -84,6 +84,7 @@ alias gc="git commit -m"
 alias gp="git add . && git commit && git push"
 alias go="git checkout"
 alias amend="git commit --amend"
+alias gg="git open"
 
 #Reload the shell
 alias reload="exec $SHELL -l"

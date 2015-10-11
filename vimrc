@@ -81,6 +81,7 @@ map <leader>bd :ls<cr>:bd<C-b><C-b>
 map <leader>bi :!bundle install<cr>
 map <leader>e :w<cr>:call RunLastSpec()<cr>
 map <leader>ga :!git add . && git commit<cr>
+map <leader>gg :!git open<cr><cr>
 map <leader>gp :!git add . && git commit && git push<cr>
 map <leader>h :nohlsearch<cr>
 map <leader>i mmgg=G`m
