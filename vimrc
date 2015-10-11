@@ -81,10 +81,10 @@ map <leader>bd :ls<cr>:bd<C-b><C-b>
 map <leader>bi :!bundle install<cr>
 map <leader>e :w<cr>:call RunLastSpec()<cr>
 map <leader>g :w<cr>:Gstatus<cr>
-map <leader>gd :GDiff<cr>
+map <leader>gd :Gvdiff<cr>
 map <leader>gg :!git open<cr><cr>
-map <leader>gp :GPush<cr>
-map <leader>gl :GPull origin
+map <leader>gp :Gpush<cr>
+map <leader>gl :Gpull origin<Space>
 map <leader>h :nohlsearch<cr>
 map <leader>i mmgg=G`m
 map <leader>ni :!npm install<cr>
