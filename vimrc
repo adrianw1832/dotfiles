@@ -37,7 +37,7 @@ set grepprg=ag
 set hidden
 set history=50
 set hlsearch
-set ignorecase 
+set ignorecase
 set incsearch
 set laststatus=2
 set lazyredraw
@@ -47,12 +47,12 @@ set noerrorbells
 set number
 set nrformats=alpha
 set numberwidth=5
-set relativenumber 
+set relativenumber
 set ruler
 set timeoutlen=500
 set showcmd
 set showmatch
-set smartcase 
+set smartcase
 set smartindent
 set so=5
 set t_Co=256
@@ -80,10 +80,11 @@ map <leader>b :ls<cr>:b
 map <leader>bd :ls<cr>:bd<C-b><C-b>
 map <leader>bi :!bundle install<cr>
 map <leader>e :w<cr>:call RunLastSpec()<cr>
-map <leader>g :Gstatus<cr>
-" map <leader>ga :!git add . && git commit<cr>
-" map <leader>gg :!git open<cr><cr>
-" map <leader>gp :!git add . && git commit && git push<cr>
+map <leader>g :w<cr>:Gstatus<cr>
+map <leader>gd :GDiff<cr>
+map <leader>gg :!git open<cr><cr>
+map <leader>gp :GPush<cr>
+map <leader>gl :GPull origin
 map <leader>h :nohlsearch<cr>
 map <leader>i mmgg=G`m
 map <leader>ni :!npm install<cr>
@@ -265,7 +266,7 @@ endif
 
 let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
-"Airline 
+"Airline
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
