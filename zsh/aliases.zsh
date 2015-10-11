@@ -21,8 +21,12 @@ alias c='clear'
 alias st="open -a SourceTree"
 
 # Ls
-alias ls='ls -GFh'
+alias ls='ls -AGFh'
 export LSCOLORS=GxFxCxDxBxegedabagaced
+
+#Tmux
+alias tl='tmux ls'
+alias tk='tmux kill-session -t'
 
 # Stopwatch
 alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
@@ -55,6 +59,10 @@ alias cpwd='pwd|tr -d "\n"|pbcopy'
 # editor shortcut
 alias v="vim"
 
+# fasd
+alias j='fasd_cd -d'
+alias jj='fasd_cd -d -i'
+
 #Config Shortcuts
 alias za="vim ~/dotfiles/zsh/aliases.zsh"
 alias ze="vim ~/.oh-my-zsh/custom/exports.zsh"
@@ -71,8 +79,9 @@ alias test="gulp test"
 
 # Git
 alias g="git status"
-alias ga="git add"
+alias ga="git add ."
 alias gc="git commit -m"
+alias gp="git add . && git commit && git push"
 alias go="git checkout"
 alias amend="git commit --amend"
 

@@ -225,5 +225,3 @@ PROMPT='%{%f%b%k%}$(build_prompt) '
 
 RPROMPT='$(git_prompt_status)%{$reset_color%}$(git_time_since_commit) ⌚ %{$fg_bold[red]%}%*%{$reset_color%}'
 
-setopt promptsubst
-PS1=$'%{\e(0%}${(r:$COLUMNS::q:)}%{\e(B%}'$PS1

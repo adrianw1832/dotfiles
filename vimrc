@@ -11,6 +11,7 @@ Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'pbrisbin/vim-mkdir'
+Plug 'tpope/vim-rails'
 Plug 'tpope/vim-repeat'
 Plug 'thoughtbot/vim-rspec'
 Plug 'vim-ruby/vim-ruby'
@@ -86,16 +87,17 @@ map <leader>i mmgg=G`m
 map <leader>ni :!npm install<cr>
 nnoremap <leader>o :CtrlP<cr>
 nnoremap <leader>oo :CtrlPBuffer<cr>
-map <leader>p :set paste<CR>o<esc>"*]p:set nopaste<cr>"
+map <leader>p :set paste<CR>o<esc>"*]p:set nopaste<cr>
 nmap <leader>pi :w<cr>:source $MYVIMRC<cr>:PlugUpdate<cr>
 map <leader>r :w<cr>:call RunNearestSpec()<cr>
-nmap <leader>so :w<cr>:source $MYVIMRC<cr>
+nmap <leader>so :w<cr>:source $MYVIMRC<cr>:AirlineRefresh<cr>
 map <leader>t :w<cr>:call RunCurrentSpecFile()<cr>
 nnoremap <leader>w :w<cr>
 nnoremap <leader>q :q<cr>
 map <leader>qq :Bclose<cr>
 nnoremap <leader>wq :wq<cr>
 nnoremap <leader>qw :wq<cr>
+nmap <leader>u :copen<cr><C-w>F:cclose<cr>:wincmd _<cr>:wincmd \|<cr>
 nmap <leader>v :vnew <C-r>=escape(expand("%:p:h"), ' ') . '/'<cr>
 nmap <leader>vi :vs ~/.vimrc<cr>
 map <leader>y :w<cr>:call RunAllSpecs()<cr>
@@ -124,8 +126,8 @@ vnoremap ∆ :m '>+1<cr>gv=gv
 autocmd VimResized * :wincmd =
 
 " zoom a vim pane, <C-w>= to re-balance
-nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>
-nnoremap <leader>= :wincmd =<cr>
+nnoremap <leader>= :wincmd _<cr>:wincmd \|<cr>
+nnoremap <leader>- :wincmd =<cr>
 
 " Setting paths for ruby
 augroup rubypath
@@ -174,6 +176,11 @@ augroup vimrcEx
   " Allow stylesheets to autocomplete hyphenated words
   autocmd FileType css,scss,sass setlocal iskeyword+=-
 augroup END
+
+" CtrlP
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 
 " Faster CtrlP search
 let g:ctrlp_use_caching = 0
@@ -314,3 +321,6 @@ let g:vtr_filetype_runner_overrides = {
       \ 'applescript': 'osascript {file}'
       \ }
 
+" vim surround
+let g:surround_45 = "<% \r %>"
+let g:surround_61 = "<%= \r %>"
