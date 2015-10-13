@@ -67,6 +67,8 @@ imap <C-b> <Left>
 imap <C-d> <Del>
 imap <C-e> <C-o>$
 imap <C-a> <C-o>^
+imap <C-n> <Down>
+imap <C-p> <Up>
 nmap 0 ^
 nmap <C-a> ^
 nmap <C-e> $
@@ -79,7 +81,8 @@ let mapleader = "\<Space>"
 map <leader>b :ls<cr>:b
 map <leader>bd :ls<cr>:bd<C-b><C-b>
 map <leader>bi :!bundle install<cr>
-map <leader>dw :%s/\s\+$//<cr>
+map <leader>c :cclose<cr>
+map <leader>dw :%s/\s\+$//<cr>:w<cr>
 map <leader>e :w<cr>:call RunLastSpec()<cr>
 map <leader>g :w<cr>:Gstatus<cr>
 map <leader>gd :Gvdiff<cr>
@@ -98,6 +101,7 @@ map <leader>rc :Econtroller<space>
 map <leader>rf :Eintegrationtest<space>
 map <leader>rm :Emodel<space>
 map <leader>rv :Eview<space>
+nmap<leader>sn :UltiSnipsEdit<cr>
 nmap <leader>so :w<cr>:source $MYVIMRC<cr>:AirlineRefresh<cr>:nohlsearch<cr>
 map <leader>t :w<cr>:call RunCurrentSpecFile()<cr>
 nnoremap <leader>w :w<cr>
@@ -107,7 +111,7 @@ nnoremap <leader>wq :wq<cr>
 nnoremap <leader>qw :wq<cr>
 nmap <leader>u :copen<cr><C-w>F:cclose<cr>:wincmd _<cr>:wincmd \|<cr>
 nmap <leader>v :vnew <C-r>=escape(expand("%:p:h"), ' ') . '/'<cr>
-nmap <leader>vi :vs ~/.vimrc<cr>
+nmap <leader>vi :e ~/.vimrc<cr>
 map <leader>y :w<cr>:call RunAllSpecs()<cr>
 nnoremap <leader><leader> <c-^>
 
@@ -116,10 +120,7 @@ nnoremap <Right> :echoe "Use l"<cr>
 nnoremap <Up> :echoe "Use k"<cr>
 nnoremap <Down> :echoe "Use j"<cr>
 
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-h> <C-w>h
-nnoremap <C-l> <C-w>l
+" Switching out to terminal
 nnoremap <NUL> <C-z>
 
 " Moving lines
@@ -148,7 +149,6 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
 let g:UltiSnipsEditSplit="vertical"
-nmap<leader>snip :UltiSnipsEdit<cr>
 
 " Dispatch
 let g:rspec_command = "Dispatch rspec {spec}"
