@@ -79,6 +79,7 @@ let mapleader = "\<Space>"
 map <leader>b :ls<cr>:b
 map <leader>bd :ls<cr>:bd<C-b><C-b>
 map <leader>bi :!bundle install<cr>
+map <leader>dw :%s/\s\+$//<cr>
 map <leader>e :w<cr>:call RunLastSpec()<cr>
 map <leader>g :w<cr>:Gstatus<cr>
 map <leader>gd :Gvdiff<cr>
@@ -93,6 +94,10 @@ nnoremap <leader>oo :CtrlPBuffer<cr>
 map <leader>p :set paste<CR>o<esc>"*]p:set nopaste<cr>
 nmap <leader>pi :w<cr>:source $MYVIMRC<cr>:PlugUpdate<cr>
 map <leader>r :w<cr>:call RunNearestSpec()<cr>
+map <leader>rc :Econtroller<space>
+map <leader>rf :Eintegrationtest<space>
+map <leader>rm :Emodel<space>
+map <leader>rv :Eview<space>
 nmap <leader>so :w<cr>:source $MYVIMRC<cr>:AirlineRefresh<cr>:nohlsearch<cr>
 map <leader>t :w<cr>:call RunCurrentSpecFile()<cr>
 nnoremap <leader>w :w<cr>
