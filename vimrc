@@ -8,6 +8,7 @@ Plug 'vim-scripts/tComment'
 Plug 'SirVer/ultisnips'
 Plug 'bling/vim-airline'
 Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'pbrisbin/vim-mkdir'
@@ -21,13 +22,16 @@ Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'kana/vim-textobj-user'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'christoomey/vim-tmux-runner'
+Plug 'edkolev/tmuxline.vim'
 
-Plug 'nanotech/jellybeans.vim'
+Plug 'tomasr/molokai'
 call plug#end()
 
-runtime macros/matchit.vim
+colorscheme molokai
+let g:molokai_original = 1
+let g:rehash256 = 1
 
-colorscheme jellybeans
+runtime macros/matchit.vim
 
 syntax on
 set autoindent
@@ -114,6 +118,7 @@ nmap <leader>v :vnew <C-r>=escape(expand("%:p:h"), ' ') . '/'<cr>
 nmap <leader>vi :e ~/.vimrc<cr>
 map <leader>y :w<cr>:call RunAllSpecs()<cr>
 nnoremap <leader><leader> <c-^>
+nnoremap <leader><leader> :Explore .<cr>
 
 nnoremap <Left> :echoe "Use h"<cr>
 nnoremap <Right> :echoe "Use l"<cr>
