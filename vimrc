@@ -79,6 +79,7 @@ nmap <C-e> $
 nmap <C-m> :bn<cr>
 nmap <C-n> :bp<cr>
 nnoremap <C-z> <C-a>
+nnoremap <tab> <c-^>
 vmap <C-c> "*y
 
 let mapleader = "\<Space>"
@@ -104,6 +105,7 @@ map <leader>r :w<cr>:call RunNearestSpec()<cr>
 map <leader>rc :Econtroller<space>
 map <leader>rf :Eintegrationtest<space>
 map <leader>rm :Emodel<space>
+map <leader>ru :Eunittest<space>
 map <leader>rv :Eview<space>
 nmap<leader>sn :UltiSnipsEdit<cr>
 nmap <leader>so :w<cr>:source $MYVIMRC<cr>:AirlineRefresh<cr>:nohlsearch<cr>
@@ -117,7 +119,6 @@ nmap <leader>u :copen<cr><C-w>F:cclose<cr>:wincmd _<cr>:wincmd \|<cr>
 nmap <leader>v :vnew <C-r>=escape(expand("%:p:h"), ' ') . '/'<cr>
 nmap <leader>vi :e ~/.vimrc<cr>
 map <leader>y :w<cr>:call RunAllSpecs()<cr>
-nnoremap <leader><leader> <c-^>
 nnoremap <leader><leader> :Explore .<cr>
 
 nnoremap <Left> :echoe "Use h"<cr>
@@ -191,7 +192,7 @@ augroup vimrcEx
 augroup END
 
 " CtrlP
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+set wildignore+=*.o,*.obj,.git,bower_components,node_modules,_site,*.class,*.zip,*.aux
 
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 
@@ -229,8 +230,8 @@ map <leader>re :call RenameFile()<cr>
 
 " Emmet
 let g:user_emmet_install_global = 0
-autocmd FileType html,css EmmetInstall
-let g:user_emmet_leader_key='\<Space>'
+autocmd FileType html,css,eruby EmmetInstall
+let g:user_emmet_leader_key='<C-m>'
 
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
