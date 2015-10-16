@@ -24,71 +24,76 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'christoomey/vim-tmux-runner'
 Plug 'edkolev/tmuxline.vim'
 
-" Plug 'tomasr/molokai'
 Plug 'sjl/badwolf'
 call plug#end()
 
 colorscheme badwolf
-" let g:molokai_original = 1
-" let g:rehash256 = 1
 
-runtime macros/matchit.vim
+runtime macros/matchit.vim     " allow vim to match more than just brackets
 
-syntax on     "turn on syntax highlighting"
-set autoindent
-set autowrite
-set backspace=indent,eol,start     "more sensible backspace behaviour"
-set cursorline     "highlight current line"
-set expandtab     "tab key will always insert 'softtabstop' amount of space"
-set grepprg=ag     "use ag as default for grep"
-set hidden
-set history=50     "number of commands to keep in history"
-set hlsearch     "highlight search result"
-set ignorecase
-set incsearch     "refresh search when entering search term"
-set laststatus=2
-set lazyredraw     "redraw window only when we need to"
-set nobackup nowritebackup noswapfile
-set nocompatible     "no backwards compatibility"
-set noerrorbells     "silent error bell"
-set number     "show line numbers"
-set nrformats=alpha
-set numberwidth=5     "width of the number column"
-set relativenumber     "show relative line numbers"
-set ruler
-set timeoutlen=500     "timeout between keystrokes to register command"
-set shiftwidth=2     "number of spaces for indents"
-set showcmd     "show command at the bottom bar"
-set showmatch
-set smartcase     "smart case for searching"
-set smartindent
-set so=5     "number of lines around cursor at the edge of screen"
-set softtabstop=2     "number of spaces in tab when editing"
-set t_Co=256     "256 terminal colours"
-set tabstop=2     "number of visual spaces per tab"
-set wildmenu     "visual menu for autocomplete"
+syntax on     " turn on syntax highlighting
+set autoindent     " keeps same level of indentation of the previous line
+set autowrite     " save on buffer switch
+set backspace=indent,eol,start     " more sensible backspace behaviour
+set cursorline     " highlight current line
+set expandtab     " tab key will always insert 'softtabstop' amount of space
+set grepprg=ag     " use ag as default for grep
+set hidden     " change default behaviour of opening file of existing buffer
+set history=50     " number of commands to keep in history
+set hlsearch     " highlight search result
+set ignorecase     " ignore case when searching
+set incsearch     " refresh search when entering search term
+set laststatus=2     " show status bar
+set lazyredraw     " redraw window only when we need to
+set nobackup nowritebackup noswapfile     " no unnecessary backup files
+set nocompatible     " no backwards compatibility
+set noerrorbells     " silent error bell
+set number     " show line numbers
+set nrformats=alpha     " format numbers such that they increase sensibly
+set numberwidth=5     " width of the number column
+set relativenumber     " show relative line numbers
+set ruler     " show line info at the bottom
+set timeoutlen=500     " timeout between keystrokes to register command
+set shiftwidth=2     " number of spaces for indents
+set showcmd     " show command at the bottom bar
+set smartcase     " smart case for searching
+set smartindent     " adds another level of indentation in some cases
+set so=5     " number of lines around cursor at the edge of screen
+set softtabstop=2     " number of spaces in tab when editing
+set t_Co=256     " 256 terminal colours
+set tabstop=2     " number of visual spaces per tab
+set wildmenu     " visual menu for autocomplete
 
+" easier esc mapping
 imap jk <Esc>
 imap kj <Esc>
+" easier autocomplete navigation
 imap <C-w> <C-n>
 imap <C-q> <C-p>
+" allow ctrl - hotkeys
+imap <C-n> <Down>
+imap <C-p> <Up>
 imap <C-f> <Right>
 imap <C-b> <Left>
 imap <C-d> <Del>
 imap <C-e> <C-o>$
 imap <C-a> <C-o>^
-imap <C-n> <Down>
-imap <C-p> <Up>
-nmap 0 ^
 nmap <C-a> ^
 nmap <C-e> $
+" switching between buffers
 nmap <C-m> :bn<cr>
 nmap <C-n> :bp<cr>
+" remap to increase number by 1
 nnoremap <C-z> <C-a>
+" switch between previous buffer
 nnoremap <tab> <c-^>
+" allow j and k to move down wrapped lines
 nnoremap j gj
 nnoremap k gk
+" copy to system clipboard
 vmap <C-c> "*y
+" Switching out to terminal
+nnoremap <NUL> <C-z>
 
 " leader mappings
 let mapleader = "\<Space>"
@@ -96,6 +101,7 @@ map <leader>b :ls<cr>:b
 map <leader>bd :ls<cr>:bd<C-b><C-b>
 map <leader>bi :!bundle install<cr>
 map <leader>c :cclose<cr>
+" delete all trailing white spaces
 map <leader>dw :%s/\s\+$//<cr>:w<cr>
 map <leader>e :w<cr>:call RunLastSpec()<cr>
 map <leader>g :w<cr>:Gstatus<cr>
@@ -104,39 +110,52 @@ map <leader>gg :!git open<cr><cr>
 map <leader>gp :Gpush<cr>
 map <leader>gl :Gpull origin<Space>
 map <leader>h :nohlsearch<cr>
+" indent all and return to current line
 map <leader>i mmgg=G`m
 map <leader>ni :!npm install<cr>
-nnoremap <leader>o :CtrlP<cr>
-nnoremap <leader>oo :CtrlPBuffer<cr>
+map <leader>o :CtrlP<cr>
+map <leader>oo :CtrlPBuffer<cr>
+" sensible pasting from system clipboard
 map <leader>p :set paste<CR>o<esc>"*]p:set nopaste<cr>
-nmap <leader>pi :w<cr>:source $MYVIMRC<cr>:PlugUpdate<cr>
+map <leader>pi :w<cr>:source $MYVIMRC<cr>:PlugUpdate<cr>
 map <leader>r :w<cr>:call RunNearestSpec()<cr>
 map <leader>rc :Econtroller<space>
+map <leader>re :call RenameFile()<cr>
 map <leader>rf :Eintegrationtest<space>
 map <leader>rm :Emodel<space>
 map <leader>ru :Eunittest<space>
 map <leader>rv :Eview<space>
-nmap<leader>sn :UltiSnipsEdit<cr>
-nmap <leader>so :w<cr>:source $MYVIMRC<cr>:AirlineRefresh<cr>:nohlsearch<cr>
+map <leader>sn :UltiSnipsEdit<cr>
+map <leader>so :w<cr>:source $MYVIMRC<cr>:AirlineRefresh<cr>:nohlsearch<cr>
 map <leader>t :w<cr>:call RunCurrentSpecFile()<cr>
-nnoremap <leader>w :w<cr>
-nnoremap <leader>q :q<cr>
+map <leader>w :w<cr>
+map <leader>q :q<cr>
 map <leader>qq :Bclose<cr>
-nnoremap <leader>wq :wq<cr>
-nnoremap <leader>qw :wq<cr>
-nmap <leader>u :copen<cr><C-w>F:cclose<cr>:wincmd _<cr>:wincmd \|<cr>
-nmap <leader>v :vnew <C-r>=escape(expand("%:p:h"), ' ') . '/'<cr>
-nmap <leader>vi :e ~/.vimrc<cr>
+map <leader>wq :wq<cr>
+map <leader>qw :wq<cr>
+map <leader>u :copen<cr><C-w>F:cclose<cr>:wincmd _<cr>:wincmd \|<cr>
+map <leader>v :vnew <C-r>=escape(expand("%:p:h"), ' ') . '/'<cr>
+map <leader>vi :e ~/.vimrc<cr>
 map <leader>y :w<cr>:call RunAllSpecs()<cr>
-nnoremap <leader><leader> :Explore .<cr>
+map <leader><leader> :Explore .<cr>
 
+nmap <leader>va :VtrAttachToPane<cr>
+nmap <leader>sc :VtrSendCommand<cr>
+nmap <leader>sf :VtrSendFile!<cr>
+nmap <leader>cr :VtrClearRunner<cr>
+nmap <leader>kr :VtrKillRunner<cr>
+nmap <C-f> :VtrSendLinesToRunner<cr>
+vmap <C-f> :VtrSendLinesToRunner<cr>
+
+nmap <leader>or:VtrOpenRunner { 'orientation': 'h', 'percentage': 50 }<cr>
+nmap <leader>pry :VtrOpenRunner { 'orientation': 'h', 'percentage': 50, 'cmd': 'pry' }<cr>
+nmap <leader>irb :VtrOpenRunner { 'orientation': 'h', 'percentage': 50, 'cmd': 'irb' }<cr>
+
+" Have to use hjkl
 nnoremap <Left> :echoe "Use h"<cr>
 nnoremap <Right> :echoe "Use l"<cr>
 nnoremap <Up> :echoe "Use k"<cr>
 nnoremap <Down> :echoe "Use j"<cr>
-
-" Switching out to terminal
-nnoremap <NUL> <C-z>
 
 " Moving lines
 nnoremap ˚ :m .-2<cr>==
@@ -146,10 +165,10 @@ inoremap ∆ <Esc>:m .+1<cr>==gi
 vnoremap ˚ :m '<-2<cr>gv=gv
 vnoremap ∆ :m '>+1<cr>gv=gv
 
-" automatically rebalance windows on vim resize
+" Automatically rebalance windows on vim resize
 autocmd VimResized * :wincmd =
 
-" zoom a vim pane, <C-w>= to re-balance
+" Zoom in on a vim pane, <C-w>= to re-balance
 nnoremap <leader>= :wincmd _<cr>:wincmd \|<cr>
 nnoremap <leader>- :wincmd =<cr>
 
@@ -158,15 +177,6 @@ augroup rubypath
 autocmd!
 autocmd FileType ruby setlocal path+=lib/**,spec/**
 augroup END
-
-" Ultisnips
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
-let g:UltiSnipsEditSplit="vertical"
-
-" Dispatch
-let g:rspec_command = "Dispatch rspec {spec}"
 
 " Display extra whitespace
 set list listchars=tab:»·,trail:·,nbsp:·
@@ -200,24 +210,6 @@ augroup vimrcEx
   autocmd FileType css,scss,sass setlocal iskeyword+=-
 augroup END
 
-" CtrlP
-set wildignore+=*.o,*.obj,.git,bower_components,node_modules,_site,*.class,*.zip,*.aux
-
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
-
-" Faster CtrlP search
-let g:ctrlp_use_caching = 0
-if executable('ag')
-  set grepprg=ag\ --nogroup\ --nocolor
-
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-else
-  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
-  let g:ctrlp_prompt_mappings = {
-        \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
-        \ }
-endif
-
 " Treat <li> and <p> tags like the block tags they are
 let g:html_indent_tags = 'li\|p'
 
@@ -235,7 +227,54 @@ function! RenameFile()
     redraw!
   endif
 endfunction
-map <leader>re :call RenameFile()<cr>
+
+" Don't close window, when deleting a buffer
+command! Bclose call <SID>BufcloseCloseIt()
+function! <SID>BufcloseCloseIt()
+  let l:currentBufNum = bufnr("%")
+  let l:alternateBufNum = bufnr("#")
+
+  if buflisted(l:alternateBufNum)
+    buffer #
+  else
+    bnext
+  endif
+
+  if bufnr("%") == l:currentBufNum
+    new
+  endif
+
+  if buflisted(l:currentBufNum)
+    execute("bdelete! ".l:currentBufNum)
+  endif
+endfunction
+
+" Ultisnips
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
+let g:UltiSnipsEditSplit="vertical"
+
+" Dispatch
+let g:rspec_command = "Dispatch rspec {spec}"
+
+" CtrlP
+set wildignore+=*.o,*.obj,.git,bower_components,node_modules,_site,*.class,*.zip,*.aux
+
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+
+" Faster CtrlP search
+let g:ctrlp_use_caching = 0
+if executable('ag')
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+else
+  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+  let g:ctrlp_prompt_mappings = {
+        \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
+        \ }
+endif
 
 " Emmet
 let g:user_emmet_install_global = 0
@@ -266,8 +305,6 @@ let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
 " Plugin key-mappings.
 inoremap <expr><C-g>     neocomplete#undo_completion()
-" <TAB>: completion.
-" inoremap <expr><TAB>  pumvisible() ? "\<C-y>" : "\<TAB>"
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -301,43 +338,10 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
-" Don't close window, when deleting a buffer
-command! Bclose call <SID>BufcloseCloseIt()
-function! <SID>BufcloseCloseIt()
-  let l:currentBufNum = bufnr("%")
-  let l:alternateBufNum = bufnr("#")
-
-  if buflisted(l:alternateBufNum)
-    buffer #
-  else
-    bnext
-  endif
-
-  if bufnr("%") == l:currentBufNum
-    new
-  endif
-
-  if buflisted(l:currentBufNum)
-    execute("bdelete! ".l:currentBufNum)
-  endif
-endfunction
-
 " vim tmux runner
 let g:VtrUseVtrMaps = 1
 let g:VtrGitCdUpOnOpen = 0
 let g:VtrPercentage = 33
-
-nmap <leader>va :VtrAttachToPane<cr>
-nmap <leader>sc :VtrSendCommand<cr>
-nmap <leader>sf :VtrSendFile!<cr>
-nmap <leader>cr :VtrClearRunner<cr>
-nmap <leader>kr :VtrKillRunner<cr>
-nmap <C-f> :VtrSendLinesToRunner<cr>
-vmap <C-f> :VtrSendLinesToRunner<cr>
-
-nmap <leader>or:VtrOpenRunner { 'orientation': 'h', 'percentage': 50 }<cr>
-nmap <leader>pry :VtrOpenRunner { 'orientation': 'h', 'percentage': 50, 'cmd': 'pry' }<cr>
-nmap <leader>irb :VtrOpenRunner { 'orientation': 'h', 'percentage': 50, 'cmd': 'irb' }<cr>
 
 let g:vtr_filetype_runner_overrides = {
       \ 'haskell': 'ghci {file}',
