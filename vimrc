@@ -24,43 +24,49 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'christoomey/vim-tmux-runner'
 Plug 'edkolev/tmuxline.vim'
 
-Plug 'tomasr/molokai'
+" Plug 'tomasr/molokai'
+Plug 'sjl/badwolf'
 call plug#end()
 
-colorscheme molokai
-let g:molokai_original = 1
-let g:rehash256 = 1
+colorscheme badwolf
+" let g:molokai_original = 1
+" let g:rehash256 = 1
 
 runtime macros/matchit.vim
 
-syntax on
+syntax on     "turn on syntax highlighting"
 set autoindent
 set autowrite
-set backspace=indent,eol,start
-set grepprg=ag
+set backspace=indent,eol,start     "more sensible backspace behaviour"
+set cursorline     "highlight current line"
+set expandtab     "tab key will always insert 'softtabstop' amount of space"
+set grepprg=ag     "use ag as default for grep"
 set hidden
-set history=50
-set hlsearch
+set history=50     "number of commands to keep in history"
+set hlsearch     "highlight search result"
 set ignorecase
-set incsearch
+set incsearch     "refresh search when entering search term"
 set laststatus=2
-set lazyredraw
+set lazyredraw     "redraw window only when we need to"
 set nobackup nowritebackup noswapfile
-set nocompatible
-set noerrorbells
-set number
+set nocompatible     "no backwards compatibility"
+set noerrorbells     "silent error bell"
+set number     "show line numbers"
 set nrformats=alpha
-set numberwidth=5
-set relativenumber
+set numberwidth=5     "width of the number column"
+set relativenumber     "show relative line numbers"
 set ruler
-set timeoutlen=500
-set showcmd
+set timeoutlen=500     "timeout between keystrokes to register command"
+set shiftwidth=2     "number of spaces for indents"
+set showcmd     "show command at the bottom bar"
 set showmatch
-set smartcase
+set smartcase     "smart case for searching"
 set smartindent
-set so=5
-set t_Co=256
-set tabstop=2 shiftwidth=2 expandtab
+set so=5     "number of lines around cursor at the edge of screen"
+set softtabstop=2     "number of spaces in tab when editing"
+set t_Co=256     "256 terminal colours"
+set tabstop=2     "number of visual spaces per tab"
+set wildmenu     "visual menu for autocomplete"
 
 imap jk <Esc>
 imap kj <Esc>
@@ -80,8 +86,11 @@ nmap <C-m> :bn<cr>
 nmap <C-n> :bp<cr>
 nnoremap <C-z> <C-a>
 nnoremap <tab> <c-^>
+nnoremap j gj
+nnoremap k gk
 vmap <C-c> "*y
 
+" leader mappings
 let mapleader = "\<Space>"
 map <leader>b :ls<cr>:b
 map <leader>bd :ls<cr>:bd<C-b><C-b>
