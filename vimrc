@@ -1,5 +1,6 @@
 call plug#begin('~/.vim/plugged')
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'rizzatti/dash.vim'
 Plug 'Raimondi/delimitMate'
 Plug 'mattn/emmet-vim'
 Plug 'Shougo/neocomplete'
@@ -103,6 +104,7 @@ map <leader>b :ls<cr>:b
 map <leader>bd :ls<cr>:bd<C-b><C-b>
 map <leader>bi :!bundle install<cr>
 map <leader>c :cclose<cr>
+map <silent> <leader>d <Plug>DashSearch
 " delete all trailing white spaces
 map <leader>dw :%s/\s\+$//<cr>:w<cr>
 map <leader>e :w<cr>:call RunLastSpec()<cr>
