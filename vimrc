@@ -56,6 +56,8 @@ set ruler     " show line info at the bottom
 set timeoutlen=500     " timeout between keystrokes to register command
 set shiftwidth=2     " number of spaces for indents
 set showcmd     " show command at the bottom bar
+set splitbelow     " new horizontal split opens to the bottom
+set splitright     " new vertical split opens to the right
 set smartcase     " smart case for searching
 set smartindent     " adds another level of indentation in some cases
 set so=5     " number of lines around cursor at the edge of screen
@@ -213,10 +215,6 @@ augroup END
 " Treat <li> and <p> tags like the block tags they are
 let g:html_indent_tags = 'li\|p'
 
-" Open new split panes to right and bottom, which feels more natural
-set splitbelow
-set splitright
-
 " Rename current file
 function! RenameFile()
   let old_name = expand('%')
@@ -279,7 +277,7 @@ endif
 " Emmet
 let g:user_emmet_install_global = 0
 autocmd FileType html,css,eruby EmmetInstall
-let g:user_emmet_leader_key='<C-m>'
+let g:user_emmet_leader_key=','
 
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
