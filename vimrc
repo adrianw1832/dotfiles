@@ -36,6 +36,7 @@ syntax on     " turn on syntax highlighting
 set autoindent     " keeps same level of indentation of the previous line
 set autowrite     " save on buffer switch
 set backspace=indent,eol,start     " more sensible backspace behaviour
+set complete+=kspell     " Autocomplete with dictionary words when spell check is on
 set cursorline     " highlight current line
 set expandtab     " tab key will always insert 'softtabstop' amount of space
 set grepprg=ag     " use ag as default for grep
@@ -121,10 +122,12 @@ map <leader>oo :CtrlPBuffer<cr>
 map <leader>p :set paste<CR>o<esc>"*]p:set nopaste<cr>
 map <leader>pi :w<cr>:source $MYVIMRC<cr>:PlugUpdate<cr>
 map <leader>r :w<cr>:call RunNearestSpec()<cr>
+map <leader>ra :A<cr>
 map <leader>rc :Econtroller<space>
 map <leader>re :call RenameFile()<cr>
 map <leader>rf :Eintegrationtest<space>
 map <leader>rm :Emodel<space>
+map <leader>rr :R<cr>
 map <leader>ru :Eunittest<space>
 map <leader>rv :Eview<space>
 map <leader>sn :UltiSnipsEdit<cr>
