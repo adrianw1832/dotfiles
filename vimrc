@@ -5,9 +5,9 @@ Plug 'Raimondi/delimitMate'
 Plug 'mattn/emmet-vim'
 Plug 'Shougo/neocomplete'
 Plug 'scrooloose/syntastic'
-Plug 'vim-scripts/tComment'
 Plug 'SirVer/ultisnips'
 Plug 'bling/vim-airline'
+Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
@@ -74,8 +74,6 @@ imap kj <Esc>
 imap <C-w> <C-n>
 imap <C-q> <C-p>
 " allow ctrl - hotkeys
-imap <C-n> <Down>
-imap <C-p> <Up>
 imap <C-f> <Right>
 imap <C-b> <Left>
 imap <C-d> <Del>
@@ -285,10 +283,14 @@ let g:user_emmet_leader_key=','
 let g:acp_enableAtStartup = 0
 " Use neocomplete.
 let g:neocomplete#enable_at_startup = 1
-" let g:neocomplete#enable_auto_select = 1
+let g:neocomplete#max_list = 10
+let g:neocomplete#source#word#max_candidates = 10
 let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#auto_completion_start_length = 3
 let g:neocomplete#sources#syntax#min_keyword_length = 3
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+let g:neocomplete#enable_auto_delimiter = 1
+let g:neocomplete#force_overwrite_completefunc = 1
+" let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 
 " Define dictionary.
 let g:neocomplete#sources#dictionary#dictionaries = {
@@ -310,18 +312,18 @@ inoremap <expr><C-g>     neocomplete#undo_completion()
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+autocmd FileType eruby setlocal omnifunc=rubycomplete#Complete
+autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
+autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
-" Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
+" Enable heavy omni completion for ruby
+if !exists('g:neocomplete#force_omni_input_patterns')
+  let g:neocomplete#force_omni_input_patterns = {}
 endif
-"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-
-let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+" let g:neocomplete#force_omni_input_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+" let g:neocomplete#force_omni_input_patterns.eruby = '[^. *\t]\.\w*\|\h\w*::'
 
 "Airline
 let g:airline_powerline_fonts = 1
