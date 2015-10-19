@@ -1,26 +1,25 @@
 call plug#begin('~/.vim/plugged')
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'rizzatti/dash.vim'
+Plug 'ctrlpvim/ctrlp.vim', { 'on': ['CtrlP', 'CtrlPBuffer'] }
+Plug 'rizzatti/dash.vim', { 'on': '<Plug>DashSearch' }
 Plug 'Raimondi/delimitMate'
-Plug 'mattn/emmet-vim'
+Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'eruby'] }
 Plug 'Shougo/neocomplete'
 Plug 'scrooloose/syntastic'
-Plug 'SirVer/ultisnips'
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'bling/vim-airline'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'pbrisbin/vim-mkdir'
-Plug 'tpope/vim-rails'
+Plug 'tpope/vim-rails', { 'for': ['ruby', 'rails'] }
 Plug 'tpope/vim-repeat'
-Plug 'thoughtbot/vim-rspec'
-Plug 'vim-ruby/vim-ruby'
-Plug 'honza/vim-snippets'
+Plug 'thoughtbot/vim-rspec', { 'for': ['ruby', 'rails'] }
+Plug 'vim-ruby/vim-ruby', { 'for': ['ruby', 'rails'] }
 Plug 'tpope/vim-surround'
-Plug 'nelstrom/vim-textobj-rubyblock'
-Plug 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-user' | Plug 'nelstrom/vim-textobj-rubyblock', { 'for': ['ruby', 'rails'] }
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'christoomey/vim-tmux-runner'
 Plug 'edkolev/tmuxline.vim'
@@ -71,6 +70,8 @@ set wildmenu     " visual menu for autocomplete
 " easier esc mapping
 imap jk <Esc>
 imap kj <Esc>
+vmap jk <Esc>
+vmap kj <Esc>
 " easier autocomplete navigation
 imap <C-w> <C-n>
 imap <C-q> <C-p>
@@ -78,8 +79,9 @@ imap <C-q> <C-p>
 imap <C-f> <Right>
 imap <C-b> <Left>
 imap <C-d> <Del>
-imap <C-e> <C-o>$
+imap <C-h> <BS>
 imap <C-a> <C-o>^
+imap <C-e> <C-o>$
 nmap <C-a> ^
 nmap <C-e> $
 " switching between buffers
@@ -260,7 +262,10 @@ let g:UltiSnipsEditSplit="vertical"
 let g:rspec_command = "Dispatch rspec {spec}"
 
 " CtrlP
+set wildignore+=*.png,*.jpg,*.gif,*.jpeg,*.gem
+set wildignore+=*DS_Store*,*sass-cahce*
 set wildignore+=*.o,*.obj,.git,bower_components,node_modules,_site,*.class,*.zip,*.aux
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 
