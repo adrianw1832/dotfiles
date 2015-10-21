@@ -142,7 +142,7 @@ prompt_git() {
     fi
 
     setopt promptsubst
-    
+
     echo -n "${ref/refs\/heads\//$PL_BRANCH_CHAR }${mode}"
   fi
 }

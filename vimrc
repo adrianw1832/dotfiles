@@ -73,8 +73,9 @@ imap kj <Esc>
 vmap jk <Esc>
 vmap kj <Esc>
 " easier autocomplete navigation
-imap <C-w> <C-n>
-imap <C-q> <C-p>
+inoremap <C-w> <C-n>
+inoremap <C-q> <C-p>
+imap ` <C-x><C-p>
 " allow ctrl - hotkeys
 imap <C-f> <Right>
 imap <C-b> <Left>
@@ -181,8 +182,8 @@ nnoremap <leader>- :wincmd =<cr>
 
 " Setting paths for ruby
 augroup rubypath
-autocmd!
-autocmd FileType ruby setlocal path+=lib/**,spec/**
+  autocmd!
+  autocmd FileType ruby setlocal path+=lib/**,spec/**
 augroup END
 
 " Display extra whitespace
@@ -298,7 +299,7 @@ let g:neocomplete#auto_completion_start_length = 3
 let g:neocomplete#sources#syntax#min_keyword_length = 3
 let g:neocomplete#enable_auto_delimiter = 1
 let g:neocomplete#force_overwrite_completefunc = 1
-" let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 
 " Define dictionary.
 let g:neocomplete#sources#dictionary#dictionaries = {
@@ -337,8 +338,9 @@ endif
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tmuxline#enabled = 1
 
-"Syntastic
+" Syntastic
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
