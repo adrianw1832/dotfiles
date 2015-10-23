@@ -1,5 +1,5 @@
 call plug#begin('~/.vim/plugged')
-Plug 'ctrlpvim/ctrlp.vim', { 'on': ['CtrlP', 'CtrlPBuffer'] }
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'rizzatti/dash.vim', { 'on': '<Plug>DashSearch' }
 Plug 'Raimondi/delimitMate'
 Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'eruby'] }
@@ -82,15 +82,11 @@ imap <C-d> <Del>
 imap <C-h> <BS>
 imap <C-a> <C-o>^
 imap <C-e> <C-o>$
-nmap <C-a> ^
-nmap <C-e> $
+nmap 0 ^
 " switching between buffers
-nmap <C-m> :bn<cr>
-nmap <C-n> :bp<cr>
+nmap <C-m> :bp<cr>
 " remap to increase number by 1
 nnoremap <C-z> <C-a>
-" switch between previous buffer
-nnoremap <tab> <c-^>
 " allow j and k to move down wrapped lines
 nnoremap j gj
 nnoremap k gk
@@ -106,8 +102,6 @@ map <leader>bd :ls<cr>:bd<C-b><C-b>
 map <leader>bi :!bundle install<cr>
 map <leader>c :cclose<cr>
 map <silent> <leader>d <Plug>DashSearch
-" delete all trailing white spaces
-map <leader>dw :%s/\s\+$//<cr>:w<cr>
 map <leader>e :w<cr>:call RunLastSpec()<cr>
 map <leader>g :w<cr>:Gstatus<cr>
 map <leader>gd :Gvdiff<cr>
@@ -151,8 +145,8 @@ nmap <leader>sc :VtrSendCommand<cr>
 nmap <leader>sf :VtrSendFile!<cr>
 nmap <leader>cr :VtrClearRunner<cr>
 nmap <leader>kr :VtrKillRunner<cr>
-nmap <C-f> :VtrSendLinesToRunner<cr>
-vmap <C-f> :VtrSendLinesToRunner<cr>
+nmap <C-a> :VtrSendLinesToRunner<cr>
+vmap <C-a> :VtrSendLinesToRunner<cr>
 
 nmap <leader>or  :VtrOpenRunner { 'orientation': 'h', 'percentage': 50 }<cr>
 nmap <leader>pry :VtrOpenRunner { 'orientation': 'h', 'percentage': 50, 'cmd': 'pry' }<cr>
@@ -178,6 +172,16 @@ autocmd VimResized * :wincmd =
 " Zoom in on a vim pane, <C-w>= to re-balance
 nnoremap <leader>= :wincmd _<cr>:wincmd \|<cr>
 nnoremap <leader>- :wincmd =<cr>
+
+" Delete all trailing white space on save
+function! <SID>StripTrailingWhitespaces()
+  let l = line(".")
+  let c = col(".")
+  %s/\s\+$//e
+  call cursor(l, c)
+endfunction
+
+autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
 " Setting paths for ruby
 augroup rubypath
