@@ -22,7 +22,6 @@ Plug 'tpope/vim-surround'
 Plug 'kana/vim-textobj-user' | Plug 'nelstrom/vim-textobj-rubyblock', { 'for': ['ruby', 'rails'] }
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'christoomey/vim-tmux-runner'
-Plug 'edkolev/tmuxline.vim'
 
 Plug 'sjl/badwolf'
 call plug#end()
@@ -338,10 +337,6 @@ endif
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tmuxline#enabled = 1
-
-" Tmuxline
-let g:tmuxline_preset = 'full'
 
 " Syntastic
 set statusline+=%#warningmsg#
