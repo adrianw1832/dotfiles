@@ -155,7 +155,7 @@ nmap <leader>kr :VtrKillRunner<cr>
 nmap <C-f> :VtrSendLinesToRunner<cr>
 vmap <C-f> :VtrSendLinesToRunner<cr>
 
-nmap <leader>or:VtrOpenRunner { 'orientation': 'h', 'percentage': 50 }<cr>
+nmap <leader>or  :VtrOpenRunner { 'orientation': 'h', 'percentage': 50 }<cr>
 nmap <leader>pry :VtrOpenRunner { 'orientation': 'h', 'percentage': 50, 'cmd': 'pry' }<cr>
 nmap <leader>irb :VtrOpenRunner { 'orientation': 'h', 'percentage': 50, 'cmd': 'irb' }<cr>
 
@@ -339,6 +339,9 @@ let g:airline_powerline_fonts = 1
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tmuxline#enabled = 1
+
+" Tmuxline
+let g:tmuxline_preset = 'full'
 
 " Syntastic
 set statusline+=%#warningmsg#
