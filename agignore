@@ -1,0 +1,13 @@
+*.sql
+/.git/
+bin
+bower_components
+build
+coverage
+doc
+log
+node_modules
+public/assets
+resources
+tmp
+vendor
