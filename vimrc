@@ -5,9 +5,9 @@ Plug 'Raimondi/delimitMate'
 Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'eruby'] }
 Plug 'Shougo/neocomplete'
 Plug 'scrooloose/syntastic'
+Plug 'tomtom/tcomment_vim'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'bling/vim-airline'
-Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
@@ -22,6 +22,7 @@ Plug 'tpope/vim-surround'
 Plug 'kana/vim-textobj-user' | Plug 'nelstrom/vim-textobj-rubyblock', { 'for': ['ruby', 'rails'] }
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'christoomey/vim-tmux-runner'
+Plug 'tpopo/vim-vinegar'
 
 Plug 'sjl/badwolf'
 call plug#end()
@@ -32,6 +33,7 @@ runtime macros/matchit.vim     " allow vim to match more than just brackets
 
 syntax on     " turn on syntax highlighting
 set autoindent     " keeps same level of indentation of the previous line
+set autoread     " Auto-reload buffers when files are changed on disk
 set autowrite     " save on buffer switch
 set backspace=indent,eol,start     " more sensible backspace behaviour
 set complete+=kspell     " Autocomplete with dictionary words when spell check is on
@@ -173,6 +175,9 @@ autocmd VimResized * :wincmd =
 nnoremap <leader>= :wincmd _<cr>:wincmd \|<cr>
 nnoremap <leader>- :wincmd =<cr>
 
+" Mapping q to close netrw whilst keeping the split open
+autocmd FileType netrw nnoremap q :bp\|bd #<cr>
+
 " Delete all trailing white space on save
 function! <SID>StripTrailingWhitespaces()
   let l = line(".")
@@ -265,13 +270,65 @@ let g:UltiSnipsEditSplit="vertical"
 " Dispatch
 let g:rspec_command = "Dispatch rspec {spec}"
 
-" CtrlP
-set wildignore+=*.png,*.jpg,*.gif,*.jpeg,*.gem
-set wildignore+=*DS_Store*,*sass-cahce*
-set wildignore+=*.o,*.obj,.git,bower_components,node_modules,_site,*.class,*.zip,*.aux
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+" Things to ignore when tab completing
+set wildignore=*.o,*.obj,*~,*.pyc
+set wildignore+=.env
+set wildignore+=.env[0-9]+
+set wildignore+=.env-pypy
+set wildignore+=.git,.gitkeep
+set wildignore+=.tmp
+set wildignore+=.coverage
+set wildignore+=*DS_Store*
+set wildignore+=.sass-cache/
+set wildignore+=__pycache__/
+set wildignore+=.webassets-cache/
+set wildignore+=vendor/rails/**
+set wildignore+=vendor/cache/**
+set wildignore+=*.gem
+set wildignore+=log/**
+set wildignore+=tmp/**
+set wildignore+=.tox/**
+set wildignore+=.idea/**
+set wildignore+=.vagrant/**
+set wildignore+=.coverage/**
+set wildignore+=*.egg,*.egg-info
+set wildignore+=*.png,*.jpg,*.gif
+set wildignore+=*.so,*.swp,*.zip,*/.Trash/**,*.pdf,*.dmg,*/Library/**,*/.rbenv/**
+set wildignore+=*/.nx/**,*.app
 
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+" Things to ignore when when using netrw
+let g:netrw_list_hide='\.o,\.obj,*\~,\.pyc,'
+let g:netrw_list_hide.='\.env,'
+let g:netrw_list_hide.='\.env[0-9].,'
+let g:netrw_list_hide.='\.env-pypy,'
+let g:netrw_list_hide.='\.git,'
+let g:netrw_list_hide.='\.gitkeep,'
+let g:netrw_list_hide.='\.vagrant,'
+let g:netrw_list_hide.='\.tmp,'
+let g:netrw_list_hide.='\.coverage$,'
+let g:netrw_list_hide.='\.DS_Store,'
+let g:netrw_list_hide.='__pycache__,'
+let g:netrw_list_hide.='\.webassets-cache/,'
+let g:netrw_list_hide.='\.sass-cache/,'
+let g:netrw_list_hide.='\.ropeproject/,'
+let g:netrw_list_hide.='vendor/rails/,'
+let g:netrw_list_hide.='vendor/cache/,'
+let g:netrw_list_hide.='\.gem,'
+let g:netrw_list_hide.='\.ropeproject/,'
+let g:netrw_list_hide.='\.coverage/,'
+let g:netrw_list_hide.='log/,'
+let g:netrw_list_hide.='tmp/,'
+let g:netrw_list_hide.='\.tox/,'
+let g:netrw_list_hide.='\.idea/,'
+let g:netrw_list_hide.='\.egg,\.egg-info,'
+let g:netrw_list_hide.='\.png,\.jpg,\.gif,'
+let g:netrw_list_hide.='\.so,\.swp,\.zip,/\.Trash/,\.pdf,\.dmg,/Library/,/\.rbenv/,'
+let g:netrw_list_hide.='*/\.nx/**,*\.app'
+
+" CtrlP
+let g:ctrlp_map = '<Nop>'
+let g:ctrlp_max_height = 20
+let g:ctrlp_max_files = 100
 
 " Faster CtrlP search
 let g:ctrlp_use_caching = 0
@@ -281,9 +338,6 @@ if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 else
   let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
-  let g:ctrlp_prompt_mappings = {
-        \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
-        \ }
 endif
 
 " Emmet
