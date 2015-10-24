@@ -1,0 +1,63 @@
+[user]
+  name = Adrian Wong
+  email = adrianwong1832@gmail.com
+[core]
+  autocrlf = input
+  safecrlf = true
+  editor = vim
+  excludesfile = /Users/Adrian/.gitignore_global
+  ignorecase = false
+[alias]
+  amend = commit --amend --reuse-message=HEAD
+  co = checkout
+  ci = commit
+  s = status -s
+  st = status
+  br = branch
+  hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+  type = cat-file -t
+  dump = cat-file -p
+  ctags = !.git/hooks/ctags
+
+[push]
+  default = current
+  followTags = true
+[filter "lfs"]
+  clean = git-lfs clean %f
+  smudge = git-lfs smudge %f
+  required = true
+[difftool "sourcetree"]
+  cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+  path =
+[mergetool "sourcetree"]
+  cmd = /opt/homebrew-cask/Caskroom/sourcetree/2.0.5.2/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+  trustExitCode = true
+
+[color]
+
+  # Use colors in Git commands that are capable of colored output when
+  # outputting to the terminal. (This is the default setting in Git ≥ 1.8.4.)
+  ui = auto
+
+[color "branch"]
+
+  current = white red reverse
+  local = red
+  remote = green
+
+[color "diff"]
+
+  meta = yellow bold
+  frag = magenta bold # line info
+  old = red # deletions
+  new = green # additions
+
+[color "status"]
+
+  added = green
+  changed = yellow
+  untracked = red
+[credential]
+  helper = osxkeychain
+[init]
+  templatedir = ~/.git_template
