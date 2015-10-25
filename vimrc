@@ -22,12 +22,13 @@ Plug 'tpope/vim-surround'
 Plug 'kana/vim-textobj-user' | Plug 'nelstrom/vim-textobj-rubyblock', { 'for': ['ruby', 'rails'] }
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'christoomey/vim-tmux-runner'
-Plug 'tpopo/vim-vinegar'
 
 Plug 'sjl/badwolf'
 call plug#end()
 
 colorscheme badwolf
+
+" Vim settings
 
 runtime macros/matchit.vim     " allow vim to match more than just brackets
 
@@ -68,36 +69,39 @@ set t_Co=256     " 256 terminal colours
 set tabstop=2     " number of visual spaces per tab
 set wildmenu     " visual menu for autocomplete
 
-" easier esc mapping
+" Custom mappings
+
+" Easier esc mapping
 imap jk <Esc>
 imap kj <Esc>
 vmap jk <Esc>
 vmap kj <Esc>
-" easier autocomplete navigation
+" Easier autocomplete navigation
 inoremap <C-w> <C-n>
 inoremap <C-q> <C-p>
 imap ` <C-x><C-p>
-" allow ctrl - hotkeys
+" Allow ctrl - hotkeys
 imap <C-f> <Right>
 imap <C-b> <Left>
 imap <C-d> <Del>
 imap <C-h> <BS>
 imap <C-a> <C-o>^
 imap <C-e> <C-o>$
+" Better start of line config
 nmap 0 ^
-" switching between buffers
+" Switching between buffers
 nmap <C-m> :bp<cr>
-" remap to increase number by 1
+" Remap to increase number by 1
 nnoremap <C-z> <C-a>
-" allow j and k to move down wrapped lines
+" Allow j and k to move down wrapped lines
 nnoremap j gj
 nnoremap k gk
-" copy to system clipboard
+" Copy to system clipboard
 vmap <C-c> "*y
 " Switching out to terminal
 nnoremap <NUL> <C-z>
 
-" leader mappings
+" Leader mappings
 let mapleader = "\<Space>"
 map <leader>b :ls<cr>:b
 map <leader>bd :ls<cr>:bd<C-b><C-b>
@@ -107,16 +111,15 @@ map <silent> <leader>d <Plug>DashSearch
 map <leader>e :w<cr>:call RunLastSpec()<cr>
 map <leader>g :w<cr>:Gstatus<cr>
 map <leader>gd :Gvdiff<cr>
-map <leader>gg :!git open<cr><cr>
 map <leader>gp :Gpush<cr>
 map <leader>gl :Gpull origin<Space>
 map <leader>h :nohlsearch<cr>
-" indent all and return to current line
+" Indent all and return to current line
 map <leader>i mmgg=G`m
 map <leader>ni :!npm install<cr>
 map <leader>o :CtrlP<cr>
 map <leader>oo :CtrlPBuffer<cr>
-" sensible pasting from system clipboard
+" Sensible pasting from system clipboard
 map <leader>p :set paste<CR>o<esc>"*]p:set nopaste<cr>
 map <leader>pi :w<cr>:source $MYVIMRC<cr>:PlugUpdate<cr>
 map <leader>r :w<cr>:call RunNearestSpec()<cr>
@@ -142,6 +145,11 @@ map <leader>vi :e ~/.vimrc<cr>
 map <leader>y :w<cr>:call RunAllSpecs()<cr>
 map <leader><leader> :Explore .<cr>
 
+" Zoom in on a vim pane, <C-w>= to re-balance
+nnoremap <leader>= :wincmd _<cr>:wincmd \|<cr>
+nnoremap <leader>- :wincmd =<cr>
+
+" Mappings for the tmux runner plugin
 nmap <leader>va :VtrAttachToPane<cr>
 nmap <leader>sc :VtrSendCommand<cr>
 nmap <leader>sf :VtrSendFile!<cr>
@@ -168,15 +176,24 @@ inoremap ∆ <Esc>:m .+1<cr>==gi
 vnoremap ˚ :m '<-2<cr>gv=gv
 vnoremap ∆ :m '>+1<cr>gv=gv
 
+" Ruby settings
+
+" Setting paths for ruby
+augroup rubypath
+  autocmd!
+  autocmd FileType ruby setlocal path+=lib/**,spec/**
+augroup END
+
+" Custom functions
+
 " Automatically rebalance windows on vim resize
 autocmd VimResized * :wincmd =
 
-" Zoom in on a vim pane, <C-w>= to re-balance
-nnoremap <leader>= :wincmd _<cr>:wincmd \|<cr>
-nnoremap <leader>- :wincmd =<cr>
+" Treat <li> and <p> tags like the block tags they are
+let g:html_indent_tags = 'li\|p'
 
-" Mapping q to close netrw whilst keeping the split open
-autocmd FileType netrw nnoremap q :bp\|bd #<cr>
+" Display extra whitespace
+set list listchars=tab:»·,trail:·,nbsp:·
 
 " Delete all trailing white space on save
 function! <SID>StripTrailingWhitespaces()
@@ -188,21 +205,12 @@ endfunction
 
 autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
-" Setting paths for ruby
-augroup rubypath
-  autocmd!
-  autocmd FileType ruby setlocal path+=lib/**,spec/**
-augroup END
-
-" Display extra whitespace
-set list listchars=tab:»·,trail:·,nbsp:·
-
+" When editing a file, always jump to the last known cursor position.
+" Don't do it for commit messages, when the position is invalid, or when
+" inside an event handler (happens when dropping a file on gvim).
 augroup vimrcEx
   autocmd!
 
-  " When editing a file, always jump to the last known cursor position.
-  " Don't do it for commit messages, when the position is invalid, or when
-  " inside an event handler (happens when dropping a file on gvim).
   autocmd BufReadPost *
         \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
         \   exe "normal g`\"" |
@@ -225,9 +233,6 @@ augroup vimrcEx
   " Allow stylesheets to autocomplete hyphenated words
   autocmd FileType css,scss,sass setlocal iskeyword+=-
 augroup END
-
-" Treat <li> and <p> tags like the block tags they are
-let g:html_indent_tags = 'li\|p'
 
 " Rename current file
 function! RenameFile()
@@ -261,15 +266,6 @@ function! <SID>BufcloseCloseIt()
   endif
 endfunction
 
-" Ultisnips
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
-let g:UltiSnipsEditSplit="vertical"
-
-" Dispatch
-let g:rspec_command = "Dispatch rspec {spec}"
-
 " Things to ignore when tab completing
 set wildignore=*.o,*.obj,*~,*.pyc
 set wildignore+=.env
@@ -296,34 +292,11 @@ set wildignore+=*.png,*.jpg,*.gif
 set wildignore+=*.so,*.swp,*.zip,*/.Trash/**,*.pdf,*.dmg,*/Library/**,*/.rbenv/**
 set wildignore+=*/.nx/**,*.app
 
-" Things to ignore when when using netrw
-let g:netrw_list_hide='\.o,\.obj,*\~,\.pyc,'
-let g:netrw_list_hide.='\.env,'
-let g:netrw_list_hide.='\.env[0-9].,'
-let g:netrw_list_hide.='\.env-pypy,'
-let g:netrw_list_hide.='\.git,'
-let g:netrw_list_hide.='\.gitkeep,'
-let g:netrw_list_hide.='\.vagrant,'
-let g:netrw_list_hide.='\.tmp,'
-let g:netrw_list_hide.='\.coverage$,'
-let g:netrw_list_hide.='\.DS_Store,'
-let g:netrw_list_hide.='__pycache__,'
-let g:netrw_list_hide.='\.webassets-cache/,'
-let g:netrw_list_hide.='\.sass-cache/,'
-let g:netrw_list_hide.='\.ropeproject/,'
-let g:netrw_list_hide.='vendor/rails/,'
-let g:netrw_list_hide.='vendor/cache/,'
-let g:netrw_list_hide.='\.gem,'
-let g:netrw_list_hide.='\.ropeproject/,'
-let g:netrw_list_hide.='\.coverage/,'
-let g:netrw_list_hide.='log/,'
-let g:netrw_list_hide.='tmp/,'
-let g:netrw_list_hide.='\.tox/,'
-let g:netrw_list_hide.='\.idea/,'
-let g:netrw_list_hide.='\.egg,\.egg-info,'
-let g:netrw_list_hide.='\.png,\.jpg,\.gif,'
-let g:netrw_list_hide.='\.so,\.swp,\.zip,/\.Trash/,\.pdf,\.dmg,/Library/,/\.rbenv/,'
-let g:netrw_list_hide.='*/\.nx/**,*\.app'
+" Plugin settings
+
+"Airline
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
 
 " CtrlP
 let g:ctrlp_map = '<Nop>'
@@ -339,6 +312,9 @@ if executable('ag')
 else
   let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
 endif
+
+" Dispatch
+let g:rspec_command = "Dispatch rspec {spec}"
 
 " Emmet
 let g:user_emmet_install_global = 0
@@ -391,10 +367,41 @@ endif
 " let g:neocomplete#force_omni_input_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
 " let g:neocomplete#force_omni_input_patterns.eruby = '[^. *\t]\.\w*\|\h\w*::'
 
-"Airline
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#syntastic#enabled = 1
-let g:airline#extensions#tabline#enabled = 1
+" Netrw settings
+
+" Mapping q to close netrw whilst keeping the split open
+autocmd FileType netrw nnoremap q :bp\|bd #<cr>
+
+let g:netrw_banner=0
+
+" Things to ignore when when using netrw
+let g:netrw_list_hide='\.o,\.obj,*\~,\.pyc,'
+let g:netrw_list_hide.='\.env,'
+let g:netrw_list_hide.='\.env[0-9].,'
+let g:netrw_list_hide.='\.env-pypy,'
+let g:netrw_list_hide.='\.git,'
+let g:netrw_list_hide.='\.gitkeep,'
+let g:netrw_list_hide.='\.vagrant,'
+let g:netrw_list_hide.='\.tmp,'
+let g:netrw_list_hide.='\.coverage$,'
+let g:netrw_list_hide.='\.DS_Store,'
+let g:netrw_list_hide.='__pycache__,'
+let g:netrw_list_hide.='\.webassets-cache/,'
+let g:netrw_list_hide.='\.sass-cache/,'
+let g:netrw_list_hide.='\.ropeproject/,'
+let g:netrw_list_hide.='vendor/rails/,'
+let g:netrw_list_hide.='vendor/cache/,'
+let g:netrw_list_hide.='\.gem,'
+let g:netrw_list_hide.='\.ropeproject/,'
+let g:netrw_list_hide.='\.coverage/,'
+let g:netrw_list_hide.='log/,'
+let g:netrw_list_hide.='tmp/,'
+let g:netrw_list_hide.='\.tox/,'
+let g:netrw_list_hide.='\.idea/,'
+let g:netrw_list_hide.='\.egg,\.egg-info,'
+let g:netrw_list_hide.='\.png,\.jpg,\.gif,'
+let g:netrw_list_hide.='\.so,\.swp,\.zip,/\.Trash/,\.pdf,\.dmg,/Library/,/\.rbenv/,'
+let g:netrw_list_hide.='*/\.nx/**,*\.app'
 
 " Syntastic
 set statusline+=%#warningmsg#
@@ -405,6 +412,12 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+" Ultisnips
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
+let g:UltiSnipsEditSplit="vertical"
 
 " vim tmux runner
 let g:VtrUseVtrMaps = 1
