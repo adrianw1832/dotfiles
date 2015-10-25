@@ -17,6 +17,9 @@ alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && kil
 # Clear
 alias c='clear'
 
+# Cask
+alias cask="brew cask"
+
 #Source Tree
 alias st="open -a SourceTree"
 
@@ -24,7 +27,7 @@ alias st="open -a SourceTree"
 alias ls='ls -AGFh'
 export LSCOLORS=GxFxCxDxBxegedabagaced
 
-#Tmux
+# Tmux
 alias tl='tmux ls'
 alias tk='tmux kill-session -t'
 
@@ -54,26 +57,26 @@ alias rdmo="bin/rails destroy model"
 alias rgmi="bin/rails generate migration"
 alias rdmi="bin/rails destroy migration"
 
-# copy the working directory path
+# Copy the working directory path
 alias cpwd='pwd|tr -d "\n"|pbcopy'
 
-# editor shortcut
+# Editor shortcut
 alias v="vim"
 
-# fasd
+# Fasd
 alias j='fasd_cd -d'
 alias jj='fasd_cd -d -i'
 
-#Config Shortcuts
+# Config Shortcuts
 alias za="vim ~/dotfiles/zsh/aliases.zsh"
 alias ze="vim ~/.oh-my-zsh/custom/exports.zsh"
 alias zf="vim ~/.oh-my-zsh/custom/functions.zsh"
 alias zshrc="vim ~/dotfiles/zsh/zshrc"
 alias vimrc="vim ~/dotfiles/vimrc"
-alias gc="vim ~/.gitconfig"
+alias gc="vim ~/dotfiles/gitconfig"
 alias tc="vim ~/dotfiles/tmux.conf"
 
-#Testing Angular
+# Testing Angular
 alias wds="webdriver-manager start"
 alias e2e="gulp e2e"
 alias test="gulp test"
@@ -88,7 +91,7 @@ alias go="git checkout"
 alias amend="git commit --amend"
 alias gg="git open"
 
-#Reload the shell
+# Reload the shell
 alias reload="exec $SHELL -l"
 
 # Lock the screen (when going AFK)
