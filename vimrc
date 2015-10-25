@@ -14,7 +14,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'pbrisbin/vim-mkdir'
-Plug 'tpope/vim-rails', { 'for': ['ruby', 'rails'] }
+Plug 'tpope/vim-rails', { 'for': ['ruby', 'rails', 'eruby'] }
 Plug 'tpope/vim-repeat'
 Plug 'thoughtbot/vim-rspec', { 'for': ['ruby', 'rails'] }
 Plug 'vim-ruby/vim-ruby', { 'for': ['ruby', 'rails'] }
@@ -24,9 +24,12 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'christoomey/vim-tmux-runner'
 
 Plug 'sjl/badwolf'
+Plug 'tomasr/molokai'
 call plug#end()
 
-colorscheme badwolf
+colorscheme molokai
+let g:molokai_original = 1
+let g:rehash256 = 1
 
 " Vim settings
 
@@ -92,12 +95,14 @@ nmap 0 ^
 " Switching between buffers
 nmap <C-m> :bp<cr>
 " Remap to increase number by 1
-nnoremap <C-z> <C-a>
+noremap <C-z> <C-a>
 " Allow j and k to move down wrapped lines
 nnoremap j gj
 nnoremap k gk
 " Copy to system clipboard
 vmap <C-c> "*y
+" Allow star to go back to the first search term
+nmap * *N
 " Switching out to terminal
 nnoremap <NUL> <C-z>
 
@@ -295,13 +300,13 @@ set wildignore+=*/.nx/**,*.app
 " Plugin settings
 
 "Airline
+let g:airline_theme='badwolf'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 
 " CtrlP
 let g:ctrlp_map = '<Nop>'
 let g:ctrlp_max_height = 20
-let g:ctrlp_max_files = 100
 
 " Faster CtrlP search
 let g:ctrlp_use_caching = 0
