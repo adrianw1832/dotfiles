@@ -94,7 +94,9 @@ imap <C-e> <C-o>$
 " Better start of line config
 nmap 0 ^
 " Switching between buffers
-nmap <C-m> :bp<cr>
+nnoremap <C-m> :bp<cr>
+nmap <cr> :bn<cr>
+nmap <tab> <C-^>
 " Remap to increase number by 1
 noremap <C-z> <C-a>
 " Allow j and k to move down wrapped lines
