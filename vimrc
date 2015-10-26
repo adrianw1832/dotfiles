@@ -27,6 +27,7 @@ Plug 'sjl/badwolf'
 Plug 'tomasr/molokai'
 call plug#end()
 
+" Colour scheme and its settings
 colorscheme molokai
 let g:molokai_original = 1
 let g:rehash256 = 1
@@ -126,7 +127,7 @@ map <leader>o :CtrlP<cr>
 map <leader>oo :CtrlPBuffer<cr>
 " Sensible pasting from system clipboard
 map <leader>p :set paste<CR>o<esc>"*]p:set nopaste<cr>
-map <leader>pi :w<cr>:source $MYVIMRC<cr>:PlugUpdate<cr>
+map <leader>pi :w<cr>:source $MYVIMRC<cr>nohlsearch<cr>:PlugUpdate<cr>
 map <leader>r :w<cr>:call RunNearestSpec()<cr>
 map <leader>ra :A<cr>
 map <leader>rc :Econtroller<space>
@@ -369,6 +370,7 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 if !exists('g:neocomplete#force_omni_input_patterns')
   let g:neocomplete#force_omni_input_patterns = {}
 endif
+" Disabled because it's slow
 " let g:neocomplete#force_omni_input_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
 " let g:neocomplete#force_omni_input_patterns.eruby = '[^. *\t]\.\w*\|\h\w*::'
 
@@ -377,6 +379,7 @@ endif
 " Mapping q to close netrw whilst keeping the split open
 autocmd FileType netrw nnoremap q :bp\|bd #<cr>
 
+" Hide the useless information at the top
 let g:netrw_banner=0
 
 " Things to ignore when when using netrw
