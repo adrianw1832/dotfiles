@@ -1,3 +1,5 @@
+" Plugins"{{{
+
 call plug#begin('~/.vim/plugged')
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'rizzatti/dash.vim', { 'on': '<Plug>DashSearch' }
@@ -26,15 +28,14 @@ Plug 'christoomey/vim-tmux-runner'
 Plug 'sjl/badwolf'
 Plug 'tomasr/molokai'
 call plug#end()
+"}}}
+" Colour scheme and its settings"{{{
 
-" Colour scheme and its settings
 colorscheme molokai
 let g:molokai_original = 1
 let g:rehash256 = 1
-
-" Vim settings
-
-runtime macros/matchit.vim     " Allow vim to match more than just brackets
+"}}}
+" Vim settings"{{{
 
 syntax on     " Turn on syntax highlighting
 set autoindent     " Keeps same level of indentation of the previous line
@@ -44,6 +45,8 @@ set backspace=indent,eol,start     " More sensible backspace behaviour
 set complete+=kspell     " Autocomplete with dictionary words when spell check is on
 set cursorline     " Highlight current line
 set expandtab     " Tab key will always insert 'softtabstop' amount of space
+set foldenable     " Enable folding
+set foldmethod=marker     " Fold based on markers
 set grepprg=ag     " Use ag as default for grep
 set hidden     " Change default behaviour of opening file of existing buffer
 set history=50     " Number of commands to keep in history
@@ -73,17 +76,39 @@ set t_Co=256     " 256 terminal colours
 set tabstop=2     " Number of visual spaces per tab
 set wildmenu     " Visual menu for autocomplete
 
-" Custom mappings
+runtime macros/matchit.vim     " Allow vim to match more than just brackets
+"}}}
+" Custom mappings"{{{
+
+" Have to use hjkl
+nnoremap <Left> :echoe "Use h"<cr>
+nnoremap <Right> :echoe "Use l"<cr>
+nnoremap <Up> :echoe "Use k"<cr>
+nnoremap <Down> :echoe "Use j"<cr>
 
 " Easier esc mapping
 imap jk <Esc>
 imap kj <Esc>
 vmap jk <Esc>
 vmap kj <Esc>
+
+" Allow j and k to move down wrapped lines
+nnoremap j gj
+nnoremap k gk
+
+" Moving lines
+nnoremap ˚ :m .-2<cr>==
+nnoremap ∆ :m .+1<cr>==
+inoremap ˚ <Esc>:m .-2<cr>==gi
+inoremap ∆ <Esc>:m .+1<cr>==gi
+vnoremap ˚ :m '<-2<cr>gv=gv
+vnoremap ∆ :m '>+1<cr>gv=gv
+
 " Easier autocomplete navigation
 inoremap <C-w> <C-n>
 inoremap <C-q> <C-p>
 imap ` <C-x><C-p>
+
 " Allow ctrl - hotkeys
 imap <C-f> <Right>
 imap <C-b> <Left>
@@ -91,25 +116,24 @@ imap <C-d> <Del>
 imap <C-h> <BS>
 imap <C-a> <C-o>^
 imap <C-e> <C-o>$
-" Better start of line config
-nmap 0 ^
+
 " Switching between buffers
 nnoremap <C-m> :bp<cr>
 nmap <cr> :bn<cr>
 nmap <tab> <C-^>
+
+" Better start of line config
+nmap 0 ^
 " Remap to increase number by 1
 noremap <C-z> <C-a>
-" Allow j and k to move down wrapped lines
-nnoremap j gj
-nnoremap k gk
 " Copy to system clipboard
 vmap <C-c> "*y
 " Allow star to go back to the first search term
 nmap * *N
 " Switching out to terminal
 nnoremap <NUL> <C-z>
-
-" Leader mappings
+"}}}
+" Leader mappings"{{{
 let mapleader = "\<Space>"
 map <leader>b :ls<cr>:b
 map <leader>bd :ls<cr>:bd<C-b><C-b>
@@ -129,7 +153,7 @@ map <leader>o :CtrlP<cr>
 map <leader>oo :CtrlPBuffer<cr>
 " Sensible pasting from system clipboard
 map <leader>p :set paste<CR>o<esc>"*]p:set nopaste<cr>
-map <leader>pi :w<cr>:source $MYVIMRC<cr>nohlsearch<cr>:PlugUpdate<cr>
+map <leader>pi :w<cr>:source $MYVIMRC<cr>:nohlsearch<cr>:PlugUpdate<cr>
 map <leader>r :w<cr>:call RunNearestSpec()<cr>
 map <leader>ra :A<cr>
 map <leader>rc :Econtroller<space>
@@ -169,30 +193,16 @@ vmap <C-a> :VtrSendLinesToRunner<cr>
 nmap <leader>or  :VtrOpenRunner { 'orientation': 'h', 'percentage': 50 }<cr>
 nmap <leader>pry :VtrOpenRunner { 'orientation': 'h', 'percentage': 50, 'cmd': 'pry' }<cr>
 nmap <leader>irb :VtrOpenRunner { 'orientation': 'h', 'percentage': 50, 'cmd': 'irb' }<cr>
-
-" Have to use hjkl
-nnoremap <Left> :echoe "Use h"<cr>
-nnoremap <Right> :echoe "Use l"<cr>
-nnoremap <Up> :echoe "Use k"<cr>
-nnoremap <Down> :echoe "Use j"<cr>
-
-" Moving lines
-nnoremap ˚ :m .-2<cr>==
-nnoremap ∆ :m .+1<cr>==
-inoremap ˚ <Esc>:m .-2<cr>==gi
-inoremap ∆ <Esc>:m .+1<cr>==gi
-vnoremap ˚ :m '<-2<cr>gv=gv
-vnoremap ∆ :m '>+1<cr>gv=gv
-
-" Ruby settings
+"}}}
+" Ruby settings"{{{
 
 " Setting paths for ruby
 augroup rubypath
   autocmd!
   autocmd FileType ruby setlocal path+=lib/**,spec/**
 augroup END
-
-" Custom functions
+"}}}
+" Custom functions"{{{
 
 " Automatically rebalance windows on vim resize
 autocmd VimResized * :wincmd =
@@ -303,8 +313,8 @@ set wildignore+=*.egg,*.egg-info
 set wildignore+=*.png,*.jpg,*.gif
 set wildignore+=*.so,*.swp,*.zip,*/.Trash/**,*.pdf,*.dmg,*/Library/**,*/.rbenv/**
 set wildignore+=*/.nx/**,*.app
-
-" Plugin settings
+"}}}
+" Plugin settings"{{{
 
 "Airline
 let g:airline_theme='badwolf'
@@ -445,4 +455,4 @@ let g:vtr_filetype_runner_overrides = {
 
 " vim surround
 let g:surround_45 = "<% \r %>"
-let g:surround_61 = "<%= \r %>"
+let g:surround_61 = "<%= \r %>""}}}
