@@ -147,7 +147,7 @@ map <leader>q :q<cr>
 map <leader>qq :Bclose<cr>
 map <leader>wq :wq<cr>
 map <leader>qw :wq<cr>
-map <leader>u :copen<cr><C-w>F:cclose<cr>:wincmd _<cr>:wincmd \|<cr>
+map <leader>u :copen<cr>:wincmd _<cr>:wincmd \|<cr>
 map <leader>v :vnew <C-r>=escape(expand("%:p:h"), ' ') . '/'<cr>
 map <leader>vi :e ~/.vimrc<cr>
 map <leader>y :w<cr>:call RunAllSpecs()<cr>
