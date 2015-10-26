@@ -62,6 +62,7 @@ alias cpwd='pwd|tr -d "\n"|pbcopy'
 
 # Editor shortcut
 alias v="vim"
+alias vv='f -e vim'
 
 # Fasd
 alias j='fasd_cd -d'
@@ -84,8 +85,11 @@ alias test="gulp test"
 # Git
 alias g="git status"
 alias ga="git add"
+alias gb="git branch"
 alias gc="git commit"
-alias gp="git add . && git commit && git push"
+alias glog="git log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short"
+alias gp="git push"
+alias gpa="git add . && git commit && git push"
 alias gpo="git push -u origin"
 alias go="git checkout"
 alias amend="git commit --amend"
