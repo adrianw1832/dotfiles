@@ -34,44 +34,44 @@ let g:rehash256 = 1
 
 " Vim settings
 
-runtime macros/matchit.vim     " allow vim to match more than just brackets
+runtime macros/matchit.vim     " Allow vim to match more than just brackets
 
-syntax on     " turn on syntax highlighting
-set autoindent     " keeps same level of indentation of the previous line
+syntax on     " Turn on syntax highlighting
+set autoindent     " Keeps same level of indentation of the previous line
 set autoread     " Auto-reload buffers when files are changed on disk
-set autowrite     " save on buffer switch
-set backspace=indent,eol,start     " more sensible backspace behaviour
+set autowrite     " Save on buffer switch
+set backspace=indent,eol,start     " More sensible backspace behaviour
 set complete+=kspell     " Autocomplete with dictionary words when spell check is on
-set cursorline     " highlight current line
-set expandtab     " tab key will always insert 'softtabstop' amount of space
-set grepprg=ag     " use ag as default for grep
-set hidden     " change default behaviour of opening file of existing buffer
-set history=50     " number of commands to keep in history
-set hlsearch     " highlight search result
-set ignorecase     " ignore case when searching
-set incsearch     " refresh search when entering search term
-set laststatus=2     " show status bar
-set lazyredraw     " redraw window only when we need to
-set nobackup nowritebackup noswapfile     " no unnecessary backup files
-set nocompatible     " no backwards compatibility
-set noerrorbells     " silent error bell
-set number     " show line numbers
-set nrformats=alpha     " format numbers such that they increase sensibly
-set numberwidth=5     " width of the number column
-set relativenumber     " show relative line numbers
-set ruler     " show line info at the bottom
-set timeoutlen=500     " timeout between keystrokes to register command
-set shiftwidth=2     " number of spaces for indents
-set showcmd     " show command at the bottom bar
-set splitbelow     " new horizontal split opens to the bottom
-set splitright     " new vertical split opens to the right
-set smartcase     " smart case for searching
-set smartindent     " adds another level of indentation in some cases
-set so=5     " number of lines around cursor at the edge of screen
-set softtabstop=2     " number of spaces in tab when editing
+set cursorline     " Highlight current line
+set expandtab     " Tab key will always insert 'softtabstop' amount of space
+set grepprg=ag     " Use ag as default for grep
+set hidden     " Change default behaviour of opening file of existing buffer
+set history=50     " Number of commands to keep in history
+set hlsearch     " Highlight search result
+set ignorecase     " Ignore case when searching
+set incsearch     " Refresh search when entering search term
+set laststatus=2     " Show status bar
+set lazyredraw     " Redraw window only when we need to
+set nobackup nowritebackup noswapfile     " No unnecessary backup files
+set nocompatible     " No backwards compatibility
+set noerrorbells     " Silent error bell
+set number     " Show line numbers
+set nrformats=alpha     " Format numbers such that they increase sensibly
+set numberwidth=5     " Width of the number column
+set relativenumber     " Show relative line numbers
+set ruler     " Show line info at the bottom
+set timeoutlen=500     " Timeout between keystrokes to register command
+set shiftwidth=2     " Number of spaces for indents
+set showcmd     " Show command at the bottom bar
+set splitbelow     " New horizontal split opens to the bottom
+set splitright     " New vertical split opens to the right
+set smartcase     " Smart case for searching
+set smartindent     " Adds another level of indentation in some cases
+set so=5     " Number of lines around cursor at the edge of screen
+set softtabstop=2     " Number of spaces in tab when editing
 set t_Co=256     " 256 terminal colours
-set tabstop=2     " number of visual spaces per tab
-set wildmenu     " visual menu for autocomplete
+set tabstop=2     " Number of visual spaces per tab
+set wildmenu     " Visual menu for autocomplete
 
 " Custom mappings
 
@@ -228,6 +228,8 @@ augroup vimrcEx
 
   " Enable spellchecking for Markdown
   autocmd FileType markdown setlocal spell
+  autocmd FileType markdown hi clear SpellBad
+  autocmd FileType markdown hi SpellBad cterm=underline
 
   " Automatically wrap at 80 characters for Markdown
   autocmd BufRead,BufNewFile *.md setlocal textwidth=80
@@ -235,6 +237,8 @@ augroup vimrcEx
   " Automatically wrap at 72 characters and spell check git commit messages
   autocmd FileType gitcommit setlocal textwidth=72
   autocmd FileType gitcommit setlocal spell
+  autocmd FileType gitcommit hi clear SpellBad
+  autocmd FileType gitcommit hi SpellBad cterm=underline
 
   " Allow stylesheets to autocomplete hyphenated words
   autocmd FileType css,scss,sass setlocal iskeyword+=-
