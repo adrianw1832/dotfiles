@@ -14,6 +14,7 @@ Plug 'bling/vim-airline'
 Plug 'tpope/vim-dispatch'
 Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-endwise'
+Plug 'tommcdo/vim-exchange'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
@@ -96,14 +97,6 @@ vmap kj <Esc>
 " Allow j and k to move down wrapped lines
 nnoremap j gj
 nnoremap k gk
-
-" Moving lines
-nnoremap ˚ :m .-2<cr>==
-nnoremap ∆ :m .+1<cr>==
-inoremap ˚ <Esc>:m .-2<cr>==gi
-inoremap ∆ <Esc>:m .+1<cr>==gi
-vnoremap ˚ :m '<-2<cr>gv=gv
-vnoremap ∆ :m '>+1<cr>gv=gv
 
 " Easier autocomplete navigation
 inoremap <C-w> <C-n>
