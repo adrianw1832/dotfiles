@@ -122,6 +122,11 @@ nnoremap <C-m> :bp<cr>
 nmap <cr> :bn<cr>
 nmap <tab> <C-^>
 
+" For switching two characters around and repeatable by .
+nnoremap <silent> <Plug>TransposeCharacters xp
+\:call repeat#set("\<Plug>TransposeCharacters")<CR>
+nmap xp <Plug>TransposeCharacters
+
 " Better start of line config
 nmap 0 ^
 " Remap to increase number by 1
