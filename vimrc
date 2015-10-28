@@ -112,8 +112,8 @@ imap <C-a> <C-o>^
 imap <C-e> <C-o>$
 
 " Switching between buffers
-nnoremap <C-m> :bp<cr>
-nnoremap <cr> :bn<cr>
+nnoremap <C-m> :bn<cr>
+nnoremap <C-n> :bp<cr>
 nmap <tab> <C-^>
 
 " For switching two characters around and repeatable by .
