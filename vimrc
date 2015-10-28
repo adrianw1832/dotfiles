@@ -8,9 +8,11 @@ Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'eruby'] }
 Plug 'Shougo/neocomplete'
 Plug 'scrooloose/syntastic'
 Plug 'tomtom/tcomment_vim'
+Plug 'marijnh/tern_for_vim', { 'for': 'javascript' }
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'bling/vim-airline'
 Plug 'tpope/vim-dispatch'
+Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
@@ -59,7 +61,6 @@ set nobackup nowritebackup noswapfile     " No unnecessary backup files
 set nocompatible     " No backwards compatibility
 set noerrorbells     " Silent error bell
 set number     " Show line numbers
-set nrformats=alpha     " Format numbers such that they increase sensibly
 set numberwidth=5     " Width of the number column
 set relativenumber     " Show relative line numbers
 set ruler     " Show line info at the bottom
@@ -119,13 +120,24 @@ imap <C-e> <C-o>$
 
 " Switching between buffers
 nnoremap <C-m> :bp<cr>
-nmap <cr> :bn<cr>
+nnoremap <cr> :bn<cr>
 nmap <tab> <C-^>
 
 " For switching two characters around and repeatable by .
 nnoremap <silent> <Plug>TransposeCharacters xp
 \:call repeat#set("\<Plug>TransposeCharacters")<CR>
 nmap xp <Plug>TransposeCharacters
+
+" Mapping for Easy Motion
+nmap s <Plug>(easymotion-s2)
+omap t <Plug>(easymotion-tl)
+omap T <Plug>(easymotion-Tl)
+omap f <Plug>(easymotion-fl)
+omap F <Plug>(easymotion-Fl)
+nmap t <Plug>(easymotion-tl)
+nmap T <Plug>(easymotion-Tl)
+nmap f <Plug>(easymotion-fl)
+nmap F <Plug>(easymotion-Fl)
 
 " Better start of line config
 nmap 0 ^
@@ -342,6 +354,12 @@ endif
 
 " Dispatch
 let g:rspec_command = "Dispatch rspec {spec}"
+
+" Easy Motion
+let g:EasyMotion_do_mapping = 0
+let g:EasyMotion_smartcase = 1
+let g:EasyMotion_use_smartsign_us = 1
+let g:EasyMotion_use_upper = 1
 
 " Emmet
 let g:user_emmet_install_global = 0
