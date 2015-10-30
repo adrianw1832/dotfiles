@@ -6,9 +6,10 @@ Plug 'rizzatti/dash.vim', { 'on': '<Plug>DashSearch' }
 Plug 'Raimondi/delimitMate'
 Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'eruby'] }
 Plug 'Shougo/neocomplete'
-Plug 'scrooloose/syntastic'
+Plug 'scrooloose/syntastic', { 'for': ['javascript', 'ruby'] }
+Plug 'godlygeek/tabular'
 Plug 'tomtom/tcomment_vim'
-Plug 'marijnh/tern_for_vim', { 'for': 'javascript' }
+" Plug 'marijnh/tern_for_vim', { 'for': 'javascript' }
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'bling/vim-airline'
 Plug 'tpope/vim-dispatch'
@@ -44,6 +45,7 @@ syntax on     " Turn on syntax highlighting
 set autoindent     " Keeps same level of indentation of the previous line
 set autoread     " Auto-reload buffers when files are changed on disk
 set autowrite     " Save on buffer switch
+set background=dark     " Assume a dark background
 set backspace=indent,eol,start     " More sensible backspace behaviour
 set complete+=kspell     " Autocomplete with dictionary words when spell check is on
 set cursorline     " Highlight current line
@@ -145,47 +147,47 @@ nnoremap <NUL> <C-z>
 "}}}
 " Leader mappings"{{{
 let mapleader = "\<Space>"
-map <leader>b :ls<cr>:b
-map <leader>bd :ls<cr>:bd<C-b><C-b>
-map <leader>bi :!bundle install<cr>
-map <leader>c :cclose<cr>
-map <silent> <leader>d <Plug>DashSearch
-map <leader>e :w<cr>:call RunLastSpec()<cr>
-map <leader>g :w<cr>:Gstatus<cr>
-map <leader>gd :Gvdiff<cr>
-map <leader>gp :Gpush<cr>
-map <leader>gl :Gpull origin<Space>
-map <leader>h :nohlsearch<cr>
+nmap <leader>b :ls<cr>:b
+nmap <leader>bd :ls<cr>:bd<C-b><C-b>
+nmap <leader>bi :!bundle install<cr>
+nmap <leader>c :cclose<cr>
+nmap <silent> <leader>d <Plug>DashSearch
+nmap <leader>e :w<cr>:call RunLastSpec()<cr>
+nmap <leader>g :w<cr>:Gstatus<cr>
+nmap <leader>gd :Gvdiff<cr>
+nmap <leader>gp :Gpush<cr>
+nmap <leader>gl :Gpull origin<Space>
+nmap <silent> <leader>h :nohlsearch<cr>
 " Indent all and return to current line
-map <leader>i mmgg=G`m
-map <leader>ni :!npm install<cr>
-map <leader>o :CtrlP<cr>
-map <leader>oo :CtrlPBuffer<cr>
+nmap <leader>i mmgg=G`m
+nmap <leader>ni :!npm install<cr>
+nmap <leader>o :CtrlP<cr>
+nmap <leader>oo :CtrlPBuffer<cr>
 " Sensible pasting from system clipboard
-map <leader>p :set paste<CR>o<esc>"*]p:set nopaste<cr>
-map <leader>pi :w<cr>:source $MYVIMRC<cr>:nohlsearch<cr>:PlugUpdate<cr>
-map <leader>r :w<cr>:call RunNearestSpec()<cr>
-map <leader>ra :A<cr>
-map <leader>rc :Econtroller<space>
-map <leader>re :call RenameFile()<cr>
-map <leader>rf :Eintegrationtest<space>
-map <leader>rm :Emodel<space>
-map <leader>rr :R<cr>
-map <leader>ru :Eunittest<space>
-map <leader>rv :Eview<space>
-map <leader>sn :UltiSnipsEdit<cr>
-map <leader>so :w<cr>:source $MYVIMRC<cr>:AirlineRefresh<cr>:nohlsearch<cr>
-map <leader>t :w<cr>:call RunCurrentSpecFile()<cr>
-map <leader>w :w<cr>
-map <leader>q :q<cr>
-map <leader>qq :Bclose<cr>
-map <leader>wq :wq<cr>
-map <leader>qw :wq<cr>
-map <leader>u :copen<cr>:wincmd _<cr>:wincmd \|<cr>
-map <leader>v :vnew <C-r>=escape(expand("%:p:h"), ' ') . '/'<cr>
-map <leader>vi :e ~/.vimrc<cr>
-map <leader>y :w<cr>:call RunAllSpecs()<cr>
-map <leader><leader> :Explore .<cr>
+nmap <leader>p :set paste<CR>o<esc>"*]p:set nopaste<cr>
+nmap <leader>pi :w<cr>:source $MYVIMRC<cr>:nohlsearch<cr>:PlugUpdate<cr>
+nmap <leader>r :w<cr>:call RunNearestSpec()<cr>
+nmap <leader>ra :A<cr>
+nmap <leader>rc :Econtroller<space>
+nmap <leader>re :call RenameFile()<cr>
+nmap <leader>rf :Eintegrationtest<space>
+nmap <leader>rm :Emodel<space>
+nmap <leader>rr :R<cr>
+nmap <leader>ru :Eunittest<space>
+nmap <leader>rv :Eview<space>
+nmap <leader>sn :UltiSnipsEdit<cr>
+nmap <leader>so :w<cr>:source $MYVIMRC<cr>:AirlineRefresh<cr>:nohlsearch<cr>
+nmap <leader>t :w<cr>:call RunCurrentSpecFile()<cr>
+nmap <leader>w :w<cr>
+nmap <leader>q :q<cr>
+nmap <leader>qq :Bclose<cr>
+nmap <leader>wq :wq<cr>
+nmap <leader>qw :wq<cr>
+nmap <leader>u :copen<cr>:wincmd _<cr>:wincmd \|<cr>
+nmap <leader>v :vnew <C-r>=escape(expand("%:p:h"), ' ') . '/'<cr>
+nmap <leader>vi :e ~/.vimrc<cr>
+nmap <leader>y :w<cr>:call RunAllSpecs()<cr>
+nmap <leader><leader> :Explore .<cr>
 
 " Zoom in on a vim pane, <C-w>= to re-balance
 nnoremap <leader>= :wincmd _<cr>:wincmd \|<cr>
