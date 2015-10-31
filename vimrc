@@ -135,6 +135,10 @@ nmap T <Plug>(easymotion-Tl)
 nmap f <Plug>(easymotion-fl)
 nmap F <Plug>(easymotion-Fl)
 
+" Remap since the function is redundant because of Easymotion
+nmap ; :
+" Visually select the text that was last edited/pasted
+nmap gV `[v`]
 " Better start of line config
 nmap 0 ^
 " Remap to increase number by 1
