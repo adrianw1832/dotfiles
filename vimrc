@@ -255,6 +255,11 @@ augroup vimrcEx
   autocmd BufRead,BufNewFile Appraisals set filetype=ruby
   autocmd BufRead,BufNewFile *.md set filetype=markdown
 
+  " Enable spellchecking for org files
+  autocmd FileType org setlocal spell
+  autocmd FileType org hi clear SpellBad
+  autocmd FileType org hi SpellBad cterm=underline
+
   " Enable spellchecking for Markdown
   autocmd FileType markdown setlocal spell
   autocmd FileType markdown hi clear SpellBad
