@@ -61,6 +61,8 @@ set ignorecase     " Ignore case when searching
 set incsearch     " Refresh search when entering search term
 set laststatus=2     " Show status bar
 set lazyredraw     " Redraw window only when we need to
+set list     " Actually display extra whitespace symbols
+set listchars=tab:»·,trail:·,nbsp:·     " Set extra whitespace symbols
 set nobackup nowritebackup noswapfile     " No unnecessary backup files
 set nocompatible     " No backwards compatibility
 set noerrorbells     " Silent error bell
@@ -82,6 +84,10 @@ set tabstop=2     " Number of visual spaces per tab
 set wildmenu     " Visual menu for autocomplete
 
 runtime macros/matchit.vim     " Allow vim to match more than just brackets
+
+" A more discrete colour column
+highlight ColorColumn ctermbg=red
+call matchadd('ColorColumn', '\%81v', 100)
 "}}}
 " Custom mappings"{{{
 
@@ -226,9 +232,6 @@ autocmd VimResized * :wincmd =
 
 " Treat <li> and <p> tags like the block tags they are
 let g:html_indent_tags = 'li\|p'
-
-" Display extra whitespace
-set list listchars=tab:»·,trail:·,nbsp:·
 
 " Delete all trailing white space on save
 function! <SID>StripTrailingWhitespaces()
