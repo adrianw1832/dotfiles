@@ -1,0 +1,179 @@
+extends rails
+
+global !p
+def filename_without_space(filename):
+    newname = filename.replace('_spec', '').title().split('_')
+    name = newname[0]
+    for n in range(1, len(newname)):
+        name += newname[n]
+    return name
+
+def filename_with_space(filename):
+    newname = filename.replace('_spec', '').split('_')
+    name = newname[0].title()
+    for n in range(1, len(newname)):
+        name += " " + newname[n]
+    return name
+endglobal
+
+snippet priv "private" mb
+private
+
+$1
+endsnippet
+
+snippet module "module" b
+module ${1:`!p snip.rv = filename_without_space(snip.basename)`}
+	${0:${VISUAL}}
+end
+endsnippet
+
+snippet class "class" b
+class ${1:`!p snip.rv = filename_without_space(snip.basename)`}
+	def initialize($2)
+		$3
+	end
+
+	def $4
+		$5
+	end
+end
+endsnippet
+
+snippet def "definition" m
+def $1
+	$2
+end
+
+endsnippet
+
+snippet des "describe" b
+describe '${1:`!p snip.rv = filename_without_space(snip.basename)`}' do
+	$2
+end
+endsnippet
+
+snippet con "context" b
+context '$1' do
+	${0:${VISUAL}}
+end
+endsnippet
+
+snippet it "it" b
+it '$1' do
+	$2
+end
+endsnippet
+
+snippet fea "feature" b
+feature '${1:`!p snip.rv = filename_with_space(snip.basename)`}' do
+	$2
+end
+endsnippet
+
+snippet sce "scenario" b
+scenario '$1' do
+	$2
+end
+endsnippet
+
+snippet fgc "fg create" b
+let(:$1) { create(:$1) }
+endsnippet
+
+snippet fgcc "fg create!" b
+let!(:$1) { create(:$1) }
+endsnippet
+
+snippet fgb "fg build" b
+let(:$1) { build(:$1) }
+endsnippet
+
+snippet fgbb "fg build!" b
+let!(:$1) { build(:$1) }
+endsnippet
+
+snippet vi "visit path" b
+visit $1_path
+endsnippet
+
+snippet visit "visit url" b
+visit '/$1'
+endsnippet
+
+snippet sel "select" b
+select '$1', from: '$2'
+endsnippet
+
+snippet ex "expect to" b
+expect($1).to $2
+endsnippet
+
+snippet exn "expect not to" b
+expect($1).not_to $2
+endsnippet
+
+snippet exhc "expect to have content" b
+expect(page).to have_content '$1'
+endsnippet
+
+snippet exhcn "expect not to have content" b
+expect(page).not_to have_content '$1'
+endsnippet
+
+snippet exhl "expect to have link" b
+expect(page).to have_link '$1'
+endsnippet
+
+snippet exhln "expect not to have link" b
+expect(page).not_to have_link '$1'
+endsnippet
+
+snippet exhb "expect to have button" b
+expect(page).to have_button '$1'
+endsnippet
+
+snippet exhbn "expect not to have button" b
+expect(page).not_to have_button '$1'
+endsnippet
+
+snippet exhs "expect to have selector" b
+expect(page).to have_selector(:css, ${1:"img[src*='${2:testing}.png']"})
+endsnippet
+
+snippet exhsn "expect not to have selector" b
+expect(page).not_to have_selector(:css, ${1:"img[src*='${2:testing}.png']"})
+endsnippet
+
+snippet excp "expect current path" b
+expect(current_path).to eq $1_path
+endsnippet
+
+snippet excpn "expect current path not" b
+expect(current_path).not_to eq '/$1'
+endsnippet
+
+snippet cl "click link" b
+click_link '$1'
+endsnippet
+
+snippet cb "click button" b
+click_button '$1'
+endsnippet
+
+snippet fi "fill in" b
+fill_in '$1', with: '$2'
+endsnippet
+
+snippet atf "attach file" b
+attach_file('${1:object}[image]', 'spec/support/fixtures/images/${2:testing}.png')
+endsnippet
+
+snippet factory "factory setup" b
+FactoryGirl.define do
+	factory :$1 do
+		$2
+	end
+end
+endsnippet
+

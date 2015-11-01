@@ -1,0 +1,55 @@
+snippet any "show any" b
+<% if @$1$2.any? %>
+	<% @$1$2.each do |$1| %>
+		<h2> <%= $1.$3 %> </h2>
+	<% end %>
+<% else %>
+	$4
+<% end %>
+endsnippet
+
+snippet error "error any" b
+<% if @$1.errors.any? %>
+<section id="errors" >
+	<h2> <%= pluralize(@$1.errors.count, "error") %> prohibited this $1 from being saved: </h2>
+	<ul>
+		<% @$1.errors.full_messages.each do |message| %>
+			<li><%= message %></li>
+		<% end %>
+	</ul>
+</section>
+<% end %>
+endsnippet
+
+snippet user "devise user" b
+<% if user_signed_in? %>
+	<%= link_to 'Sign out', destroy_user_session_path(), method: :delete %>
+<% else %>
+	<%= link_to "Sign in", new_user_session_path %>
+	<%= link_to "Sign up", new_user_registration_path %>
+<% end %>
+endsnippet
+
+snippet lt "link to" b
+<%= link_to $1, $2_path${3:($4)} %>
+endsnippet
+
+snippet ltd "link to delete" b
+<%= link_to $1, $2_path($2), method: :delete %>
+endsnippet
+
+snippet ffl "form for label" b
+<%= f.label :$1 %>
+endsnippet
+
+snippet ffs "form for submit" b
+<%= f.submit %>
+endsnippet
+
+snippet ffse "form for select" b
+<%= f.select :$1, $2 %>
+endsnippet
+
+snippet rp "render parital" b
+<%= render "$1" %>
+endsnippet

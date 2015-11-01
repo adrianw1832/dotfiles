@@ -1,0 +1,117 @@
+extends ruby
+
+global !p
+def filename_without_space(filename):
+    newname = filename.replace('_spec', '').title().split('_')
+    name = newname[0]
+    for n in range(1, len(newname)):
+        name += newname[n]
+    return name
+endglobal
+
+snippet desm "describe model" b
+describe ${1:`!p snip.rv = filename_without_space(snip.basename)`}, type: :model do
+	$2
+end
+endsnippet
+
+snippet desh "describe helper" b
+describe ${1:`!p snip.rv = filename_without_space(snip.basename)`}, type: :helper do
+	$2
+end
+endsnippet
+
+snippet itt "it one line" b
+it { is_expected.to $1 }
+endsnippet
+
+snippet rt "redirect to" b
+redirect_to $1_path
+endsnippet
+
+snippet params "params require" b
+def $1_params
+	params.require(:$1).permit(:$2)
+end
+endsnippet
+
+snippet all "find all" b
+@$1 = ${1/.*/\u$0/}.all
+endsnippet
+
+snippet new "new object" b
+@$1 = ${1/.*/\u$0/}.new
+endsnippet
+
+snippet create "create object" b
+${1/.*/\u$0/}.create($1_params)
+endsnippet
+
+snippet update "update object" b
+@$1.update($1_params)
+endsnippet
+
+snippet find "find" b
+@$1 = ${1/.*/\u$0/}.find(params[:id])
+endsnippet
+
+snippet findd "find id" b
+@$1 = ${1/.*/\u$0/}.find(params[:$1_id])
+endsnippet
+
+snippet fle "flash error" b
+flash[:error] = '$1'
+endsnippet
+
+snippet fln "flash notice" b
+flash[:notice] = '$1'
+endsnippet
+
+snippet rrh "rails helper" b
+require 'rails_helper'
+endsnippet
+
+snippet rsh "spec_helper" b
+require 'spec_helper'
+endsnippet
+
+snippet gemtest "gems for test development" b
+group :test do
+	gem 'byebug'
+	gem 'capybara'
+	gem 'database_cleaner'
+	gem 'factory_girl_rails'
+	gem 'launchy'
+	gem 'poltergeist'
+	gem 'rspec-collection_matchers'
+	gem 'rspec-rails'
+	gem 'shoulda'
+end
+endsnippet
+
+snippet fgsetup "factory girl set up" b
+RSpec.configure do |config|
+	config.include FactoryGirl::Syntax::Methods
+end
+endsnippet
+
+snippet dbcleaner "database cleaner setup" b
+RSpec.configure do |config|
+
+	config.use_transactional_fixtures = false
+
+	config.before(:suite) do
+		DatabaseCleaner.clean_with(:truncation)
+	end
+
+	config.before(:each) do |example|
+		DatabaseCleaner.strategy = example.metadata[:js] ? :truncation : :transaction
+		DatabaseCleaner.start
+	end
+
+	config.after(:each) do
+		DatabaseCleaner.clean
+	end
+
+end
+endsnippet

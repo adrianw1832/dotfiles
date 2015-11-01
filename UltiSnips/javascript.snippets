@@ -1,0 +1,61 @@
+snippet	desc "describe"
+describe('${1:description}', function() {
+	$2
+});
+endsnippet 
+
+snippet it "it" 
+it('${1:description}', function() {
+	$2
+});
+endsnippet
+
+snippet proto "prototype"
+${1:class_name}.prototype.${2:method_name} = function(${3}) {
+	${4}
+};
+endsnippet
+
+snippet f "function" 
+var ${1} = function(${2}) {
+	$3
+};
+endsnippet
+
+snippet fun "function" 
+function ${1:function_name}(${2}) {
+	$3
+};
+endsnippet
+
+snippet exe "expect to equal" 
+expect(${1:subject}).toEqual($2);
+endsnippet
+
+snippet exb "expect to be" 
+expect(${1:subject}).toBe($2);
+endsnippet
+
+snippet for "for loop" 
+for (var i = 0; i < ${1}; i++) {
+	$2 
+}
+endsnippet
+
+snippet ife "if else" 
+if (${1}) {
+	$2
+} else {
+	$3
+}
+endsnippet
+
+snippet ifei "if else if" 
+if (${1}) {
+	$2
+} else if (${3}) {
+	$4
+} else {
+	$5
+}
+endsnippet
