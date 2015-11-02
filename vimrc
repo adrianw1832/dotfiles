@@ -170,7 +170,7 @@ nmap <leader>gp :Gpush<cr>
 nmap <leader>gl :Gpull origin<Space>
 nmap <silent> <leader>h :nohlsearch<cr>
 " Indent all and return to current line
-nmap <leader>i mmgg=G`m
+nmap <leader>i mzgg=G`z
 nmap <leader>ni :!npm install<cr>
 nmap <leader>o :CtrlP<cr>
 nmap <leader>oo :CtrlPBuffer<cr>
@@ -188,12 +188,15 @@ nmap <leader>ru :Eunittest<space>
 nmap <leader>rv :Eview<space>
 nmap <leader>sn :UltiSnipsEdit<cr>
 nmap <leader>so :w<cr>:source $MYVIMRC<cr>:AirlineRefresh<cr>:nohlsearch<cr>
+" Going back to the last spelling mistake and choosing the 1st option
+nmap <leader>sp mz[s1z='z
 nmap <leader>t :w<cr>:call RunCurrentSpecFile()<cr>
 nmap <leader>w :w<cr>
 nmap <leader>q :q<cr>
 nmap <leader>qq :Bclose<cr>
 nmap <leader>wq :wq<cr>
 nmap <leader>qw :wq<cr>
+" Maximise the quickfix window, useful for reading test errors
 nmap <leader>u :copen<cr>:wincmd _<cr>:wincmd \|<cr>
 nmap <leader>v :vnew <C-r>=escape(expand("%:p:h"), ' ') . '/'<cr>
 nmap <leader>vi :e ~/.vimrc<cr>
