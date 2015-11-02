@@ -20,7 +20,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'pbrisbin/vim-mkdir'
-Plug 'jceb/vim-orgmode'
+Plug 'jceb/vim-orgmode', { 'for': 'org' }
 Plug 'tpope/vim-rails', { 'for': ['ruby', 'rails', 'eruby'] }
 Plug 'tpope/vim-repeat'
 Plug 'thoughtbot/vim-rspec', { 'for': ['ruby', 'rails'] }
