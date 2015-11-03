@@ -166,8 +166,9 @@ nmap <silent> <leader>d <Plug>DashSearch
 nmap <leader>e :w<cr>:call RunLastSpec()<cr>
 nmap <leader>g :w<cr>:Gstatus<cr>
 nmap <leader>gd :Gvdiff<cr>
-nmap <leader>gp :Gpush<cr>
 nmap <leader>gl :Gpull origin<Space>
+nmap <leader>gp :Gpush<cr>
+nmap <leader>gq mzgggq'z'z
 nmap <silent> <leader>h :nohlsearch<cr>
 " Indent all and return to current line
 nmap <leader>i mzgg=G`z
