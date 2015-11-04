@@ -239,9 +239,14 @@ let g:html_indent_tags = 'li\|p'
 
 " Delete all trailing white space on save
 function! <SID>StripTrailingWhitespaces()
+  " preparation: save last search, and cursor position
+  let _s=@/
   let l = line(".")
   let c = col(".")
+  " Do the search and replace:
   %s/\s\+$//e
+  " clean up: restore previous search history, and cursor position
+  let @/=_s
   call cursor(l, c)
 endfunction
 
