@@ -37,6 +37,12 @@ alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date
 # Get OS X Software Updates, and update installed Ruby gems, Homebrew, npm, and their installed packages
 alias update='softwareupdate -i -a; brew update; brew upgrade --all; brew cleanup; npm install npm -g; npm install bower -g; npm update -g; npm cache clean; bower update; bower cache clean; rvm cleanup all; gem update --system; gem update; gem cleanup'
 
+# Bundle
+alias bi="bundle install"
+
+# NPM
+alias ni="npm install"
+
 # Rails
 alias rr="bin/rake routes"
 alias rdbc="bin/rake db:create"
