@@ -25,6 +25,7 @@ Plug 'tpope/vim-rails', { 'for': ['ruby', 'rails', 'eruby'] }
 Plug 'tpope/vim-repeat'
 Plug 'thoughtbot/vim-rspec', { 'for': ['ruby', 'rails'] }
 Plug 'vim-ruby/vim-ruby', { 'for': ['ruby', 'rails'] }
+Plug 'christoomey/vim-sort-motion'
 Plug 'tpope/vim-surround'
 Plug 'kana/vim-textobj-user' | Plug 'nelstrom/vim-textobj-rubyblock', { 'for': ['ruby', 'rails'] }
 Plug 'christoomey/vim-tmux-navigator'
@@ -165,6 +166,7 @@ nmap <leader>c :cclose<cr>
 nmap <silent> <leader>d <Plug>DashSearch
 nmap <leader>e :w<cr>:call RunLastSpec()<cr>
 nmap <leader>g :w<cr>:Gstatus<cr>
+nmap <leader>ga :Git add .<cr><cr>
 nmap <leader>gd :Gvdiff<cr>
 nmap <leader>gl :Gpull origin<Space>
 nmap <leader>gp :Gpush<cr>
@@ -217,7 +219,7 @@ nmap <leader>kr :VtrKillRunner<cr>
 nmap <C-a> :VtrSendLinesToRunner<cr>
 vmap <C-a> :VtrSendLinesToRunner<cr>
 
-nmap <leader>or  :VtrOpenRunner { 'orientation': 'h', 'percentage': 50 }<cr>
+nmap <leader>or  :VtrOpenRunner { 'orientation': 'v', 'percentage': 20 }<cr>:VtrSendFile<cr>
 nmap <leader>pry :VtrOpenRunner { 'orientation': 'h', 'percentage': 50, 'cmd': 'pry' }<cr>
 nmap <leader>irb :VtrOpenRunner { 'orientation': 'h', 'percentage': 50, 'cmd': 'irb' }<cr>
 "}}}
