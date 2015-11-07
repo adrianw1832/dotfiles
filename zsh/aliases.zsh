@@ -44,9 +44,9 @@ alias bi="bundle install"
 alias ni="npm install"
 
 # Rails
+alias rsetup="ruby ~/dotfiles/rails_setup.rb"
 alias rr="bin/rake routes"
-alias rdbc="bin/rake db:create"
-alias rdbct="bin/rake db:create RAILS_ENV=test"
+alias rdbc="bin/rake db:create && bin/rake db:create RAILS_ENV=test"
 alias rdbd="bin/rake db:drop"
 alias rdbm="bin/rake db:migrate"
 alias rdbmt="bin/rake db:migrate RAILS_ENV=test"
