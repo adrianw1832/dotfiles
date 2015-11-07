@@ -3,6 +3,7 @@
 .bundle
 .netrwhist
 bower_components
+/vendor/assets/bower_components
 db/*.sqlite3
 log
 node_modules
