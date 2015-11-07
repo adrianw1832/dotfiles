@@ -67,6 +67,10 @@ snippet fln "flash notice" b
 flash[:notice] = '$1'
 endsnippet
 
+snippet baau "before action, authenticate user" b
+before_action :authenticate_user!, except: [:index, :show]
+endsnippet
+
 snippet rrh "rails helper" b
 require 'rails_helper'
 endsnippet
