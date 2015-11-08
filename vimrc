@@ -44,6 +44,7 @@ let g:rehash256 = 1
 " Vim settings"{{{
 
 syntax on     " Turn on syntax highlighting
+
 set autoindent     " Keeps same level of indentation of the previous line
 set autoread     " Auto-reload buffers when files are changed on disk
 set autowrite     " Save on buffer switch
@@ -71,17 +72,17 @@ set number     " Show line numbers
 set numberwidth=5     " Width of the number column
 set relativenumber     " Show relative line numbers
 set ruler     " Show line info at the bottom
-set timeoutlen=500     " Timeout between keystrokes to register command
 set shiftwidth=2     " Number of spaces for indents
 set showcmd     " Show command at the bottom bar
-set splitbelow     " New horizontal split opens to the bottom
-set splitright     " New vertical split opens to the right
 set smartcase     " Smart case for searching
-set smartindent     " Adds another level of indentation in some cases
 set so=5     " Number of lines around cursor at the edge of screen
 set softtabstop=2     " Number of spaces in tab when editing
+set spelllang=en_gb     " Set default spell check to British English
+set splitbelow     " New horizontal split opens to the bottom
+set splitright     " New vertical split opens to the right
 set t_Co=256     " 256 terminal colours
 set tabstop=2     " Number of visual spaces per tab
+set timeoutlen=500     " Timeout between keystrokes to register command
 set wildmenu     " Visual menu for autocomplete
 
 runtime macros/matchit.vim     " Allow vim to match more than just brackets
@@ -170,7 +171,6 @@ nmap <leader>ga :Git add .<cr><cr>
 nmap <leader>gd :Gvdiff<cr>
 nmap <leader>gl :Gpull origin<Space>
 nmap <leader>gp :Gpush<cr>
-nmap <leader>gq mzgggq'z'z
 nmap <silent> <leader>h :nohlsearch<cr>
 " Indent all and return to current line
 nmap <leader>i mzgg=G`z
@@ -260,6 +260,9 @@ autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 augroup vimrcEx
   autocmd!
 
+  " Enable filetype detection
+  filetype plugin indent on
+
   autocmd BufReadPost *
         \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
         \   exe "normal g`\"" |
@@ -274,19 +277,19 @@ augroup vimrcEx
   autocmd FileType org hi clear SpellBad
   autocmd FileType org hi SpellBad cterm=underline
 
-  " Enable spellchecking for Markdown
+  " Automatically wrap at 80 characters and spell check markdowns
+  autocmd BufRead,BufNewFile *.md setlocal textwidth=80
   autocmd FileType markdown setlocal spell
   autocmd FileType markdown hi clear SpellBad
   autocmd FileType markdown hi SpellBad cterm=underline
-
-  " Automatically wrap at 80 characters for Markdown
-  autocmd BufRead,BufNewFile *.md setlocal textwidth=80
+  autocmd FileType markdown set formatoptions+=a
 
   " Automatically wrap at 72 characters and spell check git commit messages
   autocmd FileType gitcommit setlocal textwidth=72
   autocmd FileType gitcommit setlocal spell
   autocmd FileType gitcommit hi clear SpellBad
   autocmd FileType gitcommit hi SpellBad cterm=underline
+  autocmd FileType markdown set formatoptions+=a
 
   " Allow stylesheets to autocomplete hyphenated words
   autocmd FileType css,scss,sass setlocal iskeyword+=-
