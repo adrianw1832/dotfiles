@@ -25,7 +25,6 @@ alias st="open -a SourceTree"
 
 # Ls
 alias ls='ls -AGFh'
-export LSCOLORS=GxFxCxDxBxegedabagaced
 
 # Tmux
 alias tl='tmux ls'
@@ -75,13 +74,13 @@ alias j='fasd_cd -d'
 alias jj='fasd_cd -d -i'
 
 # Config Shortcuts
-alias za="vim ~/dotfiles/zsh/aliases.zsh"
-alias ze="vim ~/.oh-my-zsh/custom/exports.zsh"
-alias zf="vim ~/.oh-my-zsh/custom/functions.zsh"
-alias zshrc="vim ~/dotfiles/zsh/zshrc"
-alias vimrc="vim ~/dotfiles/vimrc"
-alias gc="vim ~/dotfiles/gitconfig"
-alias tc="vim ~/dotfiles/tmux.conf"
+alias za="$EDITOR ~/dotfiles/zsh/aliases.zsh; source ~/dotfiles/zsh/aliases.zsh"
+alias ze="$EDITOR ~/.oh-my-zsh/custom/exports.zsh; source ~/.oh-my-zsh/custom/exports.zsh"
+alias zf="$EDITOR ~/dotfiles/zsh/functions.zsh; source ~/dotfiles/zsh/functions.zsh"
+alias zshrc="$EDITOR ~/dotfiles/zsh/zshrc; source ~/dotfiles/zsh/zshrc"
+alias gitconf="$EDITOR ~/dotfiles/gitconfig"
+alias tc="$EDITOR ~/dotfiles/tmux.conf"
+alias vimrc="$EDITOR ~/dotfiles/vimrc"
 
 # Testing Angular
 alias wds="webdriver-manager start"
