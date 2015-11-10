@@ -11,6 +11,7 @@ Plug 'godlygeek/tabular'
 Plug 'tomtom/tcomment_vim'
 " Plug 'marijnh/tern_for_vim', { 'for': 'javascript' }
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+Plug 'tpope/vim-abolish'
 Plug 'bling/vim-airline'
 Plug 'tpope/vim-dispatch'
 Plug 'easymotion/vim-easymotion'
@@ -129,7 +130,7 @@ nmap <tab> <C-^>
 
 " For switching two characters around and repeatable by .
 nnoremap <silent> <Plug>TransposeCharacters xp
-\:call repeat#set("\<Plug>TransposeCharacters")<CR>
+      \:call repeat#set("\<Plug>TransposeCharacters")<CR>
 nmap xp <Plug>TransposeCharacters
 
 " Mapping for Easy Motion
