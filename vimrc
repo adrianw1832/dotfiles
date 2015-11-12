@@ -31,6 +31,7 @@ Plug 'tpope/vim-surround'
 Plug 'kana/vim-textobj-user' | Plug 'nelstrom/vim-textobj-rubyblock', { 'for': ['ruby', 'rails'] }
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'christoomey/vim-tmux-runner'
+Plug 'nelstrom/vim-visual-star-search'
 
 Plug 'sjl/badwolf'
 Plug 'tomasr/molokai'
@@ -277,6 +278,7 @@ augroup vimrcEx
   autocmd FileType org setlocal spell
   autocmd FileType org hi clear SpellBad
   autocmd FileType org hi SpellBad cterm=underline
+  autocmd FileType org source ~/.vim/abbreviations.vim
 
   " Automatically wrap at 80 characters and spell check markdowns
   autocmd BufRead,BufNewFile *.md setlocal textwidth=80
@@ -284,13 +286,15 @@ augroup vimrcEx
   autocmd FileType markdown hi clear SpellBad
   autocmd FileType markdown hi SpellBad cterm=underline
   autocmd FileType markdown set formatoptions+=a
+  autocmd FileType markdown source ~/.vim/abbreviations.vim
 
   " Automatically wrap at 72 characters and spell check git commit messages
   autocmd FileType gitcommit setlocal textwidth=72
   autocmd FileType gitcommit setlocal spell
   autocmd FileType gitcommit hi clear SpellBad
   autocmd FileType gitcommit hi SpellBad cterm=underline
-  autocmd FileType markdown set formatoptions+=a
+  autocmd FileType gitcommit set formatoptions+=a
+  autocmd FileType gitcommit source ~/.vim/abbreviations.vim
 
   " Allow stylesheets to autocomplete hyphenated words
   autocmd FileType css,scss,sass setlocal iskeyword+=-
