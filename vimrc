@@ -83,6 +83,7 @@ set listchars=tab:»·,trail:·,nbsp:·     " Set extra whitespace symbols
 set nobackup nowritebackup noswapfile     " No unnecessary backup files
 set nocompatible     " No backwards compatibility
 set noerrorbells     " Silent error bell
+set nrformats=     " Treat all numerals as decimal
 set number     " Show line numbers
 set numberwidth=5     " Width of the number column
 set relativenumber     " Show relative line numbers
@@ -160,6 +161,7 @@ nmap F <Plug>(easymotion-Fl)
 
 " Remap since the function is redundant because of Easymotion
 nmap ; :
+vmap ; :
 " Visually select the text that was last edited/pasted
 nmap gV `[v`]
 " Better start of line config
