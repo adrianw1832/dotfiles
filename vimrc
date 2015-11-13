@@ -1,40 +1,54 @@
 " Plugins"{{{
 
 call plug#begin('~/.vim/plugged')
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'rizzatti/dash.vim', { 'on': '<Plug>DashSearch' }
+
+" Enhancements
 Plug 'Raimondi/delimitMate'
-Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'eruby'] }
 Plug 'Shougo/neocomplete'
-Plug 'scrooloose/syntastic', { 'for': ['javascript', 'ruby'] }
-Plug 'godlygeek/tabular'
-Plug 'tomtom/tcomment_vim'
-" Plug 'marijnh/tern_for_vim', { 'for': 'javascript' }
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-Plug 'tpope/vim-abolish'
-Plug 'bling/vim-airline'
-Plug 'tpope/vim-dispatch'
-Plug 'easymotion/vim-easymotion'
-Plug 'tpope/vim-endwise'
-Plug 'tommcdo/vim-exchange'
-Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-Plug 'pbrisbin/vim-mkdir'
-Plug 'jceb/vim-orgmode', { 'for': 'org' }
-Plug 'tpope/vim-rails', { 'for': ['ruby', 'rails', 'eruby'] }
-Plug 'tpope/vim-repeat'
-Plug 'thoughtbot/vim-rspec', { 'for': ['ruby', 'rails'] }
-Plug 'vim-ruby/vim-ruby', { 'for': ['ruby', 'rails'] }
+Plug 'bling/vim-airline'
 Plug 'christoomey/vim-sort-motion'
-Plug 'tpope/vim-surround'
-Plug 'kana/vim-textobj-user' | Plug 'nelstrom/vim-textobj-rubyblock', { 'for': ['ruby', 'rails'] }
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'christoomey/vim-tmux-runner'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'easymotion/vim-easymotion'
+Plug 'godlygeek/tabular'
+Plug 'kana/vim-textobj-user'
 Plug 'nelstrom/vim-visual-star-search'
+Plug 'pbrisbin/vim-mkdir'
+Plug 'rizzatti/dash.vim', { 'on': '<Plug>DashSearch' }
+Plug 'tommcdo/vim-exchange'
+Plug 'tomtom/tcomment_vim'
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
 
+" Language related
+
+" Ruby
+Plug 'nelstrom/vim-textobj-rubyblock', { 'for': ['ruby', 'rails', 'eruby'] }
+Plug 'thoughtbot/vim-rspec', { 'for': ['ruby', 'rails', 'eruby'] }
+Plug 'tpope/vim-rails', { 'for': ['ruby', 'rails', 'eruby'] }
+Plug 'vim-ruby/vim-ruby', { 'for': ['ruby', 'rails', 'eruby'] }
+
+" Javascript
+" Plug 'marijnh/tern_for_vim', { 'for': 'javascript' }
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+
+" Others
+Plug 'jceb/vim-orgmode', { 'for': 'org' }
+Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'eruby'] }
+Plug 'scrooloose/syntastic', { 'for': ['javascript', 'ruby'] }
+
+" Colour schemes
 Plug 'sjl/badwolf'
 Plug 'tomasr/molokai'
+
 call plug#end()
 "}}}
 " Colour scheme and its settings"{{{
