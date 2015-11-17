@@ -72,7 +72,7 @@ set foldenable     " Enable folding
 set foldmethod=marker     " Fold based on markers
 set grepprg=ag     " Use ag as default for grep
 set hidden     " Change default behaviour of opening file of existing buffer
-set history=50     " Number of commands to keep in history
+set history=100     " Number of commands to keep in history
 set hlsearch     " Highlight search result
 set ignorecase     " Ignore case when searching
 set incsearch     " Refresh search when entering search term
@@ -124,11 +124,6 @@ vmap kj <Esc>
 " Allow j and k to move down wrapped lines
 nnoremap j gj
 nnoremap k gk
-
-" Easier autocomplete navigation
-inoremap <C-w> <C-n>
-inoremap <C-q> <C-p>
-imap ` <C-x><C-p>
 
 " Allow ctrl - hotkeys
 imap <C-f> <Right>
@@ -210,7 +205,7 @@ nmap <leader>rv :Eview<space>
 nmap <leader>sn :UltiSnipsEdit<cr>
 nmap <leader>so :w<cr>:source $MYVIMRC<cr>:AirlineRefresh<cr>:nohlsearch<cr>
 " Going back to the last spelling mistake and choosing the 1st option
-nmap <leader>sp mz[s1z='z
+nmap <leader>sp mz[s1z=`z
 nmap <leader>t :w<cr>:call RunCurrentSpecFile()<cr>
 nmap <leader>w :w<cr>
 nmap <leader>q :q<cr>
