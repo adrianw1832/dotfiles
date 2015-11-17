@@ -80,6 +80,7 @@ alias zf="$EDITOR ~/dotfiles/zsh/functions.zsh; source ~/dotfiles/zsh/functions.
 alias zshrc="$EDITOR ~/dotfiles/zsh/zshrc; source ~/dotfiles/zsh/zshrc"
 alias gitconf="$EDITOR ~/dotfiles/gitconfig"
 alias tc="$EDITOR ~/dotfiles/tmux.conf"
+alias va="$EDITOR ~/dotfiles/abbreviations.vim"
 alias vimrc="$EDITOR ~/dotfiles/vimrc"
 
 # Testing Angular
