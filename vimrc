@@ -76,6 +76,7 @@ set history=100     " Number of commands to keep in history
 set hlsearch     " Highlight search result
 set ignorecase     " Ignore case when searching
 set incsearch     " Refresh search when entering search term
+set infercase     " Smarter case for autocompletion
 set laststatus=2     " Show status bar
 set lazyredraw     " Redraw window only when we need to
 set list     " Actually display extra whitespace symbols
