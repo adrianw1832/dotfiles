@@ -7,3 +7,5 @@ endif
 " Abbreviations
 Abolish im I'm
 Abolish teh the
+Abolish othre other
+Abolish ot to
