@@ -157,6 +157,8 @@ nmap F <Plug>(easymotion-Fl)
 " Remap since the function is redundant because of Easymotion
 nmap ; :
 vmap ; :
+" Remap for easier bookmark access
+nmap ' `
 " Visually select the text that was last edited/pasted
 nmap gV `[v`]
 " Better start of line config
@@ -191,7 +193,7 @@ nmap <leader>ni :!npm install<cr>
 nmap <leader>o :CtrlP<cr>
 nmap <leader>oo :CtrlPBuffer<cr>
 " Sensible pasting from system clipboard
-nmap <leader>p :set paste<CR>o<esc>"*]p:set nopaste<cr>
+nmap <leader>p o<esc>"*gp
 nmap <leader>pi :w<cr>:source $MYVIMRC<cr>:nohlsearch<cr>:PlugUpdate<cr>
 nmap <leader>r :w<cr>:call RunNearestSpec()<cr>
 nmap <leader>ra :A<cr>
