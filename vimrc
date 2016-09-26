@@ -44,8 +44,8 @@ Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 
 " Others
 Plug 'jceb/vim-orgmode', { 'for': 'org' }
-Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'eruby'] }
-Plug 'scrooloose/syntastic', { 'for': ['javascript', 'ruby'] }
+Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'eruby', 'jsp'] }
+" Plug 'scrooloose/syntastic', { 'for': ['javascript', 'ruby'] }
 
 " Colour schemes
 Plug 'sjl/badwolf'
@@ -291,6 +291,17 @@ augroup vimrcEx
   autocmd BufRead,BufNewFile Appraisals set filetype=ruby
   autocmd BufRead,BufNewFile *.md set filetype=markdown
 
+  " Enable different indentation for java files
+  autocmd FileType java set tabstop=8 softtabstop=4 shiftwidth=4
+
+  " Enable spellchecking for text files
+  autocmd BufRead,BufNewFile *.txt setlocal textwidth=80
+  autocmd FileType text setlocal spell
+  autocmd FileType text hi clear SpellBad
+  autocmd FileType text hi SpellBad cterm=underline
+  autocmd FileType text set formatoptions+=a
+  autocmd FileType text source ~/.vim/abbreviations.vim
+
   " Enable spellchecking for org files
   autocmd FileType org setlocal spell
   autocmd FileType org hi clear SpellBad
@@ -457,7 +468,7 @@ let g:EasyMotion_use_upper = 1
 
 " Emmet
 let g:user_emmet_install_global = 0
-autocmd FileType html,css,eruby EmmetInstall
+autocmd FileType html,css,eruby,jsp EmmetInstall
 let g:user_emmet_leader_key=','
 
 " Disable AutoComplPop.
