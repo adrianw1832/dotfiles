@@ -24,11 +24,13 @@ alias cask="brew cask"
 alias st="open -a SourceTree"
 
 # Ls
+alias l='ls -AGFh'
 alias ls='ls -AGFh'
 
 # Tmux
 alias tl='tmux ls'
 alias tk='tmux kill-session -t'
+alias tr='tmux rename-session'
 
 # Stopwatch
 alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
@@ -74,14 +76,14 @@ alias j='fasd_cd -d'
 alias jj='fasd_cd -d -i'
 
 # Config Shortcuts
-alias za="$EDITOR ~/dotfiles/zsh/aliases.zsh; source ~/dotfiles/zsh/aliases.zsh"
-alias ze="$EDITOR ~/.oh-my-zsh/custom/exports.zsh; source ~/.oh-my-zsh/custom/exports.zsh"
-alias zf="$EDITOR ~/dotfiles/zsh/functions.zsh; source ~/dotfiles/zsh/functions.zsh"
-alias zshrc="$EDITOR ~/dotfiles/zsh/zshrc; source ~/dotfiles/zsh/zshrc"
-alias gitconf="$EDITOR ~/dotfiles/gitconfig"
-alias tc="$EDITOR ~/dotfiles/tmux.conf"
-alias va="$EDITOR ~/dotfiles/abbreviations.vim"
-alias vimrc="$EDITOR ~/dotfiles/vimrc"
+alias za="vim ~/dotfiles/zsh/aliases.zsh; source ~/dotfiles/zsh/aliases.zsh"
+alias ze="vim ~/.oh-my-zsh/custom/exports.zsh; source ~/.oh-my-zsh/custom/exports.zsh"
+alias zf="vim ~/dotfiles/zsh/functions.zsh; source ~/dotfiles/zsh/functions.zsh"
+alias zshrc="vim ~/dotfiles/zsh/zshrc; source ~/dotfiles/zsh/zshrc"
+alias gitconf="vim ~/dotfiles/gitconfig"
+alias tc="vim ~/dotfiles/tmux.conf"
+alias va="vim ~/dotfiles/abbreviations.vim"
+alias vimrc="vim ~/dotfiles/vimrc"
 
 # Testing Angular
 alias wds="webdriver-manager start"
@@ -94,6 +96,7 @@ alias g="git status -s"
 alias ga="git add"
 alias gb="git branch -a"
 alias gc="git commit"
+alias gcl="git clone"
 alias gg="git open"
 alias glog="git log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short"
 alias go="git checkout"
@@ -101,10 +104,15 @@ alias gp="git push"
 alias gpa="git add . && git commit && git push"
 alias gpl="git pull origin"
 alias gpo="git push -u origin"
+alias gpr="git pull --rebase"
 alias gs="git status"
+alias grc="git rebase --continue"
 
 # Reload the shell
 alias reload="exec $SHELL -l"
 
 # Lock the screen (when going AFK)
 alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
+
+# Open intellij
+alias ij="open -b com.jetbrains.intellij"
