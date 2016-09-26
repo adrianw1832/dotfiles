@@ -4,10 +4,13 @@ call plug#begin('~/.vim/plugged')
 
 " Enhancements
 Plug 'Raimondi/delimitMate'
+Plug 'neomake/neomake'
 Plug 'Shougo/neocomplete'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'airblade/vim-gitgutter'
 Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'christoomey/vim-sort-motion'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'christoomey/vim-tmux-runner'
