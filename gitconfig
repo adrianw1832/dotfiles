@@ -1,6 +1,6 @@
 [user]
   name = Adrian Wong
-  email = adrianwong1832@gmail.com
+  email = awong@thoughtworks.com
 [core]
   autocrlf = input
   safecrlf = true
@@ -21,7 +21,7 @@
   required = true
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
+	path =
 [mergetool "sourcetree"]
 	cmd = /opt/homebrew-cask/Caskroom/sourcetree/2.0.5.2/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
