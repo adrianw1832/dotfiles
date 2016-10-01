@@ -41,6 +41,7 @@ Plug 'vim-ruby/vim-ruby', { 'for': ['ruby', 'rails', 'eruby'] }
 " Javascript
 " Plug 'marijnh/tern_for_vim', { 'for': 'javascript' }
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
 
 " Clojure
 Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
@@ -602,4 +603,14 @@ let g:syntastic_mode_map = {
 
 let g:neomake_serialize = 1
 let g:neomake_serialize_abort_on_error = 1
+
+" Tern
+if exists('g:plugs["tern_for_vim"]')
+  let g:tern_show_argument_hints = 'on_hold'
+  let g:tern_show_signature_in_pum = 1
+  autocmd FileType javascript setlocal omnifunc=tern#Complete
+endif
+
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
 "}}}
