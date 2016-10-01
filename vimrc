@@ -4,12 +4,10 @@ call plug#begin('~/.vim/plugged')
 
 " Enhancements
 Plug 'Raimondi/delimitMate'
-Plug 'neomake/neomake'
 Plug 'Shougo/neocomplete'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'airblade/vim-gitgutter'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'bling/vim-airline'
 Plug 'christoomey/vim-sort-motion'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'christoomey/vim-tmux-runner'
@@ -17,7 +15,9 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'godlygeek/tabular'
 Plug 'kana/vim-textobj-user'
+Plug 'kien/rainbow_parentheses.vim'
 Plug 'nelstrom/vim-visual-star-search'
+Plug 'neomake/neomake'
 Plug 'pbrisbin/vim-mkdir'
 Plug 'rizzatti/dash.vim', { 'on': '<Plug>DashSearch' }
 Plug 'tommcdo/vim-exchange'
@@ -28,6 +28,7 @@ Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
+Plug 'vim-airline/vim-airline-themes'
 
 " Language related
 
@@ -40,6 +41,12 @@ Plug 'vim-ruby/vim-ruby', { 'for': ['ruby', 'rails', 'eruby'] }
 " Javascript
 " Plug 'marijnh/tern_for_vim', { 'for': 'javascript' }
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+
+" Clojure
+Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
+Plug 'guns/vim-sexp', { 'for': 'clojure' }
+Plug 'tpope/vim-sexp-mappings-for-regular-people', { 'for': 'clojure' }
+Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 
 " Others
 Plug 'jceb/vim-orgmode', { 'for': 'org' }
