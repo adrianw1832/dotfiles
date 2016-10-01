@@ -30,7 +30,8 @@ alias ls='ls -AGFh'
 # Tmux
 alias tl='tmux ls'
 alias tk='tmux kill-session -t'
-alias tr='tmux rename-session'
+alias trs='tmux rename-session'
+alias trw='tmux rename-window'
 
 # Stopwatch
 alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
