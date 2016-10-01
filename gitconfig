@@ -53,4 +53,4 @@
 [credential]
   helper = osxkeychain
 [init]
-  templatedir = ~/.git_template
+	templatedir = ~/.git_template
