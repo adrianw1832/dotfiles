@@ -186,6 +186,7 @@ nnoremap <NUL> <C-z>
 "}}}
 " Leader mappings"{{{
 
+let maplocalleader = "\\"
 let mapleader = "\<Space>"
 nmap <leader>b :ls<cr>:b
 nmap <leader>bd :ls<cr>:bd<C-b><C-b>
@@ -198,9 +199,9 @@ nmap <leader>ga :Git add .<cr><cr>
 nmap <leader>gd :Gvdiff<cr>
 nmap <leader>gl :Gpull origin<Space>
 nmap <leader>gp :Gpush<cr>
-nmap <silent> <leader>h :nohlsearch<cr>
+nmap <silent> <leader>hh :nohlsearch<cr>
 " Indent all and return to current line
-nmap <leader>i mzgg=G`z
+nmap <leader>ii mzgg=G`z
 nmap <leader>ni :!npm install<cr>
 nmap <leader>o :CtrlP<cr>
 nmap <leader>oo :CtrlPBuffer<cr>
@@ -512,6 +513,7 @@ inoremap <expr><C-g>     neocomplete#undo_completion()
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType clojure setlocal omnifunc=clojurecomplete#Complete
 autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 autocmd FileType eruby setlocal omnifunc=rubycomplete#Complete
 autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
@@ -614,4 +616,13 @@ endif
 
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
+
+" Rainbow Parentheses
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+
+" Vim sexp
+let g:sexp_enable_insert_mode_mappings = 1
 "}}}
