@@ -3,9 +3,9 @@
   email = awong@thoughtworks.com
 [core]
   autocrlf = input
-  safecrlf = true
+  safecrlf = false
   editor = vim
-  excludesfile = /Users/Adrian/.gitignore_global
+  excludesfile = /Users/awong/.gitignore_global
   ignorecase = false
 [alias]
   type = cat-file -t
