@@ -39,9 +39,10 @@ Plug 'tpope/vim-rails', { 'for': ['ruby', 'rails', 'eruby'] }
 Plug 'vim-ruby/vim-ruby', { 'for': ['ruby', 'rails', 'eruby'] }
 
 " Javascript
-" Plug 'marijnh/tern_for_vim', { 'for': 'javascript' }
-Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'mxw/vim-jsx', { 'for': 'javascript' }
+Plug 'elzr/vim-json', { 'for': 'javascript' }
 Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
+Plug 'othree/yajs.vim', { 'for': 'javascript' }
 
 " Clojure
 Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
