@@ -39,10 +39,10 @@ Plug 'tpope/vim-rails', { 'for': ['ruby', 'rails', 'eruby'] }
 Plug 'vim-ruby/vim-ruby', { 'for': ['ruby', 'rails', 'eruby'] }
 
 " Javascript
-Plug 'mxw/vim-jsx', { 'for': 'javascript' }
 Plug 'elzr/vim-json', { 'for': 'javascript' }
 Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
 Plug 'othree/yajs.vim', { 'for': 'javascript' }
+Plug 'mxw/vim-jsx', { 'for': 'javascript' }
 
 " Clojure
 Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
@@ -52,7 +52,7 @@ Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 
 " Others
 Plug 'jceb/vim-orgmode', { 'for': 'org' }
-Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'eruby', 'jsp'] }
+Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'eruby', 'jsp', 'javascript', 'jsx'] }
 " Plug 'scrooloose/syntastic', { 'for': ['javascript', 'ruby'] }
 
 " Colour schemes
@@ -303,6 +303,9 @@ augroup vimrcEx
   " Enable different indentation for java files
   autocmd FileType java set tabstop=8 softtabstop=4 shiftwidth=4
 
+  " Enable different indentation for javascript files
+  autocmd FileType javascript set tabstop=4 softtabstop=2 shiftwidth=2
+
   " Enable spellchecking for text files
   autocmd BufRead,BufNewFile *.txt setlocal textwidth=80
   autocmd FileType text setlocal spell
@@ -477,7 +480,7 @@ let g:EasyMotion_use_upper = 1
 
 " Emmet
 let g:user_emmet_install_global = 0
-autocmd FileType html,css,eruby,jsp EmmetInstall
+autocmd FileType html,css,eruby,jsp,javascript,jsx EmmetInstall
 let g:user_emmet_leader_key=','
 
 " Disable AutoComplPop.
