@@ -43,7 +43,10 @@ alias update='softwareupdate -i -a; brew update; brew upgrade --all; brew cleanu
 alias bi="bundle install"
 
 # NPM
-alias ni="npm install"
+alias nis="npm install -S"
+alias nig="npm install -g"
+alias npmisreact="npm install -S babel-core babel-loader babel-plugin-add-module-exports babel-plugin-react-html-attrs babel-plugin-transform-class-properties babel-plugin-transform-decorators-legacy babel-preset-es2015 babel-preset-react babel-preset-stage-0 react react-dom webpack webpack-dev-server
+"
 
 # Rails
 alias rsetup="ruby ~/dotfiles/rails_setup.rb"
@@ -90,6 +93,9 @@ alias vimrc="vim ~/dotfiles/vimrc"
 alias wds="webdriver-manager start"
 alias e2e="gulp e2e"
 alias test="gulp test"
+
+# Webpack dev server
+alias webpackdevserver="webpack-dev-server --content-base src --inline --hot"
 
 # Git
 alias amend="git commit --amend"
