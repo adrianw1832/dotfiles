@@ -113,6 +113,8 @@ set splitright     " New vertical split opens to the right
 set t_Co=256     " 256 terminal colours
 set tabstop=2     " Number of visual spaces per tab
 set timeoutlen=500     " Timeout between keystrokes to register command
+set undofile     " Set the use of undofiles, which keeps a history of the undos
+set undodir=~/.vim/_undo/     " Set the directory to keep the undo files
 set wildmenu     " Visual menu for autocomplete
 
 runtime macros/matchit.vim     " Allow vim to match more than just brackets
