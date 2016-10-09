@@ -55,7 +55,6 @@ Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 Plug 'jceb/vim-orgmode', { 'for': 'org' }
 Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'eruby', 'jsp', 'javascript', 'jsx'] }
 Plug 'vim-scripts/SyntaxComplete'
-" Plug 'scrooloose/syntastic', { 'for': ['javascript', 'ruby'] }
 
 " Colour schemes
 Plug 'sjl/badwolf'
@@ -84,7 +83,7 @@ set expandtab     " Tab key will always insert 'softtabstop' amount of space
 set foldenable     " Enable folding
 set foldmethod=marker     " Fold based on markers
 set grepprg=ag     " Use ag as default for grep
-set hidden     " Change default behaviour of opening file of existing buffer
+" set hidden     " Change default behaviour of opening file of existing buffer
 set history=100     " Number of commands to keep in history
 set hlsearch     " Highlight search result
 set ignorecase     " Ignore case when searching
@@ -255,18 +254,7 @@ nmap <leader>or  :VtrOpenRunner { 'orientation': 'v', 'percentage': 20 }<cr>:Vtr
 nmap <leader>pry :VtrOpenRunner { 'orientation': 'h', 'percentage': 50, 'cmd': 'pry' }<cr>
 nmap <leader>irb :VtrOpenRunner { 'orientation': 'h', 'percentage': 50, 'cmd': 'irb' }<cr>
 "}}}
-" Ruby settings"{{{
-
-" Setting paths for ruby
-augroup rubypath
-  autocmd!
-  autocmd FileType ruby setlocal path+=lib/**,spec/**
-augroup END
-"}}}
 " Custom functions"{{{
-
-" Automatically rebalance windows on vim resize
-autocmd VimResized * :wincmd =
 
 " Treat <li> and <p> tags like the block tags they are
 let g:html_indent_tags = 'li\|p'
@@ -284,8 +272,6 @@ function! <SID>StripTrailingWhitespaces()
   call cursor(l, c)
 endfunction
 
-autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
-
 " When editing a file, always jump to the last known cursor position.
 " Don't do it for commit messages, when the position is invalid, or when
 " inside an event handler (happens when dropping a file on gvim).
@@ -300,9 +286,20 @@ augroup vimrcEx
         \   exe "normal g`\"" |
         \ endif
 
+  " Automatically rebalance windows on vim resize
+  autocmd VimResized * :wincmd =
+
+  autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+
+  " Maps K to open vim help for the word under cursor when editing vim files
+  autocmd FileType vim setlocal keywordprg=:help
+
   " Set syntax highlighting for specific file types
   autocmd BufRead,BufNewFile Appraisals set filetype=ruby
   autocmd BufRead,BufNewFile *.md set filetype=markdown
+
+  " Ruby path settings
+  autocmd FileType ruby setlocal path+=lib/**,spec/**
 
   " Enable different indentation for java files
   autocmd FileType java set tabstop=8 softtabstop=4 shiftwidth=4
@@ -310,27 +307,19 @@ augroup vimrcEx
   " Enable different indentation for javascript files
   autocmd FileType javascript set tabstop=4 softtabstop=2 shiftwidth=2
 
-  " Enable spellchecking for text files
-  autocmd BufRead,BufNewFile *.txt setlocal textwidth=80
-  autocmd FileType text setlocal spell
-  autocmd FileType text hi clear SpellBad
-  autocmd FileType text hi SpellBad cterm=underline
-  autocmd FileType text set formatoptions+=a
-  autocmd FileType text source ~/.vim/abbreviations.vim
+  " Automatically wrap at 80 characters and enable spell check text and markdowns
+  autocmd BufRead,BufNewFile *.txt,*.markdown setlocal textwidth=80
+  autocmd FileType text,markdown setlocal spell
+  autocmd FileType text,markdown hi clear SpellBad
+  autocmd FileType text,markdown hi SpellBad cterm=underline
+  autocmd FileType text,markdown set formatoptions+=a
+  autocmd FileType text,markdown source ~/.vim/abbreviations.vim
 
   " Enable spellchecking for org files
   autocmd FileType org setlocal spell
   autocmd FileType org hi clear SpellBad
   autocmd FileType org hi SpellBad cterm=underline
   autocmd FileType org source ~/.vim/abbreviations.vim
-
-  " Automatically wrap at 80 characters and spell check markdowns
-  autocmd BufRead,BufNewFile *.md setlocal textwidth=80
-  autocmd FileType markdown setlocal spell
-  autocmd FileType markdown hi clear SpellBad
-  autocmd FileType markdown hi SpellBad cterm=underline
-  autocmd FileType markdown set formatoptions+=a
-  autocmd FileType markdown source ~/.vim/abbreviations.vim
 
   " Automatically wrap at 72 characters and spell check git commit messages
   autocmd FileType gitcommit setlocal textwidth=72
@@ -342,6 +331,26 @@ augroup vimrcEx
 
   " Allow stylesheets to autocomplete hyphenated words
   autocmd FileType css,scss,sass setlocal iskeyword+=-
+
+  " Tern settings for javascript
+  autocmd InsertLeave,InsertEnter,CompleteDone * if pumvisible() == 0 | pclose | endif
+  autocmd FileType javascript nnoremap <silent> <buffer> gd :TernDef<CR>
+  autocmd FileType javascript nnoremap <silent> <buffer> K :TernDoc<CR>
+  autocmd FileType javascript nnoremap <silent> <buffer> <localleader>K :TernDocBrowse<CR>
+
+  " Types of files to load Emmet
+  autocmd FileType html,css,eruby,jsp,javascript,jsx EmmetInstall
+
+  " Ruby completion settings
+  autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
+  autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+  autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
+
+  " Mapping q to close netrw whilst keeping the split open
+  autocmd FileType netrw nnoremap q :bp\|bd #<cr>
+
+  " Run NeoMake on read and write operations
+  autocmd BufReadPost,BufWritePost * Neomake
 augroup END
 
 " Rename current file
@@ -484,7 +493,6 @@ let g:EasyMotion_use_upper = 1
 
 " Emmet
 let g:user_emmet_install_global = 0
-autocmd FileType html,css,eruby,jsp,javascript,jsx EmmetInstall
 let g:user_emmet_leader_key=','
 
 " Disable AutoComplPop.
@@ -516,11 +524,6 @@ let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 " Plugin key-mappings.
 inoremap <expr><C-g>     neocomplete#undo_completion()
 
-" Ruby completion settings
-autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
-autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
-autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
-
 " Enable heavy omni completion for ruby
 if !exists('g:neocomplete#force_omni_input_patterns')
   let g:neocomplete#force_omni_input_patterns = {}
@@ -530,9 +533,6 @@ endif
 " let g:neocomplete#force_omni_input_patterns.eruby = '[^. *\t]\.\w*\|\h\w*::'
 
 " Netrw settings
-
-" Mapping q to close netrw whilst keeping the split open
-autocmd FileType netrw nnoremap q :bp\|bd #<cr>
 
 " Hide the useless information at the top
 let g:netrw_banner=0
@@ -596,9 +596,6 @@ let g:vtr_filetype_runner_overrides = {
 let g:surround_45 = "<% \r %>"
 let g:surround_61 = "<%= \r %>"
 
-" Run NeoMake on read and write operations
-autocmd! BufReadPost,BufWritePost * Neomake
-
 " Neokmake
 let g:neomake_serialize = 1
 let g:neomake_serialize_abort_on_error = 1
@@ -608,9 +605,6 @@ if exists('g:plugs["tern_for_vim"]')
   let g:tern_show_argument_hints = 'on_hold'
   let g:tern_show_signature_in_pum = 1
 endif
-
-autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
 
 " Vim javascript libraries syntax
 let g:used_javascript_libs = 'jquery,underscore,react,jasmine,flux'
