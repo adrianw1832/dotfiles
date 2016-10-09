@@ -491,11 +491,11 @@ let g:user_emmet_leader_key=','
 let g:acp_enableAtStartup = 0
 " Use neocomplete.
 let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#max_list = 10
-let g:neocomplete#source#word#max_candidates = 10
+let g:neocomplete#max_list = 20
+let g:neocomplete#source#word#max_candidates = 20
 let g:neocomplete#enable_smart_case = 1
-let g:neocomplete#auto_completion_start_length = 3
-let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:neocomplete#auto_completion_start_length = 2
+let g:neocomplete#sources#syntax#min_keyword_length = 2
 let g:neocomplete#enable_auto_delimiter = 1
 let g:neocomplete#force_overwrite_completefunc = 1
 let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
@@ -516,13 +516,7 @@ let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 " Plugin key-mappings.
 inoremap <expr><C-g>     neocomplete#undo_completion()
 
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType clojure setlocal omnifunc=clojurecomplete#Complete
-autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-autocmd FileType eruby setlocal omnifunc=rubycomplete#Complete
+" Ruby completion settings
 autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
@@ -605,12 +599,7 @@ let g:surround_61 = "<%= \r %>"
 " Run NeoMake on read and write operations
 autocmd! BufReadPost,BufWritePost * Neomake
 
-" Disable inherited syntastic
-let g:syntastic_mode_map = {
-  \ "mode": "passive",
-  \ "active_filetypes": [],
-  \ "passive_filetypes": [] }
-
+" Neokmake
 let g:neomake_serialize = 1
 let g:neomake_serialize_abort_on_error = 1
 
