@@ -39,11 +39,11 @@ Plug 'tpope/vim-rails', { 'for': ['ruby', 'rails', 'eruby'] }
 Plug 'vim-ruby/vim-ruby', { 'for': ['ruby', 'rails', 'eruby'] }
 
 " Javascript
-Plug 'elzr/vim-json', { 'for': 'javascript' }
-Plug 'ternjs/tern_for_vim', { 'for': 'javascript', 'do': 'npm install' }
-Plug 'mxw/vim-jsx', { 'for': 'javascript' }
-Plug 'othree/javascript-libraries-syntax.vim', { 'for': 'javascript' }
-Plug 'othree/yajs.vim', { 'for': 'javascript' }
+Plug 'elzr/vim-json', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install' }
+Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx'] }
 
 " Clojure
 Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
@@ -53,7 +53,7 @@ Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 
 " Others
 Plug 'jceb/vim-orgmode', { 'for': 'org' }
-Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'eruby', 'jsp', 'javascript', 'jsx'] }
+Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'eruby', 'jsp', 'javascript', 'javascript.jsx'] }
 Plug 'vim-scripts/SyntaxComplete'
 
 " Colour schemes
@@ -339,7 +339,7 @@ augroup vimrcEx
   autocmd FileType javascript nnoremap <silent> <buffer> <localleader>K :TernDocBrowse<CR>
 
   " Types of files to load Emmet
-  autocmd FileType html,css,eruby,jsp,javascript,jsx EmmetInstall
+  autocmd FileType html,css,eruby,jsp,javascript,javascript.jsx EmmetInstall
 
   " Ruby completion settings
   autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
