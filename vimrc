@@ -40,9 +40,10 @@ Plug 'vim-ruby/vim-ruby', { 'for': ['ruby', 'rails', 'eruby'] }
 
 " Javascript
 Plug 'elzr/vim-json', { 'for': 'javascript' }
-Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
-Plug 'othree/yajs.vim', { 'for': 'javascript' }
+Plug 'ternjs/tern_for_vim', { 'for': 'javascript', 'do': 'npm install' }
 Plug 'mxw/vim-jsx', { 'for': 'javascript' }
+Plug 'othree/javascript-libraries-syntax.vim', { 'for': 'javascript' }
+Plug 'othree/yajs.vim', { 'for': 'javascript' }
 
 " Clojure
 Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
@@ -53,6 +54,7 @@ Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 " Others
 Plug 'jceb/vim-orgmode', { 'for': 'org' }
 Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'eruby', 'jsp', 'javascript', 'jsx'] }
+Plug 'vim-scripts/SyntaxComplete'
 " Plug 'scrooloose/syntastic', { 'for': ['javascript', 'ruby'] }
 
 " Colour schemes
@@ -614,11 +616,13 @@ let g:neomake_serialize_abort_on_error = 1
 if exists('g:plugs["tern_for_vim"]')
   let g:tern_show_argument_hints = 'on_hold'
   let g:tern_show_signature_in_pum = 1
-  autocmd FileType javascript setlocal omnifunc=tern#Complete
 endif
 
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
+
+" Vim javascript libraries syntax
+let g:used_javascript_libs = 'jquery,underscore,react,jasmine,flux'
 
 " Rainbow Parentheses
 au VimEnter * RainbowParenthesesToggle
