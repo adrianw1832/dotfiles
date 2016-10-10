@@ -16,6 +16,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'godlygeek/tabular'
 Plug 'kana/vim-textobj-user'
 Plug 'kien/rainbow_parentheses.vim'
+Plug 'mileszs/ack.vim'
 Plug 'nelstrom/vim-visual-star-search'
 Plug 'neomake/neomake'
 Plug 'pbrisbin/vim-mkdir'
@@ -191,6 +192,7 @@ nnoremap <NUL> <C-z>
 
 let maplocalleader = "\\"
 let mapleader = "\<Space>"
+nmap <leader>a :Ack!<Space>
 nmap <leader>b :ls<cr>:b
 nmap <leader>bd :ls<cr>:bd<C-b><C-b>
 nmap <leader>bi :!bundle install<cr>
@@ -604,4 +606,9 @@ au Syntax * RainbowParenthesesLoadBraces
 
 " Vim sexp
 let g:sexp_enable_insert_mode_mappings = 1
+
+" Ack, make ack use ag
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
 "}}}
