@@ -56,6 +56,7 @@ Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 Plug 'jceb/vim-orgmode', { 'for': 'org' }
 Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'eruby', 'jsp', 'javascript', 'javascript.jsx'] }
 Plug 'vim-scripts/SyntaxComplete'
+Plug 'tmux-plugins/vim-tmux', { 'for': 'tmux' }
 
 " Colour schemes
 Plug 'sjl/badwolf'
