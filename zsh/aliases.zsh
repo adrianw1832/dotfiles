@@ -36,8 +36,8 @@ alias trw='tmux rename-window'
 # Stopwatch
 alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
 
-# Get OS X Software Updates, and update installed Ruby gems, Homebrew, npm, and their installed packages
-alias update='softwareupdate -i -a; brew update; brew upgrade; brew cleanup; npm install npm -g; npm install bower -g; npm update -g; npm cache clean; bower update; bower cache clean; rvm cleanup all; gem update --system; gem update; gem cleanup'
+# Get OS software updates, and update installed packages of homebrew, cask, npm, bower and Ruby gems
+alias update='softwareupdate -i -a; brew update; brew upgrade; brew cleanup; brew cask cleanup; npm install npm -g; npm install bower -g; npm update -g; npm cache clean; bower update; bower cache clean; rvm cleanup all; gem update --system; gem update; gem cleanup'
 
 # Bundle
 alias bi="bundle install"
