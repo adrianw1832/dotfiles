@@ -29,6 +29,7 @@ Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
 Plug 'vim-airline/vim-airline-themes'
 
 " Language related
@@ -413,56 +414,6 @@ set wildignore+=*.egg,*.egg-info
 set wildignore+=*.png,*.jpg,*.gif
 set wildignore+=*.so,*.swp,*.zip,*/.Trash/**,*.pdf,*.dmg,*/Library/**,*/.rbenv/**
 set wildignore+=*/.nx/**,*.app
-
-" Line operations, taken from vim-unimpaired
-function! s:BlankUp(count) abort
-  put!=repeat(nr2char(10), a:count)
-  ']+1
-  silent! call repeat#set("\<Plug>unimpairedBlankUp", a:count)
-endfunction
-
-function! s:BlankDown(count) abort
-  put =repeat(nr2char(10), a:count)
-  '[-1
-  silent! call repeat#set("\<Plug>unimpairedBlankDown", a:count)
-endfunction
-
-nnoremap <silent> <Plug>unimpairedBlankUp   :<C-U>call <SID>BlankUp(v:count1)<CR>
-nnoremap <silent> <Plug>unimpairedBlankDown :<C-U>call <SID>BlankDown(v:count1)<CR>
-
-nmap [<Space> <Plug>unimpairedBlankUp
-nmap ]<Space> <Plug>unimpairedBlankDown
-
-function! s:Move(cmd, count, map) abort
-  normal! m`
-  silent! exe 'move'.a:cmd.a:count
-  norm! ``
-  silent! call repeat#set("\<Plug>unimpairedMove".a:map, a:count)
-endfunction
-
-function! s:MoveSelectionUp(count) abort
-  normal! m`
-  silent! exe "'<,'>move'<--".a:count
-  norm! ``
-  silent! call repeat#set("\<Plug>unimpairedMoveSelectionUp", a:count)
-endfunction
-
-function! s:MoveSelectionDown(count) abort
-  normal! m`
-  exe "'<,'>move'>+".a:count
-  norm! ``
-  silent! call repeat#set("\<Plug>unimpairedMoveSelectionDown", a:count)
-endfunction
-
-nnoremap <silent> <Plug>unimpairedMoveUp            :<C-U>call <SID>Move('--',v:count1,'Up')<CR>
-nnoremap <silent> <Plug>unimpairedMoveDown          :<C-U>call <SID>Move('+',v:count1,'Down')<CR>
-noremap  <silent> <Plug>unimpairedMoveSelectionUp   :<C-U>call <SID>MoveSelectionUp(v:count1)<CR>
-noremap  <silent> <Plug>unimpairedMoveSelectionDown :<C-U>call <SID>MoveSelectionDown(v:count1)<CR>
-
-nmap [e <Plug>unimpairedMoveUp
-nmap ]e <Plug>unimpairedMoveDown
-xmap [e <Plug>unimpairedMoveSelectionUp
-xmap ]e <Plug>unimpairedMoveSelectionDown
 "}}}
 " Plugin settings"{{{
 
