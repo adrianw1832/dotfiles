@@ -6,7 +6,9 @@ source ~/.zplug/init.zsh
 
 # Plugins
 zplug "$ZSH/custom/*.zsh", from:local
+zplug "djui/alias-tips"
 zplug "lib/*", from:oh-my-zsh
+zplug "plugins/npm", from:oh-my-zsh
 zplug "zplug/zplug"
 zplug "zsh-users/zsh-autosuggestions"
 
