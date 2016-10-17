@@ -1,8 +1,8 @@
 " Plugins"{{{
 
 call plug#begin('~/.vim/plugged')
+" Enhancements"{{{
 
-" Enhancements
 Plug 'Raimondi/delimitMate'
 Plug 'Shougo/neocomplete'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
@@ -31,38 +31,43 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-airline/vim-airline-themes'
+"}}}
+" Language related"{{{
 
-" Language related
+" Ruby"{{{
 
-" Ruby
 Plug 'nelstrom/vim-textobj-rubyblock', { 'for': ['ruby', 'rails', 'eruby'] }
 Plug 'thoughtbot/vim-rspec', { 'for': ['ruby', 'rails', 'eruby'] }
 Plug 'tpope/vim-rails', { 'for': ['ruby', 'rails', 'eruby'] }
 Plug 'vim-ruby/vim-ruby', { 'for': ['ruby', 'rails', 'eruby'] }
+"}}}
+" Javascript"{{{
 
-" Javascript
 Plug 'elzr/vim-json', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install' }
 Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx'] }
+"}}}
+" Clojure"{{{
 
-" Clojure
 Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
 Plug 'guns/vim-sexp', { 'for': 'clojure' }
 Plug 'tpope/vim-sexp-mappings-for-regular-people', { 'for': 'clojure' }
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+"}}}
+"}}}
+" Others"{{{
 
-" Others
 Plug 'jceb/vim-orgmode', { 'for': 'org' }
 Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'eruby', 'jsp', 'javascript', 'javascript.jsx'] }
 Plug 'vim-scripts/SyntaxComplete'
 Plug 'tmux-plugins/vim-tmux', { 'for': 'tmux' }
-
-" Colour schemes
+"}}}
+" Colour schemes"{{{
 Plug 'sjl/badwolf'
 Plug 'tomasr/molokai'
-
+"}}}
 call plug#end()
 "}}}
 " Colour scheme and its settings"{{{
@@ -70,6 +75,10 @@ call plug#end()
 colorscheme molokai
 let g:molokai_original = 1
 let g:rehash256 = 1
+
+" A more discrete colour column
+highlight ColorColumn ctermbg=red
+call matchadd('ColorColumn', '\%81v', 100)
 "}}}
 " Vim settings"{{{
 
@@ -102,6 +111,7 @@ set noerrorbells     " Silent error bell
 set nrformats=     " Treat all numerals as decimal
 set number     " Show line numbers
 set numberwidth=5     " Width of the number column
+set path+=**     " Add file paths to vim for native 'fuzzy find'
 set relativenumber     " Show relative line numbers
 set ruler     " Show line info at the bottom
 set shiftwidth=2     " Number of spaces for indents
@@ -120,10 +130,6 @@ set undodir=~/.vim/_undo/     " Set the directory to keep the undo files
 set wildmenu     " Visual menu for autocomplete
 
 runtime macros/matchit.vim     " Allow vim to match more than just brackets
-
-" A more discrete colour column
-highlight ColorColumn ctermbg=red
-call matchadd('ColorColumn', '\%81v', 100)
 "}}}
 " Custom mappings"{{{
 
@@ -262,8 +268,7 @@ nmap <leader>irb :VtrOpenRunner { 'orientation': 'h', 'percentage': 50, 'cmd': '
 
 " Treat <li> and <p> tags like the block tags they are
 let g:html_indent_tags = 'li\|p'
-
-" Delete all trailing white space on save
+" Delete all trailing white space on save"{{{
 function! <SID>StripTrailingWhitespaces()
   " preparation: save last search, and cursor position
   let _s=@/
@@ -275,16 +280,17 @@ function! <SID>StripTrailingWhitespaces()
   let @/=_s
   call cursor(l, c)
 endfunction
-
-" When editing a file, always jump to the last known cursor position.
-" Don't do it for commit messages, when the position is invalid, or when
-" inside an event handler (happens when dropping a file on gvim).
+"}}}
+" Auto commands"{{{
 augroup vimrcEx
   autocmd!
 
   " Enable filetype detection
   filetype plugin indent on
 
+  " When editing a file, always jump to the last known cursor position.
+  " Don't do it for commit messages, when the position is invalid, or when
+  " inside an event handler (happens when dropping a file on gvim).
   autocmd BufReadPost *
         \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
         \   exe "normal g`\"" |
@@ -356,8 +362,8 @@ augroup vimrcEx
   " Run NeoMake on read and write operations
   autocmd BufReadPost,BufWritePost * Neomake
 augroup END
-
-" Rename current file
+"}}}
+" Rename current file"{{{
 function! RenameFile()
   let old_name = expand('%')
   let new_name = input('New file name: ', expand('%'), 'file')
@@ -367,8 +373,8 @@ function! RenameFile()
     redraw!
   endif
 endfunction
-
-" Don't close window, when deleting a buffer
+"}}}
+" Don't close window, when deleting a buffer"{{{
 command! Bclose call <SID>BufcloseCloseIt()
 function! <SID>BufcloseCloseIt()
   let l:currentBufNum = bufnr("%")
@@ -388,8 +394,8 @@ function! <SID>BufcloseCloseIt()
     execute("bdelete! ".l:currentBufNum)
   endif
 endfunction
-
-" Things to ignore when tab completing
+"}}}
+" Things to ignore when tab completing"{{{
 set wildignore=*.o,*.obj,*~,*.pyc
 set wildignore+=.env
 set wildignore+=.env[0-9]+
@@ -415,14 +421,19 @@ set wildignore+=*.png,*.jpg,*.gif
 set wildignore+=*.so,*.swp,*.zip,*/.Trash/**,*.pdf,*.dmg,*/Library/**,*/.rbenv/**
 set wildignore+=*/.nx/**,*.app
 "}}}
+"}}}
 " Plugin settings"{{{
-
-"Airline
+"Airline"{{{
 let g:airline_theme='badwolf'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
-
-" CtrlP
+"}}}
+" Ack"{{{
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+"}}}
+" CtrlP"{{{
 let g:ctrlp_map = '<Nop>'
 let g:ctrlp_max_height = 20
 
@@ -435,28 +446,29 @@ if executable('ag')
 else
   let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
 endif
-
-" DelimitMate
+"}}}
+" DelimitMate"{{{
 let g:delimitMate_expand_cr = 1
 let g:delimitMate_expand_space = 1
 let g:delimitMate_jump_expansion = 1
-
-" Dispatch
+"}}}
+" Dispatch"{{{
 let g:rspec_command = "Dispatch rspec {spec}"
-
-" Easy Motion
+"}}}
+" Easy motion"{{{
 let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_smartcase = 1
 let g:EasyMotion_use_smartsign_us = 1
 let g:EasyMotion_use_upper = 1
-
-" Emmet
+"}}}
+" Emmet"{{{
 let g:user_emmet_install_global = 0
 let g:user_emmet_leader_key=','
+"}}}
+" Neocomplete"{{{
 
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
-" Use neocomplete.
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#max_list = 20
 let g:neocomplete#source#word#max_candidates = 20
@@ -487,8 +499,12 @@ inoremap <expr><C-g>     neocomplete#undo_completion()
 if !exists('g:neocomplete#force_omni_input_patterns')
   let g:neocomplete#force_omni_input_patterns = {}
 endif
-
-" Netrw settings
+"}}}
+" Neomake"{{{
+let g:neomake_serialize = 1
+let g:neomake_serialize_abort_on_error = 1
+"}}}
+" Netrw settings"{{{
 
 " Hide the useless information at the top
 let g:netrw_banner=0
@@ -521,14 +537,36 @@ let g:netrw_list_hide.='\.egg,\.egg-info,'
 let g:netrw_list_hide.='\.png,\.jpg,\.gif,'
 let g:netrw_list_hide.='\.so,\.swp,\.zip,/\.Trash/,\.pdf,\.dmg,/Library/,/\.rbenv/,'
 let g:netrw_list_hide.='*/\.nx/**,*\.app'
-
-" Ultisnips
+"}}}
+" Rainbow parentheses"{{{
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+"}}}
+" Tern"{{{
+if exists('g:plugs["tern_for_vim"]')
+  let g:tern_show_argument_hints = 'on_hold'
+  let g:tern_show_signature_in_pum = 1
+endif
+"}}}
+" Ultisnips"{{{
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
 let g:UltiSnipsEditSplit="vertical"
-
-" Vim tmux runner
+"}}}
+" Vim javascript libraries syntax"{{{
+let g:used_javascript_libs = 'jquery,underscore,react,jasmine,flux'
+"}}}
+" Vim surround"{{{
+let g:surround_45 = "<% \r %>"
+let g:surround_61 = "<%= \r %>"
+"}}}
+" Vim sexp"{{{
+let g:sexp_enable_insert_mode_mappings = 1
+"}}}
+" Vim tmux runner"{{{
 let g:VtrUseVtrMaps = 1
 let g:VtrGitCdUpOnOpen = 0
 let g:VtrPercentage = 33
@@ -537,35 +575,5 @@ let g:vtr_filetype_runner_overrides = {
       \ 'haskell': 'ghci {file}',
       \ 'applescript': 'osascript {file}'
       \ }
-
-" Vim surround
-let g:surround_45 = "<% \r %>"
-let g:surround_61 = "<%= \r %>"
-
-" Neokmake
-let g:neomake_serialize = 1
-let g:neomake_serialize_abort_on_error = 1
-
-" Tern
-if exists('g:plugs["tern_for_vim"]')
-  let g:tern_show_argument_hints = 'on_hold'
-  let g:tern_show_signature_in_pum = 1
-endif
-
-" Vim javascript libraries syntax
-let g:used_javascript_libs = 'jquery,underscore,react,jasmine,flux'
-
-" Rainbow Parentheses
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
-
-" Vim sexp
-let g:sexp_enable_insert_mode_mappings = 1
-
-" Ack, make ack use ag
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
-endif
+"}}}
 "}}}
