@@ -1,4 +1,5 @@
 # OS/ Shell {{{
+
 # Easier navigation
 alias ..="cd .."
 alias ...="cd ../.."
@@ -33,6 +34,7 @@ alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resource
 alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
 # }}}
 # Apps# {{{
+
 # Cask
 alias cask="brew cask"
 
@@ -47,6 +49,7 @@ alias st="open -a SourceTree"
 alias ij="open -b com.jetbrains.intellij"
 # }}}
 # Config and editor# {{{
+
 # Config shortcuts
 alias za="vim ~/dotfiles/zsh/aliases.zsh; source ~/dotfiles/zsh/aliases.zsh"
 alias ze="vim ~/dotfiles/zsh/exports.zsh; source ~/dotfiles/zsh/exports.zsh"
@@ -101,6 +104,14 @@ alias rgmi="bin/rails generate migration"
 alias rdmi="bin/rails destroy migration"
 # }}}
 # Npm# {{{
+alias npmg="npm install -g"
+alias npmd="npm install -D"
+alias npms="npm install -S"
+alias npml="npm list"
+alias npmo="npm outdated"
+alias npmv="npm -version"
+alias npmst="npm start"
+alias npmt="npm test"
 alias npmisreact="npm install -S babel-core babel-loader babel-plugin-add-module-exports babel-plugin-react-html-attrs babel-plugin-transform-class-properties babel-plugin-transform-decorators-legacy babel-preset-es2015 babel-preset-react babel-preset-stage-0 react react-dom webpack webpack-dev-server
 "
 # }}}
