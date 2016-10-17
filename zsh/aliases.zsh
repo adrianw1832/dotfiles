@@ -65,6 +65,7 @@ alias v="vim"
 alias vv='f -e vim'
 # }}}
 # Git# {{{
+
 alias amend="git commit --amend"
 alias g="git status -s"
 alias ga="git add"
@@ -84,6 +85,7 @@ alias grc="git rebase --continue"
 alias gs="git status"
 # }}}
 # Rails# {{{
+
 alias rsetup="ruby ~/dotfiles/rails_setup.rb"
 alias rr="bin/rake routes"
 alias rdbc="bin/rake db:create && bin/rake db:create RAILS_ENV=test"
@@ -104,6 +106,7 @@ alias rgmi="bin/rails generate migration"
 alias rdmi="bin/rails destroy migration"
 # }}}
 # Npm# {{{
+
 alias npmg="npm install -g"
 alias npmd="npm install -D"
 alias npms="npm install -S"
