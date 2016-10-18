@@ -217,7 +217,6 @@ nmap <silent> <leader>hh :nohlsearch<cr>
 nmap <leader>ii mzgg=G`z
 nmap <leader>ni :!npm install<cr>
 nmap <leader>o :CtrlP<cr>
-nmap <leader>oo :CtrlPBuffer<cr>
 " Sensible pasting from system clipboard
 nmap <leader>p o<esc>"*gp
 nmap <leader>pi :w<cr>:source $MYVIMRC<cr>:nohlsearch<cr>:PlugUpdate<cr>
@@ -436,6 +435,8 @@ endif
 " CtrlP"{{{
 let g:ctrlp_map = '<Nop>'
 let g:ctrlp_max_height = 20
+let g:ctrlp_open_new_file = 'r'
+let g:ctrlp_open_multiple_files = '1vjr'
 
 " Faster CtrlP search
 let g:ctrlp_use_caching = 0
