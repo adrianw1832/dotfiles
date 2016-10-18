@@ -158,8 +158,8 @@ imap <C-a> <C-o>^
 imap <C-e> <C-o>$
 
 " Switching between buffers
-nnoremap <C-m> :bn<cr>
-nnoremap <C-n> :bp<cr>
+nnoremap <C-m> :bnext<cr>
+nnoremap <C-n> :bprevious<cr>
 nmap <tab> <C-^>
 
 " For switching two characters around and repeatable by .
@@ -179,8 +179,8 @@ nmap f <Plug>(easymotion-fl)
 nmap F <Plug>(easymotion-Fl)
 
 " Remap for easier command mode access
-nmap <cr> :
-vmap <cr> :
+nmap ; :
+vmap ; :
 " Remap for easier bookmark access
 nmap ' `
 " Visually select the text that was last edited/pasted
