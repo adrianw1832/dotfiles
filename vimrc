@@ -178,9 +178,9 @@ nmap T <Plug>(easymotion-Tl)
 nmap f <Plug>(easymotion-fl)
 nmap F <Plug>(easymotion-Fl)
 
-" Remap since the function is redundant because of Easymotion
-nmap ; :
-vmap ; :
+" Remap for easier command mode access
+nmap <cr> :
+vmap <cr> :
 " Remap for easier bookmark access
 nmap ' `
 " Visually select the text that was last edited/pasted
