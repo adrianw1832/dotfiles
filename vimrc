@@ -551,6 +551,9 @@ if exists('g:plugs["tern_for_vim"]')
   let g:tern_show_signature_in_pum = 1
 endif
 "}}}
+" Tmux navigator"{{{
+let g:tmux_navigator_save_on_switch = 2
+"}}}
 " Ultisnips"{{{
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
