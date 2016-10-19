@@ -95,7 +95,7 @@ set expandtab     " Tab key will always insert 'softtabstop' amount of space
 set foldenable     " Enable folding
 set foldmethod=marker     " Fold based on markers
 set grepprg=ag     " Use ag as default for grep
-" set hidden     " Change default behaviour of opening file of existing buffer
+set hidden     " Change default behaviour of opening file of existing buffer
 set history=100     " Number of commands to keep in history
 set hlsearch     " Highlight search result
 set ignorecase     " Ignore case when searching
@@ -355,8 +355,9 @@ augroup vimrcEx
   autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
   autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
-  " Mapping q to close netrw whilst keeping the split open
+  " Mapping q to close netrw and help manual whilst keeping the split open
   autocmd FileType netrw nnoremap q :bp\|bd #<cr>
+  autocmd FileType help nnoremap q :bd<cr>
 
   " Run NeoMake on read and write operations
   autocmd BufReadPost,BufWritePost * Neomake
