@@ -22,7 +22,7 @@ alias ll='ls -Alh'
 alias update='softwareupdate -i -a; brew update; brew upgrade; brew cleanup; brew cask cleanup; npm install npm -g; npm install bower -g; npm update -g; npm cache clean; bower update; bower cache clean; rvm cleanup all; gem update --system; gem update; gem cleanup; zplug update; zplug clear'
 
 # Reload the shell
-alias reload="exec $SHELL -l"
+alias reload="source ~/.zshrc"
 
 # Copy the working directory path
 alias cpwd='pwd|tr -d "\n"|pbcopy'
@@ -54,9 +54,12 @@ alias ij="open -b com.jetbrains.intellij"
 alias za="vim ~/dotfiles/zsh/aliases.zsh; source ~/dotfiles/zsh/aliases.zsh"
 alias ze="vim ~/dotfiles/zsh/exports.zsh; source ~/dotfiles/zsh/exports.zsh"
 alias zf="vim ~/dotfiles/zsh/functions.zsh; source ~/dotfiles/zsh/functions.zsh"
-alias zshrc="vim ~/dotfiles/zsh/zshrc; source ~/dotfiles/zsh/zshrc"
+alias zshrc="vim ~/dotfiles/zshrc; source ~/dotfiles/zshrc"
+alias prompt="vim ~/dotfiles/zsh/powerline.zsh-theme; source ~/dotfiles/zsh/powerline.zsh-theme"
 alias gitconf="vim ~/dotfiles/gitconfig"
 alias tc="vim ~/dotfiles/tmux.conf"
+alias tpo="vim ~/dotfiles/tmux-powerline/tmux-powerlinerc"
+alias tpp="vim ~/dotfiles/tmux-powerline/tmux-powerline-theme.sh"
 alias va="vim ~/dotfiles/abbreviations.vim"
 alias vimrc="vim ~/dotfiles/vimrc"
 
@@ -72,6 +75,7 @@ alias ga="git add"
 alias gb="git branch -a"
 alias gc="git commit"
 alias gcl="git clone"
+alias gclean="git clean -fd"
 alias gco="git checkout"
 alias gd="git diff"
 alias gg="git open"
