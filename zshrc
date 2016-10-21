@@ -1,16 +1,15 @@
-# Path to zsh folder
-export ZSH=$HOME/.zsh
+source ~/.zsh/custom/powerline.zsh-theme
 
 # Using zplug as plugin manager
 source ~/.zplug/init.zsh
 
 # Plugins
+zplug "bhilburn/powerlevel9k"
 zplug "djui/alias-tips"
 zplug "lib/*", from:oh-my-zsh
-zplug "plugins/npm", from:oh-my-zsh
+zplug "lukechilds/zsh-nvm"
 zplug "zplug/zplug"
 zplug "zsh-users/zsh-autosuggestions"
-zplug "$ZSH/custom/*.zsh", from:local
 
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
@@ -23,9 +22,12 @@ fi
 # Then, source plugins and add commands to $PATH
 zplug load --verbose
 
-# source $ZSH/oh-my-zsh.sh
-source $ZSH/theme/custom.zsh-theme
+# Source custom zsh files
+for file in ~/dotfiles/zsh/*.zsh; do
+    source "$file"
+done
 
+# Setting for fasd to work
 eval "$(fasd --init auto)"``
 
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
