@@ -158,8 +158,8 @@ imap <C-a> <C-o>^
 imap <C-e> <C-o>$
 
 " Switching between buffers
-nnoremap <C-m> :bnext<cr>
-nnoremap <C-n> :bprevious<cr>
+nnoremap <C-n> :bnext<cr>
+nnoremap <C-p> :bprevious<cr>
 nmap <tab> <C-^>
 
 " For switching two characters around and repeatable by .
@@ -187,6 +187,8 @@ nmap ' `
 nmap gV `[v`]
 " Better start of line config
 nmap 0 ^
+" Change the behaviour of Y to be more inline with the rest
+nmap Y y$
 " Remap to increase number by 1
 noremap <C-z> <C-a>
 " Copy to system clipboard
