@@ -12,7 +12,7 @@
 	# Overlay directory to look for themes. There you can put your own themes outside the repo. Fallback will still be the "themes" directory in the repo.
 	export TMUX_POWERLINE_DIR_USER_THEMES="~/dotfiles/tmux-powerline/"
 	# Overlay directory to look for segments. There you can put your own segments outside the repo. Fallback will still be the "segments" directory in the repo.
-	export TMUX_POWERLINE_DIR_USER_SEGMENTS="~/dotfiles/tmux-powerline/"
+	export TMUX_POWERLINE_DIR_USER_SEGMENTS="~/dotfiles/tmux-powerline/segments/"
 # }
 # battery.sh {
 	# How to display battery remaining. Can be {percentage, cute}.
@@ -101,7 +101,7 @@
 	# How often in seconds to update the data from last.fm.
 	export TMUX_POWERLINE_SEG_NOW_PLAYING_LASTFM_UPDATE_PERIOD="30"
 	# Fancy char to display before now playing track
-	export TMUX_POWERLINE_SEG_NOW_PLAYING_NOTE_CHAR="♫"
+	export TMUX_POWERLINE_SEG_NOW_PLAYING_NOTE_CHAR=""
 # }
 # pwd.sh {
 	# Maximum length of output.

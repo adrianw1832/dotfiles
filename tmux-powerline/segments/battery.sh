@@ -1,8 +1,7 @@
-# LICENSE This code is not under the same license as the rest of the project as it's "stolen". It's cloned from https://github.com/richoH/dotfiles/blob/master/bin/battery and just some modifications are done so it works for my laptop. Check that URL for more recent versions.
-
 TMUX_POWERLINE_SEG_BATTERY_TYPE_DEFAULT="percentage"
 
-BATTERY_ICON=""
+NORMAL_ICON=""
+CHARGING_ICON=""
 
 generate_segmentrc() {
   read -d '' rccontents  << EORC
@@ -18,7 +17,7 @@ run_segment() {
 
   battery_status=$(__battery_osx)
   [ -z "$battery_status" ] && return
-  output="${BATTERY_ICON} ${battery_status}%"
+  output="${battery_status}%"
 
   if [ -n "$output" ]; then
     echo "$output"
@@ -38,21 +37,22 @@ __battery_osx() {
           export curcap=$value;;
         "ExternalConnected")
           export extconnect=$value;;
-        "FullyCharged")
-          export fully_charged=$value;;
       esac
       if [[ -n $maxcap && -n $curcap && -n $extconnect ]]; then
-        if [[ "$curcap" == "$maxcap" || "$fully_charged" == "Yes" && $extconnect == "Yes"  ]]; then
-          return
-        fi
         charge=`pmset -g batt | grep -o "[0-9][0-9]*\%" | rev | cut -c 2- | rev`
-        if [[ "$extconnect" == "Yes" ]]; then
-          echo "$charge"
+        if [[ $charge -gt 75 ]]; then
+          echo -n "#[fg=colour118]"
+        elif [[ $charge -gt 50 ]]; then
+          echo -n "#[fg=colour226]"
+        elif [[ $charge -gt 25 ]]; then
+          echo -n "#[fg=colour202]"
         else
-          if [[ $charge -lt 50 ]]; then
-            echo -n "#[fg=red]"
-          fi
-          echo "$charge"
+          echo -n "#[fg=colour196]"
+        fi
+        if [[ "$extconnect" == "Yes" ]]; then
+          echo "$CHARGING_ICON" "$charge"
+        else
+          echo "$NORMAL_ICON" "$charge"
         fi
         break
       fi
