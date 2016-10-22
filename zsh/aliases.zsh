@@ -91,6 +91,10 @@ alias grt="git reset"
 alias grts="git reset --soft"
 alias grth="git reset --hard"
 alias gs="git status"
+alias gsh="git stash"
+alias gsha="git stash apply"
+alias gshp="git stash pop"
+alias gshd="git stash drop"
 # }}}
 # Rails# {{{
 
