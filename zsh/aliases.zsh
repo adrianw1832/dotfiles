@@ -71,6 +71,7 @@ alias vv='f -e vim'
 # Git# {{{
 
 alias amend="git commit --amend"
+alias amendne="git commit --amend --no-edit"
 alias g="git status -s"
 alias ga="git add"
 alias gb="git branch -a"
