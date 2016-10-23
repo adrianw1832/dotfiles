@@ -238,6 +238,7 @@ nmap <leader>sp mz[s1z=`z
 nmap <leader>t :w<cr>:call RunCurrentSpecFile()<cr>
 nmap <leader>w :w<cr>
 nmap <leader>q :q<cr>
+nmap <leader>qa :qa<cr>
 nmap <leader>qq :Bclose<cr>
 nmap <leader>wq :wq<cr>
 nmap <leader>qw :wq<cr>
