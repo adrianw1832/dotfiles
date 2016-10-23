@@ -10,7 +10,8 @@ bindkey -M viins '^b' backward-char
 bindkey -M viins '^f' forward-char
 
 bindkey -M viins '^d' delete-char
-bindkey -M viins '^g' backward-delete-char
+bindkey -M viins '^b' backward-delete-char
+bindkey -M viins '^w' backward-kill-word
 # bindkey -M viins '^h' backward-delete-char # It's blocked by tmux navigator
 
 bindkey -M viins '^r' history-incremental-search-backward
