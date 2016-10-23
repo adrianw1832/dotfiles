@@ -11,7 +11,6 @@
   type = cat-file -t
   dump = cat-file -p
   ctags = !.git/hooks/ctags
-
 [push]
   default = current
   followTags = true
@@ -19,12 +18,9 @@
   clean = git-lfs clean %f
   smudge = git-lfs smudge %f
   required = true
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path =
-[mergetool "sourcetree"]
-	cmd = /opt/homebrew-cask/Caskroom/sourcetree/2.0.5.2/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
+  trustExitCode = true
+[diff]
+  tool = vimdiff
 
 [color]
 
@@ -50,7 +46,8 @@
   added = green
   changed = yellow
   untracked = red
+
 [credential]
   helper = osxkeychain
 [init]
-	templatedir = ~/.git_template
+  templatedir = ~/.git_template
