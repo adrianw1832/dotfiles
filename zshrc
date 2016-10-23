@@ -62,6 +62,7 @@ zle -N zle-keymap-select
 # Setting for fasd to work
 eval "$(fasd --init auto)"``
 
+export EDITOR='/usr/local/bin/vim'
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
 export PATH=$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:$HOME/.rvm/bin:$HOME/bin
 
