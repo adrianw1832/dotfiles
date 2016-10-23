@@ -345,10 +345,11 @@ augroup vimrcEx
   autocmd FileType css,scss,sass setlocal iskeyword+=-
 
   " Tern settings for javascript
-  autocmd InsertLeave,InsertEnter,CompleteDone * if pumvisible() == 0 | pclose | endif
-  autocmd FileType javascript nnoremap <silent> <buffer> gd :TernDef<CR>
-  autocmd FileType javascript nnoremap <silent> <buffer> K :TernDoc<CR>
-  autocmd FileType javascript nnoremap <silent> <buffer> <localleader>K :TernDocBrowse<CR>
+  autocmd InsertLeave,InsertEnter,CompleteDone *.js,*.jsx if pumvisible() == 0 | pclose | endif
+  autocmd FileType javascript,javascript.jsx set completeopt-=preview
+  autocmd FileType javascript,javascript.jsx nnoremap <silent> <buffer> gd :TernDef<CR>
+  autocmd FileType javascript,javascript.jsx nnoremap <silent> <buffer> K :TernDoc<CR>
+  autocmd FileType javascript,javascript.jsx nnoremap <silent> <buffer> <localleader>K :TernDocBrowse<CR>
 
   " Types of files to load Emmet
   autocmd FileType html,css,eruby,jsp,javascript,javascript.jsx EmmetInstall
@@ -563,6 +564,8 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
 let g:UltiSnipsEditSplit="vertical"
+" let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/plugged/vim-snippets/UltiSnips', $HOME.'/.vim/UltiSnips']
+let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
 "}}}
 " Vim javascript libraries syntax"{{{
 let g:used_javascript_libs = 'jquery,underscore,react,jasmine,flux'
