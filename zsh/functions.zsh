@@ -1,5 +1,5 @@
 # Bind ctrl space to go back to background job
-easier_ctrl-z () {
+easier_ctrl-z() {
   if [[ $#BUFFER -eq 0 ]]; then
     BUFFER="fg"
     zle accept-line
@@ -10,6 +10,12 @@ easier_ctrl-z () {
 }
 zle -N easier_ctrl-z
 bindkey '^ ' easier_ctrl-z
+
+# Custom function to handle git add and commit
+gac() { git add "$1" && git commit }
+
+# Custom function to handle git add, commit and push
+gacp() { git add "$1" && git commit && git push }
 
 # Always tmux is always running
 _not_inside_tmux() { [[ -z "$TMUX" ]] }
