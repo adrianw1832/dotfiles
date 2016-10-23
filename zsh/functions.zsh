@@ -1,5 +1,5 @@
 # Bind ctrl space to go back to background job
-easier_ctrl-z() {
+_easier_ctrl-z() {
   if [[ $#BUFFER -eq 0 ]]; then
     BUFFER="fg"
     zle accept-line
@@ -8,8 +8,7 @@ easier_ctrl-z() {
     zle clear-screen
   fi
 }
-zle -N easier_ctrl-z
-bindkey '^ ' easier_ctrl-z
+zle -N _easier_ctrl-z
 
 # Custom function to handle git add and commit
 gac() { git add "$1" && git commit }

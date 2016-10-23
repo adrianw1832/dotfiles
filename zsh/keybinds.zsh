@@ -6,6 +6,9 @@ bindkey -M viins '^o' autosuggest-execute
 bindkey -M viins '^p' up-line-or-beginning-search
 bindkey -M viins '^n' down-line-or-beginning-search
 
+bindkey -M viins '^a' beginning-of-line
+bindkey -M viins '^e' end-of-line
+
 bindkey -M viins '^b' backward-char
 bindkey -M viins '^f' forward-char
 
@@ -14,13 +17,22 @@ bindkey -M viins '^b' backward-delete-char
 bindkey -M viins '^w' backward-kill-word
 # bindkey -M viins '^h' backward-delete-char # It's blocked by tmux navigator
 
-bindkey -M viins '^r' history-incremental-search-backward
-bindkey -M viins '^t' history-incremental-search-forward
+# [Shift-Tab] - move through the completion menu backwards
+if [[ "${terminfo[kcbt]}" != "" ]]; then
+  bindkey "${terminfo[kcbt]}" reverse-menu-complete
+fi
+
+bindkey -M viins '^ ' _easier_ctrl-z
+
+bindkey -M viins '^r' history-incremental-pattern-search-backward
+bindkey -M viins '^t' history-incremental-pattern-search-forward
+
+bindkey -M viins '^v' copy-prev-shell-word
 
 bindkey -M vicmd 'Y' vi-yank-eol
 
 bindkey -M vicmd 'v' visual-mode
-bindkey -M vicmd 'V' visual-line-mode
+bindkey -M vicmd 'V' edit-command-line
 
 # Emacs-like keybinds
 # bindkey '^w' forward-word
