@@ -1,11 +1,11 @@
 snippet	desc "describe"
-describe('${1:description}', function() {
+describe('${1:description}', () => {
 	${0:${VISUAL}}
 });
 endsnippet
 
 snippet it "it"
-it('${1:description}', function() {
+it('${1:description}', () => {
 	$2
 });
 endsnippet
@@ -16,10 +16,8 @@ ${1:class_name}.prototype.${2:method_name} = function(${3}) {
 };
 endsnippet
 
-snippet f "function"
-var ${1} = function(${2}) {
-	$3
-};
+snippet af "arrow function"
+(${1}) => $2;
 endsnippet
 
 snippet fun "function"
