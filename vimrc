@@ -324,7 +324,7 @@ augroup vimrcEx
   autocmd FileType text,markdown setlocal spell
   autocmd FileType text,markdown hi clear SpellBad
   autocmd FileType text,markdown hi SpellBad cterm=underline
-  autocmd FileType text,markdown set formatoptions+=a
+  autocmd FileType text,markdown set formatoptions+=t
   autocmd FileType text,markdown source ~/.vim/abbreviations.vim
 
   " Enable spellchecking for org files
@@ -338,7 +338,7 @@ augroup vimrcEx
   autocmd FileType gitcommit setlocal spell
   autocmd FileType gitcommit hi clear SpellBad
   autocmd FileType gitcommit hi SpellBad cterm=underline
-  autocmd FileType gitcommit set formatoptions+=a
+  autocmd FileType gitcommit set formatoptions+=t
   autocmd FileType gitcommit source ~/.vim/abbreviations.vim
 
   " Allow stylesheets to autocomplete hyphenated words
