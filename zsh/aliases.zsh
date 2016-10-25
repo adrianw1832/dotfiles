@@ -63,6 +63,7 @@ alias tpo="vim ~/dotfiles/tmux-powerline/tmux-powerlinerc"
 alias tpp="vim ~/dotfiles/tmux-powerline/tmux-powerline-theme.sh"
 alias va="vim ~/dotfiles/abbreviations.vim"
 alias vimrc="vim ~/dotfiles/vimrc"
+alias cvimrc="vim ~/dotfiles/cvimrc"
 
 # Editor shortcut
 alias v="vim"
