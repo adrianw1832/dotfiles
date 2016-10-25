@@ -1,0 +1,66 @@
+set defaultnewtabpage
+set linkanimations
+set noautofocus
+set scalehints
+set smoothscroll
+set typelinkhints
+
+let completionengines = ["google", "wikipedia", "imdb"]
+let locale = "uk"
+let mapleader = ","
+let scrollduration = 10
+let searchalias g = "google"
+let searchalias g = "google"
+let searchalias i = "imdb"
+let searchalias w = "wikipedia"
+let searchlimit = 40
+
+unmap m
+
+map ; openCommandBar
+map F createActiveTabbedHint
+map P openPaste
+map R reloadTabUncached
+map Y yankDocumentUrl
+map i goToInput
+map m setMark
+map p openPasteTab
+map u lastClosedTab
+map yy yankHighlight
+
+imap <C-a> beginningOfLine
+imap <C-d> deleteForwardChar
+imap <C-h> deleteChar
+
+" Create a variable that can be used/referenced in the command bar
+let @@reddit_ask    = 'http://www.reddit.com/r/AskReddit'
+let @@reddit_movies = 'http://www.reddit.com/r/movies'
+let @@reddit_tele   = 'http://www.reddit.com/r/television'
+
+let @@top_all   = 'top?sort=top&t=all'
+let @@top_month = 'top?sort=top&t=month'
+let @@top_week  = 'top?sort=top&t=week'
+let @@top_day   = 'top?sort=top&t=day'
+
+map <Leader>aa :tabopen @@reddit_ask/@@top_all<CR>
+map <Leader>am :tabopen @@reddit_ask/@@top_month<CR>
+map <Leader>aw :tabopen @@reddit_ask/@@top_week<CR>
+map <Leader>ad :tabopen @@reddit_ask/@@top_day<CR>
+
+map <Leader>ma :tabopen @@reddit_ask/@@top_all<CR>
+map <Leader>mm :tabopen @@reddit_ask/@@top_month<CR>
+map <Leader>mw :tabopen @@reddit_ask/@@top_week<CR>
+map <Leader>md :tabopen @@reddit_ask/@@top_day<CR>
+
+map <Leader>ta :tabopen @@reddit_ask/@@top_all<CR>
+map <Leader>tm :tabopen @@reddit_ask/@@top_month<CR>
+map <Leader>tw :tabopen @@reddit_ask/@@top_week<CR>
+map <Leader>td :tabopen @@reddit_ask/@@top_day<CR>
+
+map <Leader>gh :tabopen https://github.com/adrianw1832<CR>
+map <Leader>Gh :open https://github.com/adrianw1832<CR>
+map <Leader>gi :tabopen https://gist.github.com/adrianw1832<CR>
+map <Leader>Gi :open https://gist.github.com/adrianw1832<CR>
+
+let configpath = '/Users/awong/dotfiles/cvimrc'
+set localconfig
