@@ -34,6 +34,7 @@ imap <C-h> deleteChar
 let blacklist = ["https://www.codewars.com/*"]
 
 " Create a variable that can be used/referenced in the command bar
+let @@reddit         = 'http://www.reddit.com'
 let @@reddit_ask     = 'http://www.reddit.com/r/AskReddit'
 let @@reddit_movies  = 'http://www.reddit.com/r/movies'
 let @@reddit_tele    = 'http://www.reddit.com/r/television'
@@ -44,6 +45,14 @@ let @@top_year  = 'top?sort=top&t=all'
 let @@top_month = 'top?sort=top&t=month'
 let @@top_week  = 'top?sort=top&t=week'
 let @@top_day   = 'top?sort=top&t=day'
+
+map <Leader>ra :tabopen @@reddit/@@top_all<CR>
+map <Leader>ry :tabopen @@reddit/@@top_month<CR>
+map <Leader>rm :tabopen @@reddit/@@top_month<CR>
+map <Leader>rw :tabopen @@reddit/@@top_week<CR>
+map <Leader>rd :tabopen @@reddit/@@top_day<CR>
+map <Leader>rr :open$ @@reddit<CR>
+map <Leader>RR :bookmarks! /Other Bookmarks/Reddit<CR>
 
 map <Leader>aa :tabopen @@reddit_ask/@@top_all<CR>
 map <Leader>ay :tabopen @@reddit_ask/@@top_month<CR>
