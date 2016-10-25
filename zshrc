@@ -1,3 +1,7 @@
+export EDITOR='/usr/local/bin/vim'
+export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
+export PATH=$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:$HOME/.rvm/bin:$HOME/bin
+
 source ~/.zsh/custom/powerline.zsh-theme
 
 # Using zplug as plugin manager
@@ -30,6 +34,7 @@ done
 # Enable vi mode
 bindkey -v
 export KEYTIMEOUT=1
+
 # Temporary code to enable the prompt# {{{
 function zle-line-init {
   powerlevel9k_prepare_prompts
@@ -59,12 +64,9 @@ zle -N zle-line-init
 zle -N ale-line-finish
 zle -N zle-keymap-select
 # }}}
+
 # Setting for fasd to work
 eval "$(fasd --init auto)"``
-
-export EDITOR='/usr/local/bin/vim'
-export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
-export PATH=$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:$HOME/.rvm/bin:$HOME/bin
 
 # Load RVM into a shell session *as a function*
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
