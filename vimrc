@@ -121,7 +121,7 @@ set nocompatible     " No backwards compatibility
 set noerrorbells     " Silent error bell
 set nrformats=     " Treat all numerals as decimal
 set number     " Show line numbers
-set numberwidth=5     " Width of the number column
+set numberwidth=3     " Width of the number column
 set path+=**     " Add file paths to vim for native 'fuzzy find'
 set relativenumber     " Show relative line numbers
 set ruler     " Show line info at the bottom
@@ -177,34 +177,34 @@ nnoremap <tab> <C-^>
 " For switching two characters around and repeatable by .
 nnoremap <silent> <Plug>TransposeCharacters xp
       \:call repeat#set("\<Plug>TransposeCharacters")<CR>
-nnoremap xp <Plug>TransposeCharacters
+nmap xp <Plug>TransposeCharacters
 
 " Mapping for Easy Motion
-nnoremap s <Plug>(easymotion-s2)
-onoremap t <Plug>(easymotion-tl)
-onoremap T <Plug>(easymotion-Tl)
-onoremap f <Plug>(easymotion-fl)
-onoremap F <Plug>(easymotion-Fl)
-nnoremap t <Plug>(easymotion-tl)
-nnoremap T <Plug>(easymotion-Tl)
-nnoremap f <Plug>(easymotion-fl)
-nnoremap F <Plug>(easymotion-Fl)
+nmap s <Plug>(easymotion-s2)
+omap t <Plug>(easymotion-tl)
+omap T <Plug>(easymotion-Tl)
+omap f <Plug>(easymotion-fl)
+omap F <Plug>(easymotion-Fl)
+nmap t <Plug>(easymotion-tl)
+nmap T <Plug>(easymotion-Tl)
+nmap f <Plug>(easymotion-fl)
+nmap F <Plug>(easymotion-Fl)
 
 " Gitgutter remappings
 nmap ]c <Plug>GitGutterNextHunk
 nmap [c <Plug>GitGutterPrevHunk
-nnoremap <Leader>ha <Plug>GitGutterStageHunk
-nnoremap <Leader>hr <Plug>GitGutterUndoHunk
-onoremap ih <Plug>GitGutterTextObjectInnerPending
-onoremap ah <Plug>GitGutterTextObjectOuterPending
-xnoremap ih <Plug>GitGutterTextObjectInnerVisual
-xnoremap ah <Plug>GitGutterTextObjectOuterVisual
+nmap <Leader>ha <Plug>GitGutterStageHunk
+nmap <Leader>hr <Plug>GitGutterUndoHunk
+omap ih <Plug>GitGutterTextObjectInnerPending
+omap ah <Plug>GitGutterTextObjectOuterPending
+xmap ih <Plug>GitGutterTextObjectInnerVisual
+xmap ah <Plug>GitGutterTextObjectOuterVisual
 
 " Smooth scroll remappings
-noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
-noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
-noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
-noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
+noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 10, 2)<CR>
+noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 10, 2)<CR>
+noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 10, 4)<CR>
+noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 10, 4)<CR>
 
 " Remap for easier command mode access
 nnoremap ; :
@@ -213,6 +213,8 @@ vnoremap ; :
 nnoremap ' `
 " Visually select the text that was last edited/pasted
 nnoremap gV `[v`]
+" Makes the dot command behave on a Visually selected line
+vnoremap . :norm.<CR>
 " Better start of line config
 nnoremap 0 ^
 " Change the behaviour of Y to be more inline with the rest
