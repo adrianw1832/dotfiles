@@ -9,12 +9,12 @@ endif
 call plug#begin('~/.vim/plugged')
 " Enhancements"{{{
 
-Plug 'alvan/vim-closetag'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Raimondi/delimitMate'
 Plug 'Shougo/neocomplete'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'airblade/vim-gitgutter'
+Plug 'alvan/vim-closetag'
 Plug 'bronson/vim-visual-star-search'
 Plug 'christoomey/vim-sort-motion'
 Plug 'christoomey/vim-tmux-navigator'
@@ -191,8 +191,8 @@ nnoremap f <Plug>(easymotion-fl)
 nnoremap F <Plug>(easymotion-Fl)
 
 " Gitgutter remappings
-nnoremap ]h <Plug>GitGutterNextHunk
-nnoremap [h <Plug>GitGutterPrevHunk
+nmap ]c <Plug>GitGutterNextHunk
+nmap [c <Plug>GitGutterPrevHunk
 nnoremap <Leader>ha <Plug>GitGutterStageHunk
 nnoremap <Leader>hr <Plug>GitGutterUndoHunk
 onoremap ih <Plug>GitGutterTextObjectInnerPending
