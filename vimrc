@@ -1,13 +1,20 @@
 " Plugins"{{{
-
+" Automatically install vim-plug and run PlugInstall if vim-plug is not found"{{{
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall | source $MYVIMRC
+endif
+"}}}
 call plug#begin('~/.vim/plugged')
 " Enhancements"{{{
 
+Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Raimondi/delimitMate'
 Plug 'Shougo/neocomplete'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'airblade/vim-gitgutter'
-Plug 'bling/vim-airline'
+Plug 'bronson/vim-visual-star-search'
 Plug 'christoomey/vim-sort-motion'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'christoomey/vim-tmux-runner'
@@ -17,10 +24,8 @@ Plug 'godlygeek/tabular'
 Plug 'kana/vim-textobj-user'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'mileszs/ack.vim'
-Plug 'nelstrom/vim-visual-star-search'
 Plug 'neomake/neomake'
 Plug 'pbrisbin/vim-mkdir'
-Plug 'rizzatti/dash.vim', { 'on': '<Plug>DashSearch' }
 Plug 'tommcdo/vim-exchange'
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-abolish'
@@ -30,7 +35,18 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
+"}}}
+" Others"{{{
+
+Plug 'bling/vim-airline'
+Plug 'jceb/vim-orgmode', { 'for': 'org' }
+Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'eruby', 'jsp', 'javascript', 'javascript.jsx'] }
+Plug 'rizzatti/dash.vim', { 'on': '<Plug>DashSearch' }
+Plug 'sickill/vim-pasta'
+Plug 'terryma/vim-smooth-scroll'
+Plug 'tmux-plugins/vim-tmux', { 'for': 'tmux' }
 Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-scripts/SyntaxComplete'
 "}}}
 " Language related"{{{
 
@@ -57,14 +73,8 @@ Plug 'tpope/vim-sexp-mappings-for-regular-people', { 'for': 'clojure' }
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 "}}}
 "}}}
-" Others"{{{
-
-Plug 'jceb/vim-orgmode', { 'for': 'org' }
-Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'eruby', 'jsp', 'javascript', 'javascript.jsx'] }
-Plug 'vim-scripts/SyntaxComplete'
-Plug 'tmux-plugins/vim-tmux', { 'for': 'tmux' }
-"}}}
 " Colour schemes"{{{
+
 Plug 'sjl/badwolf'
 Plug 'tomasr/molokai'
 "}}}
@@ -127,7 +137,7 @@ set tabstop=2     " Number of visual spaces per tab
 set timeoutlen=500     " Timeout between keystrokes to register command
 set undodir=~/.vim/_undo/     " Set the directory to keep the undo files
 set undofile     " Set the use of undofiles, which keeps a history of the undos
-set updatetime=500     " Time in ms for vim to update/ refresh
+set updatetime=1000     " Time in ms for vim to update/ refresh
 set wildmenu     " Visual menu for autocomplete
 
 runtime macros/matchit.vim     " Allow vim to match more than just brackets
@@ -188,6 +198,12 @@ omap ih <Plug>GitGutterTextObjectInnerPending
 omap ah <Plug>GitGutterTextObjectOuterPending
 xmap ih <Plug>GitGutterTextObjectInnerVisual
 xmap ah <Plug>GitGutterTextObjectOuterVisual
+
+" Smooth scroll remappings
+noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
+noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
+noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
+noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
 
 " Remap for easier command mode access
 nmap ; :
