@@ -178,6 +178,16 @@ nmap T <Plug>(easymotion-Tl)
 nmap f <Plug>(easymotion-fl)
 nmap F <Plug>(easymotion-Fl)
 
+" Gitgutter remappings
+nmap ]h <Plug>GitGutterNextHunk
+nmap [h <Plug>GitGutterPrevHunk
+nmap <Leader>ha <Plug>GitGutterStageHunk
+nmap <Leader>hr <Plug>GitGutterUndoHunk
+omap ih <Plug>GitGutterTextObjectInnerPending
+omap ah <Plug>GitGutterTextObjectOuterPending
+xmap ih <Plug>GitGutterTextObjectInnerVisual
+xmap ah <Plug>GitGutterTextObjectOuterVisual
+
 " Remap for easier command mode access
 nmap ; :
 vmap ; :
