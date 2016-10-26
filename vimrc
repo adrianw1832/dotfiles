@@ -152,53 +152,53 @@ nnoremap <Up> :echoe "Use k"<cr>
 nnoremap <Down> :echoe "Use j"<cr>
 
 " Easier esc mapping
-imap jk <Esc>
-imap kj <Esc>
-vmap jk <Esc>
-vmap kj <Esc>
+inoremap jk <Esc>
+inoremap kj <Esc>
+vnoremap jk <Esc>
+vnoremap kj <Esc>
 
 " Allow j and k to move down wrapped lines
 nnoremap j gj
 nnoremap k gk
 
 " Allow ctrl - hotkeys
-imap <C-f> <Right>
-imap <C-b> <Left>
-imap <C-d> <Del>
-imap <C-h> <BS>
-imap <C-a> <C-o>^
-imap <C-e> <C-o>$
+inoremap <C-f> <Right>
+inoremap <C-b> <Left>
+inoremap <C-d> <Del>
+inoremap <C-h> <BS>
+inoremap <C-a> <C-o>^
+inoremap <C-e> <C-o>$
 
 " Switching between buffers
 nnoremap <C-n> :bnext<cr>
 nnoremap <C-p> :bprevious<cr>
-nmap <tab> <C-^>
+nnoremap <tab> <C-^>
 
 " For switching two characters around and repeatable by .
 nnoremap <silent> <Plug>TransposeCharacters xp
       \:call repeat#set("\<Plug>TransposeCharacters")<CR>
-nmap xp <Plug>TransposeCharacters
+nnoremap xp <Plug>TransposeCharacters
 
 " Mapping for Easy Motion
-nmap s <Plug>(easymotion-s2)
-omap t <Plug>(easymotion-tl)
-omap T <Plug>(easymotion-Tl)
-omap f <Plug>(easymotion-fl)
-omap F <Plug>(easymotion-Fl)
-nmap t <Plug>(easymotion-tl)
-nmap T <Plug>(easymotion-Tl)
-nmap f <Plug>(easymotion-fl)
-nmap F <Plug>(easymotion-Fl)
+nnoremap s <Plug>(easymotion-s2)
+onoremap t <Plug>(easymotion-tl)
+onoremap T <Plug>(easymotion-Tl)
+onoremap f <Plug>(easymotion-fl)
+onoremap F <Plug>(easymotion-Fl)
+nnoremap t <Plug>(easymotion-tl)
+nnoremap T <Plug>(easymotion-Tl)
+nnoremap f <Plug>(easymotion-fl)
+nnoremap F <Plug>(easymotion-Fl)
 
 " Gitgutter remappings
-nmap ]h <Plug>GitGutterNextHunk
-nmap [h <Plug>GitGutterPrevHunk
-nmap <Leader>ha <Plug>GitGutterStageHunk
-nmap <Leader>hr <Plug>GitGutterUndoHunk
-omap ih <Plug>GitGutterTextObjectInnerPending
-omap ah <Plug>GitGutterTextObjectOuterPending
-xmap ih <Plug>GitGutterTextObjectInnerVisual
-xmap ah <Plug>GitGutterTextObjectOuterVisual
+nnoremap ]h <Plug>GitGutterNextHunk
+nnoremap [h <Plug>GitGutterPrevHunk
+nnoremap <Leader>ha <Plug>GitGutterStageHunk
+nnoremap <Leader>hr <Plug>GitGutterUndoHunk
+onoremap ih <Plug>GitGutterTextObjectInnerPending
+onoremap ah <Plug>GitGutterTextObjectOuterPending
+xnoremap ih <Plug>GitGutterTextObjectInnerVisual
+xnoremap ah <Plug>GitGutterTextObjectOuterVisual
 
 " Smooth scroll remappings
 noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
@@ -207,22 +207,22 @@ noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
 noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
 
 " Remap for easier command mode access
-nmap ; :
-vmap ; :
+nnoremap ; :
+vnoremap ; :
 " Remap for easier bookmark access
-nmap ' `
+nnoremap ' `
 " Visually select the text that was last edited/pasted
-nmap gV `[v`]
+nnoremap gV `[v`]
 " Better start of line config
-nmap 0 ^
+nnoremap 0 ^
 " Change the behaviour of Y to be more inline with the rest
-nmap Y y$
+nnoremap Y y$
 " Remap to increase number by 1
 noremap <C-z> <C-a>
 " Copy to system clipboard
-vmap <C-c> "*y
+vnoremap <C-c> "*y
 " Allow star to go back to the first search term
-nmap * *N
+nnoremap * *N
 " Switching out to terminal
 nnoremap <NUL> <C-z>
 "}}}
@@ -230,69 +230,69 @@ nnoremap <NUL> <C-z>
 
 let maplocalleader = "\\"
 let mapleader = "\<Space>"
-nmap <leader>a :Ack!<Space>
-nmap <leader>b :ls<cr>:b
-nmap <leader>bd :ls<cr>:bd<C-b><C-b>
-nmap <leader>bi :!bundle install<cr>
-nmap <leader>c :cclose<cr>
-nmap <silent> <leader>d <Plug>DashSearch
-nmap <leader>e :w<cr>:call RunLastSpec()<cr>
-nmap <leader>g :w<cr>:Gstatus<cr>
-nmap <leader>ga :Git add .<cr><cr>
-nmap <leader>gd :Gvdiff<cr>
-nmap <leader>gl :Gpull origin<Space>
-nmap <leader>gp :Gpush<cr>
-nmap <silent> <leader>hh :nohlsearch<cr>
+nnoremap <leader>a :Ack!<Space>
+nnoremap <leader>b :ls<cr>:b
+nnoremap <leader>bd :ls<cr>:bd<C-b><C-b>
+nnoremap <leader>bi :!bundle install<cr>
+nnoremap <leader>c :cclose<cr>
+nnoremap <silent> <leader>d <Plug>DashSearch
+nnoremap <leader>e :w<cr>:call RunLastSpec()<cr>
+nnoremap <leader>g :w<cr>:Gstatus<cr>
+nnoremap <leader>ga :Git add .<cr><cr>
+nnoremap <leader>gd :Gvdiff<cr>
+nnoremap <leader>gl :Gpull origin<Space>
+nnoremap <leader>gp :Gpush<cr>
+nnoremap <silent> <leader>hh :nohlsearch<cr>
 " Indent all and return to current line
-nmap <leader>ii mzgg=G`z
-nmap <leader>ni :!npm install<cr>
-nmap <leader>o :CtrlP<cr>
+nnoremap <leader>ii mzgg=G`z
+nnoremap <leader>ni :!npm install<cr>
+nnoremap <leader>o :CtrlP<cr>
 " Sensible pasting from system clipboard
-nmap <leader>p o<esc>"*gp
-nmap <leader>pi :w<cr>:source $MYVIMRC<cr>:nohlsearch<cr>:PlugUpdate<cr>
-nmap <leader>r :w<cr>:call RunNearestSpec()<cr>
-nmap <leader>ra :A<cr>
-nmap <leader>rc :Econtroller<space>
-nmap <leader>re :call RenameFile()<cr>
-nmap <leader>rf :Eintegrationtest<space>
-nmap <leader>rm :Emodel<space>
-nmap <leader>rr :R<cr>
-nmap <leader>ru :Eunittest<space>
-nmap <leader>rv :Eview<space>
-nmap <leader>sn :UltiSnipsEdit<cr>
-nmap <leader>so :w<cr>:source $MYVIMRC<cr>:AirlineRefresh<cr>:nohlsearch<cr>
+nnoremap <leader>p o<esc>"*gp
+nnoremap <leader>pi :w<cr>:source $MYVIMRC<cr>:nohlsearch<cr>:PlugUpdate<cr>
+nnoremap <leader>r :w<cr>:call RunNearestSpec()<cr>
+nnoremap <leader>ra :A<cr>
+nnoremap <leader>rc :Econtroller<space>
+nnoremap <leader>re :call RenameFile()<cr>
+nnoremap <leader>rf :Eintegrationtest<space>
+nnoremap <leader>rm :Emodel<space>
+nnoremap <leader>rr :R<cr>
+nnoremap <leader>ru :Eunittest<space>
+nnoremap <leader>rv :Eview<space>
+nnoremap <leader>sn :UltiSnipsEdit<cr>
+nnoremap <leader>so :w<cr>:source $MYVIMRC<cr>:AirlineRefresh<cr>:nohlsearch<cr>
 " Going back to the last spelling mistake and choosing the 1st option
-nmap <leader>sp mz[s1z=`z
-nmap <leader>t :w<cr>:call RunCurrentSpecFile()<cr>
-nmap <leader>w :w<cr>
-nmap <leader>q :q<cr>
-nmap <leader>qa :qa<cr>
-nmap <leader>qq :Bclose<cr>
-nmap <leader>wq :wq<cr>
-nmap <leader>qw :wq<cr>
+nnoremap <leader>sp mz[s1z=`z
+nnoremap <leader>t :w<cr>:call RunCurrentSpecFile()<cr>
+nnoremap <leader>w :w<cr>
+nnoremap <leader>q :q<cr>
+nnoremap <leader>qa :qa<cr>
+nnoremap <leader>qq :Bclose<cr>
+nnoremap <leader>wq :wq<cr>
+nnoremap <leader>qw :wq<cr>
 " Maximise the quickfix window, useful for reading test errors
-nmap <leader>u :copen<cr>:wincmd _<cr>:wincmd \|<cr>
-nmap <leader>v :vnew <C-r>=escape(expand("%:p:h"), ' ') . '/'<cr>
-nmap <leader>vi :e ~/.vimrc<cr>
-nmap <leader>y :w<cr>:call RunAllSpecs()<cr>
-nmap <leader><leader> :Explore .<cr>
+nnoremap <leader>u :copen<cr>:wincmd _<cr>:wincmd \|<cr>
+nnoremap <leader>v :vnew <C-r>=escape(expand("%:p:h"), ' ') . '/'<cr>
+nnoremap <leader>vi :e ~/.vimrc<cr>
+nnoremap <leader>y :w<cr>:call RunAllSpecs()<cr>
+nnoremap <leader><leader> :Explore .<cr>
 
 " Zoom in on a vim pane, <C-w>= to re-balance
 nnoremap <leader>= :wincmd _<cr>:wincmd \|<cr>
 nnoremap <leader>- :wincmd =<cr>
 
 " Mappings for the tmux runner plugin
-nmap <leader>va :VtrAttachToPane<cr>
-nmap <leader>sc :VtrSendCommand<cr>
-nmap <leader>sf :VtrSendFile!<cr>
-nmap <leader>cr :VtrClearRunner<cr>
-nmap <leader>kr :VtrKillRunner<cr>
-nmap <C-a> :VtrSendLinesToRunner<cr>
-vmap <C-a> :VtrSendLinesToRunner<cr>
+nnoremap <leader>va :VtrAttachToPane<cr>
+nnoremap <leader>sc :VtrSendCommand<cr>
+nnoremap <leader>sf :VtrSendFile!<cr>
+nnoremap <leader>cr :VtrClearRunner<cr>
+nnoremap <leader>kr :VtrKillRunner<cr>
+nnoremap <C-a> :VtrSendLinesToRunner<cr>
+vnoremap <C-a> :VtrSendLinesToRunner<cr>
 
-nmap <leader>or  :VtrOpenRunner { 'orientation': 'v', 'percentage': 20 }<cr>:VtrSendFile<cr>
-nmap <leader>pry :VtrOpenRunner { 'orientation': 'h', 'percentage': 50, 'cmd': 'pry' }<cr>
-nmap <leader>irb :VtrOpenRunner { 'orientation': 'h', 'percentage': 50, 'cmd': 'irb' }<cr>
+nnoremap <leader>or  :VtrOpenRunner { 'orientation': 'v', 'percentage': 20 }<cr>:VtrSendFile<cr>
+nnoremap <leader>pry :VtrOpenRunner { 'orientation': 'h', 'percentage': 50, 'cmd': 'pry' }<cr>
+nnoremap <leader>irb :VtrOpenRunner { 'orientation': 'h', 'percentage': 50, 'cmd': 'irb' }<cr>
 "}}}
 " Custom functions"{{{
 
@@ -500,6 +500,7 @@ let g:user_emmet_install_global = 0
 let g:user_emmet_leader_key=','
 "}}}
 " Gitgutter"{{{
+let g:gitgutter_map_keys = 0
 let g:gitgutter_sign_column_always=1
 "}}}
 " Neocomplete"{{{
