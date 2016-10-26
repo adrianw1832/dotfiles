@@ -17,7 +17,6 @@ let timeoutlen = 1500
 unmap m
 
 map ; openCommandBar
-map F createActiveTabbedHint
 map P openPaste
 map R reloadTabUncached
 map Y yankDocumentUrl
