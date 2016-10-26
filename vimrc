@@ -125,8 +125,9 @@ set splitright     " New vertical split opens to the right
 set t_Co=256     " 256 terminal colours
 set tabstop=2     " Number of visual spaces per tab
 set timeoutlen=500     " Timeout between keystrokes to register command
-set undofile     " Set the use of undofiles, which keeps a history of the undos
 set undodir=~/.vim/_undo/     " Set the directory to keep the undo files
+set undofile     " Set the use of undofiles, which keeps a history of the undos
+set updatetime=500     " Time in ms for vim to update/ refresh
 set wildmenu     " Visual menu for autocomplete
 
 runtime macros/matchit.vim     " Allow vim to match more than just brackets
@@ -480,6 +481,9 @@ let g:EasyMotion_use_upper = 1
 " Emmet"{{{
 let g:user_emmet_install_global = 0
 let g:user_emmet_leader_key=','
+"}}}
+" Gitgutter"{{{
+let g:gitgutter_sign_column_always=1
 "}}}
 " Neocomplete"{{{
 
