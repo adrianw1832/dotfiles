@@ -23,7 +23,6 @@ map Y yankDocumentUrl
 map i goToInput
 map m setMark
 map p openPasteTab
-map u lastClosedTab
 map yy yankHighlight
 
 imap <C-a> beginningOfLine
