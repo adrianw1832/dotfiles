@@ -1,6 +1,6 @@
 export EDITOR='/usr/local/bin/vim'
+export PATH=$PATH:$HOME/.rvm/bin:$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
-export PATH=$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:$HOME/.rvm/bin:$HOME/bin
 
 source ~/.zsh/custom/powerline.zsh-theme
 
