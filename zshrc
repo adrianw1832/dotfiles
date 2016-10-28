@@ -65,6 +65,9 @@ zle -N ale-line-finish
 zle -N zle-keymap-select
 # }}}
 
+# Enable autocorrection prompt
+setopt correct
+
 # Setting for fasd to work
 eval "$(fasd --init auto)"``
 
