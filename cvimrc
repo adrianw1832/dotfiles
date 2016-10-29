@@ -71,6 +71,7 @@ map <Leader>td :tabopen @@reddit_tele/@@top_day<CR>
 map <Leader>gg  :tabopen @@reddit_gunners<CR>
 
 map <Leader>yt :tabopen https://youtube.com<CR>
+map <Leader>th :tabopen https://twitch.tv<CR>
 
 map <Leader>gh :tabopen https://github.com/adrianw1832<CR>
 map <Leader>gi :tabopen https://gist.github.com/adrianw1832<CR>
