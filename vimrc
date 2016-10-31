@@ -2,7 +2,7 @@
 " Automatically install vim-plug and run PlugInstall if vim-plug is not found"{{{
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 "}}}
@@ -21,6 +21,8 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'christoomey/vim-tmux-runner'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'easymotion/vim-easymotion'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'kana/vim-textobj-user' | Plug 'lucapette/vim-textobj-underscore'
 Plug 'kien/rainbow_parentheses.vim'
@@ -105,7 +107,7 @@ set cursorline     " Highlight current line
 set expandtab     " Tab key will always insert 'softtabstop' amount of space
 set foldenable     " Enable folding
 set foldmethod=marker     " Fold based on markers
-set grepprg=ag     " Use ag as default for grep
+set grepprg=rg     " Use ag as default for grep
 set hidden     " Change default behaviour of opening file of existing buffer
 set history=100     " Number of commands to keep in history
 set hlsearch     " Highlight search result
@@ -193,9 +195,6 @@ nmap F <Plug>(easymotion-Fl)
 " Gitgutter remappings
 nmap ]c <Plug>GitGutterNextHunk
 nmap [c <Plug>GitGutterPrevHunk
-nmap <Leader>ha <Plug>GitGutterStageHunk
-nmap <Leader>hr <Plug>GitGutterUndoHunk
-nmap <Leader>hv <Plug>GitGutterPreviewHunk
 omap ih <Plug>GitGutterTextObjectInnerPending
 omap ah <Plug>GitGutterTextObjectOuterPending
 xmap ih <Plug>GitGutterTextObjectInnerVisual
@@ -207,6 +206,8 @@ noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 10, 2)<CR>
 noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 10, 4)<CR>
 noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 10, 4)<CR>
 
+" Remap Q for exmode to run macros instead
+nnoremap Q @q
 " Remap for easier command mode access
 nnoremap ; :
 vnoremap ; :
@@ -238,16 +239,19 @@ nnoremap <leader>b :ls<cr>:b
 nnoremap <leader>bd :ls<cr>:bd<C-b><C-b>
 nnoremap <leader>bi :!bundle install<cr>
 nnoremap <leader>c :cclose<cr>
-nnoremap <silent> <leader>d <Plug>DashSearch
+nmap <silent> <leader>d <Plug>DashSearch
 nnoremap <leader>e :w<cr>:call RunLastSpec()<cr>
 nnoremap <leader>g :w<cr>:Gstatus<cr>
 nnoremap <leader>ga :Git add .<cr><cr>
 nnoremap <leader>gd :Gvdiff<cr>
 nnoremap <leader>gl :Gpull origin<Space>
 nnoremap <leader>gp :Gpush<cr>
-nnoremap <silent> <leader>h :nohlsearch<cr>
+nnoremap <silent> <leader>hh :nohlsearch<cr>
+nmap <leader>ha <Plug>GitGutterStageHunk
+nmap <leader>hr <Plug>GitGutterUndoHunk
+nmap <leader>hv <Plug>GitGutterPreviewHunk
 " Indent all and return to current line
-nnoremap <leader>i mzgg=G`z
+nnoremap <leader>ii mzgg=G`z
 nnoremap <leader>ni :!npm install<cr>
 nnoremap <leader>o :CtrlP<cr>
 " Sensible pasting from system clipboard
@@ -464,8 +468,8 @@ let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 "}}}
 " Ack"{{{
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
+if executable('rg')
+  let g:ackprg = 'rg --vimgrep'
 endif
 "}}}
 " CtrlP"{{{
@@ -476,10 +480,9 @@ let g:ctrlp_open_multiple_files = '1vjr'
 
 " Faster CtrlP search
 let g:ctrlp_use_caching = 0
-if executable('ag')
-  set grepprg=ag\ --nogroup\ --nocolor
-
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+if executable('rg')
+  set grepprg=rg\ --color=never
+  let g:ctrlp_user_command = 'rg %s --files --color=never'
 else
   let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
 endif
@@ -501,6 +504,13 @@ let g:EasyMotion_use_upper = 1
 " Emmet"{{{
 let g:user_emmet_install_global = 0
 let g:user_emmet_leader_key=','
+"}}}
+" Fzf"{{{
+
+" Replace the default dictionary completion with fzf-based fuzzy completion
+inoremap <expr> <C-x><C-k> fzf#complete('cat /usr/share/dict/words')
+" Replace the default line completion with fzf-based fuzzy completion
+imap <C-x><C-l> <plug>(fzf-complete-line)
 "}}}
 " Gitgutter"{{{
 let g:gitgutter_map_keys = 0
