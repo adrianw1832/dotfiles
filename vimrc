@@ -245,9 +245,9 @@ nnoremap <leader>ga :Git add .<cr><cr>
 nnoremap <leader>gd :Gvdiff<cr>
 nnoremap <leader>gl :Gpull origin<Space>
 nnoremap <leader>gp :Gpush<cr>
-nnoremap <silent> <leader>hh :nohlsearch<cr>
+nnoremap <silent> <leader>h :nohlsearch<cr>
 " Indent all and return to current line
-nnoremap <leader>ii mzgg=G`z
+nnoremap <leader>i mzgg=G`z
 nnoremap <leader>ni :!npm install<cr>
 nnoremap <leader>o :CtrlP<cr>
 " Sensible pasting from system clipboard
