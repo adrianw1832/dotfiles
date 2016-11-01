@@ -71,6 +71,12 @@ setopt correct
 # Setting for fasd to work
 eval "$(fasd --init auto)"``
 
+# Use ripgrep as default search engine for fzf
+export FZF_DEFAULT_COMMAND='rg --files'
+export FZF_COMPLETION_TRIGGER='*'
+
+# Load fzf into the shell
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # Load RVM into a shell session *as a function*
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 # THIS MUST BE AT THE END OF THE FILE FOR JENV TO WORK!!!
