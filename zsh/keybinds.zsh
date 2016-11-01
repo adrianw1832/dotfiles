@@ -24,8 +24,8 @@ fi
 
 bindkey -M viins '^ ' _easier_ctrl-z
 
-bindkey -M viins '^r' history-incremental-pattern-search-backward
-bindkey -M viins '^t' history-incremental-pattern-search-forward
+# bindkey -M viins '^r' history-incremental-pattern-search-backward
+# bindkey -M viins '^t' history-incremental-pattern-search-forward
 
 bindkey -M viins '^v' copy-prev-shell-word
 
