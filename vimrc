@@ -21,8 +21,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'christoomey/vim-tmux-runner'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'easymotion/vim-easymotion'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --no-key-bindings' } | Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'kana/vim-textobj-user' | Plug 'lucapette/vim-textobj-underscore'
 Plug 'kien/rainbow_parentheses.vim'
@@ -253,7 +252,7 @@ nmap <leader>hv <Plug>GitGutterPreviewHunk
 " Indent all and return to current line
 nnoremap <leader>ii mzgg=G`z
 nnoremap <leader>ni :!npm install<cr>
-nnoremap <leader>o :CtrlP<cr>
+nnoremap <leader>o :Files<cr>
 " Sensible pasting from system clipboard
 nnoremap <leader>p o<esc>"*gp
 nnoremap <leader>pi :w<cr>:source $MYVIMRC<cr>:nohlsearch<cr>:PlugUpdate<cr>
@@ -481,8 +480,8 @@ let g:ctrlp_open_multiple_files = '1vjr'
 " Faster CtrlP search
 let g:ctrlp_use_caching = 0
 if executable('rg')
-  set grepprg=rg\ --color=never
-  let g:ctrlp_user_command = 'rg %s --files --color=never'
+  set grepprg=rg
+  let g:ctrlp_user_command = 'rg %s --files'
 else
   let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
 endif
@@ -511,6 +510,8 @@ let g:user_emmet_leader_key=','
 inoremap <expr> <C-x><C-k> fzf#complete('cat /usr/share/dict/words')
 " Replace the default line completion with fzf-based fuzzy completion
 imap <C-x><C-l> <plug>(fzf-complete-line)
+" Enable per-command history.
+let g:fzf_history_dir = '~/.local/share/fzf-history'
 "}}}
 " Gitgutter"{{{
 let g:gitgutter_map_keys = 0
