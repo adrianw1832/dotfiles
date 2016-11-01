@@ -19,9 +19,8 @@ Plug 'bronson/vim-visual-star-search'
 Plug 'christoomey/vim-sort-motion'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'christoomey/vim-tmux-runner'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'easymotion/vim-easymotion'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --no-key-bindings' } | Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install' } | Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'kana/vim-textobj-user' | Plug 'lucapette/vim-textobj-underscore'
 Plug 'kien/rainbow_parentheses.vim'
@@ -469,21 +468,6 @@ let g:airline#extensions#tabline#enabled = 1
 " Ack"{{{
 if executable('rg')
   let g:ackprg = 'rg --vimgrep'
-endif
-"}}}
-" CtrlP"{{{
-let g:ctrlp_map = '<Nop>'
-let g:ctrlp_max_height = 20
-let g:ctrlp_open_new_file = 'r'
-let g:ctrlp_open_multiple_files = '1vjr'
-
-" Faster CtrlP search
-let g:ctrlp_use_caching = 0
-if executable('rg')
-  set grepprg=rg
-  let g:ctrlp_user_command = 'rg %s --files'
-else
-  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
 endif
 "}}}
 " DelimitMate"{{{
