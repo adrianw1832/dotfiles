@@ -1,13 +1,13 @@
+*.min.*
 *~
 .DS_Store
 .bundle
 .netrwhist
-bower_components
 /vendor/assets/bower_components
+bower_components
 db/*.sqlite3
 log
 node_modules
+out/*
 tags
 tmp
-out/*
-*.min.*
