@@ -11,7 +11,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Raimondi/delimitMate'
-Plug 'Shougo/neocomplete'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'}
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'airblade/vim-gitgutter'
 Plug 'alvan/vim-closetag'
@@ -60,6 +60,7 @@ Plug 'vim-ruby/vim-ruby', { 'for': ['ruby', 'rails', 'eruby'] }
 
 Plug 'elzr/vim-json', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install' }
+Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx'] }
@@ -499,41 +500,6 @@ let g:fzf_history_dir = '~/.local/share/fzf-history'
 let g:gitgutter_map_keys = 0
 let g:gitgutter_sign_column_always=1
 "}}}
-" Neocomplete"{{{
-
-" Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#max_list = 20
-let g:neocomplete#source#word#max_candidates = 20
-let g:neocomplete#enable_smart_case = 1
-let g:neocomplete#auto_completion_start_length = 2
-let g:neocomplete#sources#syntax#min_keyword_length = 2
-let g:neocomplete#enable_auto_delimiter = 1
-let g:neocomplete#force_overwrite_completefunc = 1
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-
-" Define dictionary.
-let g:neocomplete#sources#dictionary#dictionaries = {
-      \ 'default' : '',
-      \ 'vimshell' : $HOME.'/.vimshell_hist',
-      \ 'scheme' : $HOME.'/.gosh_completions'
-      \ }
-
-" Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-  let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-" Plugin key-mappings.
-inoremap <expr><C-g>     neocomplete#undo_completion()
-
-" Enable heavy omni completion for ruby
-if !exists('g:neocomplete#force_omni_input_patterns')
-  let g:neocomplete#force_omni_input_patterns = {}
-endif
-"}}}
 " Neomake"{{{
 let g:neomake_serialize = 1
 let g:neomake_serialize_abort_on_error = 1
@@ -628,3 +594,15 @@ let g:vtr_filetype_runner_overrides = {
 "}}}
 
 set termguicolors
+
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#omni#functions = {}
+let g:deoplete#omni#functions.javascript = [
+  \ 'tern#Complete',
+  \ 'jspc#omni'
+\]
+
+let g:deoplete#sources = {}
+let g:deoplete#sources = ['buffer']
+let g:tern#command = ['tern']
+let g:tern#arguments = ['--persistent']
