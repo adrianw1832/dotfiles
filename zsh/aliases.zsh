@@ -51,17 +51,17 @@ alias ij="open -b com.jetbrains.intellij"
 # Config and editor# {{{
 
 # Config shortcuts
+alias gitconf="vim ~/dotfiles/gitconfig"
+alias prompt="vim ~/dotfiles/zsh/powerline.zsh-theme; source ~/dotfiles/zsh/powerline.zsh-theme"
+alias tc="vim ~/dotfiles/tmux.conf"
+alias tpo="vim ~/dotfiles/tmux-powerline/tmux-powerlinerc"
+alias tpp="vim ~/dotfiles/tmux-powerline/tmux-powerline-theme.sh"
+alias va="vim ~/dotfiles/abbreviations.vim"
 alias za="vim ~/dotfiles/zsh/aliases.zsh; source ~/dotfiles/zsh/aliases.zsh"
 alias ze="vim ~/dotfiles/zsh/exports.zsh; source ~/dotfiles/zsh/exports.zsh"
 alias zf="vim ~/dotfiles/zsh/functions.zsh; source ~/dotfiles/zsh/functions.zsh"
 alias zk="vim ~/dotfiles/zsh/keybinds.zsh; source ~/dotfiles/zsh/keybinds.zsh"
 alias zshrc="vim ~/dotfiles/zshrc; source ~/dotfiles/zshrc"
-alias prompt="vim ~/dotfiles/zsh/powerline.zsh-theme; source ~/dotfiles/zsh/powerline.zsh-theme"
-alias gitconf="vim ~/dotfiles/gitconfig"
-alias tc="vim ~/dotfiles/tmux.conf"
-alias tpo="vim ~/dotfiles/tmux-powerline/tmux-powerlinerc"
-alias tpp="vim ~/dotfiles/tmux-powerline/tmux-powerline-theme.sh"
-alias va="vim ~/dotfiles/abbreviations.vim"
 alias vimrc="vim ~/dotfiles/vimrc"
 alias cvimrc="vim ~/dotfiles/cvimrc"
 
