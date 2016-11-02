@@ -60,10 +60,10 @@ Plug 'vim-ruby/vim-ruby', { 'for': ['ruby', 'rails', 'eruby'] }
 
 Plug 'elzr/vim-json', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install' }
-Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
 "}}}
 " Clojure"{{{
 
@@ -396,7 +396,7 @@ augroup vimrcEx
   autocmd FileType help nnoremap q :bd<cr>
 
   " Run NeoMake on read and write operations
-  autocmd BufReadPost,BufWritePost * Neomake
+  autocmd BufReadPost,BufWritePost * silent! Neomake
 augroup END
 "}}}
 " Rename current file"{{{
@@ -596,6 +596,7 @@ let g:vtr_filetype_runner_overrides = {
 set termguicolors
 
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_smart_case = 1
 let g:deoplete#omni#functions = {}
 let g:deoplete#omni#functions.javascript = [
   \ 'tern#Complete',
@@ -604,5 +605,14 @@ let g:deoplete#omni#functions.javascript = [
 
 let g:deoplete#sources = {}
 let g:deoplete#sources = ['buffer']
+let g:tern_request_timeout = 1
+let g:tern_show_signature_in_pum = '0'  " This do disable full signature type on autocomplete
 let g:tern#command = ['tern']
 let g:tern#arguments = ['--persistent']
+
+if exists('g:loaded_deoplete_ternjs')
+  finish
+endif
+
+let g:loaded_deoplete_ternjs = 1
+let g:deoplete#sources#ternjs#tern_bin = get(g:, 'deoplete#sources#ternjs#tern_bin', 'tern') 
