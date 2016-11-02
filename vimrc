@@ -42,12 +42,10 @@ Plug 'tpope/vim-unimpaired'
 Plug 'bling/vim-airline'
 Plug 'jceb/vim-orgmode', { 'for': 'org' }
 Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'eruby', 'jsp', 'javascript', 'javascript.jsx'] }
-Plug 'rizzatti/dash.vim', { 'on': '<Plug>DashSearch' }
 Plug 'sickill/vim-pasta'
 Plug 'terryma/vim-smooth-scroll'
 Plug 'tmux-plugins/vim-tmux', { 'for': 'tmux' }
 Plug 'vim-airline/vim-airline-themes'
-Plug 'vim-scripts/SyntaxComplete'
 "}}}
 " Language related"{{{
 
