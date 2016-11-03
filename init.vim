@@ -76,16 +76,13 @@ Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 "}}}
 " Colour schemes"{{{
 
+Plug 'morhetz/gruvbox'
 Plug 'sjl/badwolf'
-Plug 'tomasr/molokai'
 "}}}
 call plug#end()
 "}}}
 " Colour scheme and its settings"{{{
-
-colorscheme molokai
-let g:molokai_original = 1
-let g:rehash256 = 1
+colorscheme gruvbox
 
 " A more discrete colour column
 highlight ColorColumn ctermbg=red
@@ -133,6 +130,7 @@ set spelllang=en_gb     " Set default spell check to British English
 set splitbelow     " New horizontal split opens to the bottom
 set splitright     " New vertical split opens to the right
 set tabstop=2     " Number of visual spaces per tab
+set termguicolors     " Enable true colour
 set timeoutlen=500     " Timeout between keystrokes to register command
 set undodir=~/.config/nvim/_undo/     " Set the directory to keep the undo files
 set undofile     " Set the use of undofiles, which keeps a history of the undos
@@ -364,7 +362,7 @@ augroup vimrcEx
   autocmd FileType org setlocal spell
   autocmd FileType org hi clear SpellBad
   autocmd FileType org hi SpellBad cterm=underline
-  autocmd FileType org source ~/config/nvim/abbreviations.vim
+  autocmd FileType org source ~/.config/nvim/abbreviations.vim
 
   " Automatically wrap at 72 characters and spell check git commit messages
   autocmd FileType gitcommit setlocal textwidth=72
