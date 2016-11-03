@@ -13,9 +13,8 @@ bindkey -M viins '^b' backward-char
 bindkey -M viins '^f' forward-char
 
 bindkey -M viins '^d' delete-char
-bindkey -M viins '^b' backward-delete-char
+bindkey -M viins '^h' backward-delete-char
 bindkey -M viins '^w' backward-kill-word
-# bindkey -M viins '^h' backward-delete-char # It's blocked by tmux navigator
 
 # [Shift-Tab] - move through the completion menu backwards
 if [[ "${terminfo[kcbt]}" != "" ]]; then
