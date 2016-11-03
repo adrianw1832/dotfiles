@@ -235,7 +235,6 @@ nnoremap <leader>b :ls<cr>:b
 nnoremap <leader>bd :ls<cr>:bd<C-b><C-b>
 nnoremap <leader>bi :!bundle install<cr>
 nnoremap <leader>c :cclose<cr>
-nmap <silent> <leader>d <Plug>DashSearch
 nnoremap <leader>e :w<cr>:call RunLastSpec()<cr>
 nnoremap <leader>g :w<cr>:Gstatus<cr>
 nnoremap <leader>ga :Git add .<cr><cr>
