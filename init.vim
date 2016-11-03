@@ -6,11 +6,12 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall | source ~/.config/nvim/init.vim
 endif
 "}}}
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 " Enhancements"{{{
 
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Raimondi/delimitMate'
+Plug 'Shougo/context_filetype.vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'}
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'airblade/vim-gitgutter'
@@ -58,12 +59,12 @@ Plug 'vim-ruby/vim-ruby', { 'for': ['ruby', 'rails', 'eruby'] }
 "}}}
 " Javascript"{{{
 
+Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'elzr/vim-json', { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install' }
 Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install' }
 "}}}
 " Clojure"{{{
 
@@ -116,7 +117,6 @@ set lazyredraw     " Redraw window only when we need to
 set list     " Actually display extra whitespace symbols
 set listchars=tab:»·,trail:·,nbsp:·     " Set extra whitespace symbols
 set nobackup nowritebackup noswapfile     " No unnecessary backup files
-set nocompatible     " No backwards compatibility
 set noerrorbells     " Silent error bell
 set nrformats=     " Treat all numerals as decimal
 set number     " Show line numbers
@@ -132,10 +132,9 @@ set softtabstop=2     " Number of spaces in tab when editing
 set spelllang=en_gb     " Set default spell check to British English
 set splitbelow     " New horizontal split opens to the bottom
 set splitright     " New vertical split opens to the right
-set t_Co=256     " 256 terminal colours
 set tabstop=2     " Number of visual spaces per tab
 set timeoutlen=500     " Timeout between keystrokes to register command
-set undodir=~/.vim/_undo/     " Set the directory to keep the undo files
+set undodir=~/.config/nvim/_undo/     " Set the directory to keep the undo files
 set undofile     " Set the use of undofiles, which keeps a history of the undos
 set updatetime=1000     " Time in ms for vim to update/ refresh
 set wildmenu     " Visual menu for autocomplete
@@ -342,9 +341,6 @@ augroup vimrcEx
   autocmd BufRead,BufNewFile Appraisals set filetype=ruby
   autocmd BufRead,BufNewFile *.md set filetype=markdown
 
-  " Ruby path settings
-  autocmd FileType ruby setlocal path+=lib/**,spec/**
-
   " Enable different indentation for java files
   autocmd FileType java set tabstop=8 softtabstop=4 shiftwidth=4
 
@@ -357,13 +353,13 @@ augroup vimrcEx
   autocmd FileType text,markdown hi clear SpellBad
   autocmd FileType text,markdown hi SpellBad cterm=underline
   autocmd FileType text,markdown set formatoptions+=t
-  autocmd FileType text,markdown source ~/.vim/abbreviations.vim
+  autocmd FileType text,markdown source ~/.config/nvim/abbreviations.vim
 
   " Enable spellchecking for org files
   autocmd FileType org setlocal spell
   autocmd FileType org hi clear SpellBad
   autocmd FileType org hi SpellBad cterm=underline
-  autocmd FileType org source ~/.vim/abbreviations.vim
+  autocmd FileType org source ~/config/nvim/abbreviations.vim
 
   " Automatically wrap at 72 characters and spell check git commit messages
   autocmd FileType gitcommit setlocal textwidth=72
@@ -371,7 +367,7 @@ augroup vimrcEx
   autocmd FileType gitcommit hi clear SpellBad
   autocmd FileType gitcommit hi SpellBad cterm=underline
   autocmd FileType gitcommit set formatoptions+=t
-  autocmd FileType gitcommit source ~/.vim/abbreviations.vim
+  autocmd FileType gitcommit source ~/.config/nvim/abbreviations.vim
 
   " Allow stylesheets to autocomplete hyphenated words
   autocmd FileType css,scss,sass setlocal iskeyword+=-
@@ -396,7 +392,7 @@ augroup vimrcEx
   autocmd FileType help nnoremap q :bd<cr>
 
   " Run NeoMake on read and write operations
-  autocmd BufReadPost,BufWritePost * silent! Neomake
+  autocmd BufReadPost,BufWritePost *,js,*.jsx silent! Neomake
 augroup END
 "}}}
 " Rename current file"{{{
@@ -473,6 +469,14 @@ endif
 let g:delimitMate_expand_cr = 1
 let g:delimitMate_expand_space = 1
 let g:delimitMate_jump_expansion = 1
+"}}}
+" Deoplete"{{{
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_smart_case = 1
+"}}}
+" Deoplete ternjs"{{{
+let g:tern#command = ['tern']
+let g:tern#arguments = ['--persistent']
 "}}}
 " Dispatch"{{{
 let g:rspec_command = "Dispatch rspec {spec}"
@@ -558,7 +562,7 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
 let g:UltiSnipsEditSplit="vertical"
-let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips', $HOME.'/.vim/plugged/vim-snippets/UltiSnips']
+let g:UltiSnipsSnippetDirectories=[$HOME.'/dotfiles/UltiSnips', $HOME.'/.config/nvim/plugged/vim-snippets/UltiSnips']
 "}}}
 " Vim easy align"{{{
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
@@ -592,38 +596,3 @@ let g:vtr_filetype_runner_overrides = {
       \ }
 "}}}
 "}}}
-
-set termguicolors
-
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_smart_case = 1
-let g:deoplete#max_menu_width = 80
-let g:deoplete#omni#functions = {}
-let g:deoplete#omni#functions.javascript = [
-  \ 'tern#Complete',
-  \ 'jspc#omni'
-\]
-let g:deoplete#sources = {}
-let g:deoplete#sources = ['buffer']
-
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS>  deoplete#smart_close_popup()."\<C-h>"
-
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function() abort
-  return deoplete#close_popup() . "\<CR>"
-endfunction
-  
-let g:tern_request_timeout = 1
-let g:tern_show_signature_in_pum = '0'  " This do disable full signature type on autocomplete
-let g:tern#command = ['tern']
-let g:tern#arguments = ['--persistent']
-
-if exists('g:loaded_deoplete_ternjs')
-  finish
-endif
-
-let g:loaded_deoplete_ternjs = 1
-let g:deoplete#sources#ternjs#tern_bin = get(g:, 'deoplete#sources#ternjs#tern_bin', 'tern') 
