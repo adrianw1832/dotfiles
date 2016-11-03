@@ -1,4 +1,4 @@
-export EDITOR='/usr/local/bin/vim'
+export EDITOR='/usr/local/bin/nvim'
 export PATH=$PATH:$HOME/.rvm/bin:$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
 

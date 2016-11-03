@@ -51,23 +51,24 @@ alias ij="open -b com.jetbrains.intellij"
 # Config and editor# {{{
 
 # Config shortcuts
-alias gitconf="vim ~/dotfiles/gitconfig"
-alias prompt="vim ~/dotfiles/zsh/powerline.zsh-theme; source ~/dotfiles/zsh/powerline.zsh-theme"
-alias tc="vim ~/dotfiles/tmux.conf"
-alias tpo="vim ~/dotfiles/tmux-powerline/tmux-powerlinerc"
-alias tpp="vim ~/dotfiles/tmux-powerline/tmux-powerline-theme.sh"
-alias va="vim ~/dotfiles/abbreviations.vim"
-alias za="vim ~/dotfiles/zsh/aliases.zsh; source ~/dotfiles/zsh/aliases.zsh"
-alias ze="vim ~/dotfiles/zsh/exports.zsh; source ~/dotfiles/zsh/exports.zsh"
-alias zf="vim ~/dotfiles/zsh/functions.zsh; source ~/dotfiles/zsh/functions.zsh"
-alias zk="vim ~/dotfiles/zsh/keybinds.zsh; source ~/dotfiles/zsh/keybinds.zsh"
-alias zshrc="vim ~/dotfiles/zshrc; source ~/dotfiles/zshrc"
-alias vimrc="vim ~/dotfiles/vimrc"
-alias cvimrc="vim ~/dotfiles/cvimrc"
+alias gitconf="nvim ~/dotfiles/gitconfig"
+alias prompt="nvim ~/dotfiles/zsh/powerline.zsh-theme; source ~/dotfiles/zsh/powerline.zsh-theme"
+alias tc="nvim ~/dotfiles/tmux.conf"
+alias tpo="nvim ~/dotfiles/tmux-powerline/tmux-powerlinerc"
+alias tpp="nvim ~/dotfiles/tmux-powerline/tmux-powerline-theme.sh"
+alias va="nvim ~/dotfiles/abbreviations.vim"
+alias za="nvim ~/dotfiles/zsh/aliases.zsh; source ~/dotfiles/zsh/aliases.zsh"
+alias ze="nvim ~/dotfiles/zsh/exports.zsh; source ~/dotfiles/zsh/exports.zsh"
+alias zf="nvim ~/dotfiles/zsh/functions.zsh; source ~/dotfiles/zsh/functions.zsh"
+alias zk="nvim ~/dotfiles/zsh/keybinds.zsh; source ~/dotfiles/zsh/keybinds.zsh"
+alias zshrc="nvim ~/dotfiles/zshrc; source ~/dotfiles/zshrc"
+alias cvimrc="nvim ~/dotfiles/cvimrc"
+alias vimrc="nvim ~/dotfiles/init.vim"
+# alias vimrc="nvim ~/dotfiles/vimrc"
 
 # Editor shortcut
-alias v="vim"
-alias vv='f -e vim'
+alias v="nvim"
+alias vv='f -e nvim'
 # }}}
 # Git# {{{
 

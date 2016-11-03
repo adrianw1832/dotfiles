@@ -4,7 +4,7 @@
 [core]
   autocrlf = input
   safecrlf = false
-  editor = vim
+  editor = nvim
   excludesfile = /Users/awong/.gitignore_global
   ignorecase = false
 [alias]
