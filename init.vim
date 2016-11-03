@@ -90,13 +90,8 @@ call matchadd('ColorColumn', '\%81v', 100)
 "}}}
 " Vim settings"{{{
 
-syntax on     " Turn on syntax highlighting
-
-set autoindent     " Keeps same level of indentation of the previous line
-set autoread     " Auto-reload buffers when files are changed on disk
 set autowrite     " Save on buffer switch
 set background=dark     " Assume a dark background
-set backspace=indent,eol,start     " More sensible backspace behaviour
 set complete+=kspell     " Autocomplete with dictionary words when spell check is on
 set cursorline     " Highlight current line
 set expandtab     " Tab key will always insert 'softtabstop' amount of space
@@ -104,12 +99,8 @@ set foldenable     " Enable folding
 set foldmethod=marker     " Fold based on markers
 set grepprg=rg     " Use ag as default for grep
 set hidden     " Change default behaviour of opening file of existing buffer
-set history=100     " Number of commands to keep in history
-set hlsearch     " Highlight search result
 set ignorecase     " Ignore case when searching
-set incsearch     " Refresh search when entering search term
 set infercase     " Smarter case for autocompletion
-set laststatus=2     " Show status bar
 set lazyredraw     " Redraw window only when we need to
 set list     " Actually display extra whitespace symbols
 set listchars=tab:»·,trail:·,nbsp:·     " Set extra whitespace symbols
@@ -132,10 +123,8 @@ set splitright     " New vertical split opens to the right
 set tabstop=2     " Number of visual spaces per tab
 set termguicolors     " Enable true colour
 set timeoutlen=500     " Timeout between keystrokes to register command
-set undodir=~/.config/nvim/_undo/     " Set the directory to keep the undo files
 set undofile     " Set the use of undofiles, which keeps a history of the undos
 set updatetime=1000     " Time in ms for vim to update/ refresh
-set wildmenu     " Visual menu for autocomplete
 
 runtime macros/matchit.vim     " Allow vim to match more than just brackets
 "}}}
@@ -318,9 +307,6 @@ endfunction
 augroup vimrcEx
   autocmd!
 
-  " Enable filetype detection
-  filetype plugin indent on
-
   " When editing a file, always jump to the last known cursor position.
   " Don't do it for commit messages, when the position is invalid, or when
   " inside an event handler (happens when dropping a file on gvim).
@@ -353,22 +339,16 @@ augroup vimrcEx
   " Automatically wrap at 80 characters and enable spell check text and markdowns
   autocmd BufRead,BufNewFile *.txt,*.markdown setlocal textwidth=80
   autocmd FileType text,markdown setlocal spell
-  autocmd FileType text,markdown hi clear SpellBad
-  autocmd FileType text,markdown hi SpellBad cterm=underline
   autocmd FileType text,markdown set formatoptions+=t
   autocmd FileType text,markdown source ~/.config/nvim/abbreviations.vim
 
   " Enable spellchecking for org files
   autocmd FileType org setlocal spell
-  autocmd FileType org hi clear SpellBad
-  autocmd FileType org hi SpellBad cterm=underline
   autocmd FileType org source ~/.config/nvim/abbreviations.vim
 
   " Automatically wrap at 72 characters and spell check git commit messages
   autocmd FileType gitcommit setlocal textwidth=72
   autocmd FileType gitcommit setlocal spell
-  autocmd FileType gitcommit hi clear SpellBad
-  autocmd FileType gitcommit hi SpellBad cterm=underline
   autocmd FileType gitcommit set formatoptions+=t
   autocmd FileType gitcommit source ~/.config/nvim/abbreviations.vim
 
