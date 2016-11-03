@@ -202,6 +202,9 @@ noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 10, 2)<CR>
 noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 10, 4)<CR>
 noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 10, 4)<CR>
 
+" Terminal mapping to return to previous pane
+tnoremap <ESC> <C-\><C-n><C-w><C-p>
+
 " Remap Q for exmode to run macros instead
 nnoremap Q @q
 " Remap for easier command mode access
@@ -332,6 +335,9 @@ augroup vimrcEx
   autocmd VimResized * :wincmd =
 
   autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+
+  " Automatically enter insert mode when entering terminal buffer
+  autocmd BufWinEnter,WinEnter term://* startinsert
 
   " Maps K to open vim help for the word under cursor when editing vim files
   autocmd FileType vim setlocal keywordprg=:help
