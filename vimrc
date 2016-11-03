@@ -131,8 +131,8 @@ set softtabstop=2     " Number of spaces in tab when editing
 set spelllang=en_gb     " Set default spell check to British English
 set splitbelow     " New horizontal split opens to the bottom
 set splitright     " New vertical split opens to the right
-set t_Co=256     " 256 terminal colours
 set tabstop=2     " Number of visual spaces per tab
+set termguicolors     " Enable true colour
 set timeoutlen=500     " Timeout between keystrokes to register command
 set undodir=~/.vim/_undo/     " Set the directory to keep the undo files
 set undofile     " Set the use of undofiles, which keeps a history of the undos
