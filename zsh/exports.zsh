@@ -6,6 +6,8 @@ export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
 export FZF_DEFAULT_COMMAND='rg --files'
 export FZF_COMPLETION_TRIGGER='*'
 
+export KEYTIMEOUT=1
+
 # Load fzf into the shell
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # Load RVM into a shell session *as a function*

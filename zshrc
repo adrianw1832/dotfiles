@@ -4,9 +4,9 @@ source ~/.zsh/custom/powerline.zsh-theme
 source ~/.zplug/init.zsh
 
 # Plugins
+# zplug "plugins/rvm", from:oh-my-zsh
 zplug "bhilburn/powerlevel9k"
 zplug "djui/alias-tips"
-zplug "lib/*", from:oh-my-zsh
 zplug "lukechilds/zsh-nvm"
 zplug "zplug/zplug"
 zplug "zsh-users/zsh-autosuggestions"
@@ -21,10 +21,6 @@ fi
 
 # Then, source plugins and add commands to $PATH
 zplug load --verbose
-
-# Enable vi mode
-bindkey -v
-export KEYTIMEOUT=1
 
 # Temporary code to enable the prompt# {{{
 function zle-line-init {
@@ -55,9 +51,6 @@ zle -N zle-line-init
 zle -N ale-line-finish
 zle -N zle-keymap-select
 # }}}
-
-# Enable autocorrection prompt
-setopt correct
 
 # Setting for fasd to work
 eval "$(fasd --init auto)"``
