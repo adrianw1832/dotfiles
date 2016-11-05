@@ -3,7 +3,7 @@
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
         \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall | source ~/.config/nvim/init.vim
+  autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 "}}}
 call plug#begin('~/.config/nvim/plugged')
@@ -40,12 +40,12 @@ Plug 'tpope/vim-unimpaired'
 "}}}
 " Others"{{{
 
-Plug 'bling/vim-airline'
 Plug 'jceb/vim-orgmode', { 'for': 'org' }
 Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'eruby', 'jsp', 'javascript', 'javascript.jsx'] }
 Plug 'sickill/vim-pasta'
 Plug 'terryma/vim-smooth-scroll'
 Plug 'tmux-plugins/vim-tmux', { 'for': 'tmux' }
+Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 "}}}
 " Language related"{{{
@@ -90,43 +90,41 @@ call matchadd('ColorColumn', '\%81v', 100)
 "}}}
 " Vim settings"{{{
 
-set autowrite     " Save on buffer switch
-set background=dark     " Assume a dark background
-set complete+=kspell     " Autocomplete with dictionary words when spell check is on
-set cursorline     " Highlight current line
-set expandtab     " Tab key will always insert 'softtabstop' amount of space
-set foldenable     " Enable folding
-set foldmethod=marker     " Fold based on markers
-set grepprg=rg     " Use ag as default for grep
-set hidden     " Change default behaviour of opening file of existing buffer
-set ignorecase     " Ignore case when searching
-set infercase     " Smarter case for autocompletion
-set lazyredraw     " Redraw window only when we need to
-set list     " Actually display extra whitespace symbols
-set listchars=tab:»·,trail:·,nbsp:·     " Set extra whitespace symbols
-set nobackup nowritebackup noswapfile     " No unnecessary backup files
-set noerrorbells     " Silent error bell
-set nrformats=     " Treat all numerals as decimal
-set number     " Show line numbers
-set numberwidth=3     " Width of the number column
-set path+=**     " Add file paths to vim for native 'fuzzy find'
-set relativenumber     " Show relative line numbers
-set ruler     " Show line info at the bottom
-set shiftwidth=2     " Number of spaces for indents
-set showcmd     " Show command at the bottom bar
-set smartcase     " Smart case for searching
-set so=5     " Number of lines around cursor at the edge of screen
-set softtabstop=2     " Number of spaces in tab when editing
-set spelllang=en_gb     " Set default spell check to British English
-set splitbelow     " New horizontal split opens to the bottom
-set splitright     " New vertical split opens to the right
-set tabstop=2     " Number of visual spaces per tab
-set termguicolors     " Enable true colour
-set timeoutlen=500     " Timeout between keystrokes to register command
-set undofile     " Set the use of undofiles, which keeps a history of the undos
-set updatetime=1000     " Time in ms for vim to update/ refresh
-
-runtime macros/matchit.vim     " Allow vim to match more than just brackets
+set autowrite " Save on buffer switch
+set background=dark " Assume a dark background
+set complete+=kspell " Autocomplete with dictionary words when spell check is on
+set cursorline " Highlight current line
+set expandtab " Tab key will always insert 'softtabstop' amount of space
+set foldenable " Enable folding
+set foldmethod=marker " Fold based on markers
+set grepprg=rg " Use ag as default for grep
+set hidden " Change default behaviour of opening file of existing buffer
+set ignorecase " Ignore case when searching
+set infercase " Smarter case for autocompletion
+set lazyredraw " Redraw window only when we need to
+set list " Actually display extra whitespace symbols
+set listchars=tab:»·,trail:·,nbsp:· " Set extra whitespace symbols
+set nobackup nowritebackup noswapfile " No unnecessary backup files
+set noerrorbells " Silent error bell
+set nrformats= " Treat all numerals as decimal
+set number " Show line numbers
+set numberwidth=3 " Width of the number column
+set path+=** " Add file paths to vim for native 'fuzzy find'
+set relativenumber " Show relative line numbers
+set ruler " Show line info at the bottom
+set shiftwidth=2 " Number of spaces for indents
+set showcmd " Show command at the bottom bar
+set smartcase " Smart case for searching
+set so=5 " Number of lines around cursor at the edge of screen
+set softtabstop=2 " Number of spaces in tab when editing
+set spelllang=en_gb " Set default spell check to British English
+set splitbelow " New horizontal split opens to the bottom
+set splitright " New vertical split opens to the right
+set tabstop=2 " Number of visual spaces per tab
+set timeoutlen=500 " Timeout between keystrokes to register command
+set undofile " Set the use of undofiles, which keeps a history of the undos
+set updatetime=1000 " Time in ms for vim to update/ refresh
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1 " Block shape cursor in normal, pipe in insert
 "}}}
 " Custom mappings"{{{
 
@@ -229,19 +227,18 @@ nnoremap <leader>e :w<cr>:call RunLastSpec()<cr>
 nnoremap <leader>g :w<cr>:Gstatus<cr>
 nnoremap <leader>ga :Git add .<cr><cr>
 nnoremap <leader>gd :Gvdiff<cr>
-nnoremap <leader>gl :Gpull origin<Space>
 nnoremap <leader>gp :Gpush<cr>
-nnoremap <silent> <leader>hh :nohlsearch<cr>
+nnoremap <silent> <leader>h :nohlsearch<cr>
 nmap <leader>ha <Plug>GitGutterStageHunk
 nmap <leader>hr <Plug>GitGutterUndoHunk
 nmap <leader>hv <Plug>GitGutterPreviewHunk
 " Indent all and return to current line
-nnoremap <leader>ii mzgg=G`z
+nnoremap <leader>i mzgg=G`z
 nnoremap <leader>ni :!npm install<cr>
 nnoremap <leader>o :Files<cr>
 " Sensible pasting from system clipboard
 nnoremap <leader>p o<esc>"*gp
-nnoremap <leader>pi :w<cr>:source ~/.config/nvim/init.vim<cr>:nohlsearch<cr>:PlugUpdate<cr>
+nnoremap <leader>pi :w<cr>:source $MYVIMRC<cr>:nohlsearch<cr>:PlugUpgrade<cr>:PlugUpdate<cr>
 nnoremap <leader>r :w<cr>:call RunNearestSpec()<cr>
 nnoremap <leader>ra :A<cr>
 nnoremap <leader>rc :Econtroller<space>
@@ -252,7 +249,7 @@ nnoremap <leader>rr :R<cr>
 nnoremap <leader>ru :Eunittest<space>
 nnoremap <leader>rv :Eview<space>
 nnoremap <leader>sn :UltiSnipsEdit<cr>
-nnoremap <leader>so :w<cr>:source ~/.config/nvim/init.vim<cr>:AirlineRefresh<cr>:nohlsearch<cr>
+nnoremap <leader>so :w<cr>:source $MYVIMRC<cr>:AirlineRefresh<cr>:nohlsearch<cr>
 " Going back to the last spelling mistake and choosing the 1st option
 nnoremap <leader>sp mz[s1z=`z
 nnoremap <leader>t :w<cr>:call RunCurrentSpecFile()<cr>
@@ -265,7 +262,7 @@ nnoremap <leader>qw :wq<cr>
 " Maximise the quickfix window, useful for reading test errors
 nnoremap <leader>u :copen<cr>:wincmd _<cr>:wincmd \|<cr>
 nnoremap <leader>v :vnew <C-r>=escape(expand("%:p:h"), ' ') . '/'<cr>
-nnoremap <leader>vi :e ~/.config/nvim/init.vim<cr>
+nnoremap <leader>vi :e $MYVIMRC<cr>
 nnoremap <leader>y :w<cr>:call RunAllSpecs()<cr>
 nnoremap <leader><leader> :Explore .<cr>
 
