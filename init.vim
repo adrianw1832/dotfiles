@@ -144,14 +144,6 @@ vnoremap kj <Esc>
 nnoremap j gj
 nnoremap k gk
 
-" Allow ctrl - hotkeys
-inoremap <C-f> <Right>
-inoremap <C-b> <Left>
-inoremap <C-d> <Del>
-inoremap <C-h> <BS>
-inoremap <C-a> <C-o>^
-inoremap <C-e> <C-o>$
-
 " Switching between buffers
 nnoremap <C-n> :bnext<cr>
 nnoremap <C-p> :bprevious<cr>
@@ -190,6 +182,22 @@ noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 10, 4)<CR>
 " Terminal mapping to return to previous pane
 tnoremap <ESC> <C-\><C-n><C-w><C-p>
 
+" Allow emcas style keys in insert mode
+inoremap <C-a> <Home>
+inoremap <C-b> <Left>
+inoremap <C-d> <Delete>
+inoremap <C-e> <End>
+inoremap <C-f> <Right>
+inoremap <C-h> <BS>
+
+" Allow emcas style keys in command line mode
+cnoremap <C-a>  <Home>
+cnoremap <C-b>  <Left>
+cnoremap <C-d>  <Delete>
+cnoremap <C-e>  <End>
+cnoremap <C-f>  <Right>
+cnoremap <C-h>  <BS>
+
 " Remap Q for exmode to run macros instead
 nnoremap Q @q
 " Remap for easier command mode access
@@ -211,6 +219,7 @@ noremap <C-z> <C-a>
 vnoremap <C-c> "*y
 " Allow star to go back to the first search term
 nnoremap * *N
+vnoremap * *N
 " Switching out to terminal
 nnoremap <NUL> <C-z>
 "}}}
