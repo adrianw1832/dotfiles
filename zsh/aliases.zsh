@@ -13,16 +13,19 @@ alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && kil
 # Clear
 alias c='clear'
 
+# Ripgrep
+alias -g G='| rg'
+
 # Ls
-alias l='ls -AGFh'
-alias ls='ls -AGFh'
-alias ll='ls -Alh'
+alias l='ls -AGFh' # Colorize output, add file type indicator, and put sizes in human readable format
+alias ls='ls -AGFh' # Colorize output, add file type indicator, and put sizes in human readable format
+alias ll='ls -AGFhl' # Same as above, but in long listing format
 
 # Get OS software updates, and update installed packages of homebrew, cask, npm, bower and Ruby gems
-alias update='softwareupdate -i -a; brew update; brew upgrade; brew cleanup; brew cask cleanup; npm install npm -g; npm install bower -g; npm update -g; npm cache clean; bower update; bower cache clean; rvm cleanup all; gem update --system; gem update; gem cleanup; zplug update; zplug clear'
+alias update='softwareupdate -i -a; brew update; brew upgrade; brew cleanup; brew cask cleanup; npm install npm -g; npm install bower -g; npm update -g; npm cache clean; bower update; bower cache clean; gem update --system; gem update; gem cleanup; zplug update; zplug clear'
 
 # Reload the shell
-alias reload="source ~/.zshrc"
+alias reload='exec $SHELL -l'
 
 # Copy the working directory path
 alias cpwd='pwd|tr -d "\n"|pbcopy'
@@ -51,24 +54,26 @@ alias ij="open -b com.jetbrains.intellij"
 # Config and editor# {{{
 
 # Config shortcuts
-alias gitconf="nvim ~/dotfiles/gitconfig"
-alias prompt="nvim ~/dotfiles/zsh/powerline.zsh-theme; source ~/dotfiles/zsh/powerline.zsh-theme"
-alias tc="nvim ~/dotfiles/tmux.conf"
-alias tpo="nvim ~/dotfiles/tmux-powerline/tmux-powerlinerc"
-alias tpp="nvim ~/dotfiles/tmux-powerline/tmux-powerline-theme.sh"
-alias va="nvim ~/dotfiles/abbreviations.vim"
-alias za="nvim ~/dotfiles/zsh/aliases.zsh; source ~/dotfiles/zsh/aliases.zsh"
-alias ze="nvim ~/dotfiles/zsh/exports.zsh; source ~/dotfiles/zsh/exports.zsh"
-alias zf="nvim ~/dotfiles/zsh/functions.zsh; source ~/dotfiles/zsh/functions.zsh"
-alias zk="nvim ~/dotfiles/zsh/keybinds.zsh; source ~/dotfiles/zsh/keybinds.zsh"
-alias zshrc="nvim ~/dotfiles/zshrc; source ~/dotfiles/zshrc"
-alias cvimrc="nvim ~/dotfiles/cvimrc"
-alias vimrc="nvim ~/dotfiles/init.vim"
-# alias vimrc="nvim ~/dotfiles/vimrc"
+alias gitconf="$EDITOR ~/dotfiles/gitconfig"
+alias prompt="$EDITOR ~/dotfiles/zsh/powerline.zsh-theme; source ~/dotfiles/zsh/powerline.zsh-theme"
+alias tc="$EDITOR ~/dotfiles/tmux.conf"
+alias tpo="$EDITOR ~/dotfiles/tmux-powerline/tmux-powerlinerc"
+alias tpp="$EDITOR ~/dotfiles/tmux-powerline/tmux-powerline-theme.sh"
+alias va="$EDITOR ~/dotfiles/abbreviations.vim"
+alias za="$EDITOR ~/dotfiles/zsh/aliases.zsh; source ~/dotfiles/zsh/aliases.zsh"
+alias zc="$EDITOR ~/dotfiles/zsh/completion.zsh; source ~/dotfiles/zsh/completion.zsh"
+alias ze="$EDITOR ~/dotfiles/zsh/exports.zsh; source ~/dotfiles/zsh/exports.zsh"
+alias zf="$EDITOR ~/dotfiles/zsh/functions.zsh; source ~/dotfiles/zsh/functions.zsh"
+alias zk="$EDITOR ~/dotfiles/zsh/keybinds.zsh; source ~/dotfiles/zsh/keybinds.zsh"
+alias zs="$EDITOR ~/dotfiles/zsh/setopt.zsh; source ~/dotfiles/zsh/setopt.zsh"
+alias zshrc="$EDITOR ~/dotfiles/zshrc; source ~/dotfiles/zshrc"
+alias cvimrc="$EDITOR ~/dotfiles/cvimrc"
+alias vimrc="$EDITOR ~/dotfiles/init.vim"
+# alias vimrc="$EDITOR ~/dotfiles/vimrc"
 
 # Editor shortcut
-alias v="nvim"
-alias vv='f -e nvim'
+alias v="$EDITOR"
+alias vv='f -e $EDITOR'
 # }}}
 # Git# {{{
 
@@ -132,6 +137,6 @@ alias npmo="npm outdated"
 alias npmv="npm -version"
 alias npmst="npm start"
 alias npmt="npm test"
-alias npmisreact="npm install -S babel-core babel-loader babel-plugin-add-module-exports babel-plugin-react-html-attrs babel-plugin-transform-class-properties babel-plugin-transform-decorators-legacy babel-preset-es2015 babel-preset-react babel-preset-stage-0 react react-dom webpack webpack-dev-server
+alias npmsreact="npm install -S babel-core babel-loader babel-plugin-add-module-exports babel-plugin-react-html-attrs babel-plugin-transform-class-properties babel-plugin-transform-decorators-legacy babel-preset-es2015 babel-preset-react babel-preset-stage-0 react react-dom webpack webpack-dev-server
 "
 # }}}
