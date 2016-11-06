@@ -462,8 +462,10 @@ let g:gitgutter_map_keys = 0
 let g:gitgutter_sign_column_always=1
 "}}}
 " Neomake"{{{
+let g:neomake_open_list = 2
 let g:neomake_serialize = 1
 let g:neomake_serialize_abort_on_error = 1
+let g:neomake_javascript_enabled_makers = ['eslint']
 "}}}
 " Netrw settings"{{{
 
