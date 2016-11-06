@@ -413,9 +413,10 @@ augroup vimrcEx
   autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
   autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
-  " Mapping q to close help manual
-  autocmd FileType help nnoremap <buffer> q :bd<cr>
-  autocmd FileType diff nnoremap <buffer> q :bd<cr>
+  " Mapping q to close the windows
+  autocmd FileType help nnoremap <buffer> <silent> q :bd<cr>
+  autocmd FileType diff nnoremap <buffer> <silent> q :bd<cr>
+  autocmd FileType qf   nnoremap <buffer> <silent> q :bd<cr>
 
   " This is so that delimitMate does not conflict with auto-close when dealing with tags
   autocmd FileType html let b:delimitMate_matchpairs = "(:),[:],{:}"

@@ -1,3 +1,6 @@
+# Source the theme first to prevent overridden by default
+source ~/dotfiles/zsh/powerline.zsh-theme
+
 # Using zplug as plugin manager
 source ~/.zplug/init.zsh
 
@@ -30,6 +33,6 @@ if which rbenv &> /dev/null; then
 fi
 
 # Source custom zsh files
-for file in ~/dotfiles/zsh; do
+for file in ~/dotfiles/zsh/*.zsh; do
     source "$file"
 done
