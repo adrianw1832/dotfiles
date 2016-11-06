@@ -11,14 +11,12 @@ call plug#begin('~/.config/nvim/plugged')
 
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Raimondi/delimitMate'
-Plug 'Shougo/context_filetype.vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'}
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'airblade/vim-gitgutter'
 Plug 'alvan/vim-closetag'
 Plug 'bronson/vim-visual-star-search'
 Plug 'christoomey/vim-sort-motion'
-Plug 'christoomey/vim-tmux-navigator'
 Plug 'christoomey/vim-tmux-runner'
 Plug 'easymotion/vim-easymotion'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install' } | Plug 'junegunn/fzf.vim'
@@ -27,7 +25,6 @@ Plug 'kana/vim-textobj-user' | Plug 'lucapette/vim-textobj-underscore'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'mileszs/ack.vim'
 Plug 'neomake/neomake'
-Plug 'pbrisbin/vim-mkdir'
 Plug 'tommcdo/vim-exchange'
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-abolish'
@@ -140,6 +137,13 @@ inoremap kj <Esc>
 vnoremap jk <Esc>
 vnoremap kj <Esc>
 
+" Easier navigating between panes
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+nnoremap <C-k> <C-w>k
+nnoremap <C-j> <C-w>j
+nnoremap <C-\> <C-w>p
+
 " Allow j and k to move down wrapped lines
 nnoremap j gj
 nnoremap k gk
@@ -228,26 +232,21 @@ nnoremap <NUL> <C-z>
 let maplocalleader = "\\"
 let mapleader = "\<Space>"
 nnoremap <leader>a :Ack!<Space>
-nnoremap <leader>b :ls<cr>:b
-nnoremap <leader>bd :ls<cr>:bd<C-b><C-b>
 nnoremap <leader>bi :!bundle install<cr>
 nnoremap <leader>c :cclose<cr>
 nnoremap <leader>e :w<cr>:call RunLastSpec()<cr>
 nnoremap <leader>g :w<cr>:Gstatus<cr>
-nnoremap <leader>ga :Git add .<cr><cr>
 nnoremap <leader>gd :Gvdiff<cr>
 nnoremap <leader>gp :Gpush<cr>
 nnoremap <silent> <leader>h :nohlsearch<cr>
 nmap <leader>ha <Plug>GitGutterStageHunk
 nmap <leader>hr <Plug>GitGutterUndoHunk
 nmap <leader>hv <Plug>GitGutterPreviewHunk
-" Indent all and return to current line
 nnoremap <leader>i mzgg=G`z
 nnoremap <leader>ni :!npm install<cr>
 nnoremap <leader>o :Files<cr>
-" Sensible pasting from system clipboard
 nnoremap <leader>p o<esc>"*gp
-nnoremap <leader>pi :w<cr>:source $MYVIMRC<cr>:nohlsearch<cr>:PlugUpgrade<cr>:PlugUpdate<cr>
+nnoremap <silent> <leader>pi :w<cr>:source $MYVIMRC<cr>:nohlsearch<cr>:PlugUpgrade<cr>:PlugUpdate<cr>
 nnoremap <leader>r :w<cr>:call RunNearestSpec()<cr>
 nnoremap <leader>ra :A<cr>
 nnoremap <leader>rc :Econtroller<space>
@@ -258,7 +257,7 @@ nnoremap <leader>rr :R<cr>
 nnoremap <leader>ru :Eunittest<space>
 nnoremap <leader>rv :Eview<space>
 nnoremap <leader>sn :UltiSnipsEdit<cr>
-nnoremap <leader>so :w<cr>:source $MYVIMRC<cr>:AirlineRefresh<cr>:nohlsearch<cr>
+nnoremap <leader>so :w<cr>:source $MYVIMRC<cr>:AirlineRefresh<cr>:nohlsearch<cr>:echoe "Vimrc sourced!"<cr>
 " Going back to the last spelling mistake and choosing the 1st option
 nnoremap <leader>sp mz[s1z=`z
 nnoremap <leader>t :w<cr>:call RunCurrentSpecFile()<cr>
@@ -293,22 +292,9 @@ nnoremap <leader>pry :VtrOpenRunner { 'orientation': 'h', 'percentage': 50, 'cmd
 nnoremap <leader>irb :VtrOpenRunner { 'orientation': 'h', 'percentage': 50, 'cmd': 'irb' }<cr>
 "}}}
 " Custom functions"{{{
-" Delete all trailing white space on save"{{{
-function! <SID>StripTrailingWhitespaces()
-  " preparation: save last search, and cursor position
-  let _s=@/
-  let l = line(".")
-  let c = col(".")
-  " Do the search and replace:
-  %s/\s\+$//e
-  " clean up: restore previous search history, and cursor position
-  let @/=_s
-  call cursor(l, c)
-endfunction
-"}}}
 " Don't close window, when deleting a buffer"{{{
 command! Bclose call <SID>BufcloseCloseIt()
-function! <SID>BufcloseCloseIt()
+function! s:BufcloseCloseIt()
   let l:currentBufNum = bufnr("%")
   let l:alternateBufNum = bufnr("#")
 
@@ -324,6 +310,29 @@ function! <SID>BufcloseCloseIt()
 
   if buflisted(l:currentBufNum)
     execute("bdelete! ".l:currentBufNum)
+  endif
+endfunction
+"}}}
+" Delete all trailing white space on save"{{{
+function! s:StripTrailingWhitespaces()
+  " preparation: save last search, and cursor position
+  let _s=@/
+  let l = line(".")
+  let c = col(".")
+  " Do the search and replace:
+  %s/\s\+$//e
+  " clean up: restore previous search history, and cursor position
+  let @/=_s
+  call cursor(l, c)
+endfunction
+"}}}
+" Create directory on save if it doesn't exist"{{{
+function! s:CreateNonExistantDirectory()
+  let dir = expand('%:p:h')
+
+  if !isdirectory(dir)
+    call mkdir(dir, 'p')
+    echo 'Created non-existing directory: '.dir
   endif
 endfunction
 "}}}
@@ -354,7 +363,8 @@ augroup vimrcEx
   " Run NeoMake on read and write operations
   autocmd BufReadPost,BufWritePost * Neomake
 
-  autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+  autocmd BufWritePre * :call s:StripTrailingWhitespaces()
+  autocmd BufWritePre * :call s:CreateNonExistantDirectory()
 
   " Automatically enter insert mode when entering terminal buffer
   autocmd BufWinEnter,WinEnter term://* startinsert
@@ -366,13 +376,13 @@ augroup vimrcEx
   autocmd FileType vim setlocal keywordprg=:help
 
   " Enable different indentation for language specific files
-  autocmd FileType java           set tabstop=8 softtabstop=4 shiftwidth=4
-  autocmd FileType javascript     set tabstop=4 softtabstop=2 shiftwidth=2
+  autocmd FileType java       setlocal tabstop=8 softtabstop=4 shiftwidth=4
+  autocmd FileType javascript setlocal tabstop=4 softtabstop=2 shiftwidth=2
 
   " Automatically wrap at 80 characters and enable spell check text and markdowns
   autocmd FileType text,markdown setlocal textwidth=80
   autocmd FileType text,markdown setlocal spell
-  autocmd FileType text,markdown set formatoptions+=t
+  autocmd FileType text,markdown setlocal formatoptions+=t
   autocmd FileType text,markdown source ~/.config/nvim/abbreviations.vim
 
   " Enable spellchecking for org files
@@ -382,12 +392,12 @@ augroup vimrcEx
   " Automatically wrap at 72 characters and spell check git commit messages
   autocmd FileType gitcommit setlocal textwidth=72
   autocmd FileType gitcommit setlocal spell
-  autocmd FileType gitcommit set formatoptions+=t
+  autocmd FileType gitcommit setlocal formatoptions+=t
   autocmd FileType gitcommit source ~/.config/nvim/abbreviations.vim
 
   " Tern settings for javascript
   autocmd InsertLeave,InsertEnter,CompleteDone *.js,*.jsx if pumvisible() == 0 | pclose | endif
-  autocmd FileType javascript,javascript.jsx set completeopt-=preview
+  autocmd FileType javascript,javascript.jsx setlocal completeopt-=preview
   autocmd FileType javascript,javascript.jsx nnoremap <silent> <buffer> gd :TernDef<CR>
   autocmd FileType javascript,javascript.jsx nnoremap <silent> <buffer> K :TernDoc<CR>
   autocmd FileType javascript,javascript.jsx nnoremap <silent> <buffer> <localleader>K :TernDocBrowse<CR>
@@ -403,9 +413,9 @@ augroup vimrcEx
   autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
   autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
-  " Mapping q to close netrw and help manual whilst keeping the split open
-  autocmd FileType netrw nnoremap q :bp\|bd #<cr>
-  autocmd FileType help  nnoremap q :bd<cr>
+  " Mapping q to close help manual
+  autocmd FileType help nnoremap <buffer> q :bd<cr>
+  autocmd FileType diff nnoremap <buffer> q :bd<cr>
 
   " This is so that delimitMate does not conflict with auto-close when dealing with tags
   autocmd FileType html let b:delimitMate_matchpairs = "(:),[:],{:}"
@@ -473,33 +483,18 @@ let g:neomake_javascript_enabled_makers = ['eslint']
 let g:netrw_banner=0
 
 " Things to ignore when when using netrw
-let g:netrw_list_hide='\.o,\.obj,*\~,\.pyc,'
-let g:netrw_list_hide.='\.env,'
-let g:netrw_list_hide.='\.env[0-9].,'
-let g:netrw_list_hide.='\.env-pypy,'
-let g:netrw_list_hide.='\.git,'
-let g:netrw_list_hide.='\.gitkeep,'
-let g:netrw_list_hide.='\.vagrant,'
+let g:netrw_list_hide='\.git,'
 let g:netrw_list_hide.='\.tmp,'
-let g:netrw_list_hide.='\.coverage$,'
 let g:netrw_list_hide.='\.DS_Store,'
-let g:netrw_list_hide.='__pycache__,'
-let g:netrw_list_hide.='\.webassets-cache/,'
-let g:netrw_list_hide.='\.sass-cache/,'
-let g:netrw_list_hide.='\.ropeproject/,'
 let g:netrw_list_hide.='vendor/rails/,'
 let g:netrw_list_hide.='vendor/cache/,'
 let g:netrw_list_hide.='\.gem,'
-let g:netrw_list_hide.='\.ropeproject/,'
 let g:netrw_list_hide.='\.coverage/,'
 let g:netrw_list_hide.='log/,'
 let g:netrw_list_hide.='tmp/,'
-let g:netrw_list_hide.='\.tox/,'
 let g:netrw_list_hide.='\.idea/,'
-let g:netrw_list_hide.='\.egg,\.egg-info,'
 let g:netrw_list_hide.='\.png,\.jpg,\.gif,'
 let g:netrw_list_hide.='\.so,\.swp,\.zip,/\.Trash/,\.pdf,\.dmg,/Library/,/\.rbenv/,'
-let g:netrw_list_hide.='*/\.nx/**,*\.app'
 "}}}
 " Rainbow parentheses"{{{
 au VimEnter * RainbowParenthesesToggle
@@ -512,9 +507,6 @@ if exists('g:plugs["tern_for_vim"]')
   let g:tern_show_argument_hints = 'on_hold'
   let g:tern_show_signature_in_pum = 1
 endif
-"}}}
-" Tmux navigator"{{{
-let g:tmux_navigator_save_on_switch = 2
 "}}}
 " Ultisnips"{{{
 let g:UltiSnipsExpandTrigger="<tab>"
