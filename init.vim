@@ -293,9 +293,6 @@ nnoremap <leader>pry :VtrOpenRunner { 'orientation': 'h', 'percentage': 50, 'cmd
 nnoremap <leader>irb :VtrOpenRunner { 'orientation': 'h', 'percentage': 50, 'cmd': 'irb' }<cr>
 "}}}
 " Custom functions"{{{
-
-" Treat <li> and <p> tags like the block tags they are
-let g:html_indent_tags = 'li\|p'
 " Delete all trailing white space on save"{{{
 function! <SID>StripTrailingWhitespaces()
   " preparation: save last search, and cursor position
@@ -307,92 +304,6 @@ function! <SID>StripTrailingWhitespaces()
   " clean up: restore previous search history, and cursor position
   let @/=_s
   call cursor(l, c)
-endfunction
-"}}}
-" Auto commands"{{{
-augroup vimrcEx
-  autocmd!
-
-  " When editing a file, always jump to the last known cursor position.
-  " Don't do it for commit messages, when the position is invalid, or when
-  " inside an event handler (happens when dropping a file on gvim).
-  autocmd BufReadPost *
-        \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
-        \   exe "normal g`\"" |
-        \ endif
-
-  " Automatically rebalance windows on vim resize
-  autocmd VimResized * :wincmd =
-
-  autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
-
-  " Automatically enter insert mode when entering terminal buffer
-  autocmd BufWinEnter,WinEnter term://* startinsert
-
-  " Maps K to open vim help for the word under cursor when editing vim files
-  autocmd FileType vim setlocal keywordprg=:help
-
-  " Set syntax highlighting for specific file types
-  autocmd BufRead,BufNewFile Appraisals set filetype=ruby
-  autocmd BufRead,BufNewFile *.md set filetype=markdown
-
-  " Enable different indentation for java files
-  autocmd FileType java set tabstop=8 softtabstop=4 shiftwidth=4
-
-  " Enable different indentation for javascript files
-  autocmd FileType javascript set tabstop=4 softtabstop=2 shiftwidth=2
-
-  " Automatically wrap at 80 characters and enable spell check text and markdowns
-  autocmd BufRead,BufNewFile *.txt,*.markdown setlocal textwidth=80
-  autocmd FileType text,markdown setlocal spell
-  autocmd FileType text,markdown set formatoptions+=t
-  autocmd FileType text,markdown source ~/.config/nvim/abbreviations.vim
-
-  " Enable spellchecking for org files
-  autocmd FileType org setlocal spell
-  autocmd FileType org source ~/.config/nvim/abbreviations.vim
-
-  " Automatically wrap at 72 characters and spell check git commit messages
-  autocmd FileType gitcommit setlocal textwidth=72
-  autocmd FileType gitcommit setlocal spell
-  autocmd FileType gitcommit set formatoptions+=t
-  autocmd FileType gitcommit source ~/.config/nvim/abbreviations.vim
-
-  " Allow stylesheets to autocomplete hyphenated words
-  autocmd FileType css,scss,sass setlocal iskeyword+=-
-
-  " Tern settings for javascript
-  autocmd InsertLeave,InsertEnter,CompleteDone *.js,*.jsx if pumvisible() == 0 | pclose | endif
-  autocmd FileType javascript,javascript.jsx set completeopt-=preview
-  autocmd FileType javascript,javascript.jsx nnoremap <silent> <buffer> gd :TernDef<CR>
-  autocmd FileType javascript,javascript.jsx nnoremap <silent> <buffer> K :TernDoc<CR>
-  autocmd FileType javascript,javascript.jsx nnoremap <silent> <buffer> <localleader>K :TernDocBrowse<CR>
-
-  " Types of files to load Emmet
-  autocmd FileType html,css,eruby,jsp,javascript,javascript.jsx EmmetInstall
-
-  " Ruby completion settings
-  autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
-  autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
-  autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
-
-  " Mapping q to close netrw and help manual whilst keeping the split open
-  autocmd FileType netrw nnoremap q :bp\|bd #<cr>
-  autocmd FileType help nnoremap q :bd<cr>
-
-  " Run NeoMake on read and write operations
-  autocmd BufReadPost,BufWritePost *,js,*.jsx silent! Neomake
-augroup END
-"}}}
-" Rename current file"{{{
-function! RenameFile()
-  let old_name = expand('%')
-  let new_name = input('New file name: ', expand('%'), 'file')
-  if new_name != '' && new_name != old_name
-    exec ':saveas ' . new_name
-    exec ':silent !rm ' . old_name
-    redraw!
-  endif
 endfunction
 "}}}
 " Don't close window, when deleting a buffer"{{{
@@ -416,32 +327,89 @@ function! <SID>BufcloseCloseIt()
   endif
 endfunction
 "}}}
-" Things to ignore when tab completing"{{{
-set wildignore=*.o,*.obj,*~,*.pyc
-set wildignore+=.env
-set wildignore+=.env[0-9]+
-set wildignore+=.env-pypy
-set wildignore+=.git,.gitkeep
-set wildignore+=.tmp
-set wildignore+=.coverage
-set wildignore+=*DS_Store*
-set wildignore+=.sass-cache/
-set wildignore+=__pycache__/
-set wildignore+=.webassets-cache/
-set wildignore+=vendor/rails/**
-set wildignore+=vendor/cache/**
-set wildignore+=*.gem
-set wildignore+=log/**
-set wildignore+=tmp/**
-set wildignore+=.tox/**
-set wildignore+=.idea/**
-set wildignore+=.vagrant/**
-set wildignore+=.coverage/**
-set wildignore+=*.egg,*.egg-info
-set wildignore+=*.png,*.jpg,*.gif
-set wildignore+=*.so,*.swp,*.zip,*/.Trash/**,*.pdf,*.dmg,*/Library/**,*/.rbenv/**
-set wildignore+=*/.nx/**,*.app
+" Rename current file"{{{
+function! RenameFile()
+  let old_name = expand('%')
+  let new_name = input('New file name: ', expand('%'), 'file')
+  if new_name != '' && new_name != old_name
+    exec ':saveas ' . new_name
+    exec ':silent !rm ' . old_name
+    redraw!
+  endif
+endfunction
 "}}}
+"}}}
+" Auto commands"{{{
+augroup vimrcEx
+  autocmd!
+
+  " When editing a file, always jump to the last known cursor position.
+  " Don't do it for commit messages, when the position is invalid, or when
+  " inside an event handler (happens when dropping a file on gvim).
+  autocmd BufReadPost *
+        \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
+        \   exe "normal g`\"" |
+        \ endif
+
+  " Run NeoMake on read and write operations
+  autocmd BufReadPost,BufWritePost * Neomake
+
+  autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+
+  " Automatically enter insert mode when entering terminal buffer
+  autocmd BufWinEnter,WinEnter term://* startinsert
+
+  " Automatically rebalance windows on vim resize
+  autocmd VimResized * :wincmd =
+
+  " Maps K to open vim help for the word under cursor when editing vim files
+  autocmd FileType vim setlocal keywordprg=:help
+
+  " Enable different indentation for language specific files
+  autocmd FileType java           set tabstop=8 softtabstop=4 shiftwidth=4
+  autocmd FileType javascript     set tabstop=4 softtabstop=2 shiftwidth=2
+
+  " Automatically wrap at 80 characters and enable spell check text and markdowns
+  autocmd FileType text,markdown setlocal textwidth=80
+  autocmd FileType text,markdown setlocal spell
+  autocmd FileType text,markdown set formatoptions+=t
+  autocmd FileType text,markdown source ~/.config/nvim/abbreviations.vim
+
+  " Enable spellchecking for org files
+  autocmd FileType org setlocal spell
+  autocmd FileType org source ~/.config/nvim/abbreviations.vim
+
+  " Automatically wrap at 72 characters and spell check git commit messages
+  autocmd FileType gitcommit setlocal textwidth=72
+  autocmd FileType gitcommit setlocal spell
+  autocmd FileType gitcommit set formatoptions+=t
+  autocmd FileType gitcommit source ~/.config/nvim/abbreviations.vim
+
+  " Tern settings for javascript
+  autocmd InsertLeave,InsertEnter,CompleteDone *.js,*.jsx if pumvisible() == 0 | pclose | endif
+  autocmd FileType javascript,javascript.jsx set completeopt-=preview
+  autocmd FileType javascript,javascript.jsx nnoremap <silent> <buffer> gd :TernDef<CR>
+  autocmd FileType javascript,javascript.jsx nnoremap <silent> <buffer> K :TernDoc<CR>
+  autocmd FileType javascript,javascript.jsx nnoremap <silent> <buffer> <localleader>K :TernDocBrowse<CR>
+
+  " Allow stylesheets to autocomplete hyphenated words
+  autocmd FileType css,sass,scss setlocal iskeyword+=-
+
+  " Types of files to load Emmet
+  autocmd FileType css,eruby,html,javascript,javascript.jsx,jsp EmmetInstall
+
+  " Ruby completion settings
+  autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
+  autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+  autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
+
+  " Mapping q to close netrw and help manual whilst keeping the split open
+  autocmd FileType netrw nnoremap q :bp\|bd #<cr>
+  autocmd FileType help  nnoremap q :bd<cr>
+
+  " This is so that delimitMate does not conflict with auto-close when dealing with tags
+  autocmd FileType html let b:delimitMate_matchpairs = "(:),[:],{:}"
+augroup END
 "}}}
 " Plugin settings"{{{
 "Airline"{{{
