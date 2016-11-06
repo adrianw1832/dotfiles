@@ -1,5 +1,3 @@
-source ~/dotfiles/zsh/powerline.zsh-theme
-
 # Using zplug as plugin manager
 source ~/.zplug/init.zsh
 
@@ -22,36 +20,6 @@ fi
 # Then, source plugins and add commands to $PATH
 zplug load --verbose
 
-# Temporary code to enable the prompt# {{{
-function zle-line-init {
-  powerlevel9k_prepare_prompts
-  if (( ${+terminfo[smkx]} )); then
-    printf '%s' ${terminfo[smkx]}
-  fi
-  zle reset-prompt
-  zle -R
-}
-
-function zle-line-finish {
-  powerlevel9k_prepare_prompts
-  if (( ${+terminfo[rmkx]} )); then
-    printf '%s' ${terminfo[rmkx]}
-  fi
-  zle reset-prompt
-  zle -R
-}
-
-function zle-keymap-select {
-  powerlevel9k_prepare_prompts
-  zle reset-prompt
-  zle -R
-}
-
-zle -N zle-line-init
-zle -N ale-line-finish
-zle -N zle-keymap-select
-# }}}
-
 # Setting for fasd to work
 eval "$(fasd --init auto)"``
 
@@ -62,6 +30,6 @@ if which rbenv &> /dev/null; then
 fi
 
 # Source custom zsh files
-for file in ~/dotfiles/zsh/*.zsh; do
+for file in ~/dotfiles/zsh; do
     source "$file"
 done
