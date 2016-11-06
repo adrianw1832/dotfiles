@@ -10,9 +10,6 @@ alias .....="cd ../../../.."
 alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
 alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
 
-# Clear
-alias c='clear'
-
 # Ripgrep
 alias -g G='| rg'
 
