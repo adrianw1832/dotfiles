@@ -1,4 +1,4 @@
-source ~/.zsh/custom/powerline.zsh-theme
+source ~/dotfiles/zsh/powerline.zsh-theme
 
 # Using zplug as plugin manager
 source ~/.zplug/init.zsh
@@ -54,6 +54,12 @@ zle -N zle-keymap-select
 
 # Setting for fasd to work
 eval "$(fasd --init auto)"``
+
+# if rbenv is present, configure it for use
+if which rbenv &> /dev/null; then
+    # enable shims and auto-completion
+    eval "$(rbenv init -)"
+fi
 
 # Source custom zsh files
 for file in ~/dotfiles/zsh/*.zsh; do
