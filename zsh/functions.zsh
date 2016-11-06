@@ -35,6 +35,27 @@ up() {
   esac
 }
 
+# Custom function to display the path in a better way
+path() {
+  echo $PATH | tr ":" "\n" | \
+    awk "{ sub(\"/usr\",     \"$fg_no_bold[green]/usr$reset_color\"); \
+           sub(\"/bin\",     \"$fg_no_bold[blue]/bin$reset_color\"); \
+           sub(\"/opt\",     \"$fg_no_bold[cyan]/opt$reset_color\"); \
+           sub(\"/sbin\",    \"$fg_no_bold[magenta]/sbin$reset_color\"); \
+           sub(\"/local\",   \"$fg_no_bold[yellow]/local$reset_color\"); \
+           sub(\"/.nvm\",    \"$fg_no_bold[green]/.nvm$reset_color\"); \
+           sub(\"/.rvm\",    \"$fg_no_bold[red]/.rvm$reset_color\"); \
+           sub(\"/.rbenv\",  \"$fg_no_bold[red]/.rbenv$reset_color\"); \
+           print }"
+}
+
+# Custom function to display the env in a better way
+env() {
+  printenv | \
+    awk "{ sub(\"=\", \"$fg_no_bold[red]=$reset_color\"); \
+           print }"
+}
+
 # Ensure tmux is always running
 _not_inside_tmux() { [[ -z "$TMUX" ]] }
 
