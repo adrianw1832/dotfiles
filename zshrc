@@ -5,12 +5,12 @@ source ~/dotfiles/zsh/powerline.zsh-theme
 source ~/.zplug/init.zsh
 
 # Plugins
-# zplug "plugins/rvm", from:oh-my-zsh
 zplug "bhilburn/powerlevel9k"
 zplug "djui/alias-tips"
 zplug "lukechilds/zsh-nvm"
 zplug "zplug/zplug"
 zplug "zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-completions"
 
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
@@ -31,6 +31,9 @@ if which rbenv &> /dev/null; then
     # enable shims and auto-completion
     eval "$(rbenv init -)"
 fi
+
+# Load fzf into the shell
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Source custom zsh files
 for file in ~/dotfiles/zsh/*.zsh; do
