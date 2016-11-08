@@ -56,6 +56,11 @@ env() {
            print }"
 }
 
+jj() {
+  local dir
+  dir="$(fasd -Rdl "$1" | fzf -1 -0 --no-sort +m)" && cd "${dir}" || return 1
+}
+
 # Ensure tmux is always running
 _not_inside_tmux() { [[ -z "$TMUX" ]] }
 
