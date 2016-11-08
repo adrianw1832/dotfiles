@@ -40,6 +40,8 @@ autoload -U edit-command-line
 zle -N edit-command-line
 bindkey -M vicmd 'v' edit-command-line
 
+bindkey -M menuselect 'o' accept-and-infer-next-history
+
 # Use vim navigation keys besides cursor keys in menu completion
 bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'k' vi-up-line-or-history
