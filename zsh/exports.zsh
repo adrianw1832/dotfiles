@@ -7,9 +7,5 @@ export LSCOLORS=Gxfxcxdxbxegedabagacad
 
 # Use ripgrep as default search engine for fzf
 export FZF_DEFAULT_COMMAND='rg --files'
-export FZF_COMPLETION_TRIGGER='*'
 
 export KEYTIMEOUT=1
-
-# Load fzf into the shell
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
