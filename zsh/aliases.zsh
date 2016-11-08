@@ -40,7 +40,7 @@ alias cask="brew cask"
 
 # Fasd
 alias j='fasd_cd -d'
-alias jj='fasd_cd -d -i'
+# jj is mapped to a function integrated with fzf
 
 #Source Tree
 alias st="open -a SourceTree"
