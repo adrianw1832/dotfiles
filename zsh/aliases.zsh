@@ -70,7 +70,6 @@ alias vimrc="$EDITOR ~/dotfiles/init.vim"
 
 # Editor shortcut
 alias v="$EDITOR"
-alias vv='f -e $EDITOR'
 # }}}
 # Git# {{{
 
@@ -78,7 +77,7 @@ alias amend="git commit --amend"
 alias amendne="git commit --amend --no-edit"
 alias g="git status -s"
 alias ga="git add"
-alias gb="git branch -a"
+alias gbr="git branch --all"
 alias gc="git commit"
 alias gcl="git clone"
 alias gcn="git clean -fd"
@@ -89,21 +88,21 @@ alias gdc="git diff --cached"
 alias gdt="git difftool"
 alias gdtc="git difftool --cached"
 alias gf="git fetch"
-alias glog="git log --pretty=format:\"%C(yellow)%h %C(magenta)| %C(green)%ad%  %C(magenta)|%C(reset) %s%d %C(magenta)<= %C(red)[%an]\" --graph --date=short"
+alias glog="git log --pretty=format:\"%C(yellow)%h %C(red)| %C(green)%ad%  %C(red)|%C(reset) %s%C(auto)%d %C(red)<- %C(black)%C(bold)[%an]\" --graph --date=short"
 alias gp="git push"
 alias gpf="git push -f"
 alias gpl="git pull"
 alias gpr="git pull --rebase"
 alias grc="git rebase --continue"
 alias gri="git rebase --interactive"
-alias grt="git reset"
-alias grts="git reset --soft"
-alias grth="git reset --hard"
+alias gre="git reset"
+alias gres="git reset --soft"
+alias greh="git reset --hard"
 alias gs="git status"
-alias gsh="git stash"
-alias gsha="git stash apply"
-alias gshp="git stash pop"
-alias gshd="git stash drop"
+alias gst="git stash"
+alias gsta="git stash apply"
+alias gstp="git stash pop"
+alias gstd="git stash drop"
 # }}}
 # Rails# {{{
 
