@@ -1,6 +1,5 @@
 # Use modern completion system
 autoload -U compinit && compinit
-autoload -U colors ; colors
 zmodload -i zsh/complist
 
 # Show coloured menu when tabbing
