@@ -17,13 +17,12 @@ Plug 'airblade/vim-gitgutter'
 Plug 'alvan/vim-closetag'
 Plug 'bronson/vim-visual-star-search'
 Plug 'christoomey/vim-sort-motion'
-Plug 'christoomey/vim-system-copy'
 Plug 'christoomey/vim-tmux-runner'
 Plug 'easymotion/vim-easymotion'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install' } | Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'kana/vim-textobj-user' | Plug 'lucapette/vim-textobj-underscore'
-Plug 'kien/rainbow_parentheses.vim'
+Plug 'luochen1990/rainbow'
 Plug 'mileszs/ack.vim'
 Plug 'neomake/neomake'
 Plug 'sickill/vim-pasta'
@@ -126,12 +125,6 @@ set updatetime=1000 " Time in ms for vim to update/ refresh
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1 " Block shape cursor in normal, pipe in insert
 "}}}
 " Custom mappings"{{{
-
-" Have to use hjkl
-nnoremap <Left> :echoe "Use h"<cr>
-nnoremap <Right> :echoe "Use l"<cr>
-nnoremap <Up> :echoe "Use k"<cr>
-nnoremap <Down> :echoe "Use j"<cr>
 
 " Easier esc mapping
 inoremap jk <Esc>
@@ -247,7 +240,8 @@ nmap <leader>hv <Plug>GitGutterPreviewHunk
 nnoremap <leader>i mzgg=G`z
 nnoremap <leader>ni :!npm install<cr>
 nnoremap <leader>o :Files<cr>
-nnoremap <leader>p o<esc>"*gp
+nnoremap <leader>p o<esc>"*gp==
+nnoremap <leader>P a<Space><esc>"*gp
 nnoremap <silent> <leader>pi :w<cr>:source $MYVIMRC<cr>:nohlsearch<cr>:PlugUpgrade<cr>:PlugUpdate<cr>
 nnoremap <leader>r :w<cr>:call RunNearestSpec()<cr>
 nnoremap <leader>ra :A<cr>
@@ -499,11 +493,8 @@ let g:netrw_list_hide.='\.idea/,'
 let g:netrw_list_hide.='\.png,\.jpg,\.gif,'
 let g:netrw_list_hide.='\.so,\.swp,\.zip,/\.Trash/,\.pdf,\.dmg,/Library/,/\.rbenv/,'
 "}}}
-" Rainbow parentheses"{{{
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
+"Rainbow"{{{
+let g:rainbow_active = 1
 "}}}
 " Tern"{{{
 if exists('g:plugs["tern_for_vim"]')
