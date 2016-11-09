@@ -9,3 +9,6 @@ export LSCOLORS=Gxfxcxdxbxegedabagacad
 export FZF_DEFAULT_COMMAND='rg --files'
 
 export KEYTIMEOUT=1
+
+# Remove duplicate entries
+typeset -U PATH

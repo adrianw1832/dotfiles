@@ -35,6 +35,9 @@ fi
 # Load fzf into the shell
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# Overload the colour palette to ensure correct gruvbox colours
+source ~/.config/nvim/plugged/gruvbox/gruvbox_256palette.sh
+
 # Source custom zsh files
 for file in ~/dotfiles/zsh/*.zsh; do
     source "$file"
