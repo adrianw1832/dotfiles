@@ -42,6 +42,7 @@ Plug 'vim-scripts/ReplaceWithRegister'
 
 Plug 'jceb/vim-orgmode', { 'for': 'org' }
 Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'eruby', 'jsp', 'javascript', 'javascript.jsx'] }
+Plug 'morhetz/gruvbox'
 Plug 'terryma/vim-smooth-scroll'
 Plug 'tmux-plugins/vim-tmux', { 'for': 'tmux' }
 Plug 'vim-airline/vim-airline'
@@ -73,30 +74,19 @@ Plug 'tpope/vim-sexp-mappings-for-regular-people', { 'for': 'clojure' }
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 "}}}
 "}}}
-" Colour schemes"{{{
-
-Plug 'morhetz/gruvbox'
-Plug 'sjl/badwolf'
-"}}}
 call plug#end()
-"}}}
-" Colour scheme and its settings"{{{
-colorscheme gruvbox
-
-" A more discrete colour column
-highlight ColorColumn ctermbg=red
-call matchadd('ColorColumn', '\%81v', 100)
 "}}}
 " Vim settings"{{{
 
-set autowrite " Save on buffer switch
+colorscheme gruvbox
+
 set background=dark " Assume a dark background
 set complete+=kspell " Autocomplete with dictionary words when spell check is on
 set cursorline " Highlight current line
 set expandtab " Tab key will always insert 'softtabstop' amount of space
 set foldenable " Enable folding
 set foldmethod=marker " Fold based on markers
-set grepprg=rg " Use ag as default for grep
+set grepprg=rg " Use ripgrep as default for grep
 set hidden " Change default behaviour of opening file of existing buffer
 set ignorecase " Ignore case when searching
 set infercase " Smarter case for autocompletion
