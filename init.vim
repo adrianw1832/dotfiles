@@ -31,6 +31,7 @@ Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
@@ -246,7 +247,6 @@ nnoremap <silent> <leader>pi :w<cr>:source $MYVIMRC<cr>:nohlsearch<cr>:PlugUpgra
 nnoremap <leader>r :w<cr>:call RunNearestSpec()<cr>
 nnoremap <leader>ra :A<cr>
 nnoremap <leader>rc :Econtroller<space>
-nnoremap <leader>re :call RenameFile()<cr>
 nnoremap <leader>rf :Eintegrationtest<space>
 nnoremap <leader>rm :Emodel<space>
 nnoremap <leader>rr :R<cr>
@@ -329,17 +329,6 @@ function! s:CreateNonExistantDirectory()
   if !isdirectory(dir)
     call mkdir(dir, 'p')
     echo 'Created non-existing directory: '.dir
-  endif
-endfunction
-"}}}
-" Rename current file"{{{
-function! RenameFile()
-  let old_name = expand('%')
-  let new_name = input('New file name: ', expand('%'), 'file')
-  if new_name != '' && new_name != old_name
-    exec ':saveas ' . new_name
-    exec ':silent !rm ' . old_name
-    redraw!
   endif
 endfunction
 "}}}
