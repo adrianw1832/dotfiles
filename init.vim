@@ -19,6 +19,7 @@ Plug 'bronson/vim-visual-star-search'
 Plug 'christoomey/vim-sort-motion'
 Plug 'christoomey/vim-tmux-runner'
 Plug 'easymotion/vim-easymotion'
+Plug 'janko-m/vim-test'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install' } | Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'kana/vim-textobj-user' | Plug 'lucapette/vim-textobj-underscore'
@@ -141,7 +142,7 @@ nnoremap <tab> <C-^>
 
 " For switching two characters around and repeatable by .
 nnoremap <silent> <Plug>TransposeCharacters xp
-      \:call repeat#set("\<Plug>TransposeCharacters")<CR>
+      \:call repeat#set("\<Plug>TransposeCharacters")<cr>
 nmap xp <Plug>TransposeCharacters
 
 " Mapping for Easy Motion
@@ -164,10 +165,10 @@ xmap ih <Plug>GitGutterTextObjectInnerVisual
 xmap ah <Plug>GitGutterTextObjectOuterVisual
 
 " Smooth scroll remappings
-noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 10, 2)<CR>
-noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 10, 2)<CR>
-noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 10, 4)<CR>
-noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 10, 4)<CR>
+noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 10, 2)<cr>
+noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 10, 2)<cr>
+noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 10, 4)<cr>
+noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 10, 4)<cr>
 
 " Terminal mapping to return to previous pane
 tnoremap <ESC> <C-\><C-n><C-w><C-p>
@@ -198,7 +199,7 @@ nnoremap ' `
 " Visually select the text that was last edited/pasted
 nnoremap gV `[v`]
 " Makes the dot command behave on a Visually selected line
-vnoremap . :norm.<CR>
+vnoremap . :norm.<cr>
 " Better start of line config
 nnoremap 0 ^
 " Change the behaviour of Y to be more inline with the rest
@@ -219,8 +220,8 @@ let maplocalleader = "\\"
 let mapleader = "\<Space>"
 nnoremap <leader>a :Ack!<Space>
 nnoremap <leader>bi :!bundle install<cr>
-nnoremap <leader>c :cclose<cr>
-nnoremap <leader>e :w<cr>:call RunLastSpec()<cr>
+nnoremap <silent> <leader>c :cclose<cr>
+nnoremap <leader>e :w<cr>:TestLast<cr>
 nnoremap <leader>g :w<cr>:Gstatus<cr>
 nnoremap <leader>gd :Gvdiff<cr>
 nnoremap <leader>gp :Gpush<cr>
@@ -233,8 +234,8 @@ nnoremap <leader>ni :!npm install<cr>
 nnoremap <leader>o :Files<cr>
 nnoremap <leader>p o<esc>"*gp==
 nnoremap <leader>P a<Space><esc>"*gp
-nnoremap <silent> <leader>pi :w<cr>:source $MYVIMRC<cr>:nohlsearch<cr>:PlugUpgrade<cr>:PlugUpdate<cr>
-nnoremap <leader>r :w<cr>:call RunNearestSpec()<cr>
+nnoremap <leader>pi :w<cr>:source $MYVIMRC<cr>:nohlsearch<cr>:PlugUpgrade<cr>:PlugUpdate<cr>
+nnoremap <leader>r :w<cr>:TestNearest<cr>
 nnoremap <leader>ra :A<cr>
 nnoremap <leader>rc :Econtroller<space>
 nnoremap <leader>rf :Eintegrationtest<space>
@@ -242,11 +243,12 @@ nnoremap <leader>rm :Emodel<space>
 nnoremap <leader>rr :R<cr>
 nnoremap <leader>ru :Eunittest<space>
 nnoremap <leader>rv :Eview<space>
-nnoremap <leader>sn :UltiSnipsEdit<cr>
+nnoremap <silent> <leader>sn :UltiSnipsEdit<cr>
 nnoremap <leader>so :w<cr>:source $MYVIMRC<cr>:AirlineRefresh<cr>:nohlsearch<cr>:echoe "Vimrc sourced!"<cr>
 " Going back to the last spelling mistake and choosing the 1st option
-nnoremap <leader>sp mz[s1z=`z
-nnoremap <leader>t :w<cr>:call RunCurrentSpecFile()<cr>
+nnoremap <silent> <leader>sp mz[s1z=`z
+nnoremap <leader>t :w<cr>:TestFile<cr>
+nnoremap <leader>T :TestVisit<cr>
 nnoremap <leader>w :w<cr>
 nnoremap <leader>q :q<cr>
 nnoremap <leader>qa :qa<cr>
@@ -257,7 +259,7 @@ nnoremap <leader>qw :wq<cr>
 nnoremap <leader>u :copen<cr>:wincmd _<cr>:wincmd \|<cr>
 nnoremap <leader>v :vnew <C-r>=escape(expand("%:p:h"), ' ') . '/'<cr>
 nnoremap <leader>vi :e $MYVIMRC<cr>
-nnoremap <leader>y :w<cr>:call RunAllSpecs()<cr>
+nnoremap <leader>y :w<cr>:TestSuite<cr>
 nnoremap <leader><leader> :Explore .<cr>
 
 " Zoom in on a vim pane, <C-w>= to re-balance
@@ -373,9 +375,9 @@ augroup vimrcEx
   " Tern settings for javascript
   autocmd InsertLeave,InsertEnter,CompleteDone *.js,*.jsx if pumvisible() == 0 | pclose | endif
   autocmd FileType javascript,javascript.jsx setlocal completeopt-=preview
-  autocmd FileType javascript,javascript.jsx nnoremap <silent> <buffer> gd :TernDef<CR>
-  autocmd FileType javascript,javascript.jsx nnoremap <silent> <buffer> K :TernDoc<CR>
-  autocmd FileType javascript,javascript.jsx nnoremap <silent> <buffer> <localleader>K :TernDocBrowse<CR>
+  autocmd FileType javascript,javascript.jsx nnoremap <silent> <buffer> gd :TernDef<cr>
+  autocmd FileType javascript,javascript.jsx nnoremap <silent> <buffer> K :TernDoc<cr>
+  autocmd FileType javascript,javascript.jsx nnoremap <silent> <buffer> <localleader>K :TernDocBrowse<cr>
 
   " Allow stylesheets to autocomplete hyphenated words
   autocmd FileType css,sass,scss setlocal iskeyword+=-
@@ -420,9 +422,6 @@ let g:deoplete#enable_smart_case = 1
 " Deoplete ternjs"{{{
 let g:tern#command = ['tern']
 let g:tern#arguments = ['--persistent']
-"}}}
-" Dispatch"{{{
-let g:rspec_command = "Dispatch rspec {spec}"
 "}}}
 " Easy motion"{{{
 let g:EasyMotion_do_mapping = 0
@@ -508,6 +507,9 @@ let g:surround_61 = "<%= \r %>"
 "}}}
 " Vim sexp"{{{
 let g:sexp_enable_insert_mode_mappings = 1
+"}}}
+" Vim test"{{{
+let test#strategy = "dispatch"
 "}}}
 " Vim tmux runner"{{{
 let g:VtrUseVtrMaps = 1
