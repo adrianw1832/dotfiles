@@ -10,6 +10,10 @@ alias .....="cd ../../../.."
 alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
 alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
 
+# Creating directories
+alias md="mkdir -p"
+alias rd="rmdir"
+
 # Ripgrep
 alias -g G='| rg'
 
