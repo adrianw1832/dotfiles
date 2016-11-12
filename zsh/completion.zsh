@@ -14,14 +14,14 @@ zstyle ':completion:*' completer _expand _complete
 
 # Formatting and messages
 zstyle ':completion:*' extra-verbose true
-zstyle ':completion:*:descriptions' format '%B%d%b'
+zstyle ':completion:*:descriptions' format '%K{238}%B%F{254} %d %f%b%k'
 zstyle ':completion:*:messages' format '%d'
-zstyle ':completion:*:warnings' format $'%{\e[0;31m%}No matches for:%{\e[0m%} %d'
+zstyle ':completion:*:warnings' format "%B%F{red}No matches found for:%f%b %d"
 zstyle ':completion:*' group-name ''
 
 # Enable completion caching, use rehash to clear
-zstyle ':completion::complete:*' use-cache on
-zstyle ':completion::complete:*' cache-path ~/.zsh/cache
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.zsh/cache
 
 # Ignore completion functions for commands you don’t have
 zstyle ':completion:*:functions' ignored-patterns '_*'
