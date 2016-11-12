@@ -81,9 +81,11 @@ call plug#end()
 
 colorscheme gruvbox
 
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1 " Block shape cursor in normal, pipe in insert
 set background=dark " Assume a dark background
 set complete+=kspell " Autocomplete with dictionary words when spell check is on
 set cursorline " Highlight current line
+set diffopt+=vertical " Vertical default for diff panes
 set expandtab " Tab key will always insert 'softtabstop' amount of space
 set foldenable " Enable folding
 set foldmethod=marker " Fold based on markers
@@ -96,6 +98,7 @@ set list " Actually display extra whitespace symbols
 set listchars=tab:»·,trail:·,nbsp:· " Set extra whitespace symbols
 set nobackup nowritebackup noswapfile " No unnecessary backup files
 set noerrorbells " Silent error bell
+set noshowmode " Let vim airline handle the mode display
 set nrformats= " Treat all numerals as decimal
 set number " Show line numbers
 set numberwidth=3 " Width of the number column
@@ -114,7 +117,6 @@ set tabstop=2 " Number of visual spaces per tab
 set timeoutlen=500 " Timeout between keystrokes to register command
 set undofile " Set the use of undofiles, which keeps a history of the undos
 set updatetime=1000 " Time in ms for vim to update/ refresh
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1 " Block shape cursor in normal, pipe in insert
 "}}}
 " Custom mappings"{{{
 
