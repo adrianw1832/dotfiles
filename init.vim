@@ -191,13 +191,15 @@ cnoremap <C-e>  <End>
 cnoremap <C-f>  <Right>
 cnoremap <C-h>  <BS>
 
+" Smarter history navigation with up and down arrows
+cnoremap <c-n>  <down>
+cnoremap <c-p>  <up>
+
 " Remap Q for exmode to run macros instead
 nnoremap Q @q
 " Remap for easier command mode access
 nnoremap ; :
 vnoremap ; :
-" Remap for easier bookmark access
-nnoremap ' `
 " Visually select the text that was last edited/pasted
 nnoremap gV `[v`]
 " Makes the dot command behave on a Visually selected line
@@ -219,8 +221,8 @@ nnoremap <NUL> <C-z>
 " Leader mappings"{{{
 
 let maplocalleader = "\\"
-let mapleader = "\<Space>"
-nnoremap <leader>a :Ack!<Space>
+let mapleader = "\<space>"
+nnoremap <leader>a :Ack!<space>
 nnoremap <leader>bi :!bundle install<cr>
 nnoremap <silent> <leader>c :cclose<cr>
 nnoremap <leader>e :w<cr>:TestLast<cr>
@@ -234,8 +236,8 @@ nmap <leader>hv <Plug>GitGutterPreviewHunk
 nnoremap <leader>i mzgg=G`z
 nnoremap <leader>ni :!npm install<cr>
 nnoremap <leader>o :Files<cr>
-nnoremap <leader>p o<esc>"*gp==
-nnoremap <leader>P a<Space><esc>"*gp
+nnoremap <leader>p :put =nr2char(10)<cr>"*p=`]']
+nnoremap <leader>P a<space><esc>"*gp
 nnoremap <leader>pi :w<cr>:source $MYVIMRC<cr>:nohlsearch<cr>:PlugUpgrade<cr>:PlugUpdate<cr>
 nnoremap <leader>r :w<cr>:TestNearest<cr>
 nnoremap <leader>ra :A<cr>
@@ -345,6 +347,9 @@ augroup vimrcEx
   autocmd BufWritePre * :call s:StripTrailingWhitespaces()
   autocmd BufWritePre * :call s:CreateNonExistantDirectory()
 
+  autocmd InsertLeave,BufWinEnter,WinEnter * set cursorline
+  autocmd InsertEnter,BufWinLeave,WinLeave * set nocursorline
+
   " Automatically enter insert mode when entering terminal buffer
   autocmd BufWinEnter,WinEnter term://* startinsert
 
@@ -443,6 +448,7 @@ inoremap <expr> <C-x><C-k> fzf#complete('cat /usr/share/dict/words')
 imap <C-x><C-l> <plug>(fzf-complete-line)
 " Enable per-command history.
 let g:fzf_history_dir = '~/.local/share/fzf-history'
+let g:fzf_commits_log_options = '--color=always --date=short --graph --format="%C(yellow)%h %C(red)| %C(green)%ad%  %C(red)|%C(reset) %s%C(auto)%d %C(red)<- %C(black)%C(bold)%cr by [%an]"'
 "}}}
 " Gitgutter"{{{
 let g:gitgutter_map_keys = 0
