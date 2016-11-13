@@ -38,6 +38,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-scripts/ReplaceWithRegister'
+" Plug 'vim-scripts/YankRing.vim'
 "}}}
 " Others"{{{
 
@@ -223,6 +224,7 @@ nnoremap <NUL> <C-z>
 let maplocalleader = "\\"
 let mapleader = "\<space>"
 nnoremap <leader>a :Ack!<space>
+nnoremap <leader>b :Buffers<cr>
 nnoremap <leader>bi :!bundle install<cr>
 nnoremap <silent> <leader>c :cclose<cr>
 nnoremap <leader>e :w<cr>:TestLast<cr>
@@ -234,6 +236,8 @@ nmap <leader>ha <Plug>GitGutterStageHunk
 nmap <leader>hr <Plug>GitGutterUndoHunk
 nmap <leader>hv <Plug>GitGutterPreviewHunk
 nnoremap <leader>i mzgg=G`z
+" Edit any register(" by default) in the command line window, press enter to finish
+nnoremap <silent> <leader>m :<c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>
 nnoremap <leader>ni :!npm install<cr>
 nnoremap <leader>o :Files<cr>
 nnoremap <leader>p :put =nr2char(10)<cr>"*p=`]']
