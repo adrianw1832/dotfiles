@@ -23,7 +23,7 @@ TMUX_POWERLINE_DEFAULT_RIGHTSIDE_SEPARATOR=${TMUX_POWERLINE_DEFAULT_RIGHTSIDE_SE
 
 if [ -z $TMUX_POWERLINE_LEFT_STATUS_SEGMENTS ]; then
   TMUX_POWERLINE_LEFT_STATUS_SEGMENTS=(
-    "tmux_session_info 154 235" \
+    "tmux_session_info 142 235" \
     # "hostname 33 0" \
     # "ifstat 30 255" \
     # "ifstat_sys 30 255" \
@@ -42,11 +42,11 @@ if [ -z $TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS ]; then
   #"earthquake 3 0" \
     # "pwd 89 211" \
     # "mailcount 9 255" \
-    "now_playing 236 34" \
+    "now_playing 237 34" \
     #"cpu 240 136" \
     # "load 237 167" \
     #"tmux_mem_cpu_load 234 136" \
-    "battery 238 235" \
+    "battery 239 235" \
     "weather 240 254" \
     # "rainbarf 0 ${TMUX_POWERLINE_DEFAULT_FOREGROUND_COLOR}" \
     #"xkb_layout 125 117" \
