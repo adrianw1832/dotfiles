@@ -38,7 +38,6 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-scripts/ReplaceWithRegister'
-" Plug 'vim-scripts/YankRing.vim'
 "}}}
 " Others"{{{
 
