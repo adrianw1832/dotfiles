@@ -38,9 +38,11 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-scripts/ReplaceWithRegister'
+Plug 'wellle/targets.vim'
 "}}}
 " Others"{{{
 
+Plug 'Konfekt/FastFold'
 Plug 'jceb/vim-orgmode', { 'for': 'org' }
 Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'eruby', 'jsp', 'javascript', 'javascript.jsx'] }
 Plug 'morhetz/gruvbox'
@@ -117,6 +119,7 @@ set tabstop=2 " Number of visual spaces per tab
 set timeoutlen=500 " Timeout between keystrokes to register command
 set undofile " Set the use of undofiles, which keeps a history of the undos
 set updatetime=1000 " Time in ms for vim to update/ refresh
+set wildmode=longest:full,full " Set the wildmenu behaviour to be more like zsh
 "}}}
 " Custom mappings"{{{
 
@@ -167,10 +170,10 @@ xmap ih <Plug>GitGutterTextObjectInnerVisual
 xmap ah <Plug>GitGutterTextObjectOuterVisual
 
 " Smooth scroll remappings
-noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 10, 2)<cr>
-noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 10, 2)<cr>
-noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 10, 4)<cr>
-noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 10, 4)<cr>
+noremap <silent> <C-u> :call smooth_scroll#up(&scroll, 10, 2)<cr>
+noremap <silent> <C-d> :call smooth_scroll#down(&scroll, 10, 2)<cr>
+noremap <silent> <C-b> :call smooth_scroll#up(&scroll*2, 10, 4)<cr>
+noremap <silent> <C-f> :call smooth_scroll#down(&scroll*2, 10, 4)<cr>
 
 " Terminal mapping to return to previous pane
 tnoremap <ESC> <C-\><C-n><C-w><C-p>
@@ -184,16 +187,16 @@ inoremap <C-f> <Right>
 inoremap <C-h> <BS>
 
 " Allow emcas style keys in command line mode
-cnoremap <C-a>  <Home>
-cnoremap <C-b>  <Left>
-cnoremap <C-d>  <Delete>
-cnoremap <C-e>  <End>
-cnoremap <C-f>  <Right>
-cnoremap <C-h>  <BS>
+cnoremap <C-a> <Home>
+cnoremap <C-b> <Left>
+cnoremap <C-d> <Delete>
+cnoremap <C-e> <End>
+cnoremap <C-f> <Right>
+cnoremap <C-h> <BS>
 
 " Smarter history navigation with up and down arrows
-cnoremap <c-n>  <down>
-cnoremap <c-p>  <up>
+cnoremap <C-n> <Down>
+cnoremap <C-p> <Up>
 
 " Remap Q for exmode to run macros instead
 nnoremap Q @q
@@ -221,8 +224,8 @@ nnoremap <NUL> <C-z>
 " Leader mappings"{{{
 
 let maplocalleader = "\\"
-let mapleader = "\<space>"
-nnoremap <leader>a :Ack!<space>
+let mapleader = "\<Space>"
+nnoremap <leader>a :Ack!<Space>
 nnoremap <leader>b :Buffers<cr>
 nnoremap <leader>bi :!bundle install<cr>
 nnoremap <silent> <leader>c :cclose<cr>
@@ -236,20 +239,20 @@ nmap <leader>hr <Plug>GitGutterUndoHunk
 nmap <leader>hv <Plug>GitGutterPreviewHunk
 nnoremap <leader>i mzgg=G`z
 " Edit any register(" by default) in the command line window, press enter to finish
-nnoremap <silent> <leader>m :<c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>
+nnoremap <silent> <leader>m :<C-r><C-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><C-f><left>
 nnoremap <leader>ni :!npm install<cr>
 nnoremap <leader>o :Files<cr>
 nnoremap <leader>p :put =nr2char(10)<cr>"*p=`]']
-nnoremap <leader>P a<space><esc>"*gp
+nnoremap <leader>P a<Space><Esc>"*gp
 nnoremap <leader>pi :w<cr>:source $MYVIMRC<cr>:nohlsearch<cr>:PlugUpgrade<cr>:PlugUpdate<cr>
 nnoremap <leader>r :w<cr>:TestNearest<cr>
 nnoremap <leader>ra :A<cr>
-nnoremap <leader>rc :Econtroller<space>
-nnoremap <leader>rf :Eintegrationtest<space>
-nnoremap <leader>rm :Emodel<space>
+nnoremap <leader>rc :Econtroller<Space>
+nnoremap <leader>rf :Eintegrationtest<Space>
+nnoremap <leader>rm :Emodel<Space>
 nnoremap <leader>rr :R<cr>
-nnoremap <leader>ru :Eunittest<space>
-nnoremap <leader>rv :Eview<space>
+nnoremap <leader>ru :Eunittest<Space>
+nnoremap <leader>rv :Eview<Space>
 nnoremap <silent> <leader>sn :UltiSnipsEdit<cr>
 nnoremap <leader>so :w<cr>:source $MYVIMRC<cr>:AirlineRefresh<cr>:nohlsearch<cr>:echoe "Vimrc sourced!"<cr>
 " Going back to the last spelling mistake and choosing the 1st option
