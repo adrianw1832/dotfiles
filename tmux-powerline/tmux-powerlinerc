@@ -23,7 +23,7 @@
 	export TMUX_POWERLINE_SEG_HOSTNAME_FORMAT="short"
 # }
 # now_playing.sh {
-	# Music player to use. Can be any of {audacious, banshee, cmus, itunes, lastfm, mocp, mpd, mpd_simple, pithos, rdio, rhythmbox, spotify, spotify_wine, file}.
+	# Music player to use.
 	export TMUX_POWERLINE_SEG_NOW_PLAYING_MUSIC_PLAYER="spotify"
 	# Maximum output length.
 	export TMUX_POWERLINE_SEG_NOW_PLAYING_MAX_LEN="40"
@@ -33,7 +33,7 @@
 	export TMUX_POWERLINE_SEG_NOW_PLAYING_ROLL_SPEED="2"
 
 	# Fancy char to display before now playing track
-	export TMUX_POWERLINE_SEG_NOW_PLAYING_NOTE_CHAR=""
+	export TMUX_POWERLINE_SEG_NOW_PLAYING_NOTE_CHAR=""
 # }
 # weather.sh {
 	# The data provider to use. Currently only "yahoo" is supported.

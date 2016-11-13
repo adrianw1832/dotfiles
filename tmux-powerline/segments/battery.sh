@@ -1,7 +1,6 @@
 TMUX_POWERLINE_SEG_BATTERY_TYPE_DEFAULT="percentage"
 
-NORMAL_ICON=""
-CHARGING_ICON=""
+CHARGING_ICON=" "
 
 generate_segmentrc() {
   read -d '' rccontents  << EORC
@@ -41,12 +40,16 @@ __battery_osx() {
       if [[ -n $maxcap && -n $curcap && -n $extconnect ]]; then
         charge=`pmset -g batt | grep -o "[0-9][0-9]*\%" | rev | cut -c 2- | rev`
         if [[ $charge -gt 75 ]]; then
+          export NORMAL_ICON=" "
           echo -n "#[fg=colour118]"
         elif [[ $charge -gt 50 ]]; then
+          export NORMAL_ICON=" "
           echo -n "#[fg=colour226]"
         elif [[ $charge -gt 25 ]]; then
+          export NORMAL_ICON=" "
           echo -n "#[fg=colour202]"
         else
+          export NORMAL_ICON=" "
           echo -n "#[fg=colour196]"
         fi
         if [[ "$extconnect" == "Yes" ]]; then

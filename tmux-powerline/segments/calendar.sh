@@ -27,6 +27,6 @@ run_segment() {
   time=$(date +"$TMUX_POWERLINE_SEG_TIME_FORMAT")
   date=$(date +"$TMUX_POWERLINE_SEG_DATE_FORMAT")
 
-  echo "$day "  "$time "  "$date"
+  echo "$day " "$time"  " $date"
   return 0
 }
