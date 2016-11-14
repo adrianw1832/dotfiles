@@ -22,7 +22,6 @@ Plug 'easymotion/vim-easymotion'
 Plug 'janko-m/vim-test'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install' } | Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
-Plug 'kana/vim-textobj-user' | Plug 'lucapette/vim-textobj-underscore'
 Plug 'luochen1990/rainbow'
 Plug 'mileszs/ack.vim'
 Plug 'neomake/neomake'
@@ -37,6 +36,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-vinegar'
 Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'wellle/targets.vim'
 "}}}
@@ -52,11 +52,9 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 "}}}
 " Language related"{{{
-
 " Ruby"{{{
 
-Plug 'nelstrom/vim-textobj-rubyblock', { 'for': ['ruby', 'rails', 'eruby'] }
-Plug 'thoughtbot/vim-rspec', { 'for': ['ruby', 'rails', 'eruby'] }
+Plug 'kana/vim-textobj-user' | Plug 'nelstrom/vim-textobj-rubyblock', { 'for': ['ruby', 'rails', 'eruby'] }
 Plug 'tpope/vim-rails', { 'for': ['ruby', 'rails', 'eruby'] }
 Plug 'vim-ruby/vim-ruby', { 'for': ['ruby', 'rails', 'eruby'] }
 "}}}
@@ -404,9 +402,10 @@ augroup vimrcEx
   autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
   " Mapping q to close the windows
-  autocmd FileType help nnoremap <buffer> <silent> q :bd<cr>
-  autocmd FileType diff nnoremap <buffer> <silent> q :bd<cr>
-  autocmd FileType qf   nnoremap <buffer> <silent> q :bd<cr>
+  autocmd FileType help  nnoremap <buffer> <silent> q :bd<cr>
+  autocmd FileType diff  nnoremap <buffer> <silent> q :bd<cr>
+  autocmd FileType qf    nnoremap <buffer> <silent> q :bd<cr>
+  autocmd FileType netrw nnoremap <buffer> <silent> q :Rex<cr>
 
   " This is so that delimitMate does not conflict with auto-close when dealing with tags
   autocmd FileType html let b:delimitMate_matchpairs = "(:),[:],{:}"
@@ -446,6 +445,9 @@ let g:EasyMotion_use_upper = 1
 let g:user_emmet_install_global = 0
 let g:user_emmet_leader_key=','
 "}}}
+"Fast fold"{{{
+let g:fastfold_savehook = 0
+"}}}
 " Fzf"{{{
 
 " Replace the default dictionary completion with fzf-based fuzzy completion
@@ -466,10 +468,10 @@ let g:neomake_serialize = 1
 let g:neomake_serialize_abort_on_error = 1
 let g:neomake_javascript_enabled_makers = ['eslint']
 "}}}
-" Netrw settings"{{{
+" Netrw "{{{
 
-" Hide the useless information at the top
-let g:netrw_banner=0
+" Netrw defaults to tree style on open
+let g:netrw_liststyle= 3
 
 " Things to ignore when when using netrw
 let g:netrw_list_hide='\.git,'
