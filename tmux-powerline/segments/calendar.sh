@@ -1,5 +1,5 @@
 TMUX_POWERLINE_SEG_TIME_FORMAT_DEFAULT="%H:%M"
-TMUX_POWERLINE_SEG_DATE_FORMAT_DEFAULT="%F"
+TMUX_POWERLINE_SEG_DATE_FORMAT_DEFAULT="%d-%m-%Y"
 
 generate_segmentrc() {
   read -d '' rccontents  << EORC
@@ -27,6 +27,6 @@ run_segment() {
   time=$(date +"$TMUX_POWERLINE_SEG_TIME_FORMAT")
   date=$(date +"$TMUX_POWERLINE_SEG_DATE_FORMAT")
 
-  echo "$day " "$time"  " $date"
+  echo "$day " "$time"  "$date"
   return 0
 }

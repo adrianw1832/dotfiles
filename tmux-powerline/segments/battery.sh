@@ -39,17 +39,20 @@ __battery_osx() {
       esac
       if [[ -n $maxcap && -n $curcap && -n $extconnect ]]; then
         charge=`pmset -g batt | grep -o "[0-9][0-9]*\%" | rev | cut -c 2- | rev`
-        if [[ $charge -gt 75 ]]; then
+        if [[ $charge -gt 80 ]]; then
           export NORMAL_ICON=" "
           echo -n "#[fg=colour118]"
-        elif [[ $charge -gt 50 ]]; then
+        elif [[ $charge -gt 60 ]]; then
           export NORMAL_ICON=" "
           echo -n "#[fg=colour226]"
-        elif [[ $charge -gt 25 ]]; then
+        elif [[ $charge -gt 40 ]]; then
           export NORMAL_ICON=" "
-          echo -n "#[fg=colour202]"
-        else
+          echo -n "#[fg=colour172]"
+        elif [[ $charge -gt 20 ]]; then
           export NORMAL_ICON=" "
+          echo -n "#[fg=colour160]"
+        else
+          export NORMAL_ICON=" "
           echo -n "#[fg=colour196]"
         fi
         if [[ "$extconnect" == "Yes" ]]; then
