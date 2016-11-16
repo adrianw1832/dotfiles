@@ -23,7 +23,6 @@ Plug 'janko-m/vim-test'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install' } | Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'luochen1990/rainbow'
-Plug 'mileszs/ack.vim'
 Plug 'neomake/neomake'
 Plug 'sickill/vim-pasta'
 Plug 'tommcdo/vim-exchange'
@@ -42,7 +41,6 @@ Plug 'wellle/targets.vim'
 "}}}
 " Others"{{{
 
-Plug 'Konfekt/FastFold'
 Plug 'jceb/vim-orgmode', { 'for': 'org' }
 Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'eruby', 'jsp', 'javascript', 'javascript.jsx'] }
 Plug 'morhetz/gruvbox'
@@ -223,7 +221,7 @@ nnoremap <NUL> <C-z>
 
 let maplocalleader = "\\"
 let mapleader = "\<Space>"
-nnoremap <leader>a :Ack!<Space>
+nnoremap <leader>a :Ag<Space>
 nnoremap <leader>b :Buffers<cr>
 nnoremap <leader>bi :!bundle install<cr>
 nnoremap <silent> <leader>c :cclose<cr>
@@ -237,6 +235,7 @@ nmap <leader>hr <Plug>GitGutterUndoHunk
 nmap <leader>hv <Plug>GitGutterPreviewHunk
 nnoremap <leader>i mzgg=G`z
 " Edit any register(" by default) in the command line window, press enter to finish
+nnoremap <leader>l :Lines<cr>
 nnoremap <silent> <leader>m :<C-r><C-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><C-f><left>
 nnoremap <leader>ni :!npm install<cr>
 nnoremap <leader>o :Files<cr>
@@ -417,11 +416,6 @@ let g:airline_theme='tomorrow'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 "}}}
-" Ack"{{{
-if executable('rg')
-  let g:ackprg = 'rg --vimgrep'
-endif
-"}}}
 " DelimitMate"{{{
 let g:delimitMate_expand_cr = 1
 let g:delimitMate_expand_space = 1
@@ -444,9 +438,6 @@ let g:EasyMotion_use_upper = 1
 " Emmet"{{{
 let g:user_emmet_install_global = 0
 let g:user_emmet_leader_key=','
-"}}}
-"Fast fold"{{{
-let g:fastfold_savehook = 0
 "}}}
 " Fzf"{{{
 
