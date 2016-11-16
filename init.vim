@@ -239,7 +239,7 @@ nnoremap <leader>l :Lines<cr>
 nnoremap <silent> <leader>m :<C-r><C-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><C-f><left>
 nnoremap <leader>ni :!npm install<cr>
 nnoremap <leader>o :Files<cr>
-nnoremap <leader>p :put =nr2char(10)<cr>"*p=`]']
+nnoremap <leader>p :put =nr2char(10)<cr>"*p=']']
 nnoremap <leader>P a<Space><Esc>"*gp
 nnoremap <leader>pi :w<cr>:source $MYVIMRC<cr>:nohlsearch<cr>:PlugUpgrade<cr>:PlugUpdate<cr>
 nnoremap <leader>r :w<cr>:TestNearest<cr>
@@ -336,6 +336,8 @@ endfunction
 augroup vimrcEx
   autocmd!
 
+  autocmd VimEnter * source ~/dotfiles/abbreviations.vim
+
   " When editing a file, always jump to the last known cursor position.
   " Don't do it for commit messages, when the position is invalid, or when
   " inside an event handler (happens when dropping a file on gvim).
@@ -344,20 +346,20 @@ augroup vimrcEx
         \   exe "normal g`\"" |
         \ endif
 
-  " Run NeoMake on read and write operations
-  autocmd BufReadPost,BufWritePost * Neomake
-
   autocmd BufWritePre * :call s:StripTrailingWhitespaces()
   autocmd BufWritePre * :call s:CreateNonExistantDirectory()
 
   autocmd InsertLeave,BufWinEnter,WinEnter * set cursorline
   autocmd InsertEnter,BufWinLeave,WinLeave * set nocursorline
 
+  " Automatically rebalance windows on vim resize
+  autocmd VimResized * :wincmd =
+
   " Automatically enter insert mode when entering terminal buffer
   autocmd BufWinEnter,WinEnter term://* startinsert
 
-  " Automatically rebalance windows on vim resize
-  autocmd VimResized * :wincmd =
+  " Run NeoMake on read and write operations
+  autocmd BufReadPost,BufWritePost * Neomake
 
   " Maps K to open vim help for the word under cursor when editing vim files
   autocmd FileType vim setlocal keywordprg=:help
@@ -366,34 +368,21 @@ augroup vimrcEx
   autocmd FileType java       setlocal tabstop=8 softtabstop=4 shiftwidth=4
   autocmd FileType javascript setlocal tabstop=4 softtabstop=2 shiftwidth=2
 
-  " Automatically wrap at 80 characters and enable spell check text and markdowns
+  " Automatically wrap at 80 characters and spell check text and markdowns
   autocmd FileType text,markdown setlocal textwidth=80
   autocmd FileType text,markdown setlocal spell
   autocmd FileType text,markdown setlocal formatoptions+=t
-  autocmd FileType text,markdown source ~/.config/nvim/abbreviations.vim
-
-  " Enable spellchecking for org files
-  autocmd FileType org setlocal spell
-  autocmd FileType org source ~/.config/nvim/abbreviations.vim
 
   " Automatically wrap at 72 characters and spell check git commit messages
   autocmd FileType gitcommit setlocal textwidth=72
   autocmd FileType gitcommit setlocal spell
   autocmd FileType gitcommit setlocal formatoptions+=t
-  autocmd FileType gitcommit source ~/.config/nvim/abbreviations.vim
 
-  " Tern settings for javascript
-  autocmd InsertLeave,InsertEnter,CompleteDone *.js,*.jsx if pumvisible() == 0 | pclose | endif
-  autocmd FileType javascript,javascript.jsx setlocal completeopt-=preview
-  autocmd FileType javascript,javascript.jsx nnoremap <silent> <buffer> gd :TernDef<cr>
-  autocmd FileType javascript,javascript.jsx nnoremap <silent> <buffer> K :TernDoc<cr>
-  autocmd FileType javascript,javascript.jsx nnoremap <silent> <buffer> <localleader>K :TernDocBrowse<cr>
+  " Enable spellchecking for org files
+  autocmd FileType org setlocal spell
 
   " Allow stylesheets to autocomplete hyphenated words
   autocmd FileType css,sass,scss setlocal iskeyword+=-
-
-  " Types of files to load Emmet
-  autocmd FileType css,eruby,html,javascript,javascript.jsx,jsp EmmetInstall
 
   " Ruby completion settings
   autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
@@ -405,9 +394,6 @@ augroup vimrcEx
   autocmd FileType diff  nnoremap <buffer> <silent> q :bd<cr>
   autocmd FileType qf    nnoremap <buffer> <silent> q :bd<cr>
   autocmd FileType netrw nnoremap <buffer> <silent> q :Rex<cr>
-
-  " This is so that delimitMate does not conflict with auto-close when dealing with tags
-  autocmd FileType html let b:delimitMate_matchpairs = "(:),[:],{:}"
 augroup END
 "}}}
 " Plugin settings"{{{
@@ -420,6 +406,9 @@ let g:airline#extensions#tabline#enabled = 1
 let g:delimitMate_expand_cr = 1
 let g:delimitMate_expand_space = 1
 let g:delimitMate_jump_expansion = 1
+
+" This is so that delimitMate does not conflict with auto-close when dealing with tags
+autocmd vimrcEx FileType html let b:delimitMate_matchpairs = "(:),[:],{:}"
 "}}}
 " Deoplete"{{{
 let g:deoplete#enable_at_startup = 1
@@ -438,16 +427,36 @@ let g:EasyMotion_use_upper = 1
 " Emmet"{{{
 let g:user_emmet_install_global = 0
 let g:user_emmet_leader_key=','
+
+" Types of files to load Emmet
+autocmd vimrcEx FileType css,eruby,html,javascript,javascript.jsx,jsp EmmetInstall
 "}}}
 " Fzf"{{{
 
+" Replace the default file completion with fzf-based fuzzy completion
+imap <C-x><C-f> <plug>(fzf-complete-path)
 " Replace the default dictionary completion with fzf-based fuzzy completion
 inoremap <expr> <C-x><C-k> fzf#complete('cat /usr/share/dict/words')
 " Replace the default line completion with fzf-based fuzzy completion
 imap <C-x><C-l> <plug>(fzf-complete-line)
+
 " Enable per-command history.
 let g:fzf_history_dir = '~/.local/share/fzf-history'
-let g:fzf_commits_log_options = '--color=always --date=short --graph --format="%C(yellow)%h %C(red)| %C(green)%ad%  %C(red)|%C(reset) %s%C(auto)%d %C(red)<- %C(black)%C(bold)%cr by [%an]"'
+let g:fzf_commits_log_options = '--color=always --date=short --graph --format=
+      \"%C(yellow)%h %C(red)| %C(green)%ad%  %C(red)|%C(reset) %s%C(auto)%d %C(red)<- %C(black)%C(bold)%cr by [%an]"'
+
+" Change the highlight of search results to red colour instead
+autocmd vimrcEx VimEnter * command! -nargs=* Ag
+      \ call fzf#vim#ag(<q-args>, '--color-match "1;31"', fzf#vim#default_layout)
+
+" Override statusline as you like
+function! s:fzf_statusline()
+  highlight fzf1 ctermfg=196 ctermbg=240
+  highlight fzf2 ctermfg=254 ctermbg=240
+  highlight fzf3 ctermfg=254 ctermbg=240
+  setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
+endfunction
+autocmd vimrcEx User FzfStatusLine call <SID>fzf_statusline()
 "}}}
 " Gitgutter"{{{
 let g:gitgutter_map_keys = 0
@@ -482,10 +491,18 @@ let g:netrw_list_hide.='\.so,\.swp,\.zip,/\.Trash/,\.pdf,\.dmg,/Library/,/\.rben
 let g:rainbow_active = 1
 "}}}
 " Tern"{{{
-if exists('g:plugs["tern_for_vim"]')
-  let g:tern_show_argument_hints = 'on_hold'
-  let g:tern_show_signature_in_pum = 1
-endif
+
+" Settings to control how much description is given in the completion menu
+let g:tern_show_argument_hints = 'on_hold'
+let g:tern_show_signature_in_pum = 1
+
+" Disable the preview that shows automatically when autocompleting
+autocmd vimrcEx InsertLeave,InsertEnter,CompleteDone *.js,*.jsx if pumvisible() == 0 | pclose | endif
+autocmd vimrcEx FileType javascript,javascript.jsx setlocal completeopt-=preview
+" Define some local tern key bindings
+autocmd vimrcEx FileType javascript,javascript.jsx nnoremap <silent> <buffer> gd :TernDef<cr>
+autocmd vimrcEx FileType javascript,javascript.jsx nnoremap <silent> <buffer> K :TernDoc<cr>
+autocmd vimrcEx FileType javascript,javascript.jsx nnoremap <silent> <buffer> <localleader>K :TernDocBrowse<cr>
 "}}}
 " Ultisnips"{{{
 let g:UltiSnipsExpandTrigger="<tab>"
