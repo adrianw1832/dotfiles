@@ -1,5 +1,21 @@
-# Source the theme first to prevent overridden by default
-source ~/dotfiles/zsh/powerline.zsh-theme
+# If rbenv is present, configure it for use
+if which rbenv &> /dev/null; then
+    eval "$(rbenv init -)"
+fi
+
+# Setting for fasd to work
+eval "$(fasd --init auto)"``
+
+# Load fzf into the shell
+source ~/.fzf.zsh
+
+# Overload the colour palette to ensure correct gruvbox colours
+source ~/.config/nvim/plugged/gruvbox/gruvbox_256palette.sh
+
+# Source custom zsh files
+for file in ~/dotfiles/zsh/*; do
+    source "$file"
+done
 
 # Using zplug as plugin manager
 source ~/.zplug/init.zsh
@@ -22,23 +38,3 @@ fi
 
 # Then, source plugins and add commands to $PATH
 zplug load --verbose
-
-# Setting for fasd to work
-eval "$(fasd --init auto)"``
-
-# if rbenv is present, configure it for use
-if which rbenv &> /dev/null; then
-    # enable shims and auto-completion
-    eval "$(rbenv init -)"
-fi
-
-# Load fzf into the shell
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# Overload the colour palette to ensure correct gruvbox colours
-source ~/.config/nvim/plugged/gruvbox/gruvbox_256palette.sh
-
-# Source custom zsh files
-for file in ~/dotfiles/zsh/*.zsh; do
-    source "$file"
-done
