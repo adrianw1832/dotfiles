@@ -15,7 +15,7 @@ alias md="mkdir -p"
 alias rd="rmdir"
 
 # Ripgrep
-alias -g G='| rg'
+alias -g G='| rg -S'
 
 # Ls
 alias l='ls -AGFh' # Colorize output, add file type indicator, and put sizes in human readable format
