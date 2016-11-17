@@ -6,23 +6,15 @@ update_period=600
 TMUX_POWERLINE_SEG_WEATHER_DATA_PROVIDER_DEFAULT="yahoo"
 TMUX_POWERLINE_SEG_WEATHER_UNIT_DEFAULT="c"
 TMUX_POWERLINE_SEG_WEATHER_UPDATE_PERIOD_DEFAULT="600"
-if shell_is_bsd; then
-  TMUX_POWERLINE_SEG_WEATHER_GREP_DEFAULT="/usr/local/bin/grep"
-else
-  TMUX_POWERLINE_SEG_WEATHER_GREP_DEFAULT="grep"
-fi
+TMUX_POWERLINE_SEG_WEATHER_GREP_DEFAULT="grep"
 
 
 generate_segmentrc() {
   read -d '' rccontents  << EORC
-  # The data provider to use. Currently only "yahoo" is supported.
-  export TMUX_POWERLINE_SEG_WEATHER_DATA_PROVIDER="${TMUX_POWERLINE_SEG_WEATHER_DATA_PROVIDER_DEFAULT}"
   # What unit to use. Can be any of {c,f,k}.
   export TMUX_POWERLINE_SEG_WEATHER_UNIT="${TMUX_POWERLINE_SEG_WEATHER_UNIT_DEFAULT}"
   # How often to update the weather in seconds.
   export TMUX_POWERLINE_SEG_WEATHER_UPDATE_PERIOD="${TMUX_POWERLINE_SEG_WEATHER_UPDATE_PERIOD_DEFAULT}"
-  # Name of GNU grep binary if in PATH, or path to it.
-  export TMUX_POWERLINE_SEG_WEATHER_GREP="${TMUX_POWERLINE_SEG_WEATHER_GREP_DEFAULT}"
 
   # Your location. Find a code that works for you:
   # 1. Go to Yahoo weather http://weather.yahoo.com/
@@ -37,29 +29,18 @@ run_segment() {
   __process_settings
   local tmp_file="${TMUX_POWERLINE_DIR_TEMPORARY}/weather_yahoo.txt"
   local weather
-  case "$TMUX_POWERLINE_SEG_WEATHER_DATA_PROVIDER" in
-    "yahoo") weather=$(__yahoo_weather) ;;
-    *)
-      echo "Unknown weather provider [${$TMUX_POWERLINE_SEG_WEATHER_DATA_PROVIDER}]";
-      return 1
-  esac
+  weather=$(__yahoo_weather)
   if [ -n "$weather" ]; then
     echo "$weather"
   fi
 }
 
 __process_settings() {
-  if [ -z "$TMUX_POWERLINE_SEG_WEATHER_DATA_PROVIDER" ]; then
-    export TMUX_POWERLINE_SEG_WEATHER_DATA_PROVIDER="${TMUX_POWERLINE_SEG_WEATHER_DATA_PROVIDER_DEFAULT}"
-  fi
   if [ -z "$TMUX_POWERLINE_SEG_WEATHER_UNIT" ]; then
     export TMUX_POWERLINE_SEG_WEATHER_UNIT="${TMUX_POWERLINE_SEG_WEATHER_UNIT_DEFAULT}"
   fi
   if [ -z "$TMUX_POWERLINE_SEG_WEATHER_UPDATE_PERIOD" ]; then
     export TMUX_POWERLINE_SEG_WEATHER_UPDATE_PERIOD="${TMUX_POWERLINE_SEG_WEATHER_UPDATE_PERIOD_DEFAULT}"
-  fi
-  if [ -z "$TMUX_POWERLINE_SEG_WEATHER_GREP" ]; then
-    export TMUX_POWERLINE_SEG_WEATHER_GREP="${TMUX_POWERLINE_SEG_WEATHER_GREP_DEFAULT}"
   fi
   if [ -z "$TMUX_POWERLINE_SEG_WEATHER_LOCATION" ]; then
     echo "No weather location specified.";
@@ -70,11 +51,7 @@ __process_settings() {
 __yahoo_weather() {
   degree=""
   if [ -f "$tmp_file" ]; then
-    if shell_is_osx || shell_is_bsd; then
-      last_update=$(stat -f "%m" ${tmp_file})
-    elif shell_is_linux; then
-      last_update=$(stat -c "%Y" ${tmp_file})
-    fi
+    last_update=$(stat -f "%m" ${tmp_file})
     time_now=$(date +%s)
 
     up_to_date=$(echo "(${time_now}-${last_update}) < ${update_period}" | bc)
@@ -92,24 +69,17 @@ __yahoo_weather() {
         exit 1
       fi
 
-      # Assume latest grep is in PATH
-      gnugrep="${TMUX_POWERLINE_SEG_WEATHER_GREP}"
-
       # <yweather:units temperature="F" distance="mi" pressure="in" speed="mph"/>
-      unit=$(echo "$weather_data" | "$gnugrep" -Zo "<yweather:units [^<>]*/>" | sed 's/.*temperature="\([^"]*\)".*/\1/')
-      condition=$(echo "$weather_data" | "$gnugrep" -Zo "<yweather:condition [^<>]*/>")
+      unit=$(echo "$weather_data" | grep -Zo "<yweather:units [^<>]*/>" | sed 's/.*temperature="\([^"]*\)".*/\1/')
+      condition=$(echo "$weather_data" | grep -Zo "<yweather:condition [^<>]*/>")
       # <yweather:condition  text="Clear"  code="31"  temp="66"  date="Mon, 01 Oct 2012 8:00 pm CST" />
       degree=$(echo "$condition" | sed 's/.*temp="\([^"]*\)".*/\1/')
       condition=$(echo "$condition" | sed 's/.*text="\([^"]*\)".*/\1/')
       # Pull the times for sunrise and sunset so we know when to change the day/night indicator
       # <yweather:astronomy sunrise="6:56 am"   sunset="6:21 pm"/>
-      if shell_is_osx || shell_is_bsd; then
-        date_arg='-j -f "%H:%M %p "'
-      else
-        date_arg='-d'
-      fi
-      sunrise=$(date ${date_arg}"$(echo "$weather_data" | "$gnugrep" "yweather:astronomy" | sed 's/^\(.*\)sunset.*/\1/' | sed 's/^.*sunrise="\(.*m\)".*/\1/')" +%H%M)
-      sunset=$(date ${date_arg}"$(echo "$weather_data" | "$gnugrep" "yweather:astronomy" | sed 's/^.*sunset="\(.*m\)".*/\1/')" +%H%M)
+      date_arg='-j -f "%H:%M %p "'
+      sunrise=$(date ${date_arg}"$(echo "$weather_data" | grep "yweather:astronomy" | sed 's/^\(.*\)sunset.*/\1/' | sed 's/^.*sunrise="\(.*m\)".*/\1/')" +%H%M)
+      sunset=$(date ${date_arg}"$(echo "$weather_data" | grep "yweather:astronomy" | sed 's/^.*sunset="\(.*m\)".*/\1/')" +%H%M)
     elif [ -f "${tmp_file}" ]; then
       __read_tmp_file
     fi
@@ -154,7 +124,7 @@ __get_condition_symbol() {
       echo "〰"
       ;;
     "breezy")
-      echo "🍃"
+      echo "🍃 "
       ;;
     "windy" | "fair/windy")
       echo " "

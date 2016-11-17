@@ -14,36 +14,15 @@
 	# Overlay directory to look for segments. There you can put your own segments outside the repo. Fallback will still be the "segments" directory in the repo.
 	export TMUX_POWERLINE_DIR_USER_SEGMENTS="~/dotfiles/tmux-powerline/segments"
 # }
-# battery.sh {
-	# How to display battery remaining. Can be {percentage, cute}.
-	export TMUX_POWERLINE_SEG_BATTERY_TYPE="percentage"
-# }
 # hostname.sh {
 	# Use short or long format for the hostname. Can be {"short, long"}.
-	export TMUX_POWERLINE_SEG_HOSTNAME_FORMAT="short"
-# }
-# now_playing.sh {
-	# Music player to use.
-	export TMUX_POWERLINE_SEG_NOW_PLAYING_MUSIC_PLAYER="spotify"
-	# Maximum output length.
-	export TMUX_POWERLINE_SEG_NOW_PLAYING_MAX_LEN="40"
-	# How to handle too long strings. Can be {trim, roll}.
-	export TMUX_POWERLINE_SEG_NOW_PLAYING_TRIM_METHOD="trim"
-	# Charcters per second to roll if rolling trim method is used.
-	export TMUX_POWERLINE_SEG_NOW_PLAYING_ROLL_SPEED="2"
-
-	# Fancy char to display before now playing track
-	export TMUX_POWERLINE_SEG_NOW_PLAYING_NOTE_CHAR=""
+	# export TMUX_POWERLINE_SEG_HOSTNAME_FORMAT="short"
 # }
 # weather.sh {
-	# The data provider to use. Currently only "yahoo" is supported.
-	export TMUX_POWERLINE_SEG_WEATHER_DATA_PROVIDER="yahoo"
 	# What unit to use. Can be any of {c,f,k}.
 	export TMUX_POWERLINE_SEG_WEATHER_UNIT="c"
 	# How often to update the weather in seconds.
 	export TMUX_POWERLINE_SEG_WEATHER_UPDATE_PERIOD="900"
-	# Name of GNU grep binary if in PATH, or path to it.
-	export TMUX_POWERLINE_SEG_WEATHER_GREP="grep"
 
 	# Your location. Find a code that works for you:
 	# 1. Go to Yahoo weather http://weather.yahoo.com/
