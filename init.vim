@@ -9,6 +9,7 @@ endif
 call plug#begin('~/.config/nvim/plugged')
 " Enhancements"{{{
 
+Plug 'AndrewRadev/sideways.vim'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Raimondi/delimitMate'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'}
@@ -495,6 +496,10 @@ let g:netrw_list_hide.='\.so,\.swp,\.zip,/\.Trash/,\.pdf,\.dmg,/Library/,/\.rben
 "}}}
 "Rainbow"{{{
 let g:rainbow_active = 1
+"}}}
+" Sideways"{{{
+nnoremap <silent> gsh :SidewaysLeft<cr>
+nnoremap <silent> gsl :SidewaysRight<cr>
 "}}}
 " Tern"{{{
 
