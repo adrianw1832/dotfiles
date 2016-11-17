@@ -1,4 +1,4 @@
-SIGNAL_ICON=""
+SIGNAL_ICON=" "
 NO_SIGNAL_ICON=" "
 
 generate_segmentrc() {
@@ -15,20 +15,18 @@ run_segment() {
 }
 
 __wifi_signal() {
-  db=$(/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I \
+  rssi=$(/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I \
     | grep "agrCtlRSSI" | awk '{print $2}')
-  signal="$((2 * ($db + 100)))"
+  noise=$(/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I \
+    | grep "agrCtlNoise" | awk '{print $2}')
+  signal="$((rssi - noise))"
 
-  if [ $signal -gt 70 ]; then
-    echo -n "#[fg=colour118]"
-  elif [ $signal -gt 35 ]; then
-    echo -n "#[fg=colour172]"
-  else
-    echo -n "#[fg=colour196]"
-  fi
-
-  if [ $signal -le 100 ] && [ $signal -ge 0 ]; then
-    echo "$SIGNAL_ICON $signal%"
+  if [ $signal -ge 40 ]; then
+    echo "#[fg=colour118]$SIGNAL_ICON"
+  elif [ $signal -ge 25 ]; then
+    echo "#[fg=colour172]$SIGNAL_ICON"
+  elif [ $signal -ge 10 ]; then
+    echo "#[fg=colour196]$SIGNAL_ICON"
   else
     echo "#[fg=colour196]$NO_SIGNAL_ICON"
   fi
