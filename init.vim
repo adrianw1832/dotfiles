@@ -41,6 +41,7 @@ Plug 'wellle/targets.vim'
 "}}}
 " Others"{{{
 
+" Plug 'Konfekt/FastFold'
 Plug 'jceb/vim-orgmode', { 'for': 'org' }
 Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'eruby', 'jsp', 'javascript', 'javascript.jsx'] }
 Plug 'morhetz/gruvbox'
@@ -87,6 +88,7 @@ set diffopt+=vertical " Vertical default for diff panes
 set expandtab " Tab key will always insert 'softtabstop' amount of space
 set foldenable " Enable folding
 set foldmethod=marker " Fold based on markers
+set foldlevelstart=99 " To make sure all folds are initially opened
 set grepprg=rg " Use ripgrep as default for grep
 set hidden " Change default behaviour of opening file of existing buffer
 set ignorecase " Ignore case when searching
@@ -394,6 +396,10 @@ augroup vimrcEx
   autocmd FileType diff  nnoremap <buffer> <silent> q :bd<cr>
   autocmd FileType qf    nnoremap <buffer> <silent> q :bd<cr>
   autocmd FileType netrw nnoremap <buffer> <silent> q :Rex<cr>
+
+  " Folding options
+  autocmd FileType vim,tmux,zsh setlocal foldlevel=0
+  " autocmd FileType css,html,javascript,javascript.jsx setlocal foldmethod=syntax
 augroup END
 "}}}
 " Plugin settings"{{{
