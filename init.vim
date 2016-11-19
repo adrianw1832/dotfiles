@@ -36,7 +36,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-vinegar'
 Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'wellle/targets.vim'
 "}}}
@@ -44,7 +43,7 @@ Plug 'wellle/targets.vim'
 
 " Plug 'Konfekt/FastFold'
 Plug 'jceb/vim-orgmode', { 'for': 'org' }
-Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'eruby', 'jsp', 'javascript', 'javascript.jsx'] }
+Plug 'mattn/emmet-vim'
 Plug 'morhetz/gruvbox'
 Plug 'terryma/vim-smooth-scroll'
 Plug 'tmux-plugins/vim-tmux', { 'for': 'tmux' }
@@ -469,22 +468,9 @@ let g:neomake_javascript_enabled_makers = ['eslint']
 "}}}
 " Netrw "{{{
 
-" Netrw defaults to tree style on open
-let g:netrw_liststyle= 3
-
-" Things to ignore when when using netrw
-let g:netrw_list_hide='\.git,'
-let g:netrw_list_hide.='\.tmp,'
-let g:netrw_list_hide.='\.DS_Store,'
-let g:netrw_list_hide.='vendor/rails/,'
-let g:netrw_list_hide.='vendor/cache/,'
-let g:netrw_list_hide.='\.gem,'
-let g:netrw_list_hide.='\.coverage/,'
-let g:netrw_list_hide.='log/,'
-let g:netrw_list_hide.='tmp/,'
-let g:netrw_list_hide.='\.idea/,'
-let g:netrw_list_hide.='\.png,\.jpg,\.gif,'
-let g:netrw_list_hide.='\.so,\.swp,\.zip,/\.Trash/,\.pdf,\.dmg,/Library/,/\.rbenv/,'
+" Don't load netrw since I am using ranger as my file explorer
+let g:loaded_netrw       = 1
+let g:loaded_netrwPlugin = 1
 "}}}
 "Rainbow"{{{
 let g:rainbow_active = 1
