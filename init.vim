@@ -11,7 +11,6 @@ call plug#begin('~/.config/nvim/plugged')
 
 Plug 'AndrewRadev/sideways.vim'
 Plug 'AndrewRadev/splitjoin.vim'
-Plug 'Raimondi/delimitMate'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'}
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'airblade/vim-gitgutter'
@@ -21,14 +20,15 @@ Plug 'christoomey/vim-sort-motion'
 Plug 'christoomey/vim-tmux-runner'
 Plug 'easymotion/vim-easymotion'
 Plug 'janko-m/vim-test'
+Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install' } | Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'luochen1990/rainbow'
 Plug 'neomake/neomake'
 Plug 'sickill/vim-pasta'
 Plug 'tommcdo/vim-exchange'
-Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-eunuch'
@@ -408,14 +408,6 @@ augroup END
 let g:airline_theme='tomorrow'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
-"}}}
-" DelimitMate"{{{
-let g:delimitMate_expand_cr = 1
-let g:delimitMate_expand_space = 1
-let g:delimitMate_jump_expansion = 1
-
-" This is so that delimitMate does not conflict with auto-close when dealing with tags
-autocmd vimrcEx FileType html let b:delimitMate_matchpairs = "(:),[:],{:}"
 "}}}
 " Deoplete"{{{
 let g:deoplete#enable_at_startup = 1
