@@ -5,6 +5,7 @@ export LSCOLORS=Gxfxcxdxbxegedabagacad
 export PATH=$PATH:$HOME/bin
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
 export SHELL='/usr/local/bin/zsh'
+export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
 # Remove duplicate entries
 typeset -U PATH
