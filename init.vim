@@ -538,10 +538,10 @@ autocmd vimrcEx Bufenter *.conf setlocal commentstring=#\ %s
 let g:used_javascript_libs = 'jquery,underscore,react,jasmine,flux'
 "}}}
 " Vim smooth scroll"{{{
-noremap <silent> <C-u> :call smooth_scroll#up(&scroll, 10, 2)<cr>
-noremap <silent> <C-d> :call smooth_scroll#down(&scroll, 10, 2)<cr>
-noremap <silent> <C-b> :call smooth_scroll#up(&scroll*2, 10, 4)<cr>
-noremap <silent> <C-f> :call smooth_scroll#down(&scroll*2, 10, 4)<cr>
+nnoremap <silent> <C-u> :call smooth_scroll#up(&scroll, 20, 2)<cr>
+nnoremap <silent> <C-d> :call smooth_scroll#down(&scroll, 20, 2)<cr>
+nnoremap <silent> <C-b> :call smooth_scroll#up(&scroll*2, 20, 4)<cr>
+nnoremap <silent> <C-f> :call smooth_scroll#down(&scroll*2, 20, 4)<cr>
 "}}}
 " Vim surround"{{{
 let g:surround_45 = "<% \r %>"
