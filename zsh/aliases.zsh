@@ -15,21 +15,24 @@ alias md="mkdir -p"
 alias rd="rmdir"
 
 # Ripgrep
-alias -g G='| rg -S'
+alias -g G="| rg -S"
 
 # Ls
-alias l='ls -AGFh' # Colorize output, add file type indicator, and put sizes in human readable format
-alias ls='ls -AGFh' # Colorize output, add file type indicator, and put sizes in human readable format
-alias ll='ls -AGFhl' # Same as above, but in long listing format
+alias l="ls -AGFh" # Colorize output, add file type indicator, and put sizes in human readable format
+alias ls="ls -AGFh" # Colorize output, add file type indicator, and put sizes in human readable format
+alias ll="ls -AGFhl" # Same as above, but in long listing format
 
 # Get OS software updates, and update installed packages of homebrew, cask, npm, bower and Ruby gems
-alias update='softwareupdate -i -a; brew update; brew upgrade; brew cleanup; brew cask cleanup; npm install npm -g; npm install bower -g; npm update -g; npm cache clean; bower update; bower cache clean; gem update --system; gem update; gem cleanup; zplug update; zplug clear'
+alias update="softwareupdate -i -a; brew update; brew upgrade; brew cleanup; brew cask cleanup; npm install npm -g; npm install bower -g; npm update -g; npm cache clean; bower update; bower cache clean; gem update --system; gem update; gem cleanup; zplug update; zplug clear"
+
+# Get the weather for the next 3 days
+alias weather="curl http://wttr\.in/london"
 
 # Reload the shell
-alias reload='exec $SHELL -l'
+alias reload="exec $SHELL -l"
 
 # Copy the working directory path
-alias cpwd='pwd|tr -d "\n"|pbcopy'
+alias cpwd="pwd|tr -d "\n"|pbcopy"
 
 # Lock the screen (when going AFK)
 alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
@@ -43,7 +46,7 @@ alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date
 alias cask="brew cask"
 
 # Fasd
-alias j='fasd_cd -d'
+alias j="fasd_cd -d"
 # jj is mapped to a function integrated with fzf
 
 #Source Tree
