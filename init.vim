@@ -237,8 +237,6 @@ augroup END
 " Easier esc mapping
 inoremap jk <Esc>
 inoremap kj <Esc>
-vnoremap jk <Esc>
-vnoremap kj <Esc>
 
 " Easier navigating between panes
 nnoremap <C-h> <C-w>h
@@ -250,6 +248,10 @@ nnoremap <C-\> <C-w>p
 " Allow j and k to move down wrapped lines
 nnoremap j gj
 nnoremap k gk
+
+" Map H and L to more sensible options compared to their h and l counterpart
+noremap H ^
+noremap L g_
 
 " Switching between buffers
 nnoremap <C-n> :bnext<cr>
@@ -290,7 +292,7 @@ vnoremap ; :
 " Remap Q for exmode to run macros instead
 nnoremap Q @q
 " Change the behaviour of Y to be more inline with the rest(eg C, D)
-nnoremap Y y$
+nnoremap Y yg_
 
 " Visually select the text that was last edited/pasted
 nnoremap gV `[v`]
@@ -316,7 +318,8 @@ let mapleader = "\<Space>"
 nnoremap <leader>a :Ag<Space>
 nnoremap <leader>b :Buffers<cr>
 nnoremap <leader>bi :!bundle install<cr>
-nnoremap <silent> <leader>c :cclose<cr>
+nnoremap <silent> <leader>co :copen<cr>
+nnoremap <silent> <leader>cc :cclose<cr>
 nnoremap <leader>e :w<cr>:TestLast<cr>
 nnoremap <leader>g :w<cr>:Gstatus<cr>
 nnoremap <leader>gd :Gvdiff<cr>
