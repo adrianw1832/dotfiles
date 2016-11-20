@@ -31,7 +31,8 @@ bindkey "${terminfo[kcbt]}" reverse-menu-complete
 
 bindkey -M viins '^ ' _easier_ctrl-z
 
-bindkey -M viins '^w' forward-word
+bindkey -M viins '^g' forward-word
+bindkey -M viins '^w' backward-delete-word
 bindkey -M viins '^v' copy-prev-shell-word
 
 bindkey -M vicmd 'Y' vi-yank-eol
