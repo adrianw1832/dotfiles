@@ -83,14 +83,3 @@ vv() {
   local file
   file="$(fasd -Rfl "$1" | fzf -1 -0 --no-sort +m)" && $EDITOR "${file}" || return 1
 }
-
-# Ensure tmux is always running
-_not_inside_tmux() { [[ -z "$TMUX" ]] }
-
-ensure_tmux_is_running() {
-  if _not_inside_tmux; then
-    tat
-  fi
-}
-
-ensure_tmux_is_running
