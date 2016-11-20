@@ -47,8 +47,7 @@ Plug 'mattn/emmet-vim'
 Plug 'morhetz/gruvbox'
 Plug 'terryma/vim-smooth-scroll'
 Plug 'tmux-plugins/vim-tmux', { 'for': 'tmux' }
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
 "}}}
 " Language related"{{{
 " Ruby"{{{
@@ -510,6 +509,9 @@ let g:easy_align_bypass_fold = 1
 "}}}
 " Vim close tag"{{{
 let g:closetag_filenames = "*.erb,*.html,*.js,*.jsx"
+"}}}
+"Vim commentary"{{{
+autocmd vimrcEx Bufenter *.conf setlocal commentstring=#\ %s
 "}}}
 " Vim javascript libraries syntax"{{{
 let g:used_javascript_libs = 'jquery,underscore,react,jasmine,flux'
