@@ -119,6 +119,119 @@ set undofile " Set the use of undofiles, which keeps a history of the undos
 set updatetime=1000 " Time in ms for vim to update/ refresh
 set wildmode=longest:full,full " Set the wildmenu behaviour to be more like zsh
 "}}}
+" Custom functions"{{{
+" Don't close window, when deleting a buffer"{{{
+command! Bclose call <SID>BufCloseSavingWindow()
+function! s:BufCloseSavingWindow()
+  let l:currentBufNum = bufnr("%")
+  let l:alternateBufNum = bufnr("#")
+
+  if buflisted(l:alternateBufNum)
+    buffer #
+  else
+    bnext
+  endif
+
+  if bufnr("%") == l:currentBufNum
+    new
+  endif
+
+  if buflisted(l:currentBufNum)
+    execute("bdelete! ".l:currentBufNum)
+  endif
+endfunction
+"}}}
+" Delete all trailing white space on save"{{{
+function! s:StripTrailingWhitespaces()
+  " Save last search pattern and cursor position
+  let _s = @/
+  let l  = line(".")
+  let c  = col(".")
+  " Search all trailing whitespaces and replace them with nothing
+  %s/\s\+$//e
+  " Restore last search pattern and cursor position
+  let @/ = _s
+  call cursor(l, c)
+endfunction
+"}}}
+" Create directory on save if it doesn't exist"{{{
+function! s:CreateNonExistantDirectory()
+  let dir = expand('%:p:h')
+
+  if !isdirectory(dir)
+    call mkdir(dir, 'p')
+    echo 'Created non-existing directory: '.dir
+  endif
+endfunction
+"}}}
+" Auto commands"{{{
+augroup vimrcEx
+  autocmd!
+
+  autocmd VimEnter * source ~/dotfiles/abbreviations.vim
+
+  " When editing a file, always jump to the last known cursor position.
+  " Don't do it for commit messages, when the position is invalid, or when
+  " inside an event handler (happens when dropping a file on gvim).
+  autocmd BufReadPost *
+        \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
+        \   exe "normal g`\"" |
+        \ endif
+
+  autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+  autocmd BufWritePre * :call <SID>CreateNonExistantDirectory()
+
+  autocmd InsertLeave,BufWinEnter,WinEnter * set cursorline
+  autocmd InsertEnter,BufWinLeave,WinLeave * set nocursorline
+
+  " Automatically rebalance windows on vim resize
+  autocmd VimResized * :wincmd =
+
+  " Automatically enter insert mode when entering terminal buffer
+  autocmd BufWinEnter,WinEnter term://* startinsert
+
+  " Run NeoMake on read and write operations
+  autocmd BufReadPost,BufWritePost * Neomake
+
+  " Maps K to open vim help for the word under cursor when editing vim files
+  autocmd FileType vim setlocal keywordprg=:help
+
+  " Enable different indentation for language specific files
+  autocmd FileType java       setlocal tabstop=8 softtabstop=4 shiftwidth=4
+  autocmd FileType javascript setlocal tabstop=4 softtabstop=2 shiftwidth=2
+
+  " Automatically wrap at 80 characters and spell check text and markdowns
+  autocmd FileType text,markdown setlocal textwidth=80
+  autocmd FileType text,markdown setlocal spell
+  autocmd FileType text,markdown setlocal formatoptions+=t
+
+  " Automatically wrap at 72 characters and spell check git commit messages
+  autocmd FileType gitcommit setlocal textwidth=72
+  autocmd FileType gitcommit setlocal spell
+  autocmd FileType gitcommit setlocal formatoptions+=t
+
+  " Enable spellchecking for org files
+  autocmd FileType org setlocal spell
+
+  " Allow stylesheets to autocomplete hyphenated words
+  autocmd FileType css,sass,scss setlocal iskeyword+=-
+
+  " Ruby completion settings
+  autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
+  autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+  autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
+
+  " Mapping q to close the windows
+  autocmd FileType help  nnoremap <buffer> <silent> q :bd<cr>
+  autocmd FileType diff  nnoremap <buffer> <silent> q :bd<cr>
+  autocmd FileType qf    nnoremap <buffer> <silent> q :bd<cr>
+  autocmd FileType netrw nnoremap <buffer> <silent> q :Rex<cr>
+
+  " Folding options
+  autocmd FileType vim,tmux,zsh setlocal foldlevel=0
+  " autocmd FileType css,html,javascript,javascript.jsx setlocal foldmethod=syntax
+augroup END
+"}}}
 " Custom mappings"{{{
 
 " Easier esc mapping
@@ -148,31 +261,6 @@ nnoremap <silent> <Plug>TransposeCharacters xp
       \:call repeat#set("\<Plug>TransposeCharacters")<cr>
 nmap xp <Plug>TransposeCharacters
 
-" Mapping for Easy Motion
-nmap s <Plug>(easymotion-s2)
-omap t <Plug>(easymotion-tl)
-omap T <Plug>(easymotion-Tl)
-omap f <Plug>(easymotion-fl)
-omap F <Plug>(easymotion-Fl)
-nmap t <Plug>(easymotion-tl)
-nmap T <Plug>(easymotion-Tl)
-nmap f <Plug>(easymotion-fl)
-nmap F <Plug>(easymotion-Fl)
-
-" Gitgutter remappings
-nmap ]c <Plug>GitGutterNextHunk
-nmap [c <Plug>GitGutterPrevHunk
-omap ih <Plug>GitGutterTextObjectInnerPending
-omap ah <Plug>GitGutterTextObjectOuterPending
-xmap ih <Plug>GitGutterTextObjectInnerVisual
-xmap ah <Plug>GitGutterTextObjectOuterVisual
-
-" Smooth scroll remappings
-noremap <silent> <C-u> :call smooth_scroll#up(&scroll, 10, 2)<cr>
-noremap <silent> <C-d> :call smooth_scroll#down(&scroll, 10, 2)<cr>
-noremap <silent> <C-b> :call smooth_scroll#up(&scroll*2, 10, 4)<cr>
-noremap <silent> <C-f> :call smooth_scroll#down(&scroll*2, 10, 4)<cr>
-
 " Terminal mapping to return to previous pane
 tnoremap <ESC> <C-\><C-n><C-w><C-p>
 
@@ -192,30 +280,32 @@ cnoremap <C-e> <End>
 cnoremap <C-f> <Right>
 cnoremap <C-h> <BS>
 
-" Smarter history navigation with up and down arrows
+" Smarter history navigation with up and down arrows in command mode
 cnoremap <C-n> <Down>
 cnoremap <C-p> <Up>
-
-" Remap Q for exmode to run macros instead
-nnoremap Q @q
 " Remap for easier command mode access
 nnoremap ; :
 vnoremap ; :
+
+" Remap Q for exmode to run macros instead
+nnoremap Q @q
+" Change the behaviour of Y to be more inline with the rest(eg C, D)
+nnoremap Y y$
+
 " Visually select the text that was last edited/pasted
 nnoremap gV `[v`]
 " Makes the dot command behave on a Visually selected line
 vnoremap . :norm.<cr>
-" Better start of line config
-nnoremap 0 ^
-" Change the behaviour of Y to be more inline with the rest
-nnoremap Y y$
-" Remap to increase number by 1
-noremap <C-z> <C-a>
-" Copy to system clipboard
-vnoremap <C-c> "*y
 " Allow star to go back to the first search term
 nnoremap * *N
 vnoremap * *N
+nnoremap g* g*N
+vnoremap g* g*N
+" Copy to system clipboard
+vnoremap <C-c> "*y
+
+" Remap to increase number by 1
+noremap <C-z> <C-a>
 " Switching out to terminal
 nnoremap <NUL> <C-z>
 "}}}
@@ -288,121 +378,7 @@ nnoremap <leader>or  :VtrOpenRunner { 'orientation': 'v', 'percentage': 20 }<cr>
 nnoremap <leader>pry :VtrOpenRunner { 'orientation': 'h', 'percentage': 50, 'cmd': 'pry' }<cr>
 nnoremap <leader>irb :VtrOpenRunner { 'orientation': 'h', 'percentage': 50, 'cmd': 'irb' }<cr>
 "}}}
-" Custom functions"{{{
-" Don't close window, when deleting a buffer"{{{
-command! Bclose call <SID>BufcloseCloseIt()
-function! s:BufcloseCloseIt()
-  let l:currentBufNum = bufnr("%")
-  let l:alternateBufNum = bufnr("#")
-
-  if buflisted(l:alternateBufNum)
-    buffer #
-  else
-    bnext
-  endif
-
-  if bufnr("%") == l:currentBufNum
-    new
-  endif
-
-  if buflisted(l:currentBufNum)
-    execute("bdelete! ".l:currentBufNum)
-  endif
-endfunction
-"}}}
-" Delete all trailing white space on save"{{{
-function! s:StripTrailingWhitespaces()
-  " preparation: save last search, and cursor position
-  let _s=@/
-  let l = line(".")
-  let c = col(".")
-  " Do the search and replace:
-  %s/\s\+$//e
-  " clean up: restore previous search history, and cursor position
-  let @/=_s
-  call cursor(l, c)
-endfunction
-"}}}
-" Create directory on save if it doesn't exist"{{{
-function! s:CreateNonExistantDirectory()
-  let dir = expand('%:p:h')
-
-  if !isdirectory(dir)
-    call mkdir(dir, 'p')
-    echo 'Created non-existing directory: '.dir
-  endif
-endfunction
-"}}}
-"}}}
-" Auto commands"{{{
-augroup vimrcEx
-  autocmd!
-
-  autocmd VimEnter * source ~/dotfiles/abbreviations.vim
-
-  " When editing a file, always jump to the last known cursor position.
-  " Don't do it for commit messages, when the position is invalid, or when
-  " inside an event handler (happens when dropping a file on gvim).
-  autocmd BufReadPost *
-        \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
-        \   exe "normal g`\"" |
-        \ endif
-
-  autocmd BufWritePre * :call s:StripTrailingWhitespaces()
-  autocmd BufWritePre * :call s:CreateNonExistantDirectory()
-
-  autocmd InsertLeave,BufWinEnter,WinEnter * set cursorline
-  autocmd InsertEnter,BufWinLeave,WinLeave * set nocursorline
-
-  " Automatically rebalance windows on vim resize
-  autocmd VimResized * :wincmd =
-
-  " Automatically enter insert mode when entering terminal buffer
-  autocmd BufWinEnter,WinEnter term://* startinsert
-
-  " Run NeoMake on read and write operations
-  autocmd BufReadPost,BufWritePost * Neomake
-
-  " Maps K to open vim help for the word under cursor when editing vim files
-  autocmd FileType vim setlocal keywordprg=:help
-
-  " Enable different indentation for language specific files
-  autocmd FileType java       setlocal tabstop=8 softtabstop=4 shiftwidth=4
-  autocmd FileType javascript setlocal tabstop=4 softtabstop=2 shiftwidth=2
-
-  " Automatically wrap at 80 characters and spell check text and markdowns
-  autocmd FileType text,markdown setlocal textwidth=80
-  autocmd FileType text,markdown setlocal spell
-  autocmd FileType text,markdown setlocal formatoptions+=t
-
-  " Automatically wrap at 72 characters and spell check git commit messages
-  autocmd FileType gitcommit setlocal textwidth=72
-  autocmd FileType gitcommit setlocal spell
-  autocmd FileType gitcommit setlocal formatoptions+=t
-
-  " Enable spellchecking for org files
-  autocmd FileType org setlocal spell
-
-  " Allow stylesheets to autocomplete hyphenated words
-  autocmd FileType css,sass,scss setlocal iskeyword+=-
-
-  " Ruby completion settings
-  autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
-  autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
-  autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
-
-  " Mapping q to close the windows
-  autocmd FileType help  nnoremap <buffer> <silent> q :bd<cr>
-  autocmd FileType diff  nnoremap <buffer> <silent> q :bd<cr>
-  autocmd FileType qf    nnoremap <buffer> <silent> q :bd<cr>
-  autocmd FileType netrw nnoremap <buffer> <silent> q :Rex<cr>
-
-  " Folding options
-  autocmd FileType vim,tmux,zsh setlocal foldlevel=0
-  " autocmd FileType css,html,javascript,javascript.jsx setlocal foldmethod=syntax
-augroup END
-"}}}
-" Plugin settings"{{{
+" Plugin mappings and settings"{{{
 "Airline"{{{
 let g:airline_theme='tomorrow'
 let g:airline_powerline_fonts = 1
@@ -420,7 +396,17 @@ let g:tern#arguments = ['--persistent']
 let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_smartcase = 1
 let g:EasyMotion_use_smartsign_us = 1
-let g:EasyMotion_use_upper = 1
+let g:EasyMotion_keys = 'asdfghjkl;qwertyuiopzxcvbnm'
+
+nmap s <Plug>(easymotion-overwin-f2)
+nmap t <Plug>(easymotion-tl)
+nmap T <Plug>(easymotion-Tl)
+nmap f <Plug>(easymotion-fl)
+nmap F <Plug>(easymotion-Fl)
+omap t <Plug>(easymotion-tl)
+omap T <Plug>(easymotion-Tl)
+omap f <Plug>(easymotion-fl)
+omap F <Plug>(easymotion-Fl)
 "}}}
 " Emmet"{{{
 let g:user_emmet_install_global = 0
@@ -440,6 +426,8 @@ imap <C-x><C-l> <plug>(fzf-complete-line)
 
 " Enable per-command history.
 let g:fzf_history_dir = '~/.local/share/fzf-history'
+
+" Define the git log options flag
 let g:fzf_commits_log_options = '--color=always --date=short --graph --format=
       \"%C(yellow)%h %C(red)| %C(green)%ad%  %C(red)|%C(reset) %s%C(auto)%d %C(red)<- %C(black)%C(bold)%cr by [%an]"'
 
@@ -459,6 +447,13 @@ autocmd vimrcEx User FzfStatusLine call <SID>fzf_statusline()
 " Gitgutter"{{{
 let g:gitgutter_map_keys = 0
 let g:gitgutter_sign_column_always=1
+
+nmap ]c <Plug>GitGutterNextHunk
+nmap [c <Plug>GitGutterPrevHunk
+omap ih <Plug>GitGutterTextObjectInnerPending
+omap ah <Plug>GitGutterTextObjectOuterPending
+xmap ih <Plug>GitGutterTextObjectInnerVisual
+xmap ah <Plug>GitGutterTextObjectOuterVisual
 "}}}
 " Incsearch"{{{
 let g:incsearch#magic = '\v'
@@ -507,6 +502,7 @@ let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnippetDirectories=[$HOME.'/dotfiles/UltiSnips', $HOME.'/.config/nvim/plugged/vim-snippets/UltiSnips']
 "}}}
 " Vim easy align"{{{
+
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign in visual mode (e.g. vipga)
@@ -522,6 +518,12 @@ autocmd vimrcEx Bufenter *.conf setlocal commentstring=#\ %s
 "}}}
 " Vim javascript libraries syntax"{{{
 let g:used_javascript_libs = 'jquery,underscore,react,jasmine,flux'
+"}}}
+" Vim smooth scroll"{{{
+noremap <silent> <C-u> :call smooth_scroll#up(&scroll, 10, 2)<cr>
+noremap <silent> <C-d> :call smooth_scroll#down(&scroll, 10, 2)<cr>
+noremap <silent> <C-b> :call smooth_scroll#up(&scroll*2, 10, 4)<cr>
+noremap <silent> <C-f> :call smooth_scroll#down(&scroll*2, 10, 4)<cr>
 "}}}
 " Vim surround"{{{
 let g:surround_45 = "<% \r %>"
