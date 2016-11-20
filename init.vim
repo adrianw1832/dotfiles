@@ -19,6 +19,7 @@ Plug 'bronson/vim-visual-star-search'
 Plug 'christoomey/vim-sort-motion'
 Plug 'christoomey/vim-tmux-runner'
 Plug 'easymotion/vim-easymotion'
+Plug 'haya14busa/incsearch.vim'
 Plug 'janko-m/vim-test'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install' } | Plug 'junegunn/fzf.vim'
@@ -458,6 +459,12 @@ autocmd vimrcEx User FzfStatusLine call <SID>fzf_statusline()
 " Gitgutter"{{{
 let g:gitgutter_map_keys = 0
 let g:gitgutter_sign_column_always=1
+"}}}
+" Incsearch"{{{
+let g:incsearch#magic = '\v'
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
 "}}}
 " Neomake"{{{
 let g:neomake_open_list = 2
