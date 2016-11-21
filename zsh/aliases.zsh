@@ -49,11 +49,14 @@ alias cask="brew cask"
 alias j="fasd_cd -d"
 # jj is mapped to a function integrated with fzf
 
+# Intellij
+alias ij="open -b com.jetbrains.intellij"
+
+# Ranger
+alias ra="ranger"
+
 #Source Tree
 alias st="open -a SourceTree"
-
-# Open intellij
-alias ij="open -b com.jetbrains.intellij"
 # }}}
 # Config and editor# {{{
 
