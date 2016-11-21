@@ -1,4 +1,5 @@
 *.min.*
+*.py[cod]
 *~
 .DS_Store
 .bundle
