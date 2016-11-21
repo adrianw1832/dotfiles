@@ -8,7 +8,6 @@ TMUX_POWERLINE_SEG_WEATHER_UNIT_DEFAULT="c"
 TMUX_POWERLINE_SEG_WEATHER_UPDATE_PERIOD_DEFAULT="600"
 TMUX_POWERLINE_SEG_WEATHER_GREP_DEFAULT="grep"
 
-
 generate_segmentrc() {
   read -d '' rccontents  << EORC
   # What unit to use. Can be any of {c,f,k}.

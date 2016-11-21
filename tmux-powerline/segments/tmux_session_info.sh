@@ -3,5 +3,4 @@
 
 run_segment() {
   tmux display-message -p '  #S'
-  return 0
 }

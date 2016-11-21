@@ -1,5 +1,4 @@
 # Print current playing song in spotify
-
 TMUX_POWERLINE_SEG_NOW_PLAYING_MAX_LEN="40"
 TMUX_POWERLINE_SEG_NOW_PLAYING_NOTE_CHAR=""
 
