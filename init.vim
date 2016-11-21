@@ -120,8 +120,30 @@ set updatetime=1000 " Time in ms for vim to update/ refresh
 set wildmode=longest:full,full " Set the wildmenu behaviour to be more like zsh
 "}}}
 " Custom functions"{{{
+" Create directory on save if it doesn't exist"{{{
+function! s:CreateNonExistantDirectory()
+  let dir = expand('%:p:h')
+
+  if !isdirectory(dir)
+    call mkdir(dir, 'p')
+    echo 'Created non-existing directory: '.dir
+  endif
+endfunction
+"}}}
+" Delete all trailing white space on save"{{{
+function! s:StripTrailingWhitespaces()
+  " Save last search pattern and cursor position
+  let _s = @/
+  let l  = line(".")
+  let c  = col(".")
+  " Search all trailing whitespaces and replace them with nothing
+  %s/\s\+$//e
+  " Restore last search pattern and cursor position
+  let @/ = _s
+  call cursor(l, c)
+endfunction
+"}}}
 " Don't close window, when deleting a buffer"{{{
-command! Bclose call <SID>BufCloseSavingWindow()
 function! s:BufCloseSavingWindow()
   let l:currentBufNum = bufnr("%")
   let l:alternateBufNum = bufnr("#")
@@ -140,29 +162,34 @@ function! s:BufCloseSavingWindow()
     execute("bdelete! ".l:currentBufNum)
   endif
 endfunction
-"}}}
-" Delete all trailing white space on save"{{{
-function! s:StripTrailingWhitespaces()
-  " Save last search pattern and cursor position
-  let _s = @/
-  let l  = line(".")
-  let c  = col(".")
-  " Search all trailing whitespaces and replace them with nothing
-  %s/\s\+$//e
-  " Restore last search pattern and cursor position
-  let @/ = _s
-  call cursor(l, c)
-endfunction
-"}}}
-" Create directory on save if it doesn't exist"{{{
-function! s:CreateNonExistantDirectory()
-  let dir = expand('%:p:h')
 
-  if !isdirectory(dir)
-    call mkdir(dir, 'p')
-    echo 'Created non-existing directory: '.dir
-  endif
+command! Bclose call <SID>BufCloseSavingWindow()
+"}}}
+" Integration with Ranger"{{{
+function! s:OpenRangerIn(path)
+  let currentPath = expand(a:path)
+  let rangerCallback = { 'name': 'ranger' }
+  function! rangerCallback.on_exit(id, code)
+    silent! Bclose
+      if filereadable('/tmp/chosenfile')
+        exec system('sed -ie "s/ /\\\ /g" /tmp/chosenfile')
+        exec 'argadd ' . system('cat /tmp/chosenfile | tr "\\n" " "')
+        exec 'edit ' . system('head -n1 /tmp/chosenfile')
+        call system('rm /tmp/chosenfile')
+      endif
+  endfunction
+  enew
+  call termopen('ranger --choosefiles=/tmp/chosenfile ' . currentPath, rangerCallback)
+  startinsert
 endfunction
+
+command! RangerInCurrentDirectory call <SID>OpenRangerIn("%:p:h")
+command! RangerInWorkingDirectory call <SID>OpenRangerIn("")
+
+" Don't load netrw since I am using ranger as my file explorer
+let g:loaded_netrw       = 1
+let g:loaded_netrwPlugin = 1
+"}}}
 "}}}
 " Auto commands"{{{
 augroup vimrcEx
@@ -316,7 +343,7 @@ nnoremap <NUL> <C-z>
 let maplocalleader = "\\"
 let mapleader = "\<Space>"
 nnoremap <leader>a :Ag<Space>
-nnoremap <leader>b :Buffers<cr>
+nnoremap <leader>b :History<cr>
 nnoremap <leader>bi :!bundle install<cr>
 nnoremap <silent> <leader>co :copen<cr>
 nnoremap <silent> <leader>cc :cclose<cr>
@@ -362,9 +389,9 @@ nnoremap <leader>u :copen<cr>:wincmd _<cr>:wincmd \|<cr>
 nnoremap <leader>v :vnew <C-r>=escape(expand("%:p:h"), ' ') . '/'<cr>
 nnoremap <leader>vi :e $MYVIMRC<cr>
 nnoremap <leader>y :w<cr>:TestSuite<cr>
-nnoremap <leader><leader> :Explore .<cr>
+nnoremap <leader><leader> :RangerInWorkingDirectory<cr>
 
-" Zoom in on a vim pane, <C-w>= to re-balance
+" Mappings to zoom in on a pane and to rebalance
 nnoremap <leader>= :wincmd _<cr>:wincmd \|<cr>
 nnoremap <leader>- :wincmd =<cr>
 
@@ -484,12 +511,6 @@ let g:neomake_open_list = 2
 let g:neomake_serialize = 1
 let g:neomake_serialize_abort_on_error = 1
 let g:neomake_javascript_enabled_makers = ['eslint']
-"}}}
-" Netrw "{{{
-
-" Don't load netrw since I am using ranger as my file explorer
-let g:loaded_netrw       = 1
-let g:loaded_netrwPlugin = 1
 "}}}
 "Rainbow"{{{
 let g:rainbow_active = 1
