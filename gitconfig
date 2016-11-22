@@ -19,33 +19,31 @@
   smudge = git-lfs smudge %f
   required = true
   trustExitCode = true
+
 [diff]
   tool = vimdiff
+[difftool]
+    prompt = false
+[difftool "vimdiff"]
+    cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
 
 [color]
-
   # Use colors in Git commands that are capable of colored output when
   # outputting to the terminal. (This is the default setting in Git ≥ 1.8.4.)
   ui = auto
-
 [color "branch"]
-
   current = white red reverse
   local = red
   remote = green
-
 [color "diff"]
-
   meta = yellow bold
   frag = magenta bold # line info
   old = red # deletions
   new = green # additions
-
 [color "status"]
-
-  added = green
-  changed = yellow
-  untracked = red
+  added = green bold
+  changed = yellow bold
+  untracked = red bold
 
 [credential]
   helper = osxkeychain
