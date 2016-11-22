@@ -5,11 +5,11 @@ bindkey -v
 bindkey -M viins 'jk' vi-cmd-mode
 bindkey -M viins 'kj' vi-cmd-mode
 
-autoload -U up-line-or-beginning-search
+autoload -Uz up-line-or-beginning-search
 zle -N up-line-or-beginning-search
 bindkey -M viins '^p' up-line-or-beginning-search
 
-autoload -U down-line-or-beginning-search
+autoload -Uz down-line-or-beginning-search
 zle -N down-line-or-beginning-search
 bindkey -M viins '^n' down-line-or-beginning-search
 
@@ -26,9 +26,6 @@ bindkey -M viins '^f' forward-char
 bindkey -M viins '^d' delete-char
 bindkey -M viins '^h' backward-delete-char
 
-# [Shift-Tab] - move through the completion menu backwards
-bindkey "${terminfo[kcbt]}" reverse-menu-complete
-
 bindkey -M viins '^ ' _easier_ctrl-z
 
 bindkey -M viins '^g' forward-word
@@ -37,9 +34,12 @@ bindkey -M viins '^v' copy-prev-shell-word
 
 bindkey -M vicmd 'Y' vi-yank-eol
 
-autoload -U edit-command-line
+autoload -Uz edit-command-line
 zle -N edit-command-line
-bindkey -M vicmd 'v' edit-command-line
+bindkey -M vicmd '^v' edit-command-line
+
+# [Shift-Tab] - move through the completion menu backwards
+bindkey "${terminfo[kcbt]}" reverse-menu-complete
 
 bindkey -M menuselect 'o' accept-and-infer-next-history
 
