@@ -553,7 +553,8 @@ let g:easy_align_bypass_fold = 1
 let g:closetag_filenames = "*.erb,*.html,*.js,*.jsx"
 "}}}
 "Vim commentary"{{{
-autocmd vimrcEx Bufenter *.conf setlocal commentstring=#\ %s
+autocmd vimrcEx Bufenter *.conf      setlocal commentstring=#\ %s
+autocmd vimrcEx Bufenter *.zsh-theme setlocal commentstring=#\ %s
 "}}}
 " Vim javascript libraries syntax"{{{
 let g:used_javascript_libs = 'jquery,underscore,react,jasmine,flux'
