@@ -10,7 +10,11 @@ zstyle ':completion:*' list-colors 'di=1;36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
 # List of completers to use
-zstyle ':completion:*' completer _expand _complete
+zstyle ':completion:*' completer _expand _complete _approximate
+
+# Increase the number of errors based on the length of the typed word
+zstyle ':completion:*:approximate:*' max-errors 1 numeric
+zstyle -e ':completion:*:approximate:*' max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3))numeric)'
 
 # Formatting and messages
 zstyle ':completion:*' extra-verbose true
