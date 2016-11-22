@@ -23,6 +23,7 @@ source ~/.zplug/init.zsh
 # Plugins
 zplug "bhilburn/powerlevel9k"
 zplug "djui/alias-tips"
+zplug "hlissner/zsh-autopair"
 zplug "lukechilds/zsh-nvm"
 zplug "zplug/zplug"
 zplug "zsh-users/zsh-autosuggestions"
