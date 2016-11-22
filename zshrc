@@ -21,7 +21,7 @@ done
 source ~/.zplug/init.zsh
 
 # Plugins
-zplug "bhilburn/powerlevel9k"
+zplug "bhilburn/powerlevel9k", as:theme
 zplug "djui/alias-tips"
 zplug "hlissner/zsh-autopair"
 zplug "lukechilds/zsh-nvm"
