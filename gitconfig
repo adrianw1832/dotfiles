@@ -5,7 +5,7 @@
   autocrlf = input
   safecrlf = false
   editor = nvim
-  excludesfile = /Users/awong/.gitignore_global
+  excludesfile = /Users/awong/.gitignore
   ignorecase = false
 [alias]
   type = cat-file -t
