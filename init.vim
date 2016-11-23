@@ -89,7 +89,7 @@ set expandtab " Tab key will always insert 'softtabstop' amount of space
 set foldenable " Enable folding
 set foldmethod=marker " Fold based on markers
 set foldlevelstart=99 " To make sure all folds are initially opened
-set grepprg=rg " Use ripgrep as default for grep
+set grepprg=rg\ --vimgrep " Use ripgrep as default for grep
 set hidden " Change default behaviour of opening file of existing buffer
 set ignorecase " Ignore case when searching
 set infercase " Smarter case for autocompletion
@@ -170,7 +170,8 @@ function! s:OpenRangerIn(path)
   let currentPath = expand(a:path)
   let rangerCallback = { 'name': 'ranger' }
   function! rangerCallback.on_exit(id, code)
-    silent! Bclose
+    Bclose
+    wincmd =
       if filereadable('/tmp/chosenfile')
         exec system('sed -ie "s/ /\\\ /g" /tmp/chosenfile')
         exec 'argadd ' . system('cat /tmp/chosenfile | tr "\\n" " "')
@@ -179,12 +180,13 @@ function! s:OpenRangerIn(path)
       endif
   endfunction
   enew
+  wincmd |
   call termopen('ranger --choosefiles=/tmp/chosenfile ' . currentPath, rangerCallback)
   startinsert
 endfunction
 
-command! RangerInCurrentDirectory call <SID>OpenRangerIn("%:p:h")
-command! RangerInWorkingDirectory call <SID>OpenRangerIn("")
+command! RangerInCurrentDirectory silent call <SID>OpenRangerIn("%:p:h")
+command! RangerInWorkingDirectory silent call <SID>OpenRangerIn("")
 
 " Don't load netrw since I am using ranger as my file explorer
 let g:loaded_netrw       = 1
@@ -392,8 +394,8 @@ nnoremap <leader>y :w<cr>:TestSuite<cr>
 nnoremap <leader><leader> :RangerInWorkingDirectory<cr>
 
 " Mappings to zoom in on a pane and to rebalance
-nnoremap <leader>= :wincmd _<cr>:wincmd \|<cr>
-nnoremap <leader>- :wincmd =<cr>
+nnoremap <silent> <leader>= :wincmd _<cr>:wincmd \|<cr>
+nnoremap <silent> <leader>- :wincmd =<cr>
 
 " Mappings for the tmux runner plugin
 nnoremap <leader>va :VtrAttachToPane<cr>
@@ -478,7 +480,7 @@ autocmd vimrcEx User FzfStatusLine call <SID>fzf_statusline()
 let g:fzf_colors =
     \ { 'fg':      ['fg', 'Normal'],
       \ 'bg':      ['bg', 'Normal'],
-      \ 'hl':      ['fg', 'Comment'],
+      \ 'hl':      ['fg', 'Conditional'],
       \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
       \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
       \ 'hl+':     ['fg', 'Statement'],
