@@ -24,7 +24,6 @@ source ~/.zplug/init.zsh
 zplug "bhilburn/powerlevel9k", as:theme
 zplug "djui/alias-tips"
 zplug "hlissner/zsh-autopair"
-zplug "lukechilds/zsh-nvm"
 zplug "zplug/zplug"
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-completions"
