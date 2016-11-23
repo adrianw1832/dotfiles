@@ -207,8 +207,8 @@ augroup vimrcEx
         \   exe "normal g`\"" |
         \ endif
 
-  autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
-  autocmd BufWritePre * :call <SID>CreateNonExistantDirectory()
+  autocmd BufWritePre * call <SID>StripTrailingWhitespaces()
+  autocmd BufWritePre * call <SID>CreateNonExistantDirectory()
 
   autocmd InsertLeave,BufWinEnter,WinEnter * set cursorline
   autocmd InsertEnter,BufWinLeave,WinLeave * set nocursorline
@@ -289,7 +289,7 @@ nnoremap <tab> <C-^>
 
 " For switching two characters around and repeatable by .
 nnoremap <silent> <Plug>TransposeCharacters xp
-      \:call repeat#set("\<Plug>TransposeCharacters")<cr>
+      \call repeat#set("\<Plug>TransposeCharacters")<cr>
 nmap xp <Plug>TransposeCharacters
 
 " Terminal mapping to return to previous pane
@@ -463,9 +463,11 @@ let g:fzf_history_dir = '~/.local/share/fzf-history'
 let g:fzf_commits_log_options = '--color=always --date=short --graph --format=
       \"%C(yellow)%h %C(red)| %C(green)%ad%  %C(red)|%C(reset) %s%C(auto)%d %C(red)<- %C(black)%C(bold)%cr by [%an]"'
 
-" Change the highlight of search results to red colour instead
-autocmd vimrcEx VimEnter * command! -nargs=* Ag
-      \ call fzf#vim#ag(<q-args>, '--color-match "1;31"', fzf#vim#default_layout)
+" Change ag to accept arguemnts and also the highlight of search results to red colour instead
+autocmd vimrcEx VimEnter * command! -nargs=* Ag :call <SID>fzf_ag_raw(<q-args>)
+function! s:fzf_ag_raw(command_suffix, ...)
+  return call('fzf#vim#grep', extend(['ag --color --color-match "1;31" --nogroup --noheading '.a:command_suffix, 1], a:000))
+endfunction
 
 " Override statusline as you like
 function! s:fzf_statusline()
