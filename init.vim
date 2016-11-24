@@ -382,10 +382,11 @@ nnoremap <leader>t :w<cr>:TestFile<cr>
 nnoremap <leader>T :TestVisit<cr>
 nnoremap <leader>w :w<cr>
 nnoremap <leader>q :q<cr>
-nnoremap <leader>qa :qa<cr>
 nnoremap <leader>qq :Bclose<cr>
 nnoremap <leader>wq :wq<cr>
 nnoremap <leader>qw :wq<cr>
+nnoremap <leader>qa :qa<cr>
+nnoremap <leader>wqa :wqa<cr>
 " Maximise the quickfix window, useful for reading test errors
 nnoremap <leader>u :copen<cr>:wincmd _<cr>:wincmd \|<cr>
 nnoremap <leader>v :vnew <C-r>=escape(expand("%:p:h"), ' ') . '/'<cr>
