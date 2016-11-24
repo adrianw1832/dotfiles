@@ -12,7 +12,7 @@
   dump = cat-file -p
   ctags = !.git/hooks/ctags
 [push]
-  default = current
+  default = upstream
   followTags = true
 [filter "lfs"]
   clean = git-lfs clean %f
@@ -23,17 +23,26 @@
 [diff]
   tool = vimdiff
 [difftool]
-    prompt = false
+  prompt = false
 [difftool "vimdiff"]
-    cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+  cmd = nvim -d $LOCAL $REMOTE -c '$wincmd w' -c 'wincmd L'
+[merge]
+  summary = true
+  verbosity = 1
+  tool = fugitive
+[mergetool]
+  prompt = false
+[mergetool "fugitive"]
+  cmd = nvim -d $LOCAL $MERGED $REMOTE -c '$wincmd w' -c 'wincmd L'
+  keepbackup=false
 
 [color]
   # Use colors in Git commands that are capable of colored output when
   # outputting to the terminal. (This is the default setting in Git ≥ 1.8.4.)
-  ui = auto
+  ui = true
 [color "branch"]
-  current = white red reverse
-  local = red
+  current = white reverse
+  local = yellow
   remote = green
 [color "diff"]
   meta = yellow bold
