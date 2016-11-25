@@ -17,19 +17,20 @@ gac() { git add "$1" && git commit }
 gacp() { git add "$1" && git commit && git push }
 
 # Pass git log to fzf and can check the diff of the commit object
-fglog() {
-  glog "$@" | fzf --ansi --exact --no-sort --reverse --tiebreak=index \
+glog() {
+  gitlog "$@" | fzf --ansi --exact --no-sort --reverse --tiebreak=index \
     --bind "ctrl-m:execute:
              (grep -o '[a-f0-9]\{7\}' | head -1 |
-             xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
+             xargs -I % sh -c 'git show %') << 'FZF-EOF'
              {}
              FZF-EOF"
+  clear
 }
 
 # Get the commit sha - example usage: git rebase -i `fcs`
 fcs() {
   local commits commit
-  commits=$(glog) &&
+  commits=$(gitlog) &&
     commit=$(echo "$commits" | fzf --ansi --exact --no-sort --reverse --tiebreak=index) &&
     echo -n $(echo "$commit" | awk '{print $2}')
 }
@@ -82,4 +83,9 @@ jj() {
 vv() {
   local file
   file="$(fasd -Rfl "$1" | fzf -1 -0 --no-sort +m)" && $EDITOR "${file}" || return 1
+}
+
+# Makes git auto completion faster favouring for local completions
+__git_files () {
+    _wanted files expl 'local files' _files
 }
