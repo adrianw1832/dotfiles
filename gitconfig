@@ -3,10 +3,14 @@
   email = awong@thoughtworks.com
 [core]
   autocrlf = input
-  safecrlf = false
   editor = nvim
   excludesfile = /Users/awong/.gitignore
   ignorecase = false
+  safecrlf = false
+[pager]
+  diff = diff-so-fancy | less -FRS --pattern '^(commit|added:|deleted:|modified:) '
+  show = diff-so-fancy | less -FRS --pattern '^(commit|added:|deleted:|modified:) '
+
 [alias]
   type = cat-file -t
   dump = cat-file -p
@@ -37,22 +41,29 @@
   keepbackup=false
 
 [color]
-  # Use colors in Git commands that are capable of colored output when
-  # outputting to the terminal. (This is the default setting in Git ≥ 1.8.4.)
   ui = true
 [color "branch"]
   current = white reverse
   local = yellow
   remote = green
-[color "diff"]
-  meta = yellow bold
-  frag = magenta bold # line info
-  old = red # deletions
-  new = green # additions
 [color "status"]
   added = green bold
   changed = yellow bold
+  nobranch = red white bold
   untracked = red bold
+[color "diff"]
+  commit = yellow bold
+  frag = magenta bold
+  meta = yellow bold
+  new = green bold
+  old = red bold
+  plain = white
+  whitespace = red reverse
+[color "diff-highlight"]
+  oldNormal = red bold
+  oldHighlight = "red bold 52"
+  newNormal = "green bold"
+  newHighlight = "green bold 22"
 
 [credential]
   helper = osxkeychain
