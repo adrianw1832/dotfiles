@@ -4,20 +4,18 @@
 [core]
   autocrlf = input
   editor = nvim
-  excludesfile = /Users/awong/.gitignore
+  excludesfile = ~/.gitignore
   ignorecase = false
   safecrlf = false
 [pager]
   diff = diff-so-fancy | less -FRS --pattern '^(commit|added:|deleted:|modified:) '
   show = diff-so-fancy | less -FRS --pattern '^(commit|added:|deleted:|modified:) '
-
-[alias]
-  type = cat-file -t
-  dump = cat-file -p
-  ctags = !.git/hooks/ctags
 [push]
   default = upstream
   followTags = true
+
+[alias]
+  ctags = !.git/hooks/ctags
 [filter "lfs"]
   clean = git-lfs clean %f
   smudge = git-lfs smudge %f
