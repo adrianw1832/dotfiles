@@ -14,6 +14,10 @@
   default = upstream
   followTags = true
 
+[pretty]
+  gitlog = %<(11,trunc)%C(bold)%C(black)%an%C(reset) %C(red)| %C(dim)%C(yellow)%h %C(red)| %C(green)%ad%  %C(red)|%C(reset) %s %C(auto)%d
+  reflog = %>(10,trunc)%C(bold)%C(black)%gd%C(reset) %C(red)| %C(dim)%C(yellow)%h %C(red)| %<(22,trunc)%C(green)%ad%  %C(red)|%C(reset) %C(bold)%C(green)%>(12,trunc)%cr%C(reset) %C(red)|%C(reset) %gs
+
 [alias]
   ctags = !.git/hooks/ctags
 [filter "lfs"]
@@ -27,7 +31,7 @@
 [difftool]
   prompt = false
 [difftool "vimdiff"]
-  cmd = nvim -d $LOCAL $REMOTE -c '$wincmd w' -c 'wincmd L'
+  cmd = nvim -d $LOCAL $REMOTE -c 'wincmd w'
 [merge]
   summary = true
   verbosity = 1
@@ -35,13 +39,13 @@
 [mergetool]
   prompt = false
 [mergetool "fugitive"]
-  cmd = nvim -d $LOCAL $MERGED $REMOTE -c '$wincmd w' -c 'wincmd L'
+  cmd = nvim -d $LOCAL $MERGED $REMOTE -c 'wincmd w'
   keepbackup=false
 
 [color]
   ui = true
 [color "branch"]
-  current = white reverse
+  current = white bold reverse
   local = yellow
   remote = green
 [color "status"]
@@ -49,8 +53,9 @@
   changed = yellow bold
   nobranch = red white bold
   untracked = red bold
+  updated = green
 [color "diff"]
-  commit = yellow bold
+  commit = yellow
   frag = magenta bold
   meta = yellow bold
   new = green bold

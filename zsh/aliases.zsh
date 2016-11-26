@@ -100,7 +100,7 @@ alias gdt="git difftool"
 alias gdtc="git difftool --cached"
 alias gf="git fetch"
 alias gir="git rebase --interactive"
-alias gitlog="git log --color=always --date=short --graph --format=\"%C(yellow)%h %C(red)| %C(green)%ad%  %C(red)|%C(reset) %s%C(auto)%d %C(red)<- %C(black)%C(bold)%cr by [%an]\""
+alias gitlog="git log --graph --date=format:%a\ %H:%M\ %d-%m-%Y --format=gitlog"
 alias gmt="git mergetool"
 alias gp="git push"
 alias gpf="git push -f"
@@ -117,6 +117,7 @@ alias gst="git stash"
 alias gsta="git stash apply"
 alias gstd="git stash drop"
 alias gstp="git stash pop"
+alias reflog="git reflog --format=reflog"
 # }}}
 # Rails# {{{
 
