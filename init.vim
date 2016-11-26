@@ -104,7 +104,6 @@ set number " Show line numbers
 set numberwidth=3 " Width of the number column
 set path+=** " Add file paths to vim for native 'fuzzy find'
 set relativenumber " Show relative line numbers
-set ruler " Show line info at the bottom
 set shiftwidth=2 " Number of spaces for indents
 set showcmd " Show command at the bottom bar
 set smartcase " Smart case for searching
@@ -226,8 +225,8 @@ augroup vimrcEx
   autocmd FileType vim setlocal keywordprg=:help
 
   " Enable different indentation for language specific files
-  autocmd FileType java       setlocal tabstop=8 softtabstop=4 shiftwidth=4
-  autocmd FileType javascript setlocal tabstop=4 softtabstop=2 shiftwidth=2
+  autocmd FileType java       setlocal tabstop=4 softtabstop=4 shiftwidth=4
+  autocmd FileType javascript setlocal tabstop=2 softtabstop=2 shiftwidth=2
 
   " Automatically wrap at 80 characters and spell check text and markdowns
   autocmd FileType text,markdown setlocal textwidth=80
@@ -251,10 +250,10 @@ augroup vimrcEx
   autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
   " Mapping q to close the windows
-  autocmd FileType help  nnoremap <buffer> <silent> q :bd<cr>
-  autocmd FileType diff  nnoremap <buffer> <silent> q :bd<cr>
-  autocmd FileType qf    nnoremap <buffer> <silent> q :bd<cr>
-  autocmd FileType netrw nnoremap <buffer> <silent> q :Rex<cr>
+  autocmd FileType help  nnoremap <buffer> <silent> q :bd<CR>
+  autocmd FileType diff  nnoremap <buffer> <silent> q :bd<CR>
+  autocmd FileType qf    nnoremap <buffer> <silent> q :bd<CR>
+  autocmd FileType netrw nnoremap <buffer> <silent> q :Rex<CR>
 
   " Folding options
   autocmd FileType vim,tmux,zsh setlocal foldlevel=0
@@ -283,13 +282,13 @@ noremap H ^
 noremap L g_
 
 " Switching between buffers
-nnoremap <C-n> :bnext<cr>
-nnoremap <C-p> :bprevious<cr>
+nnoremap <C-n> :bnext<CR>
+nnoremap <C-p> :bprevious<CR>
 nnoremap <tab> <C-^>
 
 " For switching two characters around and repeatable by .
 nnoremap <silent> <Plug>TransposeCharacters xp
-      \call repeat#set("\<Plug>TransposeCharacters")<cr>
+      \call repeat#set("\<Plug>TransposeCharacters")<CR>
 nmap xp <Plug>TransposeCharacters
 
 " Terminal mapping to return to previous pane
@@ -326,7 +325,7 @@ nnoremap Y yg_
 " Visually select the text that was last edited/pasted
 nnoremap gV `[v`]
 " Makes the dot command behave on a Visually selected line
-vnoremap . :norm.<cr>
+vnoremap . :norm.<CR>
 " Allow star to go back to the first search term
 nnoremap * *N
 vnoremap * *N
@@ -344,78 +343,86 @@ nnoremap <NUL> <C-z>
 
 let maplocalleader = "\\"
 let mapleader = "\<Space>"
-nnoremap <leader>a :Ag<Space>
-nnoremap <leader>b :History<cr>
-nnoremap <leader>bi :!bundle install<cr>
-nnoremap <silent> <leader>co :copen<cr>
-nnoremap <silent> <leader>cc :cclose<cr>
-nnoremap <leader>e :w<cr>:TestLast<cr>
-nnoremap <leader>g :w<cr>:Gstatus<cr>
-nnoremap <leader>gd :Gvdiff<cr>
-nnoremap <leader>gp :Gpush<cr>
-nnoremap <silent> <leader>h :nohlsearch<cr>
-nmap <leader>ha <Plug>GitGutterStageHunk
-nmap <leader>hr <Plug>GitGutterUndoHunk
-nmap <leader>hv <Plug>GitGutterPreviewHunk
-nnoremap <leader>i mzgg=G`z
-nnoremap <leader>l :Lines<cr>
+nnoremap <Leader>a :Ag<Space>
+nnoremap <Leader>b :History<CR>
+nnoremap <Leader>bi :!bundle install<CR>
+nnoremap <silent> <Leader>co :copen<CR>
+nnoremap <silent> <Leader>cc :cclose<CR>
+nnoremap <Leader>e :w<CR>:TestLast<CR>
+nnoremap <Leader>g :w<CR>:Gstatus<CR>
+nnoremap <Leader>gd :Gvdiff<CR>
+nnoremap <Leader>gl :silent Glog -25<CR>:copen<CR>
+nnoremap <Leader>gp :Gpush<CR>
+nnoremap <silent> <Leader>h :nohlsearch<CR>
+nmap <Leader>ha <Plug>GitGutterStageHunk
+nmap <Leader>hr <Plug>GitGutterUndoHunk
+nmap <Leader>hv <Plug>GitGutterPreviewHunk
+nnoremap <Leader>i mzgg=G`z
+nnoremap <Leader>l :Lines<CR>
 " Edit any register(" by default) in the command line window, press enter to finish
-nnoremap <silent> <leader>m :<C-u><C-r><C-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><C-f><left>
-nnoremap <leader>ni :!npm install<cr>
-nnoremap <leader>o :Files<cr>
-nnoremap <leader>p :put =nr2char(10)<cr>"*gp
-nnoremap <leader>P :put! =nr2char(10)<cr>"*gp
-nnoremap <leader>pi :w<cr>:source $MYVIMRC<cr>:nohlsearch<cr>:PlugUpgrade<cr>:PlugUpdate<cr>
-nnoremap <leader>r :w<cr>:TestNearest<cr>
-nnoremap <leader>ra :A<cr>
-nnoremap <leader>rc :Econtroller<Space>
-nnoremap <leader>rf :Eintegrationtest<Space>
-nnoremap <leader>rm :Emodel<Space>
-nnoremap <leader>rr :R<cr>
-nnoremap <leader>ru :Eunittest<Space>
-nnoremap <leader>rv :Eview<Space>
-nnoremap <silent> <leader>sn :UltiSnipsEdit<cr>
-nnoremap <leader>so :w<cr>:source $MYVIMRC<cr>:AirlineRefresh<cr>:nohlsearch<cr>:echoe "Vimrc sourced!"<cr>
+nnoremap <silent> <Leader>m :<C-u><C-r><C-r>='let @'. v:register .' = '. string(getreg(v:register))<CR><C-f><left>
+nnoremap <Leader>ni :!npm install<CR>
+nnoremap <Leader>o :Files<CR>
+nnoremap <Leader>p :put =nr2char(10)<CR>"*gp
+nnoremap <Leader>P :put! =nr2char(10)<CR>"*gp
+nnoremap <Leader>pi :w<CR>:source $MYVIMRC<CR>:nohlsearch<CR>:PlugUpgrade<CR>:PlugUpdate<CR>
+nnoremap <Leader>r :w<CR>:TestNearest<CR>
+nnoremap <Leader>ra :A<CR>
+nnoremap <Leader>rc :Econtroller<Space>
+nnoremap <Leader>rf :Eintegrationtest<Space>
+nnoremap <Leader>rm :Emodel<Space>
+nnoremap <Leader>rr :R<CR>
+nnoremap <Leader>ru :Eunittest<Space>
+nnoremap <Leader>rv :Eview<Space>
+nnoremap <silent> <Leader>sn :UltiSnipsEdit<CR>
+nnoremap <Leader>so :w<CR>:source $MYVIMRC<CR>:AirlineRefresh<CR>:nohlsearch<CR>:echoe "Vimrc sourced!"<CR>
 " Going back to the last spelling mistake and choosing the 1st option
-nnoremap <silent> <leader>sp mz[s1z=`z
-nnoremap <leader>t :w<cr>:TestFile<cr>
-nnoremap <leader>T :TestVisit<cr>
-nnoremap <leader>w :w<cr>
-nnoremap <leader>q :q<cr>
-nnoremap <leader>qq :Bclose<cr>
-nnoremap <leader>wq :wq<cr>
-nnoremap <leader>qw :wq<cr>
-nnoremap <leader>qa :qa<cr>
-nnoremap <leader>wqa :wqa<cr>
+nnoremap <silent> <Leader>sp mz[s1z=`z
+nnoremap <Leader>t :w<CR>:TestFile<CR>
+nnoremap <Leader>T :TestVisit<CR>
+nnoremap <Leader>w :w<CR>
+nnoremap <Leader>q :q<CR>
+nnoremap <Leader>qq :Bclose<CR>
+nnoremap <Leader>wq :wq<CR>
+nnoremap <Leader>qw :wq<CR>
+nnoremap <Leader>qa :qa<CR>
+nnoremap <Leader>wqa :wqa<CR>
 " Maximise the quickfix window, useful for reading test errors
-nnoremap <leader>u :copen<cr>:wincmd _<cr>:wincmd \|<cr>
-nnoremap <leader>v :vnew <C-r>=escape(expand("%:p:h"), ' ') . '/'<cr>
-nnoremap <leader>vi :e $MYVIMRC<cr>
-nnoremap <leader>y :w<cr>:TestSuite<cr>
-nnoremap <leader><leader> :RangerInWorkingDirectory<cr>
+nnoremap <Leader>u :copen<CR>:wincmd _<CR>:wincmd \|<CR>
+nnoremap <Leader>v :vnew <C-r>=escape(expand("%:p:h"), ' ') . '/'<CR>
+nnoremap <Leader>vi :e $MYVIMRC<CR>
+nnoremap <Leader>y :w<CR>:TestSuite<CR>
+nnoremap <Leader><Leader> :RangerInWorkingDirectory<CR>
 
 " Mappings to zoom in on a pane and to rebalance
-nnoremap <silent> <leader>= :wincmd _<cr>:wincmd \|<cr>
-nnoremap <silent> <leader>- :wincmd =<cr>
+nnoremap <silent> <Leader>= :wincmd _<CR>:wincmd \|<CR>
+nnoremap <silent> <Leader>- :wincmd =<CR>
 
 " Mappings for the tmux runner plugin
-nnoremap <leader>va :VtrAttachToPane<cr>
-nnoremap <leader>sc :VtrSendCommand<cr>
-nnoremap <leader>sf :VtrSendFile!<cr>
-nnoremap <leader>cr :VtrClearRunner<cr>
-nnoremap <leader>kr :VtrKillRunner<cr>
-nnoremap <C-a> :VtrSendLinesToRunner<cr>
-vnoremap <C-a> :VtrSendLinesToRunner<cr>
+nnoremap <Leader>va :VtrAttachToPane<CR>
+nnoremap <Leader>sc :VtrSendCommand<CR>
+nnoremap <Leader>sf :VtrSendFile!<CR>
+nnoremap <Leader>cr :VtrClearRunner<CR>
+nnoremap <Leader>kr :VtrKillRunner<CR>
+nnoremap <C-a> :VtrSendLinesToRunner<CR>
+vnoremap <C-a> :VtrSendLinesToRunner<CR>
 
-nnoremap <leader>or  :VtrOpenRunner { 'orientation': 'v', 'percentage': 20 }<cr>:VtrSendFile<cr>
-nnoremap <leader>pry :VtrOpenRunner { 'orientation': 'h', 'percentage': 50, 'cmd': 'pry' }<cr>
-nnoremap <leader>irb :VtrOpenRunner { 'orientation': 'h', 'percentage': 50, 'cmd': 'irb' }<cr>
+nnoremap <Leader>or  :VtrOpenRunner { 'orientation': 'v', 'percentage': 20 }<CR>:VtrSendFile<CR>
+nnoremap <Leader>pry :VtrOpenRunner { 'orientation': 'h', 'percentage': 50, 'cmd': 'pry' }<CR>
+nnoremap <Leader>irb :VtrOpenRunner { 'orientation': 'h', 'percentage': 50, 'cmd': 'irb' }<CR>
 "}}}
 " Plugin mappings and settings"{{{
 "Airline"{{{
 let g:airline_theme='tomorrow'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
+"}}}
+" Close tag"{{{
+let g:closetag_filenames = "*.erb,*.html,*.js,*.jsx"
+"}}}
+" Commentary"{{{
+autocmd vimrcEx Bufenter *.conf      setlocal commentstring=#\ %s
+autocmd vimrcEx Bufenter *.zsh-theme setlocal commentstring=#\ %s
 "}}}
 " Deoplete"{{{
 let g:deoplete#enable_at_startup = 1
@@ -424,6 +431,15 @@ let g:deoplete#enable_smart_case = 1
 " Deoplete ternjs"{{{
 let g:tern#command = ['tern']
 let g:tern#arguments = ['--persistent']
+"}}}
+" Easy align"{{{
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Disabling and foldmethod during alignment
+let g:easy_align_bypass_fold = 1
 "}}}
 " Easy motion"{{{
 let g:EasyMotion_do_mapping = 0
@@ -461,13 +477,12 @@ imap <C-x><C-l> <plug>(fzf-complete-line)
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 
 " Define the git log options flag
-let g:fzf_commits_log_options = '--color=always --date=short --graph --format=
-      \"%C(yellow)%h %C(red)| %C(green)%ad%  %C(red)|%C(reset) %s%C(auto)%d %C(red)<- %C(black)%C(bold)%cr by [%an]"'
+let g:fzf_commits_log_options = '--color=always --graph --date=format:%a\ %H:%M\ %d-%m-%Y --format=gitlog'
 
-" Change ag to accept arguemnts and also the highlight of search results to red colour instead
+" Change Ag to accept arguemnts and also highlight search results to red instead
 autocmd vimrcEx VimEnter * command! -nargs=* Ag :call <SID>fzf_ag_raw(<q-args>)
 function! s:fzf_ag_raw(command_suffix, ...)
-  return call('fzf#vim#grep', extend(['ag --color --color-match "1;31" --nogroup --noheading '.a:command_suffix, 1], a:000))
+  return call('fzf#vim#grep', extend(['ag --nogroup --column --color --color-match "1;31" '.a:command_suffix, 1], a:000))
 endfunction
 
 " Override statusline as you like
@@ -511,6 +526,9 @@ map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
 "}}}
+" Javascript libraries syntax"{{{
+let g:used_javascript_libs = 'jquery,underscore,react,jasmine,flux'
+"}}}
 " Neomake"{{{
 let g:neomake_open_list = 2
 let g:neomake_serialize = 1
@@ -520,9 +538,22 @@ let g:neomake_javascript_enabled_makers = ['eslint']
 "Rainbow"{{{
 let g:rainbow_active = 1
 "}}}
+" Sexp"{{{
+let g:sexp_enable_insert_mode_mappings = 1
+"}}}
 " Sideways"{{{
-nnoremap <silent> gsh :SidewaysLeft<cr>
-nnoremap <silent> gsl :SidewaysRight<cr>
+nnoremap <silent> gsh :SidewaysLeft<CR>
+nnoremap <silent> gsl :SidewaysRight<CR>
+"}}}
+" Smooth scroll"{{{
+nnoremap <silent> <C-u> :call smooth_scroll#up(&scroll, 20, 2)<CR>
+nnoremap <silent> <C-d> :call smooth_scroll#down(&scroll, 20, 2)<CR>
+nnoremap <silent> <C-b> :call smooth_scroll#up(&scroll*2, 20, 4)<CR>
+nnoremap <silent> <C-f> :call smooth_scroll#down(&scroll*2, 20, 4)<CR>
+"}}}
+" Surround"{{{
+let g:surround_45 = "<% \r %>"
+let g:surround_61 = "<%= \r %>"
 "}}}
 " Tern"{{{
 
@@ -534,53 +565,14 @@ let g:tern_show_signature_in_pum = 1
 autocmd vimrcEx InsertLeave,InsertEnter,CompleteDone *.js,*.jsx if pumvisible() == 0 | pclose | endif
 autocmd vimrcEx FileType javascript,javascript.jsx setlocal completeopt-=preview
 " Define some local tern key bindings
-autocmd vimrcEx FileType javascript,javascript.jsx nnoremap <silent> <buffer> gd :TernDef<cr>
-autocmd vimrcEx FileType javascript,javascript.jsx nnoremap <silent> <buffer> K :TernDoc<cr>
-autocmd vimrcEx FileType javascript,javascript.jsx nnoremap <silent> <buffer> <localleader>K :TernDocBrowse<cr>
+autocmd vimrcEx FileType javascript,javascript.jsx nnoremap <silent> <buffer> gd :TernDef<CR>
+autocmd vimrcEx FileType javascript,javascript.jsx nnoremap <silent> <buffer> K :TernDoc<CR>
+autocmd vimrcEx FileType javascript,javascript.jsx nnoremap <silent> <buffer> <localleader>K :TernDocBrowse<CR>
 "}}}
-" Ultisnips"{{{
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
-let g:UltiSnipsEditSplit="vertical"
-let g:UltiSnipsSnippetDirectories=[$HOME.'/dotfiles/UltiSnips', $HOME.'/.config/nvim/plugged/vim-snippets/UltiSnips']
-"}}}
-" Vim easy align"{{{
-
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
-" Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
-" Disabling and foldmethod during alignment
-let g:easy_align_bypass_fold = 1
-"}}}
-" Vim close tag"{{{
-let g:closetag_filenames = "*.erb,*.html,*.js,*.jsx"
-"}}}
-"Vim commentary"{{{
-autocmd vimrcEx Bufenter *.conf      setlocal commentstring=#\ %s
-autocmd vimrcEx Bufenter *.zsh-theme setlocal commentstring=#\ %s
-"}}}
-" Vim javascript libraries syntax"{{{
-let g:used_javascript_libs = 'jquery,underscore,react,jasmine,flux'
-"}}}
-" Vim smooth scroll"{{{
-nnoremap <silent> <C-u> :call smooth_scroll#up(&scroll, 20, 2)<cr>
-nnoremap <silent> <C-d> :call smooth_scroll#down(&scroll, 20, 2)<cr>
-nnoremap <silent> <C-b> :call smooth_scroll#up(&scroll*2, 20, 4)<cr>
-nnoremap <silent> <C-f> :call smooth_scroll#down(&scroll*2, 20, 4)<cr>
-"}}}
-" Vim surround"{{{
-let g:surround_45 = "<% \r %>"
-let g:surround_61 = "<%= \r %>"
-"}}}
-" Vim sexp"{{{
-let g:sexp_enable_insert_mode_mappings = 1
-"}}}
-" Vim test"{{{
+" Test"{{{
 let test#strategy = "dispatch"
 "}}}
-" Vim tmux runner"{{{
+" Tmux runner"{{{
 let g:VtrUseVtrMaps = 1
 let g:VtrGitCdUpOnOpen = 0
 let g:VtrPercentage = 33
@@ -589,5 +581,12 @@ let g:vtr_filetype_runner_overrides = {
       \ 'haskell': 'ghci {file}',
       \ 'applescript': 'osascript {file}'
       \ }
+"}}}
+" Ultisnips"{{{
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
+let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsSnippetDirectories=[$HOME.'/dotfiles/UltiSnips', $HOME.'/.config/nvim/plugged/vim-snippets/UltiSnips']
 "}}}
 "}}}
