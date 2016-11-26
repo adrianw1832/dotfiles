@@ -16,6 +16,9 @@ gac() { git add "$1" && git commit }
 # Custom function to handle git add, commit and push
 gacp() { git add "$1" && git commit && git push }
 
+# Custom function to handle git diff, for an optional argument
+gd() { git diff "${1:-.}" && clear }
+
 # Pass git log to fzf and can check the diff of the commit object
 glog() {
   gitlog "$@" | fzf --ansi --exact --no-sort --reverse --tiebreak=index \
