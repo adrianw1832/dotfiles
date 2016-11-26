@@ -12,12 +12,15 @@ zle -N _easier_ctrl-z
 
 # Custom function to handle git add and commit
 gac() { git add "$1" && git commit }
+compdef _git gac=git-add
 
 # Custom function to handle git add, commit and push
 gacp() { git add "$1" && git commit && git push }
+compdef _git gacp=git-add
 
 # Custom function to handle git diff, for an optional argument
 gd() { git diff "${1:-.}" && clear }
+compdef _git gd=git-diff
 
 # Pass git log to fzf and can check the diff of the commit object
 glog() {
@@ -86,9 +89,4 @@ jj() {
 vv() {
   local file
   file="$(fasd -Rfl "$1" | fzf -1 -0 --no-sort +m)" && $EDITOR "${file}" || return 1
-}
-
-# Makes git auto completion faster favouring for local completions
-__git_files () {
-    _wanted files expl 'local files' _files
 }
