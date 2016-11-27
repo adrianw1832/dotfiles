@@ -7,7 +7,7 @@ function +vi-git-remotebranch() {
 
   # Show whether we are detached or not
   if [[ "${branch_name}" == "HEAD" ]]; then
-    hook_com[branch]=" ${hook_com[branch]}"
+    hook_com[branch]="  ${hook_com[branch]}"
   else
     hook_com[branch]="$(print_icon 'VCS_BRANCH_ICON')${hook_com[branch]}"
   fi
