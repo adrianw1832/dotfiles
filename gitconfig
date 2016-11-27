@@ -7,9 +7,6 @@
   excludesfile = ~/.gitignore
   ignorecase = false
   safecrlf = false
-[pager]
-  diff = diff-so-fancy | less -FRS --pattern '^(commit|added:|deleted:|modified:) '
-  show = diff-so-fancy | less -FRS --pattern '^(commit|added:|deleted:|modified:) '
 [push]
   default = upstream
   followTags = true

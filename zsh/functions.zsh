@@ -19,7 +19,7 @@ gacp() { git add "$1" && git commit && git push }
 compdef _git gacp=git-add
 
 # Custom function to handle git diff, for an optional argument
-gd() { git diff "${1:-.}" && clear }
+gd() { git diff --color=always "${1:-.}" | diff-so-fancy | less -CGR }
 compdef _git gd=git-diff
 
 # Pass git log to fzf and can check the diff of the commit object
@@ -27,10 +27,9 @@ glog() {
   gitlog "$@" | fzf --ansi --exact --no-sort --reverse --tiebreak=index \
     --bind "ctrl-m:execute:
              (grep -o '[a-f0-9]\{7\}' | head -1 |
-             xargs -I % sh -c 'git show %') << 'FZF-EOF'
+             xargs -I % sh -c 'git show --color=always % | diff-so-fancy | less -CGR') << 'FZF-EOF'
              {}
              FZF-EOF"
-  clear
 }
 
 # Get the commit sha - example usage: git rebase -i `fcs`
