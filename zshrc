@@ -38,3 +38,6 @@ fi
 
 # Then, source plugins and add commands to $PATH
 zplug load --verbose
+
+# Patching powerlevel9k so that it shows detached head state
+source ~/dotfiles/zsh/detached.plugin.zsh
