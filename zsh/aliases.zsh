@@ -105,6 +105,7 @@ alias gp="git push"
 alias gpf="git push -f"
 alias gpl="git pull"
 alias gpr="git pull --rebase"
+alias gmv="git mv"
 alias grc="git rebase --continue"
 alias gre="git reset"
 alias greh="git reset --hard"
@@ -117,6 +118,7 @@ alias gsta="git stash apply"
 alias gstd="git stash drop"
 alias gstp="git stash pop"
 alias reflog="git reflog --format=reflog"
+alias wip="git commit -am 'wip'"
 # }}}
 # Rails# {{{
 
