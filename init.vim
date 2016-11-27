@@ -192,8 +192,8 @@ let g:loaded_netrw       = 1
 let g:loaded_netrwPlugin = 1
 "}}}
 "}}}
-" Auto commands"{{{
-augroup vimrcEx
+" Auto commands - init"{{{
+augroup init
   autocmd!
 
   autocmd VimEnter * source ~/dotfiles/abbreviations.vim
@@ -220,6 +220,11 @@ augroup vimrcEx
 
   " Run NeoMake on read and write operations
   autocmd BufReadPost,BufWritePost * Neomake
+augroup END
+"}}}
+" Auto commands - filetypes"{{{
+augroup filetypes
+  autocmd!
 
   " Maps K to open vim help for the word under cursor when editing vim files
   autocmd FileType vim setlocal keywordprg=:help
@@ -249,16 +254,24 @@ augroup vimrcEx
   autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
   autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
-  " Mapping q to close the windows
-  autocmd FileType help  nnoremap <buffer> <silent> q :bd<CR>
-  autocmd FileType diff  nnoremap <buffer> <silent> q :bd<CR>
-  autocmd FileType qf    nnoremap <buffer> <silent> q :bd<CR>
-  autocmd FileType netrw nnoremap <buffer> <silent> q :Rex<CR>
-
   " Folding options
   autocmd FileType vim,tmux setlocal foldlevel=0
   autocmd BufEnter *.zsh*   setlocal foldlevel=0
   " autocmd FileType css,html,javascript,javascript.jsx setlocal foldmethod=syntax
+
+  " Mapping q to close the windows
+  autocmd FileType help  nnoremap <silent> <buffer> q :bd<CR>
+  autocmd FileType diff  nnoremap <silent> <buffer> q :bd<CR>
+  autocmd FileType qf    nnoremap <silent> <buffer> q :bd<CR>
+  autocmd FileType netrw nnoremap <silent> <buffer> q :Rex<CR>
+
+  " Mappings to make git interactive rebase easier
+  autocmd FileType gitrebase nnoremap <silent> <buffer> gd :Drop<CR>
+  autocmd FileType gitrebase nnoremap <silent> <buffer> ge :Edit<CR>
+  autocmd FileType gitrebase nnoremap <silent> <buffer> gf :Fixup<CR>
+  autocmd FileType gitrebase nnoremap <silent> <buffer> gp :Pick<CR>
+  autocmd FileType gitrebase nnoremap <silent> <buffer> gr :Reword<CR>
+  autocmd FileType gitrebase nnoremap <silent> <buffer> gs :Squash<CR>
 augroup END
 "}}}
 " Custom mappings"{{{
@@ -418,6 +431,9 @@ nnoremap <Leader>pry :VtrOpenRunner { 'orientation': 'h', 'percentage': 50, 'cmd
 nnoremap <Leader>irb :VtrOpenRunner { 'orientation': 'h', 'percentage': 50, 'cmd': 'irb' }<CR>
 "}}}
 " Plugin mappings and settings"{{{
+augroup plugins
+  autocmd!
+augroup END
 "Airline"{{{
 let g:airline_theme='tomorrow'
 let g:airline_powerline_fonts = 1
@@ -427,8 +443,8 @@ let g:airline#extensions#tabline#enabled = 1
 let g:closetag_filenames = "*.erb,*.html,*.js,*.jsx"
 "}}}
 " Commentary"{{{
-autocmd vimrcEx Bufenter *.conf      setlocal commentstring=#\ %s
-autocmd vimrcEx Bufenter *.zsh-theme setlocal commentstring=#\ %s
+autocmd plugins Bufenter *.conf      setlocal commentstring=#\ %s
+autocmd plugins Bufenter *.zsh-theme setlocal commentstring=#\ %s
 "}}}
 " Deoplete"{{{
 let g:deoplete#enable_at_startup = 1
@@ -468,7 +484,7 @@ let g:user_emmet_install_global = 0
 let g:user_emmet_leader_key=','
 
 " Types of files to load Emmet
-autocmd vimrcEx FileType css,eruby,html,javascript,javascript.jsx,jsp EmmetInstall
+autocmd plugins FileType css,eruby,html,javascript,javascript.jsx,jsp EmmetInstall
 "}}}
 " Fzf"{{{
 
@@ -486,7 +502,7 @@ let g:fzf_history_dir = '~/.local/share/fzf-history'
 let g:fzf_commits_log_options = '--color=always --graph --date=format:%a\ %H:%M\ %d-%m-%Y --format=gitlog'
 
 " Change Ag to accept arguemnts and also highlight search results to red instead
-autocmd vimrcEx VimEnter * command! -nargs=* Ag :call <SID>fzf_ag_raw(<q-args>)
+autocmd plugins VimEnter * command! -nargs=* Ag :call <SID>fzf_ag_raw(<q-args>)
 function! s:fzf_ag_raw(command_suffix, ...)
   return call('fzf#vim#grep', extend(['ag --nogroup --column --color --color-match "1;31" '.a:command_suffix, 1], a:000))
 endfunction
@@ -498,7 +514,7 @@ function! s:fzf_statusline()
   highlight fzf3 ctermfg=254 ctermbg=240
   setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
 endfunction
-autocmd vimrcEx User FzfStatusLine call <SID>fzf_statusline()
+autocmd plugins User FzfStatusLine call <SID>fzf_statusline()
 
 " Customize fzf colors to match your color scheme
 let g:fzf_colors =
@@ -568,12 +584,12 @@ let g:tern_show_argument_hints = 'on_hold'
 let g:tern_show_signature_in_pum = 1
 
 " Disable the preview that shows automatically when autocompleting
-autocmd vimrcEx InsertLeave,InsertEnter,CompleteDone *.js,*.jsx if pumvisible() == 0 | pclose | endif
-autocmd vimrcEx FileType javascript,javascript.jsx setlocal completeopt-=preview
+autocmd plugins Insertleave,InsertEnter,CompleteDone *.js,*.jsx if pumvisible() == 0 | pclose | endif
+autocmd plugins Filetype javascript,javascript.jsx setlocal completeopt-=preview
 " Define some local tern key bindings
-autocmd vimrcEx FileType javascript,javascript.jsx nnoremap <silent> <buffer> gd :TernDef<CR>
-autocmd vimrcEx FileType javascript,javascript.jsx nnoremap <silent> <buffer> K :TernDoc<CR>
-autocmd vimrcEx FileType javascript,javascript.jsx nnoremap <silent> <buffer> <localleader>K :TernDocBrowse<CR>
+autocmd plugins Filetype javascript,javascript.jsx nnoremap <silent> <buffer> gd :TernDef<CR>
+autocmd plugins Filetype javascript,javascript.jsx nnoremap <silent> <buffer> K :TernDoc<CR>
+autocmd plugins Filetype javascript,javascript.jsx nnoremap <silent> <buffer> <localleader>K :TernDocBrowse<CR>
 "}}}
 " Test"{{{
 let test#strategy = "dispatch"
