@@ -444,6 +444,7 @@ let g:closetag_filenames = "*.erb,*.html,*.js,*.jsx"
 "}}}
 " Commentary"{{{
 autocmd plugins Bufenter *.conf      setlocal commentstring=#\ %s
+autocmd plugins Bufenter *gitconfig  setlocal commentstring=#\ %s
 autocmd plugins Bufenter *.zsh-theme setlocal commentstring=#\ %s
 "}}}
 " Deoplete"{{{
@@ -474,6 +475,10 @@ nmap t <Plug>(easymotion-tl)
 nmap T <Plug>(easymotion-Tl)
 nmap f <Plug>(easymotion-fl)
 nmap F <Plug>(easymotion-Fl)
+vmap t <Plug>(easymotion-tl)
+vmap T <Plug>(easymotion-Tl)
+vmap f <Plug>(easymotion-fl)
+vmap F <Plug>(easymotion-Fl)
 omap t <Plug>(easymotion-tl)
 omap T <Plug>(easymotion-Tl)
 omap f <Plug>(easymotion-fl)
