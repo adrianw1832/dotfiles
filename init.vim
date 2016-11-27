@@ -256,7 +256,8 @@ augroup vimrcEx
   autocmd FileType netrw nnoremap <buffer> <silent> q :Rex<CR>
 
   " Folding options
-  autocmd FileType vim,tmux,zsh setlocal foldlevel=0
+  autocmd FileType vim,tmux setlocal foldlevel=0
+  autocmd BufEnter *.zsh*   setlocal foldlevel=0
   " autocmd FileType css,html,javascript,javascript.jsx setlocal foldmethod=syntax
 augroup END
 "}}}
