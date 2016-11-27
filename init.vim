@@ -315,7 +315,7 @@ cnoremap <C-n> <Down>
 cnoremap <C-p> <Up>
 " Remap for easier command mode access
 nnoremap ; :
-vnoremap ; :
+xnoremap ; :
 
 " Remap Q for exmode to run macros instead
 nnoremap Q @q
@@ -325,19 +325,24 @@ nnoremap Y yg_
 " Visually select the text that was last edited/pasted
 nnoremap gV `[v`]
 " Makes the dot command behave on a Visually selected line
-vnoremap . :norm.<CR>
+xnoremap . :norm.<CR>
 " Allow star to go back to the first search term
 nnoremap * *N
-vnoremap * *N
+xnoremap * *N
 nnoremap g* g*N
-vnoremap g* g*N
+xnoremap g* g*N
 " Copy to system clipboard
-vnoremap <C-c> "*y
+xnoremap <C-c> "*y
 
 " Remap to increase number by 1
 noremap <C-z> <C-a>
-" Switching out to terminal
+" Switching out to terminal using Ctrl-space
 nnoremap <NUL> <C-z>
+
+" Mappings to make diffs easier
+xnoremap <silent> do :diffget<CR>
+xnoremap <silent> dp :diffput<CR>
+nnoremap <silent> du :wincmd w<CR>:normal u<CR>:wincmd w<CR>
 "}}}
 " Leader mappings"{{{
 
