@@ -92,6 +92,7 @@ set foldlevelstart=99 " To make sure all folds are initially opened
 set grepprg=rg\ --vimgrep " Use ripgrep as default for grep
 set hidden " Change default behaviour of opening file of existing buffer
 set ignorecase " Ignore case when searching
+set inccommand=nosplit " Use live substitution introduced in 0.1.7
 set infercase " Smarter case for autocompletion
 set lazyredraw " Redraw window only when we need to
 set list " Actually display extra whitespace symbols
@@ -137,6 +138,19 @@ function! s:StripTrailingWhitespaces()
   let c  = col(".")
   " Search all trailing whitespaces and replace them with nothing
   %s/\s\+$//e
+  " Restore last search pattern and cursor position
+  let @/ = _s
+  call cursor(l, c)
+endfunction
+"}}}
+" Merge multiple empty lines to one on save"{{{
+function! s:MergeMultipleEmptyLines()
+  " Save last search pattern and cursor position
+  let _s = @/
+  let l  = line(".")
+  let c  = col(".")
+  " Search all multiple empty lines and merge them to one
+  %s/^$\n^$//e
   " Restore last search pattern and cursor position
   let @/ = _s
   call cursor(l, c)
@@ -206,8 +220,9 @@ augroup init
         \   exe "normal g`\"" |
         \ endif
 
-  autocmd BufWritePre * call <SID>StripTrailingWhitespaces()
   autocmd BufWritePre * call <SID>CreateNonExistantDirectory()
+  autocmd BufWritePre * call <SID>StripTrailingWhitespaces()
+  autocmd BufWritePre * call <SID>MergeMultipleEmptyLines()
 
   autocmd InsertLeave,BufWinEnter,WinEnter * set cursorline
   autocmd InsertEnter,BufWinLeave,WinLeave * set nocursorline
