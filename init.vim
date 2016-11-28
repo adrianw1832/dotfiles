@@ -330,6 +330,9 @@ cnoremap <C-p> <Up>
 " Remap for easier command mode access
 nnoremap ; :
 xnoremap ; :
+" Remappings for backtick since it's more useful
+nnoremap ' `
+nnoremap ` '
 
 " Remap Q for exmode to run macros instead
 nnoremap Q @q
@@ -431,9 +434,11 @@ nnoremap <Leader>pry :VtrOpenRunner { 'orientation': 'h', 'percentage': 50, 'cmd
 nnoremap <Leader>irb :VtrOpenRunner { 'orientation': 'h', 'percentage': 50, 'cmd': 'irb' }<CR>
 "}}}
 " Plugin mappings and settings"{{{
+" Set up augroup for plugins"{{{
 augroup plugins
   autocmd!
 augroup END
+"}}}
 "Airline"{{{
 let g:airline_theme='tomorrow'
 let g:airline_powerline_fonts = 1
@@ -562,7 +567,7 @@ let g:neomake_serialize = 1
 let g:neomake_serialize_abort_on_error = 1
 let g:neomake_javascript_enabled_makers = ['eslint']
 "}}}
-"Rainbow"{{{
+" Rainbow"{{{
 let g:rainbow_active = 1
 "}}}
 " Sexp"{{{
@@ -579,8 +584,10 @@ nnoremap <silent> <C-b> :call smooth_scroll#up(&scroll*2, 20, 4)<CR>
 nnoremap <silent> <C-f> :call smooth_scroll#down(&scroll*2, 20, 4)<CR>
 "}}}
 " Surround"{{{
-let g:surround_45 = "<% \r %>"
-let g:surround_61 = "<%= \r %>"
+let g:surround_45  = "<% \r %>" " - for <% %>
+let g:surround_61  = "<%= \r %>" " = for <%= %>
+let g:surround_118 = "#{\r}" " v for #{}
+let g:surround_35  = "#{\r}" " # for #{}
 "}}}
 " Tern"{{{
 
