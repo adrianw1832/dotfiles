@@ -122,7 +122,7 @@ set wildmode=longest:full,full " Set the wildmenu behaviour to be more like zsh
 "}}}
 " Custom functions"{{{
 " Create directory on save if it doesn't exist"{{{
-function! s:CreateNonExistantDirectory()
+function! s:CreateNonExistantDirectory() abort
   let dir = expand("%:p:h")
 
   if !isdirectory(dir)
@@ -132,7 +132,7 @@ function! s:CreateNonExistantDirectory()
 endfunction
 "}}}
 " Delete all trailing white space on save"{{{
-function! s:StripTrailingWhitespaces()
+function! s:StripTrailingWhitespaces() abort
   " Save last search pattern and cursor position
   let _s = @/
   let l  = line(".")
@@ -145,7 +145,7 @@ function! s:StripTrailingWhitespaces()
 endfunction
 "}}}
 " Merge multiple empty lines to one on save"{{{
-function! s:MergeMultipleEmptyLines()
+function! s:MergeMultipleEmptyLines() abort
   " Save last search pattern and cursor position
   let _s = @/
   let l  = line(".")
@@ -158,7 +158,7 @@ function! s:MergeMultipleEmptyLines()
 endfunction
 "}}}
 " Don't close window, when deleting a buffer"{{{
-function! s:BufCloseSavingWindow()
+function! s:BufCloseSavingWindow() abort
   let l:currentBufNum = bufnr("%")
   let l:alternateBufNum = bufnr("#")
 
@@ -185,10 +185,10 @@ command! Bclose call s:BufCloseSavingWindow()
 let g:loaded_netrw       = 1
 let g:loaded_netrwPlugin = 1
 
-function! s:OpenRangerIn(path)
+function! s:OpenRangerIn(path) abort
   let currentPath = expand(a:path)
   let rangerCallback = { "name": "ranger" }
-  function! rangerCallback.on_exit(id, code)
+  function! rangerCallback.on_exit(id, code) abort
     Bclose
     wincmd =
     if filereadable("/tmp/chosenfile")
@@ -197,7 +197,6 @@ function! s:OpenRangerIn(path)
       execute "edit " . system("head -n1 /tmp/chosenfile")
       call system("rm /tmp/chosenfile")
     endif
-    call s:DeleteEmptyBuffers()
   endfunction
   enew
   wincmd |
@@ -232,13 +231,10 @@ augroup init
   autocmd InsertEnter,BufWinLeave,WinLeave * set nocursorline
 
   " Automatically rebalance windows on vim resize
-  autocmd VimResized * :wincmd =
+  autocmd VimResized * wincmd =
 
   " Automatically enter insert mode when entering terminal buffer
   autocmd BufWinEnter,WinEnter term://* startinsert
-
-  " Run NeoMake on read and write operations
-  autocmd BufReadPost,BufWritePost * Neomake
 augroup END
 "}}}
 " Auto commands - filetypes"{{{
@@ -376,8 +372,8 @@ noremap <C-z> <C-a>
 nnoremap <NUL> <C-z>
 
 " Mappings to make diffs easier
-xnoremap <silent> do :diffget<CR>
-xnoremap <silent> dp :diffput<CR>
+xnoremap <silent> do :diffget<CR>:dif<CR>
+xnoremap <silent> dp :diffput<CR>:dif<CR>
 nnoremap <silent> du :wincmd w<CR>:normal u<CR>:wincmd w<CR>
 "}}}
 " Leader mappings"{{{
@@ -453,11 +449,8 @@ nnoremap <Leader>pry :VtrOpenRunner { 'orientation': 'h', 'percentage': 50, 'cmd
 nnoremap <Leader>irb :VtrOpenRunner { 'orientation': 'h', 'percentage': 50, 'cmd': 'irb' }<CR>
 "}}}
 " Plugin mappings and settings"{{{
-" Set up augroup for plugins"{{{
 augroup plugins
   autocmd!
-augroup END
-"}}}
 "Airline"{{{
 let g:airline_theme='tomorrow'
 let g:airline_powerline_fonts = 1
@@ -467,9 +460,9 @@ let g:airline#extensions#tabline#enabled = 1
 let g:closetag_filenames = "*.erb,*.html,*.js,*.jsx"
 "}}}
 " Commentary"{{{
-autocmd plugins Bufenter *.conf      setlocal commentstring=#\ %s
-autocmd plugins Bufenter *gitconfig  setlocal commentstring=#\ %s
-autocmd plugins Bufenter *.zsh-theme setlocal commentstring=#\ %s
+autocmd Bufenter *.conf      setlocal commentstring=#\ %s
+autocmd Bufenter *gitconfig  setlocal commentstring=#\ %s
+autocmd Bufenter *.zsh-theme setlocal commentstring=#\ %s
 "}}}
 " Deoplete"{{{
 let g:deoplete#enable_at_startup = 1
@@ -513,7 +506,10 @@ let g:user_emmet_install_global = 0
 let g:user_emmet_leader_key=','
 
 " Types of files to load Emmet
-autocmd plugins FileType css,eruby,html,javascript,javascript.jsx,jsp EmmetInstall
+autocmd FileType css,eruby,html,javascript,javascript.jsx,jsp EmmetInstall
+"}}}
+" Fugitive"{{{
+autocmd BufReadPost fugitive://*/.git//0/* if pumvisible() == 0 | pclose | endif
 "}}}
 " Fzf"{{{
 
@@ -531,19 +527,19 @@ let g:fzf_history_dir = '~/.local/share/fzf-history'
 let g:fzf_commits_log_options = '--color=always --graph --date=format:%a\ %H:%M\ %d-%m-%Y --format=gitlog'
 
 " Change Ag to accept arguemnts and also highlight search results to red instead
-autocmd plugins VimEnter * command! -nargs=* Ag :call s:fzf_ag_raw(<q-args>)
-function! s:fzf_ag_raw(command_suffix, ...)
+autocmd VimEnter * command! -nargs=* Ag :call s:fzf_ag_raw(<q-args>)
+function! s:fzf_ag_raw(command_suffix, ...) abort
   return call('fzf#vim#grep', extend(['ag --nogroup --column --color --color-match "1;31" '.a:command_suffix, 1], a:000))
 endfunction
 
 " Override statusline as you like
-function! s:fzf_statusline()
+function! s:fzf_statusline() abort
   highlight fzf1 ctermfg=196 ctermbg=240
   highlight fzf2 ctermfg=254 ctermbg=240
   highlight fzf3 ctermfg=254 ctermbg=240
   setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
 endfunction
-autocmd plugins User FzfStatusLine call s:fzf_statusline()
+autocmd User FzfStatusLine call s:fzf_statusline()
 
 " Customize fzf colors to match your color scheme
 let g:fzf_colors =
@@ -585,6 +581,9 @@ let g:neomake_open_list = 2
 let g:neomake_serialize = 1
 let g:neomake_serialize_abort_on_error = 1
 let g:neomake_javascript_enabled_makers = ['eslint']
+
+" Run NeoMake on read and write operations
+autocmd BufReadPost,BufWritePost * Neomake
 "}}}
 " Rainbow"{{{
 let g:rainbow_active = 1
@@ -615,12 +614,12 @@ let g:tern_show_argument_hints = 'on_hold'
 let g:tern_show_signature_in_pum = 1
 
 " Disable the preview that shows automatically when autocompleting
-autocmd plugins Insertleave,InsertEnter,CompleteDone *.js,*.jsx if pumvisible() == 0 | pclose | endif
-autocmd plugins Filetype javascript,javascript.jsx setlocal completeopt-=preview
+autocmd Insertleave,InsertEnter,CompleteDone *.js,*.jsx if pumvisible() == 0 | pclose | endif
+autocmd Filetype javascript,javascript.jsx setlocal completeopt-=preview
 " Define some local tern key bindings
-autocmd plugins Filetype javascript,javascript.jsx nnoremap <silent> <buffer> gd :TernDef<CR>
-autocmd plugins Filetype javascript,javascript.jsx nnoremap <silent> <buffer> K :TernDoc<CR>
-autocmd plugins Filetype javascript,javascript.jsx nnoremap <silent> <buffer> <localleader>K :TernDocBrowse<CR>
+autocmd Filetype javascript,javascript.jsx nnoremap <silent> <buffer> gd :TernDef<CR>
+autocmd Filetype javascript,javascript.jsx nnoremap <silent> <buffer> K :TernDoc<CR>
+autocmd Filetype javascript,javascript.jsx nnoremap <silent> <buffer> <localleader>K :TernDocBrowse<CR>
 "}}}
 " Test"{{{
 let test#strategy = "dispatch"
@@ -642,4 +641,5 @@ let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnippetDirectories=[$HOME.'/dotfiles/UltiSnips', $HOME.'/.config/nvim/plugged/vim-snippets/UltiSnips']
 "}}}
+augroup END
 "}}}
