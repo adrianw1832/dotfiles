@@ -260,7 +260,7 @@ augroup init
 augroup END
 "}}}
 " Auto commands - filetypes"{{{
-augroup filetypes
+augroup Filetypes
   autocmd!
 
   " Maps K to open vim help for the word under cursor when editing vim files
@@ -300,7 +300,6 @@ augroup filetypes
   autocmd FileType help  nnoremap <silent> <buffer> q :bd<CR>
   autocmd FileType diff  nnoremap <silent> <buffer> q :bd<CR>
   autocmd FileType qf    nnoremap <silent> <buffer> q :bd<CR>
-  autocmd FileType netrw nnoremap <silent> <buffer> q :Rex<CR>
 
   " Mappings to make git interactive rebase easier
   autocmd FileType gitrebase nnoremap <silent> <buffer> gd :Drop<CR>
@@ -392,13 +391,6 @@ xnoremap <C-c> "*y
 noremap <C-z> <C-a>
 " Switching out to terminal using Ctrl-space
 nnoremap <NUL> <C-z>
-
-" Mappings to make diffs easier
-nnoremap <silent> do :diffget<CR>:GitGutterNextHunk<CR>
-nnoremap <silent> dp :diffput<CR>:GitGutterNextHunk<CR>
-xnoremap <silent> do :diffget<CR>
-xnoremap <silent> dp :diffput<CR>
-nnoremap <silent> du :wincmd w<CR>:normal u<CR>:wincmd w<CR>
 "}}}
 " Leader mappings"{{{
 
@@ -473,8 +465,6 @@ nnoremap <Leader>pry :VtrOpenRunner { 'orientation': 'h', 'percentage': 50, 'cmd
 nnoremap <Leader>irb :VtrOpenRunner { 'orientation': 'h', 'percentage': 50, 'cmd': 'irb' }<CR>
 "}}}
 " Plugin mappings and settings"{{{
-augroup plugins
-  autocmd!
 "Airline"{{{
 let g:airline_theme='tomorrow'
 let g:airline_powerline_fonts = 1
@@ -484,9 +474,12 @@ let g:airline#extensions#tabline#enabled = 1
 let g:closetag_filenames = "*.erb,*.html,*.js,*.jsx"
 "}}}
 " Commentary"{{{
-autocmd Bufenter *.conf      setlocal commentstring=#\ %s
-autocmd Bufenter *gitconfig  setlocal commentstring=#\ %s
-autocmd Bufenter *.zsh-theme setlocal commentstring=#\ %s
+augroup Commentary
+  autocmd!
+  autocmd Bufenter *.conf      setlocal commentstring=#\ %s
+  autocmd Bufenter *gitconfig  setlocal commentstring=#\ %s
+  autocmd Bufenter *.zsh-theme setlocal commentstring=#\ %s
+augroup END
 "}}}
 " Deoplete"{{{
 let g:deoplete#enable_at_startup = 1
@@ -529,11 +522,27 @@ omap F <Plug>(easymotion-Fl)
 let g:user_emmet_install_global = 0
 let g:user_emmet_leader_key=','
 
-" Types of files to load Emmet
-autocmd FileType css,eruby,html,javascript,javascript.jsx,jsp EmmetInstall
+augroup Emmet
+  autocmd!
+  autocmd FileType css,eruby,html,javascript,javascript.jsx,jsp EmmetInstall
+augroup END
 "}}}
 " Fugitive"{{{
-autocmd BufReadPost fugitive://*/.git//0/* if pumvisible() == 0 | pclose | endif
+augroup Fugitive
+  autocmd!
+" Mappings to make partial diffs easier
+  autocmd BufReadPost fugitive://*/.git//0/* if pumvisible() == 0 | pclose | endif
+  autocmd BufReadPost fugitive://*/.git//0/* nnoremap <silent> do :diffget<CR>:GitGutterNextHunk<CR>
+  autocmd BufReadPost fugitive://*/.git//0/* nnoremap <silent> dp :diffput<CR>:GitGutterNextHunk<CR>
+  autocmd BufReadPost fugitive://*/.git//0/* nnoremap <silent> du :wincmd w<CR>:normal u<CR>:wincmd w<CR>
+  autocmd BufReadPost fugitive://*/.git//0/* xnoremap <silent> do :diffget<CR>
+  autocmd BufReadPost fugitive://*/.git//0/* xnoremap <silent> dp :diffput<CR>
+  autocmd BufDelete   fugitive://*/.git//0/* nunmap do
+  autocmd BufDelete   fugitive://*/.git//0/* nunmap dp
+  autocmd BufDelete   fugitive://*/.git//0/* nunmap du
+  autocmd BufDelete   fugitive://*/.git//0/* xunmap do
+  autocmd BufDelete   fugitive://*/.git//0/* xunmap dp
+augroup END
 "}}}
 " Fzf"{{{
 
@@ -551,7 +560,6 @@ let g:fzf_history_dir = '~/.local/share/fzf-history'
 let g:fzf_commits_log_options = '--color=always --graph --date=format:%a\ %H:%M\ %d-%m-%Y --format=gitlog'
 
 " Change Ag to accept arguemnts and also highlight search results to red instead
-autocmd VimEnter * command! -nargs=* Ag :call s:fzf_ag_raw(<q-args>)
 function! s:fzf_ag_raw(command_suffix, ...) abort
   return call('fzf#vim#grep', extend(['ag --nogroup --column --color --color-match "1;31" '.a:command_suffix, 1], a:000))
 endfunction
@@ -563,7 +571,12 @@ function! s:fzf_statusline() abort
   highlight fzf3 ctermfg=254 ctermbg=240
   setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
 endfunction
-autocmd User FzfStatusLine call s:fzf_statusline()
+
+augroup Fzf
+  autocmd!
+  autocmd VimEnter * command! -nargs=* Ag :call s:fzf_ag_raw(<q-args>)
+  autocmd User FzfStatusLine call s:fzf_statusline()
+augroup END
 
 " Customize fzf colors to match your color scheme
 let g:fzf_colors =
@@ -606,8 +619,10 @@ let g:neomake_serialize = 1
 let g:neomake_serialize_abort_on_error = 1
 let g:neomake_javascript_enabled_makers = ['eslint']
 
-" Run NeoMake on read and write operations
-autocmd BufReadPost,BufWritePost * Neomake
+augroup Neomake
+  autocmd!
+  autocmd BufReadPost,BufWritePost * Neomake
+augroup END
 "}}}
 " Rainbow"{{{
 let g:rainbow_active = 1
@@ -637,13 +652,16 @@ let g:surround_35  = "#{\r}" " # for #{}
 let g:tern_show_argument_hints = 'on_hold'
 let g:tern_show_signature_in_pum = 1
 
-" Disable the preview that shows automatically when autocompleting
-autocmd Insertleave,InsertEnter,CompleteDone *.js,*.jsx if pumvisible() == 0 | pclose | endif
-autocmd Filetype javascript,javascript.jsx setlocal completeopt-=preview
-" Define some local tern key bindings
-autocmd Filetype javascript,javascript.jsx nnoremap <silent> <buffer> gd :TernDef<CR>
-autocmd Filetype javascript,javascript.jsx nnoremap <silent> <buffer> K :TernDoc<CR>
-autocmd Filetype javascript,javascript.jsx nnoremap <silent> <buffer> <localleader>K :TernDocBrowse<CR>
+augroup Tern
+  autocmd!
+  " Disable the preview that shows automatically when autocompleting
+  autocmd Insertleave,InsertEnter,CompleteDone *.js,*.jsx if pumvisible() == 0 | pclose | endif
+  autocmd Filetype javascript,javascript.jsx setlocal completeopt-=preview
+  " Define some local tern key bindings
+  autocmd Filetype javascript,javascript.jsx nnoremap <silent> <buffer> gd :TernDef<CR>
+  autocmd Filetype javascript,javascript.jsx nnoremap <silent> <buffer> K :TernDoc<CR>
+  autocmd Filetype javascript,javascript.jsx nnoremap <silent> <buffer> <localleader>K :TernDocBrowse<CR>
+augroup END
 "}}}
 " Test"{{{
 let test#strategy = "dispatch"
@@ -665,5 +683,4 @@ let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnippetDirectories=[$HOME.'/dotfiles/UltiSnips', $HOME.'/.config/nvim/plugged/vim-snippets/UltiSnips']
 "}}}
-augroup END
 "}}}
