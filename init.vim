@@ -123,11 +123,11 @@ set wildmode=longest:full,full " Set the wildmenu behaviour to be more like zsh
 " Custom functions"{{{
 " Create directory on save if it doesn't exist"{{{
 function! s:CreateNonExistantDirectory()
-  let dir = expand('%:p:h')
+  let dir = expand("%:p:h")
 
   if !isdirectory(dir)
-    call mkdir(dir, 'p')
-    echo 'Created non-existing directory: '.dir
+    call mkdir(dir, "p")
+    echo "Created non-existing directory: ".dir
   endif
 endfunction
 "}}}
@@ -177,34 +177,37 @@ function! s:BufCloseSavingWindow()
   endif
 endfunction
 
-command! Bclose call <SID>BufCloseSavingWindow()
+command! Bclose call s:BufCloseSavingWindow()
 "}}}
 " Integration with Ranger"{{{
-function! s:OpenRangerIn(path)
-  let currentPath = expand(a:path)
-  let rangerCallback = { 'name': 'ranger' }
-  function! rangerCallback.on_exit(id, code)
-    Bclose
-    wincmd =
-      if filereadable('/tmp/chosenfile')
-        exec system('sed -ie "s/ /\\\ /g" /tmp/chosenfile')
-        exec 'argadd ' . system('cat /tmp/chosenfile | tr "\\n" " "')
-        exec 'edit ' . system('head -n1 /tmp/chosenfile')
-        call system('rm /tmp/chosenfile')
-      endif
-  endfunction
-  enew
-  wincmd |
-  call termopen('ranger --choosefiles=/tmp/chosenfile ' . currentPath, rangerCallback)
-  startinsert
-endfunction
-
-command! RangerInCurrentDirectory silent call <SID>OpenRangerIn("%:p:h")
-command! RangerInWorkingDirectory silent call <SID>OpenRangerIn("")
 
 " Don't load netrw since I am using ranger as my file explorer
 let g:loaded_netrw       = 1
 let g:loaded_netrwPlugin = 1
+
+function! s:OpenRangerIn(path)
+  let currentPath = expand(a:path)
+  let rangerCallback = { "name": "ranger" }
+  function! rangerCallback.on_exit(id, code)
+    Bclose
+    wincmd =
+    if filereadable("/tmp/chosenfile")
+      execute system('sed -ie "s/ /\\\ /g" /tmp/chosenfile')
+      execute "argadd " . system('cat /tmp/chosenfile | tr "\\n" " "')
+      execute "edit " . system("head -n1 /tmp/chosenfile")
+      call system("rm /tmp/chosenfile")
+    endif
+    call s:DeleteEmptyBuffers()
+  endfunction
+  enew
+  wincmd |
+  call termopen("ranger --choosefiles=/tmp/chosenfile " . currentPath, rangerCallback)
+  startinsert
+endfunction
+
+command! RangerInCurrentDirectory silent call s:OpenRangerIn("%:p:h")
+command! RangerInWorkingDirectory silent call s:OpenRangerIn("")
+
 "}}}
 "}}}
 " Auto commands - init"{{{
@@ -221,9 +224,9 @@ augroup init
         \   exe "normal g`\"" |
         \ endif
 
-  autocmd BufWritePre * call <SID>CreateNonExistantDirectory()
-  autocmd BufWritePre * call <SID>StripTrailingWhitespaces()
-  autocmd BufWritePre * call <SID>MergeMultipleEmptyLines()
+  autocmd BufWritePre * call s:CreateNonExistantDirectory()
+  autocmd BufWritePre * call s:StripTrailingWhitespaces()
+  autocmd BufWritePre * call s:MergeMultipleEmptyLines()
 
   autocmd InsertLeave,BufWinEnter,WinEnter * set cursorline
   autocmd InsertEnter,BufWinLeave,WinLeave * set nocursorline
@@ -528,7 +531,7 @@ let g:fzf_history_dir = '~/.local/share/fzf-history'
 let g:fzf_commits_log_options = '--color=always --graph --date=format:%a\ %H:%M\ %d-%m-%Y --format=gitlog'
 
 " Change Ag to accept arguemnts and also highlight search results to red instead
-autocmd plugins VimEnter * command! -nargs=* Ag :call <SID>fzf_ag_raw(<q-args>)
+autocmd plugins VimEnter * command! -nargs=* Ag :call s:fzf_ag_raw(<q-args>)
 function! s:fzf_ag_raw(command_suffix, ...)
   return call('fzf#vim#grep', extend(['ag --nogroup --column --color --color-match "1;31" '.a:command_suffix, 1], a:000))
 endfunction
@@ -540,7 +543,7 @@ function! s:fzf_statusline()
   highlight fzf3 ctermfg=254 ctermbg=240
   setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
 endfunction
-autocmd plugins User FzfStatusLine call <SID>fzf_statusline()
+autocmd plugins User FzfStatusLine call s:fzf_statusline()
 
 " Customize fzf colors to match your color scheme
 let g:fzf_colors =
