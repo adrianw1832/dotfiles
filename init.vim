@@ -157,7 +157,14 @@ function! s:MergeMultipleEmptyLines() abort
   call cursor(l, c)
 endfunction
 "}}}
-" Don't close window, when deleting a buffer"{{{
+" Delete empty buffers"{{{
+function! s:DeleteEmptyBuffers() abort
+  let buffers = filter(range(1, bufnr("$")), 'bufloaded(v:val) && empty(bufname(v:val)) && getbufline(v:val, 1, 2) == [""]')
+  if !empty(buffers)
+    execute "bwipe ".join(buffers, " ")
+  endif
+endfunction
+"}}}
 function! s:BufCloseSavingWindow() abort
   let l:currentBufNum = bufnr("%")
   let l:alternateBufNum = bufnr("#")
@@ -197,6 +204,7 @@ function! s:OpenRangerIn(path) abort
       execute "edit " . system("head -n1 /tmp/chosenfile")
       call system("rm /tmp/chosenfile")
     endif
+    call s:DeleteEmptyBuffers()
   endfunction
   enew
   wincmd |
@@ -207,7 +215,15 @@ endfunction
 command! RangerInCurrentDirectory silent call s:OpenRangerIn("%:p:h")
 command! RangerInWorkingDirectory silent call s:OpenRangerIn("")
 
-"}}}
+function! s:OpenRangerWhenNoFileIsGiven() abort
+  if argc() == 0 && !exists("s:std_in")
+    call s:OpenRangerIn("")
+  elseif argc() == 1 && isdirectory(argv(0))
+    bd
+    execute "cd" fnameescape(argv(0))
+    call s:OpenRangerIn("")
+  endif
+endfunction
 "}}}
 " Auto commands - init"{{{
 augroup init
@@ -215,6 +231,10 @@ augroup init
 
   autocmd VimEnter * source ~/dotfiles/abbreviations.vim
 
+
+  " This mimics netrw's behaviour when no file or a direcotry is given upon open
+  autocmd StdinReadPre * let s:std_in=1
+  autocmd VimEnter * call s:OpenRangerWhenNoFileIsGiven()
   " When editing a file, always jump to the last known cursor position.
   " Don't do it for commit messages, when the position is invalid, or when
   " inside an event handler (happens when dropping a file on gvim).
