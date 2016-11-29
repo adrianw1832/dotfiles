@@ -366,6 +366,8 @@ cnoremap <C-p> <Up>
 " Remap for easier command mode access
 nnoremap ; :
 xnoremap ; :
+" Put a semicolon at the end of the line;
+nnoremap : mzA;<Esc>`z
 " Remappings for backtick since it's more useful
 nnoremap ' `
 nnoremap ` '
@@ -437,6 +439,7 @@ nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :q<CR>
 nnoremap <Leader>qq :Bclose<CR>
 nnoremap <Leader>wq :wq<CR>
+nnoremap <Leader>wa :wa<CR>
 nnoremap <Leader>qw :wq<CR>
 nnoremap <Leader>qa :qa<CR>
 nnoremap <Leader>wqa :wqa<CR>
