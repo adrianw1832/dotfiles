@@ -165,6 +165,7 @@ function! s:DeleteEmptyBuffers() abort
   endif
 endfunction
 "}}}
+" Don't close window, when deleting a buffer"{{{
 function! s:BufCloseSavingWindow() abort
   let l:currentBufNum = bufnr("%")
   let l:alternateBufNum = bufnr("#")
@@ -225,16 +226,17 @@ function! s:OpenRangerWhenNoFileIsGiven() abort
   endif
 endfunction
 "}}}
+"}}}
 " Auto commands - init"{{{
 augroup init
   autocmd!
 
   autocmd VimEnter * source ~/dotfiles/abbreviations.vim
 
-
   " This mimics netrw's behaviour when no file or a direcotry is given upon open
   autocmd StdinReadPre * let s:std_in=1
   autocmd VimEnter * call s:OpenRangerWhenNoFileIsGiven()
+
   " When editing a file, always jump to the last known cursor position.
   " Don't do it for commit messages, when the position is invalid, or when
   " inside an event handler (happens when dropping a file on gvim).
@@ -392,8 +394,10 @@ noremap <C-z> <C-a>
 nnoremap <NUL> <C-z>
 
 " Mappings to make diffs easier
-xnoremap <silent> do :diffget<CR>:dif<CR>
-xnoremap <silent> dp :diffput<CR>:dif<CR>
+nnoremap <silent> do :diffget<CR>:GitGutterNextHunk<CR>
+nnoremap <silent> dp :diffput<CR>:GitGutterNextHunk<CR>
+xnoremap <silent> do :diffget<CR>
+xnoremap <silent> dp :diffput<CR>
 nnoremap <silent> du :wincmd w<CR>:normal u<CR>:wincmd w<CR>
 "}}}
 " Leader mappings"{{{
