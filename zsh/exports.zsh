@@ -3,7 +3,6 @@ export FZF_DEFAULT_COMMAND='rg --files -S'
 export KEYTIMEOUT=1
 export LSCOLORS=Gxfxcxdxbxegedabagacad
 export N_PREFIX=$HOME
-export PATH=$PATH:$HOME/bin
 export SHELL='/usr/local/bin/zsh'
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
