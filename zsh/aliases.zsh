@@ -85,7 +85,6 @@ alias v="$EDITOR"
 
 alias amend="git commit --amend"
 alias amendne="git commit --amend --no-edit"
-alias dirty="$EDITOR `git status | grep modified | awk '{print $2}'`"
 alias g="git status -s"
 alias ga="git add"
 alias gbr="git branch --all"

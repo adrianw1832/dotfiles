@@ -10,6 +10,11 @@ fi
 }
 zle -N _easier_ctrl-z
 
+# Show all the modified files in the editor
+dirty() {
+  git status | grep modified | awk '{print $2}' | xargs $EDITOR
+}
+
 # Custom function to handle git add and commit
 gac() { git add "$1" && git commit }
 compdef _git gac=git-add
