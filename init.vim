@@ -17,7 +17,6 @@ Plug 'airblade/vim-gitgutter'
 Plug 'alvan/vim-closetag'
 Plug 'bronson/vim-visual-star-search'
 Plug 'christoomey/vim-sort-motion'
-Plug 'christoomey/vim-tmux-runner'
 Plug 'easymotion/vim-easymotion'
 Plug 'haya14busa/incsearch.vim'
 Plug 'janko-m/vim-test'
@@ -25,7 +24,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install' } | Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'luochen1990/rainbow'
-Plug 'metakirby5/codi.vim'
+Plug 'metakirby5/codi.vim', { 'on': 'Codi' }
 Plug 'neomake/neomake'
 Plug 'sickill/vim-pasta'
 Plug 'tommcdo/vim-exchange'
@@ -77,7 +76,7 @@ Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 "}}}
 call plug#end()
 "}}}
-" Vim settings"{{{
+" Settings"{{{
 
 colorscheme gruvbox
 
@@ -449,23 +448,9 @@ nnoremap <Leader>v :vnew <C-r>=escape(expand("%:p:h"), ' ') . '/'<CR>
 nnoremap <Leader>vi :e $MYVIMRC<CR>
 nnoremap <Leader>y :w<CR>:TestSuite<CR>
 nnoremap <Leader><Leader> :RangerInWorkingDirectory<CR>
-
 " Mappings to zoom in on a pane and to rebalance
 nnoremap <silent> <Leader>= :wincmd _<CR>:wincmd \|<CR>
 nnoremap <silent> <Leader>- :wincmd =<CR>
-
-" Mappings for the tmux runner plugin
-nnoremap <Leader>va :VtrAttachToPane<CR>
-nnoremap <Leader>sc :VtrSendCommand<CR>
-nnoremap <Leader>sf :VtrSendFile!<CR>
-nnoremap <Leader>cr :VtrClearRunner<CR>
-nnoremap <Leader>kr :VtrKillRunner<CR>
-nnoremap <C-a> :VtrSendLinesToRunner<CR>
-vnoremap <C-a> :VtrSendLinesToRunner<CR>
-
-nnoremap <Leader>or  :VtrOpenRunner { 'orientation': 'v', 'percentage': 20 }<CR>:VtrSendFile<CR>
-nnoremap <Leader>pry :VtrOpenRunner { 'orientation': 'h', 'percentage': 50, 'cmd': 'pry' }<CR>
-nnoremap <Leader>irb :VtrOpenRunner { 'orientation': 'h', 'percentage': 50, 'cmd': 'irb' }<CR>
 "}}}
 " Plugin mappings and settings"{{{
 "Airline"{{{
@@ -535,8 +520,8 @@ augroup Fugitive
   autocmd!
 " Mappings to make partial diffs easier
   autocmd BufReadPost fugitive://*/.git//0/* if pumvisible() == 0 | pclose | endif
-  autocmd BufReadPost fugitive://*/.git//0/* nnoremap <silent> do :diffget<CR>:GitGutterNextHunk<CR>
-  autocmd BufReadPost fugitive://*/.git//0/* nnoremap <silent> dp :diffput<CR>:GitGutterNextHunk<CR>
+  autocmd BufReadPost fugitive://*/.git//0/* nnoremap <silent> do :diffget<CR>]c
+  autocmd BufReadPost fugitive://*/.git//0/* nnoremap <silent> dp :diffput<CR>]c
   autocmd BufReadPost fugitive://*/.git//0/* nnoremap <silent> du :wincmd w<CR>:normal u<CR>:wincmd w<CR>
   autocmd BufReadPost fugitive://*/.git//0/* xnoremap <silent> do :diffget<CR>
   autocmd BufReadPost fugitive://*/.git//0/* xnoremap <silent> dp :diffput<CR>
@@ -668,16 +653,6 @@ augroup END
 "}}}
 " Test"{{{
 let test#strategy = "dispatch"
-"}}}
-" Tmux runner"{{{
-let g:VtrUseVtrMaps = 1
-let g:VtrGitCdUpOnOpen = 0
-let g:VtrPercentage = 33
-
-let g:vtr_filetype_runner_overrides = {
-      \ 'haskell': 'ghci {file}',
-      \ 'applescript': 'osascript {file}'
-      \ }
 "}}}
 " Ultisnips"{{{
 let g:UltiSnipsExpandTrigger="<tab>"
