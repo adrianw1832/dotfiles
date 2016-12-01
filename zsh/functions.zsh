@@ -16,11 +16,11 @@ dirty() {
 }
 
 # Custom function to handle git add and commit
-gac() { git add "$1" && git commit }
+gac() { git add "${1:-.}" && git commit }
 compdef _git gac=git-add
 
 # Custom function to handle git add, commit and push
-gacp() { git add "$1" && git commit && git push }
+gacp() { git add "${1:-.}" && git commit && git push }
 compdef _git gacp=git-add
 
 # Custom function to handle git diff, for an optional argument
