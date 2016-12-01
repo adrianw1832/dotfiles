@@ -36,7 +36,7 @@ glog() {
 gitlog() {
   glog "${1:---all}" | fzf --ansi --exact --no-sort --reverse --tiebreak=index \
     --bind "ctrl-m:execute:
-            (grep -o '[a-f0-9]\{7\}' | head -1 |
+            (grep -o '[a-f0-9]\{7\}' |
             xargs -I % sh -c 'git show --color=always % | diff-so-fancy | less -CGR') << 'FZF-EOF'
             {}
             FZF-EOF"
@@ -50,15 +50,13 @@ rlog() {
 # Pass ref log to fzf
 reflog() {
   rlog "${1:--250}" | fzf --ansi --exact --no-sort --reverse --tiebreak=index \
-    | awk '{print $3}' | xargs git checkout
+    | grep -o 'HEAD@{\d\+}' | xargs git checkout
 }
 
 # Get the commit sha - example usage: git rebase -i `fcs`
 fcs() {
-  local commits commit
-  commits=$(gitlog) &&
-    commit=$(echo "$commits" | fzf --ansi --exact --no-sort --reverse --tiebreak=index) &&
-    echo -n $(echo "$commit" | awk '{print $2}')
+  glog "${1:---all}" | fzf --ansi --exact --no-sort --reverse --tiebreak=index \
+    | grep -o '[a-f0-9]\{7\}'
 }
 
 # Custom function to allow smarter backwards cd
