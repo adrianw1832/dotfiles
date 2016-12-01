@@ -631,10 +631,17 @@ nnoremap <silent> <C-b> :call smooth_scroll#up(&scroll*2, 20, 4)<CR>
 nnoremap <silent> <C-f> :call smooth_scroll#down(&scroll*2, 20, 4)<CR>
 "}}}
 " Surround"{{{
-let g:surround_45  = "<% \r %>" " - for <% %>
-let g:surround_61  = "<%= \r %>" " = for <%= %>
-let g:surround_118 = "#{\r}" " v for #{}
-let g:surround_35  = "#{\r}" " # for #{}
+
+" To determine the ASCII code to use, do :echo char2nr("-")
+let g:surround_45 = "<% \r %>" " - for <% %>
+let g:surround_61 = "<%= \r %>" " = for <%= %>
+let g:surround_51 = "#{\r}" " 3 for #{}
+let g:surround_52 = "${\r}" " 4 for ${}
+"}}}
+" Targets"{{{
+let g:targets_argOpening = '[({[]'
+let g:targets_argClosing = '[]})]'
+let g:targets_seekRanges = 'cr cb cB lc ac Ac lr rr ll lb ar ab lB Ar aB Ab AB rb rB al Al'
 "}}}
 " Tern"{{{
 
