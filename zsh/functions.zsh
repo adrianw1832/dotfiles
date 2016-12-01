@@ -27,14 +27,30 @@ compdef _git gacp=git-add
 gd() { git diff --color=always "${1:-.}" | diff-so-fancy | less -CGR }
 compdef _git gd=git-diff
 
-# Pass git log to fzf and can check the diff of the commit object
+# Custom git log and defaults to showing 15 results unless an argument is given
 glog() {
-  gitlog "$@" | fzf --ansi --exact --no-sort --reverse --tiebreak=index \
+  git log --color=always --date=format:%a\ %H:%M\ %d-%m-%Y --format=log "${1:--15}"
+}
+
+# Pass git log to fzf and can check the diff of the commit object
+gitlog() {
+  glog "${1:---all}" | fzf --ansi --exact --no-sort --reverse --tiebreak=index \
     --bind "ctrl-m:execute:
-             (grep -o '[a-f0-9]\{7\}' | head -1 |
-             xargs -I % sh -c 'git show --color=always % | diff-so-fancy | less -CGR') << 'FZF-EOF'
-             {}
-             FZF-EOF"
+            (grep -o '[a-f0-9]\{7\}' | head -1 |
+            xargs -I % sh -c 'git show --color=always % | diff-so-fancy | less -CGR') << 'FZF-EOF'
+            {}
+            FZF-EOF"
+}
+
+# Custom ref log and defaults to showing 15 results unless an argument is given
+rlog() {
+  git reflog --format=reflog "${1:--15}"
+}
+
+# Pass ref log to fzf
+reflog() {
+  rlog "${1:--250}" | fzf --ansi --exact --no-sort --reverse --tiebreak=index \
+    | awk '{print $3}' | xargs git checkout
 }
 
 # Get the commit sha - example usage: git rebase -i `fcs`

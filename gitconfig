@@ -12,7 +12,8 @@
   followTags = true
 
 [pretty]
-  gitlog = %C(dim)%C(yellow)%h %C(red)| %<(11,trunc)%C(bold)%C(black)%an%C(reset) %C(red)| %C(green)%ad%  %C(red)|%C(reset) %s %C(auto)%d
+  graph = %C(dim yellow)%h%C(reset) - %C(dim green)%ad%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n          %C(bold white)%s%C(reset) %C(bold black)- %an%C(reset)
+  log = %C(dim)%C(yellow)%h %C(red)| %<(11,trunc)%C(bold)%C(black)%an%C(reset) %C(red)| %C(green)%ad%  %C(red)|%C(reset) %s %C(auto)%d
   reflog = %C(dim)%C(yellow)%h %C(red)| %>(9,trunc)%C(bold)%C(black)%gd%C(reset) %C(red)| %<(22,trunc)%C(green)%ad%  %C(red)|%C(reset) %C(bold)%C(green)%>(12,trunc)%cr%C(reset) %C(red)|%C(reset) %gs
 
 [alias]
