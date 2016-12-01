@@ -325,6 +325,8 @@ nnoremap <C-\> <C-w>p
 " Allow j and k to move down wrapped lines
 nnoremap j gj
 nnoremap k gk
+vnoremap j gj
+vnoremap k gk
 
 " Map H and L to more sensible options compared to their h and l counterpart
 noremap H ^
@@ -404,7 +406,7 @@ nnoremap <silent> <Leader>co :copen<CR>
 nnoremap <silent> <Leader>cc :cclose<CR>
 nnoremap <Leader>e :w<CR>:TestLast<CR>
 nnoremap <Leader>g :w<CR>:Gstatus<CR>
-nnoremap <Leader>gd :Gvdiff<CR>
+nnoremap <Leader>gd :Gdiff<CR>
 nnoremap <Leader>gl :silent Glog -25<CR>:copen<CR>
 nnoremap <Leader>gp :Gpush<CR>
 nnoremap <silent> <Leader>h :nohlsearch<CR>
