@@ -367,8 +367,6 @@ cnoremap <C-p> <Up>
 " Remap for easier command mode access
 nnoremap ; :
 xnoremap ; :
-" Put a semicolon at the end of the line;
-nnoremap : mzA;<Esc>`z
 " Remappings for backtick since it's more useful
 nnoremap ' `
 nnoremap ` '
@@ -453,6 +451,7 @@ nnoremap <Leader><Leader> :RangerInWorkingDirectory<CR>
 " Mappings to zoom in on a pane and to rebalance
 nnoremap <silent> <Leader>= :wincmd _<CR>:wincmd \|<CR>
 nnoremap <silent> <Leader>- :wincmd =<CR>
+nnoremap <Leader>; mzA;<Esc>`z
 "}}}
 " Plugin mappings and settings"{{{
 "Airline"{{{
@@ -604,10 +603,10 @@ map g/ <Plug>(incsearch-stay)
 let g:used_javascript_libs = 'jquery,underscore,react,jasmine,flux'
 "}}}
 " Neomake"{{{
-let g:neomake_open_list = 2
 let g:neomake_serialize = 1
 let g:neomake_serialize_abort_on_error = 1
-let g:neomake_javascript_enabled_makers = ['eslint']
+let g:airline#extensions#neomake#warning_symbol = '⚠ '
+let g:airline#extensions#neomake#error_symbol = '✖ '
 
 augroup Neomake
   autocmd!
