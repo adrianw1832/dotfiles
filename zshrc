@@ -24,7 +24,6 @@ source ~/.zplug/init.zsh
 zplug "bhilburn/powerlevel9k", as:theme
 zplug "djui/alias-tips"
 zplug "hlissner/zsh-autopair"
-zplug "zplug/zplug"
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-completions"
 
@@ -37,7 +36,7 @@ if ! zplug check --verbose; then
 fi
 
 # Then, source plugins and add commands to $PATH
-zplug load --verbose
+zplug load
 
 # Patching powerlevel9k so that it shows detached head state
 source ~/dotfiles/zsh/detached.plugin.zsh
