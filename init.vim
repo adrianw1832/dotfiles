@@ -263,12 +263,15 @@ augroup END
 augroup Filetypes
   autocmd!
 
-  " Maps K to open vim help for the word under cursor when editing vim files
-  autocmd FileType vim setlocal keywordprg=:help
-
   " Enable different indentation for language specific files
   autocmd FileType java       setlocal tabstop=4 softtabstop=4 shiftwidth=4
   autocmd FileType javascript setlocal tabstop=2 softtabstop=2 shiftwidth=2
+
+  " Easier gf file navigation for specific languages
+  autocmd FileType javascript setlocal suffixesadd+=.js
+
+  " Maps K to open vim help for the word under cursor when editing vim files
+  autocmd FileType vim setlocal keywordprg=:help
 
   " Automatically wrap at 80 characters and spell check text and markdowns
   autocmd FileType text,markdown setlocal textwidth=80
@@ -554,9 +557,9 @@ endfunction
 
 " Override statusline as you like
 function! s:fzf_statusline() abort
-  highlight fzf1 ctermfg=196 ctermbg=240
-  highlight fzf2 ctermfg=254 ctermbg=240
-  highlight fzf3 ctermfg=254 ctermbg=240
+  highlight fzf1 ctermfg=196 ctermbg=237
+  highlight fzf2 ctermfg=254 ctermbg=237
+  highlight fzf3 ctermfg=254 ctermbg=237
   setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
 endfunction
 
@@ -604,8 +607,10 @@ let g:used_javascript_libs = 'jquery,underscore,react,jasmine,flux'
 " Neomake"{{{
 let g:neomake_serialize = 1
 let g:neomake_serialize_abort_on_error = 1
-let g:airline#extensions#neomake#warning_symbol = '⚠ '
-let g:airline#extensions#neomake#error_symbol = '✖ '
+let g:neomake_error_sign = {'text': '', 'texthl': 'NeomakeErrorSign'}
+let g:neomake_warning_sign = {'text': '', 'texthl': 'NeomakeWarningSign'}
+let g:airline#extensions#neomake#warning_symbol = ' '
+let g:airline#extensions#neomake#error_symbol = ' '
 
 augroup Neomake
   autocmd!
