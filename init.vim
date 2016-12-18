@@ -419,8 +419,8 @@ nnoremap <Leader>l :Lines<CR>
 nnoremap <silent> <Leader>m :<C-u><C-r><C-r>='let @'. v:register .' = '. string(getreg(v:register))<CR><C-f><left>
 nnoremap <Leader>ni :!npm install<CR>
 nnoremap <Leader>o :Files<CR>
-nnoremap <Leader>p :put =nr2char(10)<CR>"*gp
-nnoremap <Leader>P :put! =nr2char(10)<CR>"*gp
+nnoremap <Leader>p :put =nr2char(10)<CR>"*p`[=`]`]
+nnoremap <Leader>P :put! =nr2char(10)<CR>"*p`[=`]`]
 nnoremap <Leader>pi :w<CR>:source $MYVIMRC<CR>:nohlsearch<CR>:PlugUpgrade<CR>:PlugUpdate<CR>
 nnoremap <Leader>r :w<CR>:TestNearest<CR>
 nnoremap <Leader>ra :A<CR>
