@@ -26,6 +26,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'luochen1990/rainbow'
 Plug 'metakirby5/codi.vim', { 'on': 'Codi' }
 Plug 'neomake/neomake'
+Plug 'romainl/vim-qf'
 Plug 'sickill/vim-pasta'
 Plug 'tommcdo/vim-exchange'
 Plug 'tpope/vim-abolish'
@@ -400,8 +401,6 @@ let mapleader = "\<Space>"
 nnoremap <Leader>a :Ag<Space>
 nnoremap <Leader>b :History<CR>
 nnoremap <Leader>bi :!bundle install<CR>
-nnoremap <silent> <Leader>co :copen<CR>
-nnoremap <silent> <Leader>cc :cclose<CR>
 nnoremap <Leader>e :w<CR>:TestLast<CR>
 nnoremap <Leader>g :w<CR>:Gstatus<CR>
 nnoremap <Leader>gd :Gdiff<CR>
@@ -611,6 +610,13 @@ let g:airline#extensions#neomake#error_symbol = '✖ '
 augroup Neomake
   autocmd!
   autocmd BufReadPost,BufWritePost * Neomake
+augroup END
+"}}}
+" Qf"{{{
+augroup Qf
+  autocmd!
+  autocmd VimEnter * nmap coc <Plug>QfCtoggle
+  autocmd VimEnter * nmap col <Plug>QfLtoggle
 augroup END
 "}}}
 " Rainbow"{{{
