@@ -47,9 +47,9 @@ Plug 'wellle/targets.vim'
 Plug 'jceb/vim-orgmode', { 'for': 'org' }
 Plug 'mattn/emmet-vim'
 Plug 'morhetz/gruvbox'
-Plug 'terryma/vim-smooth-scroll'
 Plug 'tmux-plugins/vim-tmux', { 'for': 'tmux' }
 Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
+Plug 'yuttie/comfortable-motion.vim'
 "}}}
 " Language related"{{{
 " Ruby"{{{
@@ -633,12 +633,6 @@ let g:sexp_enable_insert_mode_mappings = 1
 " Sideways"{{{
 nnoremap <silent> gsh :SidewaysLeft<CR>
 nnoremap <silent> gsl :SidewaysRight<CR>
-"}}}
-" Smooth scroll"{{{
-nnoremap <silent> <C-u> :call smooth_scroll#up(&scroll, 20, 2)<CR>
-nnoremap <silent> <C-d> :call smooth_scroll#down(&scroll, 20, 2)<CR>
-nnoremap <silent> <C-b> :call smooth_scroll#up(&scroll*2, 20, 4)<CR>
-nnoremap <silent> <C-f> :call smooth_scroll#down(&scroll*2, 20, 4)<CR>
 "}}}
 " Surround"{{{
 
