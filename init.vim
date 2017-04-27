@@ -74,6 +74,9 @@ Plug 'guns/vim-sexp', { 'for': 'clojure' }
 Plug 'tpope/vim-sexp-mappings-for-regular-people', { 'for': 'clojure' }
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 "}}}
+" Markdown"{{{
+Plug 'junegunn/vim-xmark', { 'do': 'make' }
+"}}}
 "}}}
 call plug#end()
 "}}}
