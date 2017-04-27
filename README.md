@@ -1,4 +1,4 @@
-##My dot files
+## My dot files
 
 These are my config files that I am using at the moment. As much as I am using
 Git to keep a version control on them, it is also to share my configs in the
