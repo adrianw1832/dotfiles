@@ -617,7 +617,7 @@ let g:airline#extensions#neomake#error_symbol = ' '
 
 augroup Neomake
   autocmd!
-  autocmd BufReadPost,BufWritePost * Neomake
+  autocmd BufEnter,BufWritePost * Neomake
 augroup END
 "}}}
 " Qf"{{{
