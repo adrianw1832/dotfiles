@@ -57,7 +57,6 @@ Plug 'yuttie/comfortable-motion.vim'
 
 Plug 'kana/vim-textobj-user' | Plug 'nelstrom/vim-textobj-rubyblock', { 'for': ['ruby', 'rails', 'eruby'] }
 Plug 'tpope/vim-rails', { 'for': ['ruby', 'rails', 'eruby'] }
-Plug 'vim-ruby/vim-ruby', { 'for': ['ruby', 'rails', 'eruby'] }
 "}}}
 " Javascript"{{{
 
@@ -617,7 +616,7 @@ let g:airline#extensions#neomake#error_symbol = ' '
 
 augroup Neomake
   autocmd!
-  autocmd BufEnter,BufWritePost * Neomake
+  autocmd BufWinEnter,BufWritePost * Neomake
 augroup END
 "}}}
 " Qf"{{{
