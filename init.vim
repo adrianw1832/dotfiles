@@ -28,6 +28,7 @@ Plug 'metakirby5/codi.vim', { 'on': 'Codi' }
 Plug 'neomake/neomake'
 Plug 'romainl/vim-qf'
 Plug 'sickill/vim-pasta'
+Plug 'terryma/vim-expand-region'
 Plug 'tommcdo/vim-exchange'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
