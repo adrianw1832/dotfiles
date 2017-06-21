@@ -16,6 +16,7 @@ Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'airblade/vim-gitgutter'
 Plug 'alvan/vim-closetag'
 Plug 'bronson/vim-visual-star-search'
+Plug 'brooth/far.vim'
 Plug 'christoomey/vim-sort-motion'
 Plug 'easymotion/vim-easymotion'
 Plug 'haya14busa/incsearch.vim'
@@ -303,9 +304,9 @@ augroup Filetypes
   " autocmd FileType css,html,javascript,javascript.jsx setlocal foldmethod=syntax
 
   " Mapping q to close the windows
-  autocmd FileType help  nnoremap <silent> <buffer> q :bd<CR>
-  autocmd FileType diff  nnoremap <silent> <buffer> q :bd<CR>
-  autocmd FileType qf    nnoremap <silent> <buffer> q :bd<CR>
+  autocmd FileType help nnoremap <silent> <buffer> q :bd<CR>
+  autocmd FileType diff nnoremap <silent> <buffer> q :bd<CR>
+  autocmd FileType qf   nnoremap <silent> <buffer> q :bd<CR>
 
   " Mappings to make git interactive rebase easier
   autocmd FileType gitrebase nnoremap <silent> <buffer> gd :Drop<CR>
@@ -518,6 +519,14 @@ let g:user_emmet_leader_key=','
 augroup Emmet
   autocmd!
   autocmd FileType css,eruby,html,javascript,javascript.jsx,jsp EmmetInstall
+augroup END
+"}}}
+" Far"{{{
+let g:far#preview_window_height = 25
+
+augroup Far
+  autocmd!
+  autocmd FileType far_vim nnoremap <silent> <buffer> q :bd<CR> :cclose<CR>
 augroup END
 "}}}
 " Fugitive"{{{
