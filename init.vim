@@ -388,10 +388,10 @@ nnoremap gV `[v`]
 " Makes the dot command behave on a Visually selected line
 xnoremap . :norm.<CR>
 " Allow star to go back to the first search term
-nnoremap * *N
-xnoremap * *N
-nnoremap g* g*N
-xnoremap g* g*N
+nnoremap <silent> * *N :set hlsearch<CR>
+xnoremap <silent> * *N :set hlsearch<CR>
+nnoremap <silent> g* g*N :set hlsearch<CR>
+xnoremap <silent> g* g*N :set hlsearch<CR>
 " Copy to system clipboard
 xnoremap <C-c> "*y
 
@@ -405,14 +405,13 @@ nnoremap <NUL> <C-z>
 let maplocalleader = "\\"
 let mapleader = "\<Space>"
 nnoremap <Leader>a :Ag<Space>
-nnoremap <Leader>b :History<CR>
 nnoremap <Leader>bi :!bundle install<CR>
 nnoremap <Leader>e :w<CR>:TestLast<CR>
 nnoremap <Leader>g :w<CR>:Gstatus<CR>
 nnoremap <Leader>gd :Gdiff<CR>
 nnoremap <Leader>gl :silent Glog -25<CR>:copen<CR>
 nnoremap <Leader>gp :Gpush<CR>
-nnoremap <silent> <Leader>h :nohlsearch<CR>
+nnoremap <Leader>h :History<CR>
 nmap <Leader>ha <Plug>GitGutterStageHunk
 nmap <Leader>hr <Plug>GitGutterUndoHunk
 nmap <Leader>hv <Plug>GitGutterPreviewHunk
