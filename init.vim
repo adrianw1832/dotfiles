@@ -89,6 +89,7 @@ colorscheme gruvbox
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1 " Block shape cursor in normal, pipe in insert
 set background=dark " Assume a dark background
 set complete+=kspell " Autocomplete with dictionary words when spell check is on
+set cscopetag "search both cscopes db and the tags file
 set cursorline " Highlight current line
 set diffopt+=vertical " Vertical default for diff panes
 set expandtab " Tab key will always insert 'softtabstop' amount of space
@@ -615,6 +616,9 @@ omap ih <Plug>GitGutterTextObjectInnerPending
 omap ah <Plug>GitGutterTextObjectOuterPending
 xmap ih <Plug>GitGutterTextObjectInnerVisual
 xmap ah <Plug>GitGutterTextObjectOuterVisual
+"}}}
+" Gtags"{{{
+let g:GtagsCscope_Auto_Map = 1
 "}}}
 " Incsearch"{{{
 let g:incsearch#magic = '\v'
