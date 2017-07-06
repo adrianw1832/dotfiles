@@ -401,7 +401,7 @@ xnoremap <C-c> "*y
 " Remap to increase number by 1
 noremap <C-z> <C-a>
 " Switching out to terminal using Ctrl-space
-nnoremap <NUL> <C-z>
+nnoremap <C-space> <C-z>
 "}}}
 " Leader mappings"{{{
 
