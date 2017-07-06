@@ -26,7 +26,6 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install' } | Plug 'junegunn/fzf
 Plug 'junegunn/vim-easy-align'
 Plug 'luochen1990/rainbow'
 Plug 'metakirby5/codi.vim', { 'on': 'Codi' }
-Plug 'neomake/neomake'
 Plug 'romainl/vim-qf'
 Plug 'sickill/vim-pasta'
 Plug 'terryma/vim-expand-region'
@@ -41,12 +40,14 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-scripts/ReplaceWithRegister'
+Plug 'w0rp/ale'
 Plug 'wellle/targets.vim'
 "}}}
 " Others"{{{
 
 " Plug 'Konfekt/FastFold'
 Plug 'jceb/vim-orgmode', { 'for': 'org' }
+Plug 'joereynolds/gtags-scope'
 Plug 'mattn/emmet-vim'
 Plug 'morhetz/gruvbox'
 Plug 'tmux-plugins/vim-tmux', { 'for': 'tmux' }
@@ -464,6 +465,15 @@ let g:airline_theme='tomorrow'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 "}}}
+" Ale"{{{
+augroup Ale
+  autocmd!
+  autocmd FileType javascript set formatprg=prettier\ --stdin\ --single-quote\ --trailing-comma\ es5
+  autocmd BufWritePre *.js,*.jsx :normal gggqG
+augroup END
+let g:ale_sign_error = ''
+let g:ale_sign_warning = ''
+"}}}
 " Close tag"{{{
 let g:closetag_filenames = "*.erb,*.html,*.js,*.jsx"
 "}}}
@@ -614,19 +624,6 @@ map g/ <Plug>(incsearch-stay)
 "}}}
 " Javascript libraries syntax"{{{
 let g:used_javascript_libs = 'jquery,underscore,react,jasmine,flux'
-"}}}
-" Neomake"{{{
-let g:neomake_serialize = 1
-let g:neomake_serialize_abort_on_error = 1
-let g:neomake_error_sign = {'text': '', 'texthl': 'NeomakeErrorSign'}
-let g:neomake_warning_sign = {'text': '', 'texthl': 'NeomakeWarningSign'}
-let g:airline#extensions#neomake#warning_symbol = ' '
-let g:airline#extensions#neomake#error_symbol = ' '
-
-augroup Neomake
-  autocmd!
-  autocmd BufWinEnter,BufWritePost * Neomake
-augroup END
 "}}}
 " Qf"{{{
 augroup Qf
