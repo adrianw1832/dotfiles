@@ -195,10 +195,6 @@ command! Bclose call s:BufCloseSavingWindow()
 "}}}
 " Integration with Ranger"{{{
 
-" Don't load netrw since I am using ranger as my file explorer
-let g:loaded_netrw       = 1
-let g:loaded_netrwPlugin = 1
-
 function! s:OpenRangerIn(path) abort
   let currentPath = expand(a:path)
   let rangerCallback = { "name": "ranger" }
