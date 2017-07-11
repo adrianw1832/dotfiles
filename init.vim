@@ -426,6 +426,7 @@ nnoremap <Leader>pi :w<CR>:source $MYVIMRC<CR>:nohlsearch<CR>:PlugUpgrade<CR>:Pl
 nnoremap <Leader>r :w<CR>:TestNearest<CR>
 nnoremap <Leader>ra :A<CR>
 nnoremap <Leader>rc :Econtroller<Space>
+vnoremap <Leader>re c<C-O>:set revins<CR><C-R>"<Esc>:set norevins<CR>
 nnoremap <Leader>rf :Eintegrationtest<Space>
 nnoremap <Leader>rm :Emodel<Space>
 nnoremap <Leader>rr :R<CR>
