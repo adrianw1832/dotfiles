@@ -305,6 +305,7 @@ augroup Filetypes
   autocmd FileType help nnoremap <silent> <buffer> q :bd<CR>
   autocmd FileType diff nnoremap <silent> <buffer> q :bd<CR>
   autocmd FileType qf   nnoremap <silent> <buffer> q :bd<CR>
+  autocmd BufWinEnter * if &previewwindow | nnoremap <silent> <buffer> q :bd<CR> | endif
 
   " Mappings to make git interactive rebase easier
   autocmd FileType gitrebase nnoremap <silent> <buffer> gd :Drop<CR>
