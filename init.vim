@@ -79,6 +79,9 @@ Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 " Markdown"{{{
 Plug 'junegunn/vim-xmark', { 'do': 'make' }
 "}}}
+" Puppet"{{{
+Plug 'rodjek/vim-puppet', { 'for': 'puppet' }
+"}}}
 "}}}
 call plug#end()
 "}}}
