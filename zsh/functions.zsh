@@ -59,6 +59,13 @@ fcs() {
     | grep -o '[a-f0-9]\{7\}'
 }
 
+gp() {
+  local branch=$(git rev-parse --abbrev-ref HEAD)
+  local remote=$(git config branch.$branch.merge)
+  [[ $remote = '' ]] && git push -u origin $branch || git push
+}
+compdef _git gp=git-push
+
 # Custom function to allow smarter backwards cd
 up() {
   local op=print
