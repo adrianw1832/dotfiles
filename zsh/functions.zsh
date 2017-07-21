@@ -66,6 +66,11 @@ gp() {
 }
 compdef _git gp=git-push
 
+deletebranch() {
+  git branch -d $1 && git push -d origin $1
+}
+compdef _git deletebranch=git-branch
+
 # Custom function to allow smarter backwards cd
 up() {
   local op=print
