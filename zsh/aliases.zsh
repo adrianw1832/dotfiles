@@ -123,7 +123,7 @@ alias ghb="hub browse --"
 alias ghpr="hub browse -- pulls"
 alias graph="git log --color=always --date=format:%a\ %H:%M\ %d-%m-%Y --graph --format=graph && clear"
 alias nuke="git add -A && git commit -qm 'NUKE SAVEPOINT' && git reset HEAD~1 --hard"
-alias pullrequest="hub pull-request -co"
+alias cpr="hub pull-request"
 alias undo="git reset HEAD~"
 alias wip="git add -A && git commit -m 'WIP'"
 # }}}
