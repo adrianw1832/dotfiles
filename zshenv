@@ -4,9 +4,4 @@ if [ -x /usr/libexec/path_helper ]; then
     eval `/usr/libexec/path_helper -s`
 fi
 
-# If rbenv is present, configure it for use
-if which rbenv &> /dev/null; then
-    eval "$(rbenv init -)"
-fi
-
 export PATH=$PATH:$HOME/bin
