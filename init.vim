@@ -559,7 +559,9 @@ augroup Emmet
 augroup END
 "}}}
 " Far"{{{
+let g:far#window_width = 80
 let g:far#preview_window_height = 25
+let g:far#source = 'agnvim'
 
 augroup Far
   autocmd!
