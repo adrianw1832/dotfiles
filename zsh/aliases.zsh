@@ -55,8 +55,12 @@ alias ij="open -b com.jetbrains.intellij"
 # Ranger
 alias ra="ranger"
 
-#Source Tree
+# Source Tree
 alias st="open -a SourceTree"
+
+# Tmuxinator
+alias muxo="tmuxinator open"
+alias muxs="tmuxinator start"
 # }}}
 # Config and editor# {{{
 
@@ -111,6 +115,7 @@ alias grm="git rm"
 alias grs="git rebase --skip"
 alias gs="git status"
 alias gsh="git show"
+alias gshf="git show --pretty='' --name-only"
 alias gst="git stash"
 alias gsta="git stash apply"
 alias gstd="git stash drop"
