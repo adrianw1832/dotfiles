@@ -430,13 +430,13 @@ nnoremap <C-space> <C-z>
 let maplocalleader = "\\"
 let mapleader = "\<Space>"
 nnoremap <Leader>a :Ag<Space>
+nnoremap <Leader>b :Buffers<CR>
 nnoremap <Leader>bi :!bundle install<CR>
 nnoremap <Leader>e :w<CR>:TestLast<CR>
 nnoremap <Leader>g :w<CR>:Gstatus<CR>
 nnoremap <Leader>gd :Gdiff<CR>
 nnoremap <Leader>gl :silent Glog -25<CR>:copen<CR>
 nnoremap <Leader>gp :Gpush<CR>
-nnoremap <Leader>h :History<CR>
 nmap <Leader>ha <Plug>GitGutterStageHunk
 nmap <Leader>hr <Plug>GitGutterUndoHunk
 nmap <Leader>hv <Plug>GitGutterPreviewHunk
@@ -446,6 +446,7 @@ nnoremap <Leader>l :Lines<CR>
 nnoremap <silent> <Leader>m :<C-u><C-r><C-r>='let @'. v:register .' = '. string(getreg(v:register))<CR><C-f><left>
 nnoremap <Leader>ni :!npm install<CR>
 nnoremap <Leader>o :Files<CR>
+nnoremap <Leader>O :History<CR>
 nnoremap <Leader>p :put =nr2char(10)<CR>"*p`[=`]`]
 nnoremap <Leader>P :put! =nr2char(10)<CR>"*p`[=`]`]
 nnoremap <Leader>pi :w<CR>:source $MYVIMRC<CR>:nohlsearch<CR>:PlugUpgrade<CR>:PlugUpdate<CR>
