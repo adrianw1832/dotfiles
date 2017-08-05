@@ -123,6 +123,24 @@ set updatetime=1000 " Time in ms for vim to update/ refresh
 set wildmode=longest:full,full " Set the wildmenu behaviour to be more like zsh
 "}}}
 " Custom functions"{{{
+" Overload gx to also open Plug URI"{{{
+function! s:plug_gx() abort
+  if getline('.') =~ '^Plug\s'
+    let cfile = expand('<cfile>')
+
+    if cfile !~ 'github\.com' && !filereadable(cfile)
+      call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx :
+            \ 'https://github.com/'.cfile)), netrw#CheckIfRemote())
+      return
+    endif
+  endif
+
+  call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx :
+        \ '<cfile>')), netrw#CheckIfRemote())
+endfunction
+
+nnoremap <buffer> <silent> gx :call <sid>plug_gx()<cr>
+"}}}
 " Make * and # work in visual mode too"{{{
 function! s:VisualSearch(cmdtype) abort
   let temp = @s
