@@ -8,14 +8,12 @@ endif
 "}}}
 call plug#begin('~/.config/nvim/plugged')
 " Enhancements"{{{
-
 Plug 'AndrewRadev/sideways.vim'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'}
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'airblade/vim-gitgutter'
 Plug 'alvan/vim-closetag'
-Plug 'bronson/vim-visual-star-search'
 Plug 'brooth/far.vim'
 Plug 'christoomey/vim-sort-motion'
 Plug 'easymotion/vim-easymotion'
@@ -44,7 +42,6 @@ Plug 'w0rp/ale'
 Plug 'wellle/targets.vim'
 "}}}
 " Others"{{{
-
 " Plug 'Konfekt/FastFold'
 Plug 'jceb/vim-orgmode', { 'for': 'org' }
 Plug 'joereynolds/gtags-scope'
@@ -56,12 +53,10 @@ Plug 'yuttie/comfortable-motion.vim'
 "}}}
 " Language related"{{{
 " Ruby"{{{
-
 Plug 'kana/vim-textobj-user' | Plug 'nelstrom/vim-textobj-rubyblock', { 'for': ['ruby', 'rails', 'eruby'] }
 Plug 'tpope/vim-rails', { 'for': ['ruby', 'rails', 'eruby'] }
 "}}}
 " Javascript"{{{
-
 Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'elzr/vim-json', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
@@ -70,7 +65,6 @@ Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install' }
 "}}}
 " Clojure"{{{
-
 Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
 Plug 'guns/vim-sexp', { 'for': 'clojure' }
 Plug 'tpope/vim-sexp-mappings-for-regular-people', { 'for': 'clojure' }
@@ -86,7 +80,6 @@ Plug 'rodjek/vim-puppet', { 'for': 'puppet' }
 call plug#end()
 "}}}
 " Settings"{{{
-
 colorscheme gruvbox
 
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1 " Block shape cursor in normal, pipe in insert
@@ -130,6 +123,17 @@ set updatetime=1000 " Time in ms for vim to update/ refresh
 set wildmode=longest:full,full " Set the wildmenu behaviour to be more like zsh
 "}}}
 " Custom functions"{{{
+" Make * and # work in visual mode too"{{{
+function! s:VisualSearch(cmdtype) abort
+  let temp = @s
+  norm! gv"sy
+  let @/ = '\V' . substitute(escape(@s, a:cmdtype.'\'), '\n', '\\n', 'g')
+  let @s = temp
+endfunction
+
+xnoremap * :<C-u>call <SID>VisualSearch('/')<CR>/<C-R>=@/<CR><CR>N
+xnoremap # :<C-u>call <SID>VisualSearch('?')<CR>?<C-R>=@/<CR><CR>N
+"}}}
 " Create directory on save if it doesn't exist"{{{
 function! s:CreateNonExistantDirectory() abort
   let dir = expand("%:p:h")
@@ -169,6 +173,7 @@ endfunction
 " Delete empty buffers"{{{
 function! s:DeleteEmptyBuffers() abort
   let buffers = filter(range(1, bufnr("$")), 'bufloaded(v:val) && empty(bufname(v:val)) && getbufline(v:val, 1, 2) == [""]')
+
   if !empty(buffers)
     execute "bwipe ".join(buffers, " ")
   endif
@@ -201,6 +206,7 @@ command! Bclose call s:BufCloseSavingWindow()
 function! s:OpenRangerIn(path) abort
   let currentPath = expand(a:path)
   let rangerCallback = { "name": "ranger" }
+
   function! rangerCallback.on_exit(id, code) abort
     Bclose
     wincmd =
@@ -390,11 +396,9 @@ nnoremap Y yg_
 nnoremap gV `[v`]
 " Makes the dot command behave on a Visually selected line
 xnoremap . :norm.<CR>
-" Allow star to go back to the first search term
-nnoremap <silent> * *N :set hlsearch<CR>
-xnoremap <silent> * *N :set hlsearch<CR>
-nnoremap <silent> g* g*N :set hlsearch<CR>
-xnoremap <silent> g* g*N :set hlsearch<CR>
+" Allow * and g* seaches to go back to the first search term
+nnoremap <silent> * *N
+nnoremap <silent> g* g*N
 " Copy to system clipboard
 xnoremap <C-c> "*y
 
@@ -460,6 +464,8 @@ nnoremap <Leader><Leader> :RangerInWorkingDirectory<CR>
 nnoremap <silent> <Leader>= :wincmd _<CR>:wincmd \|<CR>
 nnoremap <silent> <Leader>- :wincmd =<CR>
 nnoremap <Leader>; mzA;<Esc>`z
+nnoremap <Leader>* :Ag <C-r><C-w><Space>**/*
+xnoremap <Leader>* "sy:Ag <C-r>s<Space>**/*
 "}}}
 " Plugin mappings and settings"{{{
 "Airline"{{{
