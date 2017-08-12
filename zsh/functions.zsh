@@ -15,6 +15,11 @@ dirty() {
   git status | grep modified | awk '{print $2}' | xargs $EDITOR
 }
 
+# Find all local branches that are merged except for master and dev(elop) and delete them
+deletelocalmergedbranches() {
+  git branch --merged | egrep -v "(^\*|master|develop|dev)" | xargs git branch -d
+}
+
 # Custom function to handle git add and commit
 gac() { git add "${1:-.}" && git commit -v }
 compdef _git gac=git-add
