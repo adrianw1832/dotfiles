@@ -434,6 +434,7 @@ nnoremap <Leader>b :Buffers<CR>
 nnoremap <Leader>bi :!bundle install<CR>
 nnoremap <Leader>e :w<CR>:TestLast<CR>
 nnoremap <Leader>g :w<CR>:Gstatus<CR>
+nnoremap <Leader>gb :Gblame<CR>
 nnoremap <Leader>gd :Gdiff<CR>
 nnoremap <Leader>gl :silent Glog -25<CR>:copen<CR>
 nnoremap <Leader>gp :Gpush<CR>
@@ -483,8 +484,8 @@ nnoremap <Leader><Leader> :RangerInWorkingDirectory<CR>
 nnoremap <silent> <Leader>= :wincmd _<CR>:wincmd \|<CR>
 nnoremap <silent> <Leader>- :wincmd =<CR>
 nnoremap <Leader>; mzA;<Esc>`z
-nnoremap <Leader>* :Ag <C-r><C-w><Space>**/*
-xnoremap <Leader>* "sy:Ag <C-r>s<Space>**/*
+nnoremap <Leader>* :Ag <C-r><C-w>
+xnoremap <Leader>* "sy:Ag <C-r>s
 "}}}
 " Plugin mappings and settings"{{{
 "Airline"{{{
