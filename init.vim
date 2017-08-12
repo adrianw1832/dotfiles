@@ -572,17 +572,8 @@ augroup END
 augroup Fugitive
   autocmd!
 " Mappings to make partial diffs easier
-  autocmd BufReadPost fugitive://*/.git//0/* if pumvisible() == 0 | pclose | endif
-  autocmd BufReadPost fugitive://*/.git//0/* nnoremap <silent> do :diffget<CR>]c
-  autocmd BufReadPost fugitive://*/.git//0/* nnoremap <silent> dp :diffput<CR>]c
+  " autocmd BufReadPost fugitive://*/.git//0/* if pumvisible() == 0 | pclose | endif
   autocmd BufReadPost fugitive://*/.git//0/* nnoremap <silent> du :wincmd w<CR>:normal u<CR>:wincmd w<CR>
-  autocmd BufReadPost fugitive://*/.git//0/* xnoremap <silent> do :diffget<CR>
-  autocmd BufReadPost fugitive://*/.git//0/* xnoremap <silent> dp :diffput<CR>
-  autocmd BufDelete   fugitive://*/.git//0/* nunmap do
-  autocmd BufDelete   fugitive://*/.git//0/* nunmap dp
-  autocmd BufDelete   fugitive://*/.git//0/* nunmap du
-  autocmd BufDelete   fugitive://*/.git//0/* xunmap do
-  autocmd BufDelete   fugitive://*/.git//0/* xunmap dp
 augroup END
 "}}}
 " Fzf"{{{
