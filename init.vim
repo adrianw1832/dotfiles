@@ -180,8 +180,13 @@ function! s:MergeMultipleEmptyLines() abort
   let _s = @/
   let l  = line(".")
   let c  = col(".")
-  " Search all multiple empty lines and merge them to one
-  %s/^$\n^$//e
+  if exists('b:MergeMultipleEmptyLinesToTwo')
+    " Search all multiple empty lines and merge them to one
+    " For special cases, merge them to two lines instead of one
+    %s/\n\{3,}/\r\r\r/e
+  else
+    %s/^$\n^$//e
+  endif
   " Restore last search pattern and cursor position
   let @/ = _s
   call cursor(l, c)
@@ -277,6 +282,8 @@ augroup init
   autocmd BufWritePre * call s:StripTrailingWhitespaces()
   autocmd BufWritePre * call s:MergeMultipleEmptyLines()
 
+  autocmd FileType python let b:MergeMultipleEmptyLinesToTwo=1
+
   autocmd InsertLeave,BufWinEnter,WinEnter * set cursorline
   autocmd InsertEnter,BufWinLeave,WinLeave * set nocursorline
 
@@ -294,6 +301,7 @@ augroup Filetypes
   " Enable different indentation for language specific files
   autocmd FileType java       setlocal tabstop=4 softtabstop=4 shiftwidth=4
   autocmd FileType javascript setlocal tabstop=2 softtabstop=2 shiftwidth=2
+  autocmd FileType python     setlocal tabstop=4 softtabstop=4 shiftwidth=4
 
   " Easier gf file navigation for specific languages
   autocmd FileType javascript setlocal suffixesadd+=.js
