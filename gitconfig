@@ -29,16 +29,13 @@
 [difftool]
   prompt = false
 [difftool "vimdiff"]
-  cmd = nvim -d $LOCAL $REMOTE -c 'wincmd w'
+  cmd = nvim -c "Gdiff" "$MERGED"
 [merge]
-  summary = true
-  verbosity = 1
   tool = fugitive
-[mergetool]
-  prompt = false
-[mergetool "fugitive"]
-  cmd = nvim -d $LOCAL $MERGED $REMOTE -c 'wincmd w'
   keepbackup=false
+[mergetool "fugitive"]
+  prompt = false
+  cmd = nvim -c "Gdiff" "$MERGED"
 
 [color]
   ui = true
