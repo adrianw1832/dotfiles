@@ -516,8 +516,11 @@ augroup Commentary
 augroup END
 "}}}
 " Deoplete"{{{
-let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_smart_case = 1
+augroup Deoplete
+  autocmd!
+  autocmd InsertEnter * call deoplete#enable()
+augroup END
 "}}}
 " Deoplete ternjs"{{{
 let g:tern#command = ['tern']
