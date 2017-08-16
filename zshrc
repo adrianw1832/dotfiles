@@ -13,7 +13,7 @@ source ~/.fzf.zsh
 source ~/.config/nvim/plugged/gruvbox/gruvbox_256palette.sh
 
 # Source custom zsh files
-for file in ~/dotfiles/zsh/*; do
+for file in ~/dotfiles/zsh/**/*; do
     source "$file"
 done
 
