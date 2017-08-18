@@ -30,7 +30,7 @@ grbm() {
 }
 
 # Custom function to handle git add and commit
-gac() { git add "${1:-.}" && git commit -v }
+gac() { git add "${1:-.}" && git commit --verbose }
 compdef _git gac=git-add
 
 # Custom function to handle git add, commit and push
