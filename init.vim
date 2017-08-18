@@ -501,10 +501,11 @@ xnoremap <Leader>* "sy:Ag <C-r>s
 augroup Ale
   autocmd!
   autocmd FileType javascript set formatprg=prettier\ --stdin\ --single-quote\ --trailing-comma\ es5
-  autocmd BufWritePre *.js,*.jsx :normal gggqG
 augroup END
-let g:ale_sign_error = ''
-let g:ale_sign_warning = ''
+let g:ale_sign_warning='●'
+hi ALEErrorSign ctermfg=red ctermbg=none
+let g:ale_sign_error='●'
+hi ALEWarningSign ctermfg=yellow ctermbg=none
 "}}}
 " Close tag"{{{
 let g:closetag_filenames = "*.erb,*.html,*.js,*.jsx"
