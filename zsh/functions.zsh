@@ -20,6 +20,15 @@ deletelocalmergedbranches() {
   git branch --merged | egrep -v "(^\*|master|develop|dev)" | xargs git branch -d
 }
 
+# Get latest from master and then rebase master on current branch
+grbm() {
+  local currentbranch=$(git branch | grep \* | cut -d ' ' -f2)
+  git checkout master
+  git pull --rebase --prune
+  git checkout $currentbranch
+  git rebase master
+}
+
 # Custom function to handle git add and commit
 gac() { git add "${1:-.}" && git commit -v }
 compdef _git gac=git-add
