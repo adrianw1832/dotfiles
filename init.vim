@@ -445,7 +445,7 @@ nnoremap <Leader>e :w<CR>:TestLast<CR>
 nnoremap <Leader>g :w<CR>:Gstatus<CR>
 nnoremap <Leader>gb :Gblame<CR>
 nnoremap <Leader>gd :Gdiff<CR>
-nnoremap <Leader>gl :silent Glog -25<CR>:copen<CR>
+nnoremap <Leader>gl :silent Glog<CR>:copen<CR>
 nnoremap <Leader>gp :Gpush<CR>
 nmap <Leader>ha <Plug>GitGutterStageHunk
 nmap <Leader>hr <Plug>GitGutterUndoHunk
