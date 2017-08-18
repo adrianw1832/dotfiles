@@ -414,6 +414,8 @@ nnoremap ` '
 
 " Remap Q for exmode to run macros instead
 nnoremap Q @q
+" Run a macro on visually selected lines
+xnoremap Q :normal @q <CR>
 " Change the behaviour of Y to be more inline with the rest(eg C, D)
 nnoremap Y yg_
 
@@ -577,7 +579,7 @@ augroup END
 " Fugitive"{{{
 augroup Fugitive
   autocmd!
-" Mappings to make partial diffs easier
+  " Mappings to make partial diffs easier
   " autocmd BufReadPost fugitive://*/.git//0/* if pumvisible() == 0 | pclose | endif
   autocmd BufReadPost fugitive://*/.git//0/* nnoremap <silent> du :wincmd w<CR>:normal u<CR>:wincmd w<CR>
 augroup END
@@ -618,7 +620,7 @@ augroup END
 
 " Customize fzf colors to match your color scheme
 let g:fzf_colors =
-    \ { 'fg':      ['fg', 'Normal'],
+      \ { 'fg':      ['fg', 'Normal'],
       \ 'bg':      ['bg', 'Normal'],
       \ 'hl':      ['fg', 'Conditional'],
       \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
