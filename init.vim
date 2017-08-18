@@ -649,7 +649,7 @@ xmap ah <Plug>GitGutterTextObjectOuterVisual
 let g:GtagsCscope_Auto_Map = 1
 "}}}
 " Incsearch"{{{
-let g:incsearch#magic = '\v'
+let g:incsearch#magic = '\m'
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
