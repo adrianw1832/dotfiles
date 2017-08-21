@@ -42,12 +42,13 @@ Plug 'w0rp/ale'
 Plug 'wellle/targets.vim'
 "}}}
 " Others"{{{
-Plug 'itchyny/lightline.vim'
+" Plug 'Konfekt/FastFold'
 Plug 'jceb/vim-orgmode', { 'for': 'org' }
 Plug 'joereynolds/gtags-scope'
 Plug 'mattn/emmet-vim'
 Plug 'morhetz/gruvbox'
 Plug 'tmux-plugins/vim-tmux', { 'for': 'tmux' }
+Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
 Plug 'yuttie/comfortable-motion.vim'
 "}}}
 " Language related"{{{
@@ -467,7 +468,7 @@ nnoremap <Leader>rr :R<CR>
 nnoremap <Leader>ru :Eunittest<Space>
 nnoremap <Leader>rv :Eview<Space>
 nnoremap <silent> <Leader>sn :UltiSnipsEdit<CR>
-nnoremap <Leader>so :w<CR>:source $MYVIMRC<CR>:nohlsearch<CR>:echoe "Vimrc sourced!"<CR>
+nnoremap <Leader>so :w<CR>:source $MYVIMRC<CR>:AirlineRefresh<CR>:nohlsearch<CR>:echoe "Vimrc sourced!"<CR>
 " Going back to the last spelling mistake and choosing the 1st option
 nnoremap <silent> <Leader>sp mz[s1z=`z
 nnoremap <Leader>t :w<CR>:TestFile<CR>
@@ -494,6 +495,10 @@ nnoremap <Leader>* :Ag <C-r><C-w>
 xnoremap <Leader>* "sy:Ag <C-r>s
 "}}}
 " Plugin mappings and settings"{{{
+"Airline"{{{
+let g:airline_theme='tomorrow'
+let g:airline_powerline_fonts = 1
+"}}}
 " Ale"{{{
 augroup Ale
   autocmd!
@@ -654,18 +659,6 @@ map g/ <Plug>(incsearch-stay)
 "}}}
 " Javascript libraries syntax"{{{
 let g:used_javascript_libs = 'jquery,underscore,react,jasmine,flux'
-"}}}
-" Lightline"{{{
-let g:lightline = {
-      \ 'colorscheme': 'gruvbox',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-      \   'gitbranch': 'fugitive#head'
-      \ },
-      \ }
 "}}}
 " Qf"{{{
 augroup Qf
