@@ -224,7 +224,6 @@ endfunction
 command! Bclose call s:BufCloseSavingWindow()
 "}}}
 " Integration with Ranger"{{{
-
 function! s:OpenRangerIn(path) abort
   let currentPath = expand(a:path)
   let rangerCallback = { "name": "ranger" }
@@ -351,7 +350,6 @@ augroup Filetypes
 augroup END
 "}}}
 " Custom mappings"{{{
-
 " Easier esc mapping
 inoremap jk <Esc>
 inoremap kj <Esc>
@@ -435,7 +433,6 @@ noremap <C-z> <C-a>
 nnoremap <C-space> <C-z>
 "}}}
 " Leader mappings"{{{
-
 let maplocalleader = "\\"
 let mapleader = "\<Space>"
 nnoremap <Leader>a :Ag<Space>
@@ -530,7 +527,6 @@ let g:tern#command = ['tern']
 let g:tern#arguments = ['--persistent']
 "}}}
 " Easy align"{{{
-
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign in visual mode (e.g. vipga)
@@ -586,7 +582,6 @@ augroup Fugitive
 augroup END
 "}}}
 " Fzf"{{{
-
 " Replace the default file completion with fzf-based fuzzy completion
 imap <C-x><C-f> <plug>(fzf-complete-path)
 " Replace the default dictionary completion with fzf-based fuzzy completion
@@ -687,7 +682,6 @@ nnoremap <silent> gsh :SidewaysLeft<CR>
 nnoremap <silent> gsl :SidewaysRight<CR>
 "}}}
 " Surround"{{{
-
 " To determine the ASCII code to use, do :echo char2nr("-")
 let g:surround_45 = "<% \r %>" " - for <% %>
 let g:surround_61 = "<%= \r %>" " = for <%= %>
@@ -700,7 +694,6 @@ let g:targets_argClosing = '[]})]'
 let g:targets_seekRanges = 'cr cb cB lc ac Ac lr rr ll lb ar ab lB Ar aB Ab AB rb rB al Al'
 "}}}
 " Tern"{{{
-
 " Settings to control how much description is given in the completion menu
 let g:tern_show_argument_hints = 'on_hold'
 let g:tern_show_signature_in_pum = 1
