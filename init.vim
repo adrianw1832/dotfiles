@@ -593,7 +593,10 @@ imap <C-x><C-l> <plug>(fzf-complete-line)
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 
 " Define the git log options flag
-let g:fzf_commits_log_options = '--color=always --graph --date=format:%a\ %H:%M\ %d-%m-%Y --format=gitlog'
+let g:fzf_commits_log_options = '--color=always --graph --date=format:%a\ %H:%M\ %d-%m-%Y --format=log'
+
+" [Tags] Command to generate tags file
+let g:fzf_tags_command = 'ctags -R'
 
 " Change Ag to accept arguemnts and also highlight search results to red instead
 function! s:fzf_ag_raw(command_suffix, ...) abort
