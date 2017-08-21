@@ -66,3 +66,6 @@
   helper = osxkeychain
 [init]
   templatedir = ~/.git_template
+
+[interactive]
+  diffFilter = diff-so-fancy --patch-mode | less -CGR
