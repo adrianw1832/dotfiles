@@ -86,7 +86,7 @@ compdef _git gp=git-push
 # }}}
 # Find all local branches that are merged except for master and dev(elop) and delete them# {{{
 deletelocalmergedbranches() {
-  git branch --merged | egrep -v "(^\*|master|develop|dev)" | xargs git branch -d
+  git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d
 }
 # }}}
 # Delete both the local and remote branch# {{{
