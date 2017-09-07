@@ -20,6 +20,9 @@ done
 # Using zplug as plugin manager
 source ~/.zplug/init.zsh
 
+# Load the homebrew version of python as per homebrew version 1.2.4 update (https://github.com/Homebrew/homebrew-core/issues/15746)
+PATH="/usr/local/opt/python/libexec/bin:$PATH"
+
 # Plugins
 zplug "bhilburn/powerlevel9k", as:theme
 zplug "djui/alias-tips"
