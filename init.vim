@@ -8,6 +8,7 @@ endif
 "}}}
 call plug#begin('~/.config/nvim/plugged')
 " Enhancements"{{{
+Plug 'AndrewRadev/deleft.vim'
 Plug 'AndrewRadev/sideways.vim'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'}
