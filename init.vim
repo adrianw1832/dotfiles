@@ -85,6 +85,7 @@ colorscheme gruvbox
 
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1 " Block shape cursor in normal, pipe in insert
 set background=dark " Assume a dark background
+set breakindent " long lines of code will wrap with an indentation
 set complete+=kspell " Autocomplete with dictionary words when spell check is on
 set cscopetag "search both cscopes db and the tags file
 set cursorline " Highlight current line
@@ -94,6 +95,7 @@ set foldenable " Enable folding
 set foldmethod=marker " Fold based on markers
 set foldlevelstart=99 " To make sure all folds are initially opened
 set grepprg=rg\ --vimgrep " Use ripgrep as default for grep
+set gdefault " Default global flag for substitute, since that's the most likely usecase
 set hidden " Change default behaviour of opening file of existing buffer
 set ignorecase " Ignore case when searching
 set inccommand=nosplit " Use live substitution introduced in 0.1.7
@@ -111,12 +113,14 @@ set path+=** " Add file paths to vim for native 'fuzzy find'
 set relativenumber " Show relative line numbers
 set shiftwidth=2 " Number of spaces for indents
 set showcmd " Show command at the bottom bar
+set signcolumn=yes " Show column for git gutter
 set smartcase " Smart case for searching
 set so=5 " Number of lines around cursor at the edge of screen
 set softtabstop=2 " Number of spaces in tab when editing
 set spelllang=en_gb " Set default spell check to British English
 set splitbelow " New horizontal split opens to the bottom
 set splitright " New vertical split opens to the right
+set synmaxcol=200 " only syntax highlight the first 200 characters of each line to avoid lag in long line files
 set tabstop=2 " Number of visual spaces per tab
 set timeoutlen=500 " Timeout between keystrokes to register command
 set undofile " Set the use of undofiles, which keeps a history of the undos
@@ -640,7 +644,6 @@ let g:fzf_colors =
 "}}}
 " Gitgutter"{{{
 let g:gitgutter_map_keys = 0
-let g:gitgutter_sign_column_always=1
 
 nmap ]c <Plug>GitGutterNextHunk
 nmap [c <Plug>GitGutterPrevHunk
