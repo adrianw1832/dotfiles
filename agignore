@@ -6,7 +6,6 @@
 .netrwhist
 /.git/
 /vendor/assets/bower_components
-bin
 bower_components
 build
 coverage
