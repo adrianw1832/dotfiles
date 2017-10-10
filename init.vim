@@ -419,7 +419,7 @@ nnoremap ` '
 " Remap Q for exmode to run macros instead
 nnoremap Q @q
 " Run a macro on visually selected lines
-xnoremap Q :normal @q <CR>
+xnoremap Q :'<,'>:normal @q<CR>
 " Change the behaviour of Y to be more inline with the rest(eg C, D)
 nnoremap Y yg_
 
