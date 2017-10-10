@@ -17,6 +17,9 @@ alias rd="rmdir"
 # Ripgrep
 alias -g G="| rg -S"
 
+# Lines
+alias -g L="| wc -l"
+
 # Ls
 alias l="ls -AGFh" # Colorize output, add file type indicator, and put sizes in human readable format
 alias ls="ls -AGFh" # Colorize output, add file type indicator, and put sizes in human readable format
