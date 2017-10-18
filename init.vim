@@ -441,14 +441,15 @@ nnoremap <C-space> <C-z>
 " Leader mappings"{{{
 let maplocalleader = "\\"
 let mapleader = "\<Space>"
-nnoremap <Leader>a :Ag<Space>
+nnoremap <Leader>a :Ag!<Space>
 nnoremap <Leader>b :Buffers<CR>
 nnoremap <Leader>bi :!bundle install<CR>
 nnoremap <Leader>e :w<CR>:TestLast<CR>
 nnoremap <Leader>g :w<CR>:Gstatus<CR>
 nnoremap <Leader>gb :Gblame<CR>
 nnoremap <Leader>gd :Gdiff<CR>
-nnoremap <Leader>gl :silent Glog<CR>:copen<CR>
+nnoremap <Leader>gl :Commits!<CR>
+nnoremap <Leader>gll :BCommits!<CR>
 nnoremap <Leader>gp :Gpush<CR>
 nmap <Leader>ha <Plug>GitGutterStageHunk
 nmap <Leader>hr <Plug>GitGutterUndoHunk
@@ -496,8 +497,8 @@ nnoremap <Leader><Leader> :RangerInWorkingDirectory<CR>
 nnoremap <silent> <Leader>= :wincmd _<CR>:wincmd \|<CR>
 nnoremap <silent> <Leader>- :wincmd =<CR>
 nnoremap <Leader>; mzA;<Esc>`z
-nnoremap <Leader>* :Ag <C-r><C-w>
-xnoremap <Leader>* "sy:Ag <C-r>s
+nnoremap <Leader>* :Ag! <C-r><C-w>
+xnoremap <Leader>* "sy:Ag! <C-r>s
 "}}}
 " Plugin mappings and settings"{{{
 "Airline"{{{
@@ -608,11 +609,6 @@ let g:fzf_commits_log_options = '--color=always --graph --date=format:%a\ %H:%M\
 " [Tags] Command to generate tags file
 let g:fzf_tags_command = 'ctags -R'
 
-" Change Ag to accept arguemnts and also highlight search results to red instead
-function! s:fzf_ag_raw(command_suffix, ...) abort
-  return call('fzf#vim#grep', extend(['ag --nogroup --column --color --color-match "1;31" '.a:command_suffix, 1], a:000))
-endfunction
-
 " Override statusline as you like
 function! s:fzf_statusline() abort
   highlight fzf1 ctermfg=196 ctermbg=237
@@ -621,26 +617,34 @@ function! s:fzf_statusline() abort
   setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
 endfunction
 
+" :Ag  - Start fzf with hidden preview window that can be disabled with "?" key
+" :Ag! - Start fzf in fullscreen and display the preview window above
+command! -bang -nargs=* Ag
+      \ call fzf#vim#grep(
+      \   'ag --nogroup --column --color --color-match "1;31" '.shellescape(<q-args>), 1,
+      \   <bang>0 ? fzf#vim#with_preview('up:60%')
+      \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+      \   <bang>0)
+
 augroup Fzf
   autocmd!
-  autocmd VimEnter * command! -nargs=* Ag :call s:fzf_ag_raw(<q-args>)
   autocmd User FzfStatusLine call s:fzf_statusline()
 augroup END
 
 " Customize fzf colors to match your color scheme
 let g:fzf_colors =
       \ { 'fg':      ['fg', 'Normal'],
-      \ 'bg':      ['bg', 'Normal'],
-      \ 'hl':      ['fg', 'Conditional'],
-      \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-      \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-      \ 'hl+':     ['fg', 'Statement'],
-      \ 'info':    ['fg', 'PreProc'],
-      \ 'prompt':  ['fg', 'Conditional'],
-      \ 'pointer': ['fg', 'Exception'],
-      \ 'marker':  ['fg', 'Keyword'],
-      \ 'spinner': ['fg', 'Label'],
-      \ 'header':  ['fg', 'Comment'] }
+      \   'bg':      ['bg', 'Normal'],
+      \   'hl':      ['fg', 'Conditional'],
+      \   'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+      \   'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+      \   'hl+':     ['fg', 'Statement'],
+      \   'info':    ['fg', 'PreProc'],
+      \   'prompt':  ['fg', 'Conditional'],
+      \   'pointer': ['fg', 'Exception'],
+      \   'marker':  ['fg', 'Keyword'],
+      \   'spinner': ['fg', 'Label'],
+      \   'header':  ['fg', 'Comment'] }
 "}}}
 " Gitgutter"{{{
 let g:gitgutter_map_keys = 0
