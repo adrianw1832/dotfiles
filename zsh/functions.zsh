@@ -12,7 +12,7 @@ zle -N _easier_ctrl-z
 # }}}
 # Show all the modified files in the editor# {{{
 dirty() {
-  git status | grep modified | awk '{print $2}' | xargs $EDITOR
+  git status | grep modified | awk '{print $2}' | fzf | xargs $EDITOR
 }
 # }}}
 # Get latest from master and then rebase master on current branch# {{{
