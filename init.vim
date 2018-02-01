@@ -338,7 +338,7 @@ augroup Filetypes
   " Folding options
   autocmd FileType vim,tmux setlocal foldlevel=0
   autocmd BufEnter *.zsh*   setlocal foldlevel=0
-  " autocmd FileType css,html,javascript,javascript.jsx setlocal foldmethod=syntax
+  autocmd FileType xml,css,html setlocal foldmethod=syntax
 
   " Mapping q to close the windows
   autocmd FileType help nnoremap <silent> <buffer> q :bd<CR>
