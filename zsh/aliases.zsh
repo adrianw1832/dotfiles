@@ -53,7 +53,7 @@ alias j="fasd_cd -d"
 # jj is mapped to a function integrated with fzf
 
 # Intellij
-alias ij="open -b com.jetbrains.intellij"
+alias ij="open -a IntelliJ\ IDEA\ CE"
 
 # Ranger
 alias ra="ranger"
