@@ -83,7 +83,6 @@ call plug#end()
 " Settings"{{{
 colorscheme gruvbox
 
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1 " Block shape cursor in normal, pipe in insert
 set background=dark " Assume a dark background
 set breakindent " long lines of code will wrap with an indentation
 set complete+=kspell " Autocomplete with dictionary words when spell check is on
