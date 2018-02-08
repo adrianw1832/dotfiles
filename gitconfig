@@ -70,3 +70,6 @@
 
 [interactive]
   diffFilter = diff-so-fancy --patch-mode | less -CGR
+
+# [includeIf "gitdir:~/Desktop/example/"]
+#   path = ~/Desktop/example/.gitconfig
