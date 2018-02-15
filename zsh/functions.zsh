@@ -33,7 +33,7 @@ gac() { git add "${1:-.}" && git commit --verbose }
 compdef _git gac=git-add
 # }}}
 # Git add, commit and then push# {{{
-gacp() { git add "${1:-.}" && git commit && git push }
+gacp() { git add "${1:-.}" && git commit --verbose && git push }
 compdef _git gacp=git-add
 # }}}
 # Git show for all if no arugments are specified# {{{
