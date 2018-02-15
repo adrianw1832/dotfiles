@@ -26,7 +26,7 @@ alias ls="ls -AGFh" # Colorize output, add file type indicator, and put sizes in
 alias ll="ls -AGFhl" # Same as above, but in long listing format
 
 # Get OS software updates, and update installed packages of homebrew, cask, npm and Ruby gems
-alias update="softwareupdate -i -a; brew update; brew upgrade; brew cleanup; brew cask cleanup; npm install npm -g; npm update -g; npm cache verify; gem update --system; gem update; gem cleanup; zplug update; zplug clear"
+alias update="softwareupdate -i -a; brew update; brew upgrade; brew cleanup; brew cask upgrade --greedy; brew cask cleanup; npm install npm -g; npm update -g; npm cache verify; gem update --system; gem update; gem cleanup; zplug update; zplug clear"
 
 # Get the weather for the next 3 days
 alias weather="curl http://wttr\.in/london"
