@@ -38,7 +38,7 @@ compdef _git gacp=git-add
 # }}}
 # Git show for all if no arugments are specified# {{{
 gsh() { git show --color=always "${1:-.}" | diff-so-fancy | less -CGR }
-compdef _git gd=git-show
+compdef _git gsh=git-show
 # }}}
 # Git diff for all if not arguments are specified# {{{
 gd() { git diff --color=always "${1:-.}" | diff-so-fancy | less -CGR }
@@ -87,13 +87,16 @@ compdef _git gp=git-push
 # Find all local branches that are merged except for master and dev(elop) and delete them# {{{
 deletelocalmergedbranches() {
   git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d
+  compdef _git deletelocalmergedbranches=git-branch
+  # This autocompletion doesn't really work...
 }
 # }}}
 # Delete both the local and remote branch# {{{
 deletelocalandremotebranch() {
   git branch -d $1 && git push -d origin $1
+  compdef _git deletelocalandremotebranch=git-branch
+  # This autocompletion doesn't really work...
 }
-compdef _git deletebranch=git-branch
 # }}}
 # Smarter backwards cd# {{{
 up() {
