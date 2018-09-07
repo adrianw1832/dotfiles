@@ -14,11 +14,17 @@ alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && kil
 alias md="mkdir -p"
 alias rd="rmdir"
 
+# # Silver searcher
+# alias -g G="| ag"
+
 # Ripgrep
 alias -g G="| rg -S"
 
 # Lines
 alias -g L="| wc -l"
+
+# Pbcopy
+alias -g Y="| pbcopy"
 
 # Ls
 alias l="ls -AGFh" # Colorize output, add file type indicator, and put sizes in human readable format
