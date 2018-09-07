@@ -44,6 +44,7 @@ bindkey -M viins '^ ' _easier_ctrl-z
 bindkey -M viins '^g' forward-word
 bindkey -M viins '^w' backward-delete-word
 bindkey -M viins '^v' copy-prev-shell-word
+bindkey -M viins '^y' insert-last-word
 
 bindkey -M vicmd 'Y' vi-yank-eol
 
