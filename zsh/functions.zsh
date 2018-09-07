@@ -93,7 +93,7 @@ deletelocalmergedbranches() {
 # }}}
 # Delete both the local and remote branch# {{{
 deletelocalandremotebranch() {
-  git branch -d $1 && git push -d origin $1
+  git branch -D $1 && git push -d origin $1
   compdef _git deletelocalandremotebranch=git-branch
   # This autocompletion doesn't really work...
 }
