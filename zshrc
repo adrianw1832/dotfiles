@@ -20,9 +20,6 @@ done
 # Using zplug as plugin manager
 source ~/.zplug/init.zsh
 
-# Load the homebrew version of python as per homebrew version 1.2.4 update (https://github.com/Homebrew/homebrew-core/issues/15746)
-PATH="/usr/local/opt/python/libexec/bin:$PATH"
-
 # Plugins
 zplug "bhilburn/powerlevel9k", as:theme
 zplug "djui/alias-tips"
@@ -43,3 +40,7 @@ zplug load
 
 # Patching powerlevel9k so that it shows detached head state
 source ~/dotfiles/zsh/detached.plugin.zsh
+
+# Setup for nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
