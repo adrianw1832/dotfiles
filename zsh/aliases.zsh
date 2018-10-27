@@ -72,14 +72,16 @@ alias muxo="tmuxinator open"
 alias muxs="tmuxinator start"
 # }}}
 # Config and editor# {{{
+export EDITOR='/usr/local/bin/nvim'
+export ANSIBLE_FILES_PATH='~/dotfiles/ansible/roles/development/files'
 
 # Config shortcuts
 alias cvimrc="$EDITOR ~/dotfiles/cvimrc"
-alias gitconf="$EDITOR ~/dotfiles/gitconfig"
+alias gitconf="$EDITOR $ANSIBLE_FILES_PATH/gitconfig"
 alias prompt="$EDITOR ~/dotfiles/zsh/powerline.zsh-theme; source ~/dotfiles/zsh/powerline.zsh-theme"
-alias tc="$EDITOR ~/dotfiles/tmux.conf"
-alias tpo="$EDITOR ~/dotfiles/tmux-powerline/tmux-powerlinerc"
-alias tpp="$EDITOR ~/dotfiles/tmux-powerline/tmux-powerline-theme.sh"
+alias tc="$EDITOR $ANSIBLE_FILES_PATH/tmux.conf"
+alias tprc="$EDITOR $ANSIBLE_FILES_PATH/tmux-powerlinerc"
+alias tpt="$EDITOR ~/dotfiles/tmux-powerline/tmux-powerline-theme.sh"
 alias va="$EDITOR ~/dotfiles/abbreviations.vim"
 # alias vimrc="$EDITOR ~/dotfiles/vimrc"
 alias vimrc="$EDITOR ~/dotfiles/init.vim"
@@ -89,7 +91,7 @@ alias ze="$EDITOR ~/dotfiles/zsh/exports.zsh; source ~/dotfiles/zsh/exports.zsh"
 alias zf="$EDITOR ~/dotfiles/zsh/functions.zsh; source ~/dotfiles/zsh/functions.zsh"
 alias zk="$EDITOR ~/dotfiles/zsh/keybinds.zsh; source ~/dotfiles/zsh/keybinds.zsh"
 alias zs="$EDITOR ~/dotfiles/zsh/setopt.zsh; source ~/dotfiles/zsh/setopt.zsh"
-alias zshrc="$EDITOR ~/dotfiles/zshrc; source ~/dotfiles/zshrc"
+alias zshrc="$EDITOR $ANSIBLE_FILES_PATH/zshrc; source $ANSIBLE_FILES_PATH/zshrc"
 
 # Editor shortcut
 alias v="$EDITOR"

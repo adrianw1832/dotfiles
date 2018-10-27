@@ -1,4 +1,3 @@
-export EDITOR='/usr/local/bin/nvim'
 export KEYTIMEOUT=1
 export LSCOLORS=Gxfxcxdxbxegedabagacad
 export N_PREFIX=$HOME
