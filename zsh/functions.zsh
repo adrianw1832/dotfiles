@@ -85,18 +85,12 @@ gp() {
 compdef _git gp=git-push
 # }}}
 # Find all local branches that are merged except for master and dev(elop) and delete them# {{{
-deletelocalmergedbranches() {
-  git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d
-  compdef _git deletelocalmergedbranches=git-branch
-  # This autocompletion doesn't really work...
-}
+deletelocalmergedbranches() { git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d }
+compdef _git deletelocalmergedbranches=git-branch
 # }}}
 # Delete both the local and remote branch# {{{
-deletelocalandremotebranch() {
-  git branch -D $1 && git push -d origin $1
-  compdef _git deletelocalandremotebranch=git-branch
-  # This autocompletion doesn't really work...
-}
+deletelocalandremotebranch() { git branch -D $1 && git push -d origin $1 }
+compdef _git deletelocalandremotebranch=git-branch
 # }}}
 # Smarter backwards cd# {{{
 up() {
