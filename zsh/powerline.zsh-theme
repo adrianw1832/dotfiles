@@ -45,6 +45,7 @@ POWERLEVEL9K_NODE_VERSION_FOREGROUND='254'
 POWERLEVEL9K_STATUS_VERBOSE=false
 
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context os_icon dir vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs vi_mode node_version rbenv time)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs vi_mode time)
+# POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs vi_mode nvm rbenv time)
 
 DEFAULT_USER=$USER
