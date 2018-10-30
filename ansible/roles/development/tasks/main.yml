@@ -13,9 +13,9 @@
 
 - name: Create symlinks for dotfiles
   file:
-    src: '{{ item.src }}'
-    dest: '~/.{{ item.path }}'
+    src: "{{ lookup('env','PWD') }}/{{ item.src }}"
+    dest: '{{ item.dest }}'
     state: link
     force: yes
-  with_filetree: '{{ role_path }}/files'
-  when: item.state == 'file'
+    follow: false
+  with_items: '{{ dotfiles }}'
