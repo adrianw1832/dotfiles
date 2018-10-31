@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<workflow>
+  <name>Wi-Fi Control</name>
+  <version>1.0</version>
+  <bundle>com.miromannino.wifi-control</bundle>
+  <updated>1470823198</updated>
+  <file>wi-fi_control.alfredworkflow</file>
+</workflow>
