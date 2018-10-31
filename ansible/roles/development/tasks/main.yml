@@ -1,7 +1,7 @@
 - name: Ensure homebrew is installed
   stat:
-    path: "/usr/local/bin/brew"
-  register: "homebrew_check"
+    path: '/usr/local/bin/brew'
+  register: homebrew_check
 
 - name: Install homebrew
   command: '/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
@@ -23,6 +23,19 @@
     name: '{{ cask_packages }}'
     state: present
   with_items: '{{ cask_packages }}'
+
+- name: Check for existing dotfiles
+  stat:
+    path: '{{ item.dest }}'
+  register: dotfile_exists
+  with_items: '{{ dotfiles }}'
+
+- name: Backup existing dotfiles
+  copy:
+    src: '{{ item.item.dest }}'
+    dest: '{{ item.item.dest }}.backup'
+  with_items: '{{ dotfile_exists.results }}'
+  when: item.stat.exists
 
 - name: Create symlinks for dotfiles
   file:
