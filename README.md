@@ -9,5 +9,11 @@ copying and using it as what might work for me, might not work for you.
 
 ### Setting up with ansible
 
+#### Pre-requisites
+
+Install ansible (pip is the recommended way)<br/>
+```sudo easy_install pip```<br/>
+```sudo pip install ansible```
+
 Run ```ansible-playbook -i ansible/inventory ansible/site.yml``` at
-the root of this repo.
+the root of this repo after you have cloned it.
