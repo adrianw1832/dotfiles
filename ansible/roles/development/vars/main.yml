@@ -16,6 +16,7 @@ brew_packages:
   - neovim
   - node
   - packer
+  - python@2
   - python3
   - ranger
   - rbenv
