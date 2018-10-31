@@ -38,6 +38,7 @@ cask_packages:
   - intellij-idea-ce
   - iterm2
   - java8
+  - karabiner-elements
   - keycastr
   - slack
   - spectacle
@@ -57,3 +58,4 @@ dotfiles:
   - { src: 'zshenv', dest: '~/.zshenv' }
   - { src: 'zshrc', dest: '~/.zshrc' }
   - { src: 'init.vim', dest: '~/.config/nvim/init.vim' }
+  - { src: 'karabiner', dest: '~/.config/karabiner' }
