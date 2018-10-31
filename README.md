@@ -9,8 +9,5 @@ copying and using it as what might work for me, might not work for you.
 
 ### Setting up with ansible
 
-Run ```ansible-playbook -i ansible/inventory ansible/site.yml -c local``` at
+Run ```ansible-playbook -i ansible/inventory ansible/site.yml``` at
 the root of this repo.
-
-Check the dest of the dotfiles in ```ansible/roles/development/vars/main.yml```
-since it makes some assumptions as to where the symlinked files should be.

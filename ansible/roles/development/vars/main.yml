@@ -1,3 +1,5 @@
+upgrade_homebrew_packages: false
+
 brew_packages:
   - awscli
   - bash
