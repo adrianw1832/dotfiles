@@ -83,7 +83,11 @@ call plug#end()
 " Settings"{{{
 colorscheme gruvbox
 
-let g:ruby_host_prog = '~/.rbenv/versions/2.4.2/bin/neovim-ruby-host' " Workaround to get neovim to find neovim-ruby-host
+let g:python_host_prog  = '/usr/local/bin/python'
+let g:python3_host_prog  = '/usr/local/bin/python3'
+let g:loaded_ruby_provider = 1
+let g:loaded_node_provider = 1
+
 set background=dark " Assume a dark background
 set breakindent " long lines of code will wrap with an indentation
 set complete+=kspell " Autocomplete with dictionary words when spell check is on
