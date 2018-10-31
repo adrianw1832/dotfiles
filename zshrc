@@ -1,8 +1,9 @@
+# Rbenv{{{
 # If rbenv is present, configure it for use
 if which rbenv &> /dev/null; then
     eval "$(rbenv init -)"
 fi
-
+# }}}
 # Setting for fasd to work
 eval "$(fasd --init auto)"``
 
@@ -11,12 +12,12 @@ source ~/.fzf.zsh
 
 # Overload the colour palette to ensure correct gruvbox colours
 source ~/.config/nvim/plugged/gruvbox/gruvbox_256palette.sh
-
-# Source custom zsh files
+# Source custom zsh files{{{
 for file in ~/dotfiles/zsh/**/*; do
     source "$file"
 done
-
+# }}}
+# Zplug{{{
 # Using zplug as plugin manager
 source ~/.zplug/init.zsh
 
@@ -37,10 +38,10 @@ fi
 
 # Then, source plugins and add commands to $PATH
 zplug load
-
+# }}}
 # Patching powerlevel9k so that it shows detached head state
 source ~/dotfiles/zsh/detached.plugin.zsh
-
-# Setup for nvm
+# Nvm{{{
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+# }}}
