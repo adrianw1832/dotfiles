@@ -35,7 +35,7 @@
 
 - name: Install Inconsolata for Powerline Nerd Font Complete
   copy:
-    src: "{{ lookup('env','PWD') }}/Inconsolata for Powerline Nerd Font Complete.otf"
+    src: "{{ lookup('env','PWD') }}/fonts/Inconsolata for Powerline Nerd Font Complete.otf"
     dest: '$HOME/Library/Fonts'
     mode: 0644
 
