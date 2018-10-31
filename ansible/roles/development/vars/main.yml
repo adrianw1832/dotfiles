@@ -15,6 +15,7 @@ brew_packages:
   - jq
   - neovim
   - node
+  - packer
   - python3
   - ranger
   - rbenv
@@ -31,6 +32,7 @@ cask_packages:
   - 1password
   - alfred
   - appcleaner
+  - docker
   - flux
   - google-chrome
   - intellij-idea-ce
