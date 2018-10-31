@@ -1,19 +1,6 @@
 # Enable vi mode
 bindkey -v
 
-# Updates editor information when the keymap changes.
-function zle-keymap-select() {
-  zle reset-prompt
-  zle -R
-}
-
-# Ensure that the prompt is redrawn when the terminal size changes.
-TRAPWINCH() {
-  zle &&  zle -R
-}
-
-zle -N zle-keymap-select
-
 # Vi mode keybinds
 bindkey -M viins 'jk' vi-cmd-mode
 bindkey -M viins 'kj' vi-cmd-mode
