@@ -4,5 +4,6 @@
     install_cask_packages.yml
     install_python_packages.yml
     install_font.yml
+    setup_system_perferences.yml
     setup_iterm2_perferences.yml
     setup_dotfiles.yml

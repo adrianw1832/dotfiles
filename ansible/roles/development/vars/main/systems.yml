@@ -1,0 +1,10 @@
+system:
+  input:
+    key_repeat_rate: 2
+    initial_key_repeat_delay: 15
+
+  dock:
+    autohide: true
+
+  ui:
+    interface_style: Dark

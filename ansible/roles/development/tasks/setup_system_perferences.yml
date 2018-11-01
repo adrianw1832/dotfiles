@@ -1,0 +1,24 @@
+- name: Input - Set key repeat rate ({{ system.input.key_repeat_rate }})
+  osx_defaults:
+    key: KeyRepeat
+    type: int
+    value: "{{ system.input.key_repeat_rate }}"
+
+- name: Input - Set initial key repeat delay ({{ system.input.initial_key_repeat_delay }})
+  osx_defaults:
+    key: InitialKeyRepeat
+    type: int
+    value: "{{ system.input.initial_key_repeat_delay }}"
+
+- name: Dock - Automatically hide dock ({{ system.dock.autohide }})
+  osx_defaults:
+    domain: com.apple.dock
+    key: autohide
+    type: bool
+    value: "{{ system.dock.autohide }}"
+
+- name: UI - Set interface style ({{ system.ui.interface_style }})
+  osx_defaults:
+    key: AppleInterfaceStyle
+    type: string
+    value: "{{ system.ui.interface_style }}"
