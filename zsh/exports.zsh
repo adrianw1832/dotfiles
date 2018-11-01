@@ -1,5 +1,5 @@
 export KEYTIMEOUT=1
-export LSCOLORS=Gxfxcxdxbxegedabagacad
+# export LSCOLORS=Gxfxcxdxbxegedabagacad
 export N_PREFIX=$HOME
 export SHELL='/usr/local/bin/zsh'
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
