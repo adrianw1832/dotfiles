@@ -1,0 +1,16 @@
+cask_packages:
+  - 1password
+  - alfred
+  - appcleaner
+  - docker
+  - flux
+  - google-chrome
+  - iterm2
+  - java8
+  - karabiner-elements
+  - keycastr
+  - slack
+  - spectacle
+  - spotify
+  - vagrant
+  - virtualbox

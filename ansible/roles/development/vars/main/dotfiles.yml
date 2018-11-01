@@ -1,0 +1,13 @@
+dotfiles:
+  - { src: 'agignore', dest: '~/.agignore' }
+  - { src: 'gitconfig', dest: '~/.gitconfig' }
+  - { src: 'gitignore', dest: '~/.gitignore' }
+  - { src: 'ignore', dest: '~/.ignore' }
+  - { src: 'tern-config', dest: '~/.tern-config' }
+  - { src: 'tmux-powerline/tmux-powerlinerc', dest: '~/.tmux-powerlinerc' }
+  - { src: 'tmux.conf', dest: '~/.tmux.conf' }
+  - { src: 'vimrc', dest: '~/.vimrc' }
+  - { src: 'zshenv', dest: '~/.zshenv' }
+  - { src: 'zshrc', dest: '~/.zshrc' }
+  - { src: 'init.vim', dest: '~/.config/nvim/init.vim' }
+  - { src: 'karabiner', dest: '~/.config/karabiner' }
