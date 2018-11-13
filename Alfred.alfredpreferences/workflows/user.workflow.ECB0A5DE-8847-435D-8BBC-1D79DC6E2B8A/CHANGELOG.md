@@ -1,6 +1,23 @@
 Changelog
 =========
 
+Version 1.6.2 – 2018-02-13
+--------------------------
+
+### Bugfixes
+
+* Api pagination didn't work correctly any more (missing results from page > 2)
+
+
+Version 1.6.1 – 2017-09-23
+--------------------------
+
+### Bugfixes
+
+* Support for macOS 10.13 High Sierra
+* Commit search results had wrong urls on GitHub Enterprise (@beparker)
+
+
 Version 1.6 – 2017-05-07
 ------------------------
 
