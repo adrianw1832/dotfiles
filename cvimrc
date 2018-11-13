@@ -19,11 +19,9 @@ unmap m
 map ; openCommandBar
 map P openPaste
 map R reloadTabUncached
-map Y yankDocumentUrl
 map i goToInput
 map m setMark
 map p openPasteTab
-map yy yankHighlight
 
 imap <C-a> beginningOfLine
 imap <C-d> deleteForwardChar
