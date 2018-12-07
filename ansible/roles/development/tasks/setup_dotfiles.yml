@@ -2,13 +2,13 @@
   stat:
     path: '{{ item.dest }}'
   register: dotfile_exists
-  with_items: '{{ dotfiles }}'
+  loop: '{{ dotfiles }}'
 
 - name: Backup existing dotfiles
   copy:
     src: '{{ item.item.dest }}'
     dest: '{{ item.item.dest }}.backup'
-  with_items: '{{ dotfile_exists.results }}'
+  loop: '{{ dotfile_exists.results }}'
   when: item.stat.exists
 
 - name: Create symlinks for dotfiles
@@ -18,4 +18,4 @@
     state: link
     force: yes
     follow: false
-  with_items: '{{ dotfiles }}'
+  loop: '{{ dotfiles }}'

@@ -1,9 +1,27 @@
-- name: MacOS set up
-  include:
+- name: Brew
+  import_tasks:
     install_brew_packages.yml
+
+- name: Cask
+  import_tasks:
     install_cask_packages.yml
+
+- name: Python
+  import_tasks:
     install_python_packages.yml
+
+- name: Fonts
+  import_tasks:
     install_font.yml
+
+- name: System preferences
+  import_tasks:
     setup_system_perferences.yml
+
+- name: iTerm2 preferences
+  import_tasks:
     setup_iterm2_perferences.yml
+
+- name: Dotfiles
+  import_tasks:
     setup_dotfiles.yml

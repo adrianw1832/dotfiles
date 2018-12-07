@@ -1,5 +1,5 @@
 - name: Install packages with homebrew cask
   homebrew_cask:
-    name: '{{ cask_packages }}'
-    state: present
-  with_items: '{{ cask_packages }}'
+    name: '{{ item }}'
+    state: installed
+  loop: '{{ cask_packages }}'

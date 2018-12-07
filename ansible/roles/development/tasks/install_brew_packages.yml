@@ -13,7 +13,7 @@
 
 - name: Install packages with homebrew
   homebrew:
-    name: '{{ brew_packages }}'
+    name: '{{ item }}'
     state: present
     upgrade_all: '{{ upgrade_homebrew_packages }}'
-  with_items: '{{ brew_packages }}'
+  loop: '{{ brew_packages }}'

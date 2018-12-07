@@ -2,7 +2,7 @@ upgrade_homebrew_packages: false
 
 brew_packages:
   - awscli
-  - bash
+  - bat
   - ctags
   - curl
   - diff-so-fancy
@@ -10,7 +10,7 @@ brew_packages:
   - exa
   - fasd
   - fzf
-# From https://github.com/Homebrew/homebrew-core/issues/32081, we can see that the --without-completions flag is no longer available. In order to use the git tab completion from zsh rather than the git ones, delete /usr/local/share/zsh/site-functions (which is where the zsh completions are currently installed to) once git is installed.
+# # From https://github.com/Homebrew/homebrew-core/issues/32081, we can see that the --without-completions flag is no longer available. In order to use the git tab completion from zsh rather than the git ones, delete /usr/local/share/zsh/site-functions (which is where the zsh completions are currently installed to) once git is installed.
   - git
   - hub
   - jq
@@ -28,4 +28,5 @@ brew_packages:
   - tmux
   - vim
   - wget
+  - zplug
   - zsh

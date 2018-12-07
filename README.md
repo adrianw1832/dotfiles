@@ -15,5 +15,5 @@ Install ansible (pip is the recommended way)<br/>
 ```sudo easy_install pip```<br/>
 ```sudo pip install ansible```
 
-Run ```ansible-playbook -i ansible/inventory ansible/site.yml``` at
+Run ```ansible-playbook ansible/playbook.yml``` at
 the root of this repo after you have cloned it.
