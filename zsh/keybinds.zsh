@@ -38,6 +38,7 @@ bindkey -M vicmd 'Y' vi-yank-eol
 autoload -Uz edit-command-line
 zle -N edit-command-line
 bindkey -M vicmd '^v' edit-command-line
+bindkey -M viins '^x^e' edit-command-line
 
 # [Shift-Tab] - move through the completion menu backwards
 bindkey "${terminfo[kcbt]}" reverse-menu-complete
