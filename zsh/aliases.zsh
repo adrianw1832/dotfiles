@@ -14,6 +14,9 @@ alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && kil
 alias md="mkdir -p"
 alias rd="rmdir"
 
+# Makes copying and pasting code easier
+alias \$=''
+
 # # Silver searcher
 # alias -g G="| ag"
 
@@ -31,8 +34,11 @@ alias l="exa -a --time-style=long-iso --group-directories-first"
 alias ls="exa -a --time-style=long-iso --group-directories-first"
 alias ll="exa -lahg --time-style=long-iso --group-directories-first"
 
+# Bat
+alias cat="bat --theme gruvbox"
+
 # Get OS software updates, and update installed packages of homebrew, cask, npm and Ruby gems
-alias update="softwareupdate -i -a; brew update; brew upgrade; brew cleanup; brew cask upgrade --greedy; brew cask cleanup; npm install npm -g; npm update -g; npm cache verify; gem update --system; gem update; gem cleanup; zplug update; zplug clear"
+alias update="softwareupdate -i -a; brew update; brew upgrade; brew cask upgrade --greedy; brew cleanup; zplug update; zplug clear"
 
 # Get the weather for the next 3 days
 alias weather="curl http://wttr\.in/london"
@@ -78,6 +84,7 @@ export EDITOR='/usr/local/bin/nvim'
 alias cvimrc="$EDITOR ~/dotfiles/cvimrc"
 alias gitconf="$EDITOR ~/dotfiles/gitconfig"
 alias prompt="$EDITOR ~/dotfiles/zsh/powerline.zsh-theme; source ~/dotfiles/zsh/powerline.zsh-theme"
+alias sshconf="$EDITOR ~/.ssh/config"
 alias tc="$EDITOR ~/dotfiles/tmux.conf"
 alias tprc="$EDITOR ~/dotfiles/tmux-powerline/tmux-powerlinerc"
 alias tpt="$EDITOR ~/dotfiles/tmux-powerline/tmux-powerline-theme.sh"
