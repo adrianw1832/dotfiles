@@ -24,6 +24,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install' } | Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'luochen1990/rainbow'
+Plug 'machakann/vim-highlightedyank'
 Plug 'metakirby5/codi.vim', { 'on': 'Codi' }
 Plug 'romainl/vim-qf'
 Plug 'sickill/vim-pasta'
@@ -76,6 +77,13 @@ Plug 'junegunn/vim-xmark', { 'do': 'make' }
 "}}}
 " Puppet"{{{
 Plug 'rodjek/vim-puppet', { 'for': 'puppet' }
+"}}}
+" Terraform"{{{
+Plug 'hashivim/vim-terraform', { 'for': 'terraform' }
+Plug 'juliosueiras/vim-terraform-completion', { 'for': 'terraform' }
+"}}}
+" Jenkinsfile"{{{
+Plug 'martinda/Jenkinsfile-vim-syntax', { 'for': 'Jenkinsfile' }
 "}}}
 "}}}
 call plug#end()
@@ -277,7 +285,7 @@ augroup init
 
   " This mimics netrw's behaviour when no file or a direcotry is given upon open
   autocmd StdinReadPre * let s:std_in=1
-  autocmd VimEnter * call s:OpenRangerWhenNoFileIsGiven()
+  " autocmd VimEnter * call s:OpenRangerWhenNoFileIsGiven()
 
   " When editing a file, always jump to the last known cursor position.
   " Don't do it for commit messages, when the position is invalid, or when
@@ -341,7 +349,7 @@ augroup Filetypes
 
   " Folding options
   autocmd FileType vim,tmux setlocal foldlevel=0
-  autocmd BufEnter *.zsh*   setlocal foldlevel=0
+  autocmd BufEnter *zsh*   setlocal foldlevel=0
   autocmd FileType xml,css,html setlocal foldmethod=syntax
 
   " Mapping q to close the windows
@@ -445,7 +453,7 @@ nnoremap <C-space> <C-z>
 " Leader mappings"{{{
 let maplocalleader = "\\"
 let mapleader = "\<Space>"
-nnoremap <Leader>a :Ag!<Space>
+nnoremap <Leader>a :Rg!<Space>
 nnoremap <Leader>b :Buffers<CR>
 nnoremap <Leader>bi :!bundle install<CR>
 nnoremap <Leader>e :w<CR>:TestLast<CR>
@@ -501,8 +509,8 @@ nnoremap <Leader><Leader> :RangerInWorkingDirectory<CR>
 nnoremap <silent> <Leader>= :wincmd _<CR>:wincmd \|<CR>
 nnoremap <silent> <Leader>- :wincmd =<CR>
 nnoremap <Leader>; mzA;<Esc>`z
-nnoremap <Leader>* :Ag! <C-r><C-w>
-xnoremap <Leader>* "sy:Ag! <C-r>s
+nnoremap <Leader>* :Rg! <C-r><C-w>
+xnoremap <Leader>* "sy:Rg! <C-r>s
 "}}}
 " Plugin mappings and settings"{{{
 "Airline"{{{
@@ -532,10 +540,20 @@ augroup END
 "}}}
 " Deoplete"{{{
 let g:deoplete#enable_smart_case = 1
-augroup Deoplete
-  autocmd!
-  autocmd InsertEnter * call deoplete#enable()
-augroup END
+let g:deoplete#enable_at_startup = 1
+" augroup Deoplete
+"   autocmd!
+"   autocmd InsertEnter * call deoplete#enable()
+" augroup END
+
+" let g:deoplete#omni_patterns = {}
+
+" call deoplete#custom#option('omni_patterns', {
+"       \ 'complete_method': 'omnifunc',
+"       \ 'terraform': '[^ *\t"{=$]\w*',
+"       \})
+
+" call deoplete#initialize()
 "}}}
 " Deoplete ternjs"{{{
 let g:tern#command = ['tern']
@@ -621,11 +639,11 @@ function! s:fzf_statusline() abort
   setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
 endfunction
 
-" :Ag  - Start fzf with hidden preview window that can be disabled with "?" key
-" :Ag! - Start fzf in fullscreen and display the preview window above
-command! -bang -nargs=* Ag
+" :Rg  - Start fzf with hidden preview window that can be disabled with "?" key
+" :Rg! - Start fzf in fullscreen and display the preview window above
+command! -bang -nargs=* Rg
       \ call fzf#vim#grep(
-      \   'ag --nogroup --column --color --color-match "1;31" '.shellescape(<q-args>), 1,
+      \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
       \   <bang>0 ? fzf#vim#with_preview('up:60%')
       \           : fzf#vim#with_preview('right:50%:hidden', '?'),
       \   <bang>0)
