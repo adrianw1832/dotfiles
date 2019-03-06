@@ -1,0 +1,10 @@
+- name: Check if tmux plugin manager is installed
+  stat:
+    path: '~/.tmux/plugins/tpm'
+  register: tmux_plugin_manager_check
+
+- name: Install tmux plugin manager
+  git:
+    dest: '~/.tmux/plugins/tpm'
+    repo: 'https://github.com/tmux-plugins/tpm'
+  when: not tmux_plugin_manager_check.exists

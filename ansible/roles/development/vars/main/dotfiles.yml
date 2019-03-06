@@ -11,3 +11,4 @@ dotfiles:
   - { src: 'zshrc', dest: '~/.zshrc' }
   - { src: 'init.vim', dest: '~/.config/nvim/init.vim' }
   - { src: 'karabiner', dest: '~/.config/karabiner' }
+  - { src: 'colours/gruvbox.tmTheme', dest: '~/.config/bat/gruvbox.tmTheme' }

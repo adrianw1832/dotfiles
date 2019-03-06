@@ -1,0 +1,7 @@
+- name: Create sub-config directories
+  file:
+    path: '~/.config/{{ item }}'
+    state: directory
+    with_items:
+      - bat
+      - nvim

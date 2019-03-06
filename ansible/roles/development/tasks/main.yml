@@ -10,6 +10,18 @@
   import_tasks:
     install_python_packages.yml
 
+- name: Tmux Plugin Manager
+  import_tasks:
+    tmux_plugin_manager.yml
+
+- name: Zplug
+  import_tasks:
+    zplug.yml
+
+- name: Create config directory
+  import_tasks:
+    create_config_directories.yml
+
 - name: Fonts
   import_tasks:
     install_font.yml
